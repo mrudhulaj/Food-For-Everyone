@@ -30,7 +30,7 @@
 											</div>
 											<div class="col-md-4 col-sm-4">
 													<div class="join-us">
-															<p><a href="#">Sign Up / Login</a></p>
+															<p><a href="#">Sign Up / Login Page</a></p>
 													</div>
 											</div>
 									</div>
