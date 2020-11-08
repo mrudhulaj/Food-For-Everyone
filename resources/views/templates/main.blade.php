@@ -50,8 +50,8 @@
 											<div class="col-md-9 col-sm-12 col-xs-12">
 													<div class="menu">
 															<ul class="nav navbar-nav">
-																	<li class="active"><a href="#">HOME</a></li>
-																	<li><a href="#">ABOUT US</a></li>
+																	<li class="active-nav"><a href="#">HOME</a></li>
+																	<li><a href="{{route('aboutUs')}}">ABOUT US</a></li>
 																	<li><a href="#">AVAILABLE FOODS</a></li>
 																	<li><a href="#">OTHER ITEMS</a></li>
 																	<li><a href="#">VOLUNTEERS </a></li>

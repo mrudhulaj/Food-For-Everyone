@@ -61,6 +61,8 @@
 .nav>li>a:focus {
     text-decoration: none;
     background-color: transparent;
+    color: #00A348 !important;
+    font-weight: bold !important;
 }
 
 .main-logo {
@@ -651,7 +653,7 @@
 }
 
 .donors .donors_input h5 input {
-    background: #01d262 none repeat scroll 0 0;
+    background: #00A348 none repeat scroll 0 0;
     border: 1px solid #fff;
     border-radius: 10px;
     color: #fff;
@@ -694,7 +696,7 @@
 
 .donors .donors_input h4 select {
     width: 500px;
-    background: #01d262 none repeat scroll 0 0;
+    background: #00A348 none repeat scroll 0 0;
     border: none;
     padding: 17px 20px;
     border-radius: 10px;
@@ -1130,4 +1132,16 @@
 }
 .footer_carosal_icon .owl-nav{
     display: none;
+}
+
+.white-bold{
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.active-nav a{
+    color: #00A348 !important;
+    font-weight: bold !important;
 }
