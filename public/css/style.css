@@ -80,7 +80,10 @@
 }
 
 .carosal-area {
-    background-image: url("../images/carosal-bg.jpg");
+    /* background-image: url("../images/carosal-bg.jpg"); */
+    background-image: url("https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/assets/2019/05/16-05-2019_FAO_Children-Meals-Lao.jpg/image1170x530cropped.jpg");
+    /* style="background-image: url('https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/assets/2019/05/16-05-2019_FAO_Children-Meals-Lao.jpg/image1170x530cropped.jpg'); */
+    background-size: 1400px;
     background-size: cover;
 }
 
