@@ -17,6 +17,21 @@
 	<link rel="stylesheet" href="{{url('css/responsive.css')}}">
 </head>
 
+<style>
+	.sticky {
+  position: fixed;
+  top: 0;
+	width: 100%;
+	background-color: #00381a;
+	opacity: 1;
+
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+</style>
+
 <body>
 	<div class="wrapper">
 			<header class="header">
@@ -36,7 +51,7 @@
 									</div>
 							</div>
 					</section>
-					<section class="header-bottom">
+					<section class="header-bottom"> {{-- id="navbar" for sticky navbar--}}
 							<div class="container">
 									<div class="row">
 											<div class="col-md-3 col-sm-12 col-xs-12">
@@ -50,13 +65,30 @@
 											<div class="col-md-9 col-sm-12 col-xs-12">
 													<div class="menu">
 															<ul class="nav navbar-nav">
-																	<li class="active-nav"><a href="#">HOME</a></li>
-																	<li><a href="{{route('aboutUs')}}">ABOUT US</a></li>
-																	<li><a href="#">AVAILABLE FOODS</a></li>
-																	<li><a href="#">OTHER ITEMS</a></li>
-																	<li><a href="#">VOLUNTEERS </a></li>
-																	<li><a href="#">BLOG</a></li>
-																	<li><a href="#">CONTACT</a></li>
+																	@php 
+																		$activeTab = Session::get('activeTab');
+																	@endphp
+																	<li class=" @if($activeTab == 'HOME') active-nav @endif ">
+																		<a href="{{route('home')}}">HOME</a>
+																	</li>
+																	<li class=" @if($activeTab == 'ABOUT US') active-nav @endif">
+																		<a href="{{route('aboutUs')}}">ABOUT US</a>
+																	</li>
+																	<li class=" @if($activeTab == 'AVAILABLE FOODS') active-nav @endif ">
+																		<a href="#">AVAILABLE FOODS</a>
+																	</li>
+																	<li class=" @if($activeTab == 'OTHER ITEMS') active-nav @endif ">
+																		<a href="#">OTHER ITEMS</a>
+																	</li>
+																	<li class=" @if($activeTab == 'VOLUNTEERS') active-nav @endif ">
+																		<a href="#">VOLUNTEERS </a>
+																	</li>
+																	<li class=" @if($activeTab == 'BLOG') active-nav @endif ">
+																		<a href="#">BLOG</a>
+																	</li>
+																	<li class=" @if($activeTab == 'CONTACT') active-nav @endif ">
+																	<a href="{{route('contactUs')}}">CONTACT</a>
+																	</li>
 															</ul>
 													</div>
 											</div>
@@ -150,6 +182,24 @@
 					var s = document.getElementsByTagName('script')[0];
 					s.parentNode.insertBefore(ga, s);
 			})();
+
+			//Begin:Make navbar sticky
+
+			// window.onscroll = function() {myFunction()};
+
+			// var navbar = document.getElementById("navbar");
+			// var sticky = navbar.offsetTop;
+
+			// function myFunction() {
+			// 	if (window.pageYOffset >= sticky) {
+			// 		navbar.classList.add("sticky")
+			// 	} else {
+			// 		navbar.classList.remove("sticky");
+			// 	}
+			// }
+
+			// End: Make Navbar sticky
+
 	</script>
 </body>
 

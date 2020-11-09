@@ -6,15 +6,23 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/home' ,'HomeController@HomeView');
+// Route::get('/home' ,'HomeController@HomeView');
+
+Route::get('home', ['as' => 'home','uses' => 'Home\HomeController@HomeView']);
 
 // End: Home Page
 
 // Begin: About Us
 
-Route::get('/about-us', ['as' => 'aboutUs','uses' => 'AboutUs\AboutUsController@aboutUsView']);
+Route::get('about-us', ['as' => 'aboutUs','uses' => 'AboutUs\AboutUsController@aboutUsView']);
 
 // End: About Us
+
+// Begin: Contact Us
+
+Route::get('contact-us', ['as' => 'contactUs','uses' => 'ContactUs\ContactUsController@contactUsView']);
+
+// End: Contact Us
 
 
 Route::get('/donation' ,'DonationController@FormDonation');

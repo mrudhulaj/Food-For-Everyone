@@ -1145,3 +1145,17 @@
     color: #00A348 !important;
     font-weight: bold !important;
 }
+
+.ffe-font{
+    color: #3c354e;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 26px;
+    /* text-align: center; */
+}
+
+.plr-0{
+    padding-left: 0px;
+    padding-right: 0px;
+ }
