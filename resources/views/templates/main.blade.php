@@ -75,7 +75,7 @@
 																		<a href="{{route('aboutUs')}}">ABOUT US</a>
 																	</li>
 																	<li class=" @if($activeTab == 'AVAILABLE FOODS') active-nav @endif ">
-																		<a href="#">AVAILABLE FOODS</a>
+																		<a href="{{route('availableFoods')}}">AVAILABLE FOODS</a>
 																	</li>
 																	<li class=" @if($activeTab == 'OTHER ITEMS') active-nav @endif ">
 																		<a href="#">OTHER ITEMS</a>
@@ -83,9 +83,9 @@
 																	<li class=" @if($activeTab == 'VOLUNTEERS') active-nav @endif ">
 																		<a href="#">VOLUNTEERS </a>
 																	</li>
-																	<li class=" @if($activeTab == 'BLOG') active-nav @endif ">
+																	{{--  <li class=" @if($activeTab == 'BLOG') active-nav @endif ">
 																		<a href="#">BLOG</a>
-																	</li>
+																	</li>  --}}
 																	<li class=" @if($activeTab == 'CONTACT') active-nav @endif ">
 																	<a href="{{route('contactUs')}}">CONTACT</a>
 																	</li>
