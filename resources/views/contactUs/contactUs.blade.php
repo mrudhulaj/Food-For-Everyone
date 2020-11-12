@@ -1,5 +1,5 @@
 @extends('templates.main')
-<title>Contact Us</title>
+<title>Contact</title>
 <link rel="stylesheet" href="{{url('css/contact-us-css/util.css')}}">
 <link rel="stylesheet" href="{{url('css/contact-us-css/main.css')}}">
 <style>

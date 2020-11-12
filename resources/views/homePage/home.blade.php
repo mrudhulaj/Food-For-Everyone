@@ -73,7 +73,7 @@
 												<i class="material-icons">favorite</i>
 										</div>
 										<h2 style="text-align: center;"><a href="#">Volunteering</a></h2>
-										<p>We are always looking for genuine, kind hearted volunters a.k.a superheroes to support our programs. If you are one of them , click here to learn more about it and how you can join our family.</p>
+										<p>We are always looking for genuine, kind hearted volunters a.k.a superheroes to support our events. If you are one of them , click here to learn more about it and how you can join our family.</p>
 								</div>
 						</div>
 						<div class="col-md-4 col-xs-12">
@@ -81,8 +81,8 @@
 										<div class="promo-icon">
 												<i class="material-icons">dashboard</i>
 										</div>
-										<h2 style="text-align: center;"><a href="#">Our Programs</a></h2>
-										<p>We always conduct transparent programs with the only aim of helping the needy people.We are always open to ideas and trying out different programs to bring more people into our family and to help every suffering soul.</p>
+										<h2 style="text-align: center;"><a href="#">Events</a></h2>
+										<p>We always conduct transparent events with the only aim of helping the needy people.We are always open to ideas and trying out different events to bring more people into our family and to help every suffering soul.</p>
 								</div>
 						</div>
 				</div>
@@ -93,7 +93,7 @@
 				<div class="row">
 						<div class="col-md-12 for-padding">
 								<h3>You have the heart to help, but not the time?</h3>
-								<p>We understand everyone's struggles, but it's the thought that always counts. If you like , it's always possible to contribute to help our volunteers and the people. Our activites and programs are always transparent and you are always welcome to attend any of our events.</p>
+								<p>We understand everyone's struggles, but it's the thought that always counts. If you like , it's always possible to contribute to help our volunteers and the people. Our activites and events are always transparent and you are always welcome to attend any of our events.</p>
 								<h4 style="margin-top: 35px;">Next upcoming event at Government Childrens Hospital, Calicut</h4>
 								<div class="progress-text">
 										<p class="progress-top">50%</p>

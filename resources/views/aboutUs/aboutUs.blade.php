@@ -1,4 +1,5 @@
 @extends('templates.main')
+<title>About Us</title>
 <style>
 	.aboutUs{
 		background-image: url("../images/about-us-1.png");
