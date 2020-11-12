@@ -63,8 +63,8 @@
 										<div class="promo-icon">
 												<i class="material-icons">near_me</i>
 										</div>
-										<h2 style="text-align: center;"><a href="#">Fundraising</a></h2>
-										<p>We conduct different fundraising activites across different cities across India to provide our causes.Please click here to find out about the fundraising activities happening around you.</p>
+										<h2 style="text-align: center;"><a href="#">Causes</a></h2>
+										<p>We are continously trying to expand our reach to different areas where people need support to help build a better future.Click here to learn more about the causes we support currently.</p>
 								</div>
 						</div>
 						<div class="col-md-4 col-xs-12">

@@ -1,22 +1,26 @@
 <?php
 
 // Begin: Home Page
-    Route::get('/', function () {
-        return view('home');
-    });
-    Route::get('home', ['as' => 'home','uses' => 'Home\HomeController@HomeView']);
+  Route::get('/', function () {
+      return view('home');
+  });
+  Route::get('home', ['as' => 'home','uses' => 'Home\HomeController@HomeView']);
 // End: Home Page
 
-// Begin: Available Foods
-    Route::get('available-foods', ['as' => 'availableFoods','uses' => 'AvailableFoods\AvailableFoodsController@availableFoodsView']);
-// End: Available Foods
-
 // Begin: About Us
-    Route::get('about-us', ['as' => 'aboutUs','uses' => 'AboutUs\AboutUsController@aboutUsView']);
+  Route::get('about-us', ['as' => 'aboutUs','uses' => 'AboutUs\AboutUsController@aboutUsView']);
 // End: About Us
 
+// Begin: Available Foods
+  Route::get('available-foods', ['as' => 'availableFoods','uses' => 'AvailableFoods\AvailableFoodsController@availableFoodsView']);
+// End: Available Foods
+
+// Begin: Causes
+  Route::get('causes', ['as' => 'causes','uses' => 'Causes\CausesController@CausesView']);
+// End: Causes
+
 // Begin: Contact Us
-    Route::get('contact-us', ['as' => 'contactUs','uses' => 'ContactUs\ContactUsController@contactUsView']);
+  Route::get('contact-us', ['as' => 'contactUs','uses' => 'ContactUs\ContactUsController@contactUsView']);
 // End: Contact Us
 
 

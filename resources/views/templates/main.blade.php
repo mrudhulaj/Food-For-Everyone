@@ -77,8 +77,8 @@
 																	<li class=" @if($activeTab == 'AVAILABLE FOODS') active-nav @endif ">
 																		<a href="{{route('availableFoods')}}">AVAILABLE FOODS</a>
 																	</li>
-																	<li class=" @if($activeTab == 'FUNDRAISING') active-nav @endif ">
-																		<a href="#">FUNDRAISING</a>
+																	<li class=" @if($activeTab == 'CAUSES') active-nav @endif ">
+																		<a href="{{route('causes')}}">CAUSES</a>
 																	</li>
 																	<li class=" @if($activeTab == 'VOLUNTEERS') active-nav @endif ">
 																		<a href="#">VOLUNTEERS </a>
