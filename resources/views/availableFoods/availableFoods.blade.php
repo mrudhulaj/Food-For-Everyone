@@ -1,4 +1,5 @@
 @extends('templates.main')
+<title>Available Foods</title>
 <style>
 
 	.wrapper section>h2::before{
@@ -12,6 +13,23 @@
 	.filter{
 		font-size: 16px;
 	}
+
+	.pr-20{
+		padding-right: 20px !important;
+	}
+
+	.pl-20{
+		padding-left: 20px
+	}
+
+	.mr-20{
+		margin-right: 20px !important;
+	}
+
+	.ml-20{
+		margin-left: 20px
+	}
+
 </style>
 @section('content')
 <div class="container">
@@ -20,40 +38,46 @@
 		<p>Here we list out the food's contributed by our user's and partner's.We make sure that these items comply strictly with our standard terms and policies.
 			<br> All the food's that is not collected within the user specified time is automatically deleted to avoid any complications.</p>
 	</section>
-	<div class="col-lg-12 plr-0 filter" style="border: 1px solid red">
-		<div class="row">
-			<div class="col-lg-6 form-group">
-				<label for="">Location</label>
-				<input type="text" class="form-control" name="" id="" placeholder="City">
-				<input type="text" class="form-control" name="" id="" placeholder="Country">
+	<div class="col-lg-12 plr-0 filter" style="margin-top: 30px;">
+
+		<form class="form-inline">
+			<div class="form-group">
+				<label for="" class="">Location</label>
+				<input type="text" class="form-control pr-20" name="" id="" placeholder="Country">
+				<input type="text" class="form-control pr-20" name="" id="" placeholder="City">
 			</div>
-	
-			<div class="col-lg-6">
-				<label for="">Food Count</label>
-				<input type="text" name="" id="" placeholder="Food Count">
+
+			<div class="form-group">
+				<label for="" class="pl-20">Time</label>
+				<select class="form-control" style="width: 188px">
+					<option>Less than 1 hour</option>
+				</select>
 			</div>
-		</div>
 
-		<div>
-			<label for="">Time</label>
-			<select name="" id="">
-				<option value="">Less than 1 hour</option>
-			</select>
-		</div>
+			<div class="form-group">
+				<label for="" class="pl-20">Food Count</label>
+				<input type="text" class="pl-20 form-control" name="" id="" placeholder="Food Count" style="width: 150px">
+			</div>
 
-		<div>
-			<label for="">Veg</label>
-			<input type="radio" >
-			<label for="">Non Veg</label>
-			<input type="radio">
-		</div>
+			<div class="form-group">
+				<input type="radio" name="vegFlag" id="nonVegFlag">
+				<label for="nonVegFlag" class="pl-20">Non Veg</label>
+				<input type="radio" name="vegFlag" id="vegFlag">
+				<label for="vegFlag" class="pl-20">Veg</label>
+			</div>
 
-		<div>
-			<label for="">Restaurent</label>
-			<input type="radio">
-			<label for="">Event</label>
-			<input type="radio">
-		</div>
+			{{--  <div class="form-group" style="margin-top: 10px">
+				<label for="" class="">Restaurent</label>
+				<input type="radio" name="" id="">
+				<label for="" class="pl-20">Event</label>
+				<input type="radio" name="" id="">
+			</div>  --}}
+
+			<div class="col-lg-12" style="text-align: center;margin-top: 20px;margin-bottom: 20px;">
+				<button class="btn button-bg-green" style="padding: 0px;width: 100px;height: 40px" type="submit">Filter</button>
+			</div>
+
+		</form>
 
 	</div>
 

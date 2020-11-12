@@ -1,4 +1,5 @@
 @extends('templates.main')
+<title>Home</title>
 <style>
 	::placeholder {
   color: white;
