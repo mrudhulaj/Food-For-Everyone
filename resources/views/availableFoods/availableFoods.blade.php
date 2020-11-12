@@ -30,6 +30,9 @@
 		margin-left: 20px
 	}
 
+	tr:nth-child(even) {
+  	background-color: #f2f2f2;
+	}
 </style>
 @section('content')
 <div class="container">
@@ -60,18 +63,11 @@
 			</div>
 
 			<div class="form-group">
-				<input type="radio" name="vegFlag" id="nonVegFlag">
+				<input type="radio" name="vegFlag" id="nonVegFlag" checked>
 				<label for="nonVegFlag" class="pl-20">Non Veg</label>
 				<input type="radio" name="vegFlag" id="vegFlag">
 				<label for="vegFlag" class="pl-20">Veg</label>
 			</div>
-
-			{{--  <div class="form-group" style="margin-top: 10px">
-				<label for="" class="">Restaurent</label>
-				<input type="radio" name="" id="">
-				<label for="" class="pl-20">Event</label>
-				<input type="radio" name="" id="">
-			</div>  --}}
 
 			<div class="col-lg-12" style="text-align: center;margin-top: 20px;margin-bottom: 20px;">
 				<button class="btn button-bg-green" style="padding: 0px;width: 100px;height: 40px" type="submit">Filter</button>
@@ -81,29 +77,49 @@
 
 	</div>
 
-	<table class="table">
+	<table class="table" style="margin-bottom: 50px;">
 		<thead class="table-striped">
 			<tr>
-				<th scope="col">First</th>
-				<th scope="col">Last</th>
-				<th scope="col">Handle</th>
+				<th scope="col">First Name</th>
+				<th scope="col">Last Name</th>
+				<th scope="col">Type</th>
+				<th scope="col">Restaurent Name</th>
+				<th scope="col">Phone</th>
+				<th scope="col">Location</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>Mark</td>
-				<td>Otto</td>
-				<td>@mdo</td>
+				<td>Qamr</td>
+				<td>Abdullah</td>
+				<td>Restaurent</td>
+				<td>Paragon</td>
+				<td>+91 9989898889</td>
+				<td>Calicut, India</td>
 			</tr>
 			<tr>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
+				<td>Qamr</td>
+				<td>Abdullah</td>
+				<td>Restaurent</td>
+				<td>Paragon</td>
+				<td>+91 9989898889</td>
+				<td>Calicut, India</td>
 			</tr>
 			<tr>
-				<td>Larry</td>
-				<td>the Bird</td>
-				<td>@twitter</td>
+				<td>Qamr</td>
+				<td>Abdullah</td>
+				<td>Restaurent</td>
+				<td>Paragon</td>
+				<td>+91 9989898889</td>
+				<td>Calicut, India</td>
+			</tr>
+			<tr>
+				<td>Qamr</td>
+				<td>Abdullah</td>
+				<td>Restaurent</td>
+				<td>Paragon</td>
+				<td>+91 9989898889</td>
+				<td>Calicut, India</td>
 			</tr>
 		</tbody>
 	</table>
