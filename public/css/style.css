@@ -1229,3 +1229,8 @@
   
   
   /* End: Custom Radio Button With Green Color */
+	.mainbox-general{
+		margin-bottom: 20px;
+		border-radius: 7px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);
+	 }

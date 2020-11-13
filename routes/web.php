@@ -16,7 +16,8 @@
 // End: Available Foods
 
 // Begin: Causes
-  Route::get('causes', ['as' => 'causes','uses' => 'Causes\CausesController@CausesView']);
+  Route::get('causes', ['as' => 'causes','uses' => 'Causes\CausesController@causesView']);
+  Route::get('causes-details', ['as' => 'causesDetails','uses' => 'Causes\CausesDetailsController@causesDetailsView']);
 // End: Causes
 
 // Begin: Contact Us
