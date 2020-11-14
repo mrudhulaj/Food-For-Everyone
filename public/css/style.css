@@ -1185,6 +1185,8 @@
 .button-bg-green:hover {
     background: #00B346;
     font-weight: bold;
+    border: none;
+    color: white;
 }
 
 .form-control:focus {
@@ -1233,4 +1235,15 @@
 		margin-bottom: 20px;
 		border-radius: 7px;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);
-	 }
+   }
+
+   .cust-a{
+     color: #00A348;
+   }
+   
+   .cust-a:hover{
+    text-decoration: none;
+    background-color: transparent;
+    color: #00A348 !important;
+    font-weight: bold !important;
+   }

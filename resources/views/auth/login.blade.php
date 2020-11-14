@@ -1,18 +1,147 @@
-@extends('layouts.app')
-{{--  @extends('templates.main')  --}}
+{{-- @extends('layouts.app') --}}
+@extends('templates.main')
 
+<style>
+    .justify-content-center {
+        justify-content: center !important;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, .125);
+        border-radius: .25rem;
+    }
+
+    .card-header:first-child {
+        border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+    }
+
+    .card-header {
+        padding: .75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: rgba(0, 0, 0, .03);
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        padding: 1.25rem;
+    }
+
+    .cust-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*Begin: Custom checkbox */
+
+/* The container */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: normal;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #dfe5f7;
+ border-radius: 5px; 
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #00A348;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* End: Custom checkbok */
+
+</style>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6" style="margin-bottom: 50px;">
+          <div style="text-align: center;">
+            <div class="main-logo">
+              <img src="{{ url('images/mainLogo.png') }}" width="50"
+                  height="50">
+              <h2>Food For Everyone</h2>
+            </div>
+          </div>
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header" style="background-color: #00E660;">
+                    {{ __('Login') }}
+                </div>
 
-                <div class="card-body">
+                <div class="col-lg-offset-1 card-body" style="margin-top: 15px;">
                     <form method="POST" action="{{ route('login') }}"
                         aria-label="{{ __('Login') }}">
                         @csrf
-
                         <div class="form-group row">
                             <label for="email"
                                 class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -48,25 +177,24 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-lg-offset-4 col-md-6" style="margin-top: 10px;">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                        {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                    <label class="checkbox-container">
+                                      {{ __('Remember Me') }}
+                                      <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                      <span class="checkmark"></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-lg-offset-4 col-md-8">
+                                <button type="submit" class="button-bg-green btn btn-primary" style="padding: 0px;width: 70px;height: 40px">
                                     {{ __('Login') }}
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="btn btn-link cust-a" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
                             </div>

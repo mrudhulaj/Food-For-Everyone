@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,6 +32,9 @@
     }
 
 </style>
+@php
+    $activeTab = Session::get('activeTab');
+@endphp
 
 <body>
     <div class="wrapper">
@@ -41,66 +45,71 @@
                         <div class="col-md-8 col-sm-8 col-xs-12">
                             <div class="contact">
                                 <p><span class="phone join-us"><a href="#">Phone: +91 9998881111</a></span><span
-                                        class="email join-us"><a href="#">Email: foodforeveryone@gmail.com</a></span>
+                                        class="email join-us"><a href="#">Email: info@foodforeveryone.com</a></span>
                                 </p>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <div class="join-us">
-                                <p><a href="#">Sign Up / Login</a></p>
+                                <p>
+                                  <a href="{{ route('login') }}">
+                                      @if($activeTab == 'LOGIN')
+                                          <a href="{{ route('home') }}">Home</a>
+                                      @else
+                                          Sign Up / Login
+                                      @endif
+                                  </a>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="header-bottom"> {{-- id="navbar" for sticky navbar --}}
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-12 col-xs-12">
-                            <a href="#">
-                                <div class="main-logo">
-                                    <img src="{{ url('images/mainLogo.png') }}" width="50"
-                                        height="50">
-                                    <h2>Food For Everyone</h2>
+            @if($activeTab != 'LOGIN')
+                <section class="header-bottom"> {{-- id="navbar" for sticky navbar --}}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                <a href="{{ route('home') }}">
+                                    <div class="main-logo">
+                                        <img src="{{ url('images/mainLogo.png') }}" width="50"
+                                            height="50">
+                                        <h2>Food For Everyone</h2>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-9 col-sm-12 col-xs-12">
+                                <div class="menu">
+                                    <ul class="nav navbar-nav">
+                                        <li class=" @if($activeTab == 'HOME') active-nav @endif ">
+                                            <a href="{{ route('home') }}">HOME</a>
+                                        </li>
+                                        <li class=" @if($activeTab == 'ABOUT US') active-nav @endif">
+                                            <a href="{{ route('aboutUs') }}">ABOUT US</a>
+                                        </li>
+                                        <li class=" @if($activeTab == 'AVAILABLE FOODS') active-nav @endif ">
+                                            <a href="{{ route('availableFoods') }}">AVAILABLE
+                                                FOODS</a>
+                                        </li>
+                                        <li class=" @if($activeTab == 'CAUSES') active-nav @endif ">
+                                            <a href="{{ route('causes') }}">CAUSES</a>
+                                        </li>
+                                        <li class=" @if($activeTab == 'VOLUNTEERS') active-nav @endif ">
+                                            <a href="{{ route('volunteers') }}">VOLUNTEERS </a>
+                                        </li>
+                                        <li class=" @if($activeTab == 'EVENTS') active-nav @endif ">
+                                            <a href="{{ route('events') }}">EVENTS</a>
+                                        </li>
+                                        <li class=" @if($activeTab == 'CONTACT') active-nav @endif ">
+                                            <a href="{{ route('contactUs') }}">CONTACT</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-9 col-sm-12 col-xs-12">
-                            <div class="menu">
-                                <ul class="nav navbar-nav">
-                                    @php
-                                        $activeTab = Session::get('activeTab');
-                                    @endphp
-                                    <li class=" @if($activeTab == 'HOME') active-nav @endif ">
-                                        <a href="{{ route('home') }}">HOME</a>
-                                    </li>
-                                    <li class=" @if($activeTab == 'ABOUT US') active-nav @endif">
-                                        <a href="{{ route('aboutUs') }}">ABOUT US</a>
-                                    </li>
-                                    <li class=" @if($activeTab == 'AVAILABLE FOODS') active-nav @endif ">
-                                        <a href="{{ route('availableFoods') }}">AVAILABLE FOODS</a>
-                                    </li>
-                                    <li class=" @if($activeTab == 'CAUSES') active-nav @endif ">
-                                        <a href="{{ route('causes') }}">CAUSES</a>
-                                    </li>
-                                    <li class=" @if($activeTab == 'VOLUNTEERS') active-nav @endif ">
-                                      <a href="{{route('volunteers')}}">VOLUNTEERS </a>
-                                    </li>
-                                    <li class=" @if($activeTab == 'EVENTS') active-nav @endif ">
-                                      <a href="{{route('events')}}">EVENTS</a>
-                                    </li>
-                                    {{--  <li class=" @if($activeTab == 'BLOG') active-nav @endif ">
-																		<a href="#">BLOG</a>
-																	</li>  --}}
-                                    <li class=" @if($activeTab == 'CONTACT') active-nav @endif ">
-                                        <a href="{{ route('contactUs') }}">CONTACT</a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            @endif
         </header>
         {{-- Main Content Begins --}}
         @yield('content')
