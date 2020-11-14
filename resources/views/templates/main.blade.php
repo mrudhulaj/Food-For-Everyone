@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-{{--  Git hard revert 14-Nov-2020 11:39PM  --}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
