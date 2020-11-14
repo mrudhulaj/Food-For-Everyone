@@ -35,8 +35,6 @@
 
 Route::get('/donation' ,'DonationController@FormDonation');
 
-Route::get('/availablefoods' ,'AvailableFoodsController@ViewData');
-
 Route::post('/insert-donation','DonationController@InsertDonation');
 
 Route::get('/otheritems','OtherItemsController@ViewData');
@@ -47,3 +45,7 @@ Route::get('delete-donation/{id}','DonationController@DeleteData');
 
 Route::post('update-donation','DonationController@UpdateData');
 
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
