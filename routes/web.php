@@ -20,6 +20,10 @@
   Route::get('causes-details', ['as' => 'causesDetails','uses' => 'Causes\CausesDetailsController@causesDetailsView']);
 // End: Causes
 
+// Begin: Volunteers
+  Route::get('volunteers', ['as' => 'volunteers','uses' => 'Volunteers\VolunteersController@volunteersView']);
+// End: Volunteers
+
 // Begin: Contact Us
   Route::get('contact-us', ['as' => 'contactUs','uses' => 'ContactUs\ContactUsController@contactUsView']);
 // End: Contact Us

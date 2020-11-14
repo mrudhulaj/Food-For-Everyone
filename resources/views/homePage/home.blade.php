@@ -355,9 +355,9 @@
                                         class="fa fa-behance" aria-hidden="true"></i></a></h5>
                         </div>
                     </div>
-                    <div class="item" style="height: 178px;">
+                    <div class="item">
                         <img src="{{ url('images/volanteer_3.jpg') }}">
-                        <div class="text">
+                        <div class="text" style="height: 178px;">
                             <h3>Cynthia Anni</h3>
                             <h6>Singer</h6>
                             <p>With us since 2020</p>

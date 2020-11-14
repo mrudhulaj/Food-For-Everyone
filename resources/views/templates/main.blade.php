@@ -85,7 +85,7 @@
                                         <a href="{{ route('causes') }}">CAUSES</a>
                                     </li>
                                     <li class=" @if($activeTab == 'VOLUNTEERS') active-nav @endif ">
-                                        <a href="#">VOLUNTEERS </a>
+                                      <a href="{{route('volunteers')}}">VOLUNTEERS </a>
                                     </li>
                                     <li class=" @if($activeTab == 'EVENTS') active-nav @endif ">
                                         <a href="#">EVENTS</a>
