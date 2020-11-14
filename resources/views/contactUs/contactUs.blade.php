@@ -3,6 +3,14 @@
 <link rel="stylesheet" href="{{url('css/contact-us-css/util.css')}}">
 <link rel="stylesheet" href="{{url('css/contact-us-css/main.css')}}">
 <style>
+
+  ::placeholder{
+    color: #3c354e;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 26px;
+  }
 	.wrapper section>h2::before{
 		width: 190px !important;
 		left: 42% !important;
@@ -52,7 +60,7 @@
 			</div>
 			<div class="row mrl-0">
 				<div class="col-lg-12 cust-form-style">
-					<label class="label-input100 cust-ffe-font" for="first-name">Tell us your name *</label>
+					<label class="label-input100 cust-ffe-font" for="first-name">Tell us your name <span style="color: red"> *</span></label>
 					<div class="wrap-input100 validate-input" data-validate="Type first name">
 						<input id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
 						<span class="focus-input100"></span>
@@ -62,7 +70,7 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<label class="label-input100 cust-ffe-font" for="email">Enter your email *</label>
+					<label class="label-input100 cust-ffe-font" for="email">Enter your email <span style="color: red"> *</span></label>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com">
 						<span class="focus-input100"></span>
@@ -70,11 +78,11 @@
 
 					<label class="label-input100 cust-ffe-font" for="phone">Enter phone number</label>
 					<div class="wrap-input100">
-						<input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +91 9998887777">
+						<input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +91 9999999999">
 						<span class="focus-input100"></span>
 					</div>
 
-					<label class="label-input100 cust-ffe-font" for="message">Message *</label>
+					<label class="label-input100 cust-ffe-font" for="message">Message <span style="color: red"> *</span></label>
 					<div class="wrap-input100 validate-input" data-validate = "Message is required">
 						<textarea style="min-height: 200px;" id="message" class="input100" name="message" placeholder="Write us a message"></textarea>
 						<span class="focus-input100"></span>
