@@ -24,6 +24,10 @@
   Route::get('volunteers', ['as' => 'volunteers','uses' => 'Volunteers\VolunteersController@volunteersView']);
 // End: Volunteers
 
+// Begin: Events
+  Route::get('events', ['as' => 'events','uses' => 'Events\EventsController@eventsView']);
+// End: Events
+
 // Begin: Contact Us
   Route::get('contact-us', ['as' => 'contactUs','uses' => 'ContactUs\ContactUsController@contactUsView']);
 // End: Contact Us
