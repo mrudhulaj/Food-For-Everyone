@@ -204,7 +204,7 @@
                       <div class="form-group row mb-0" style=" margin-top: 30px">
                         <div class="col-md-12" style="display: flex;justify-content: center">
                           <label for="" style="font-weight: normal">Don't have an account? 
-                            <a class="btn btn-link cust-a" href="#" style="padding-left: 0px;font-weight: bold;margin-top: -3px;">Sign Up</a>
+                            <a class="btn btn-link cust-a" href="{{ route('register') }}" style="padding-left: 0px;font-weight: bold;margin-top: -3px;">Sign Up</a>
                           </label>
                         </div>
                       </div>
