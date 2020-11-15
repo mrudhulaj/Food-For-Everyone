@@ -115,8 +115,8 @@
         @yield('content')
         {{-- Main Content Ends --}}
 
-        <footer class="footer">
-            <div class="container">
+        <footer class="footer" @if($activeTab == 'LOGIN') style="background: white;padding-top: 0px;margin-top: -70px" @endif>
+            <div class="container" @if($activeTab == 'LOGIN') style="display: none;" @endif>
                 <div class="row">
                     <div class="col-md-4 col-sm-12">
                         <div class="footer-charity-text">
