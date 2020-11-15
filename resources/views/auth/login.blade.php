@@ -34,6 +34,15 @@
         margin-bottom: 0;
         background-color: rgba(0, 0, 0, .03);
         border-bottom: 1px solid rgba(0, 0, 0, .125);
+        background-color: #00E660;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        font-size: 18px;
+        border-radius: 13px 13px 0px 0px !important;
+        margin-right: -1px;
+        margin-left: -1px;
+
     }
 
     .card-body {
@@ -133,8 +142,8 @@
               <h2>Food For Everyone</h2>
             </div>
           </div>
-            <div class="card">
-                <div class="card-header" style="background-color: #00E660;font-weight: bold;display: flex;justify-content: center;font-size: 18px;">
+            <div class="card" style="border-radius: 13px;box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);">
+                <div class="card-header">
                   Sign In 
                 </div>
 
