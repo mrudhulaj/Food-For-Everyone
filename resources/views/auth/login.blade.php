@@ -38,7 +38,7 @@
 
     .card-body {
         flex: 1 1 auto;
-        padding: 1.25rem;
+        padding: 2.25rem;
     }
 
     .cust-center {
@@ -125,7 +125,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6" style="margin-bottom: 50px;">
+        <div class="col-md-4" style="margin-bottom: 50px;">
           <div style="text-align: center;">
             <div class="main-logo">
               <img src="{{ url('images/mainLogo.png') }}" width="50"
@@ -134,22 +134,19 @@
             </div>
           </div>
             <div class="card">
-                <div class="card-header" style="background-color: #00E660;">
-                    {{ __('Login') }}
+                <div class="card-header" style="background-color: #00E660;font-weight: bold;display: flex;justify-content: center;font-size: 18px;">
+                  Sign In 
                 </div>
 
-                <div class="col-lg-offset-1 card-body" style="margin-top: 15px;">
+                <div class="card-body" style="margin-top: 15px;">
                     <form method="POST" action="{{ route('login') }}"
                         aria-label="{{ __('Login') }}">
                         @csrf
                         <div class="form-group row">
-                            <label for="email"
-                                class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="col-md-12" style="display: flex;justify-content: center">
                                 <input id="email" type="email"
                                     class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                    name="email" value="{{ old('email') }}" required autofocus>
+                                    name="email" value="{{ old('email') }}" required autofocus placeholder="Email" style="width: 80%">
 
                                 @if($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
@@ -160,48 +157,60 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="col-md-12" style="display: flex;justify-content: center;">
                                 <input id="password" type="password"
                                     class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                    name="password" required>
+                                    name="password" required placeholder="Password" style="width: 80%">
 
                                 @if($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
+                                @endif 
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-lg-offset-4 col-md-6" style="margin-top: 10px;">
-                                <div class="form-check">
-                                    <label class="checkbox-container">
-                                      {{ __('Remember Me') }}
-                                      <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                      <span class="checkmark"></span>
-                                    </label>
-                                </div>
+                        <div class="form-group row" style="margin-top: 25px;">
+                          <div class="col-md-12" style="display: flex;justify-content: center">
+                            <div class="form-check">
+                              <label class="checkbox-container">
+                                <span>
+                                  {{ __('Remember Me') }}
+                                </span>
+                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <span class="checkmark"></span>
+                              </label>
                             </div>
-                        </div>
+                          </div>
+                      </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-lg-offset-4 col-md-8">
-                                <button type="submit" class="button-bg-green btn btn-primary" style="padding: 0px;width: 70px;height: 40px">
-                                    {{ __('Login') }}
-                                </button>
+                          <div class="col-md-12" style="display: flex;justify-content: center">
+                            <button type="submit" class="button-bg-green btn btn-primary" style="padding: 0px;width: 80%;height: 40px">
+                                {{ __('Login') }}
+                            </button>
+                          </div>
+                      </div>
 
-                                <a class="btn btn-link cust-a" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            </div>
+                      <div class="form-group row mb-0" style=" margin-top: 30px">
+                        <div class="col-md-12" style="display: flex;justify-content: center">
+                          <label for="" style="font-weight: normal">Don't have an account? 
+                            <a class="btn btn-link cust-a" href="#" style="padding-left: 0px;font-weight: bold;margin-top: -3px;">Sign Up</a>
+                          </label>
                         </div>
+                      </div>
                     </form>
                 </div>
             </div>
+            <div class="col-md-12" style="margin-top: 30px">
+              <a style="display: flex;justify-content: center" class="btn btn-link cust-a" href="{{ route('password.request') }}">
+                {{ __('Forgot Your Password?') }}
+              </a>
+              <a style="display: flex;justify-content: center" class="btn btn-link cust-a" href="{{ route('password.request') }}">
+                Terms & Conditions
+              </a>
+            </div> 
+
         </div>
     </div>
 </div>
