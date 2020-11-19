@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Food For Everyone</title>
     <link rel="icon" href="{{ url('images/mainLogo.png') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -15,6 +16,10 @@
     <link rel="stylesheet" href="{{ url('css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/style.css') }}">
     <link rel="stylesheet" href="{{ url('css/responsive.css') }}">
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{--  <link href="{{ asset('css/app.css') }}" rel="stylesheet">  --}}
+
 </head>
 
 <style>
@@ -115,8 +120,10 @@
         @yield('content')
         {{-- Main Content Ends --}}
 
-        <footer class="footer" @if($activeTab == 'LOGIN') style="background: white;padding-top: 0px;margin-top: -70px" @endif>
-            <div class="container" @if($activeTab == 'LOGIN') style="display: none;" @endif>
+        <footer class="footer" @if($activeTab == 'LOGIN') style="display: none;" @endif>
+            <div class="container">
+              {{--  <footer class="footer" >  --}}
+                {{--  <div class="container" >  --}}
                 <div class="row">
                     <div class="col-md-4 col-sm-12">
                         <div class="footer-charity-text">
