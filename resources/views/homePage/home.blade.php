@@ -44,7 +44,7 @@
 
     </div>
 
-    <!-- Left and right controls -->
+    <!-- Left and right control -->
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
         <span class="sr-only">Previous</span>
