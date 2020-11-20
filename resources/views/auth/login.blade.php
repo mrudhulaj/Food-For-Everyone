@@ -136,6 +136,10 @@
         border-radius: 13px 13px 0px 0px;
     }
 
+    .form-group label{
+      font-weight: normal;
+    }
+
     /* End: Custom checkbok */
 
 </style>
@@ -250,32 +254,49 @@
             </div>
             <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
                 <form method="POST" action="{{ route('register') }}"
-                    aria-label="{{ __('Register') }}">
+                    aria-label="{{ __('Register') }}" name="register">
                     @csrf
 
                     <div class="form-group row">
-                        <label for="name"
-                            class="col-md-5 col-form-label text-md-right">{{ __('Name') }}</label>
+                        <label for="firstName"
+                            class="col-md-5 col-form-label text-md-right">First Name</label>
 
                         <div class="col-md-7">
-                            <input id="name" type="text"
-                                class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                name="name" value="{{ old('name') }}" required autofocus>
+                            <input id="firstName" type="text"
+                                class="form-control{{ $errors->has('FirstName') ? ' is-invalid' : '' }}"
+                                name="firstName" value="{{ old('FirstName') }}" required autofocus>
 
-                            @if($errors->has('name'))
+                            @if($errors->has('FirstName'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong>{{ $errors->first('FirstName') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
                     <div class="form-group row">
+                      <label for="lastName"
+                          class="col-md-5 col-form-label text-md-right">Last Name</label>
+
+                      <div class="col-md-7">
+                          <input id="lastName" type="text"
+                              class="form-control{{ $errors->has('LastName') ? ' is-invalid' : '' }}"
+                              name="lastName" value="{{ old('LastName') }}" required autofocus>
+
+                          @if($errors->has('LastName'))
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $errors->first('LastName') }}</strong>
+                              </span>
+                          @endif
+                      </div>
+                  </div>
+
+                    <div class="form-group row">
                         <label for="email"
                             class="col-md-5 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                         <div class="col-md-7">
-                            <input id="email" type="email"
+                            <input id="registerEmail" type="email"
                                 class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                                 name="email" value="{{ old('email') }}" required>
 
@@ -292,7 +313,7 @@
                             class="col-md-5 col-form-label text-md-right">{{ __('Password') }}</label>
 
                         <div class="col-md-7">
-                            <input id="password" type="password"
+                            <input id="registerPassword" type="password"
                                 class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
                                 name="password" required>
 
@@ -314,6 +335,19 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                      <label for="password-confirm"
+                          class="col-md-5 col-form-label text-md-right">Type</label>
+
+                      <div class="col-md-7">
+                        <select class="form-control">
+                          <option>Volunteer</option>
+                          <option>Donater</option>
+                          <option>User</option>
+                        </select>
+                      </div>
+                    </div>
+
                     <div class="form-group row mb-0" style="text-align: right">
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-primary button-bg-green" style="padding: 6px 12px;border-radius: 4px;">
@@ -331,4 +365,49 @@
     </div>
 </div>
 {{-- End :Modal Registration Form --}}
+
+<script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ asset('vendor/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}" defer></script>
+<script>
+$(document).ready(function () {
+  console.log("helloo");
+  // $("form[name='register']").validate({
+  //   rules: {
+  //     // The key name on the left side is the name attribute
+  //     // of an input field. Validation rules are defined
+  //     // on the right side
+  //     firstName: "required",
+  //     lastName: "required",
+  //     email: {
+  //       required: true,
+  //       // Specify that email should be validated
+  //       // by the built-in "email" rule
+  //       email: true
+  //     },
+  //     password: {
+  //       required: true,
+  //       minlength: 5
+  //     }
+  //   },
+  //   // Specify validation error messages
+  //   messages: {
+  //     firstName: "Please enter your firstName",
+  //     lastName: "Please enter your lastname",
+  //     password: {
+  //       required: "Please provide a password",
+  //       minlength: "Your password must be at least 5 characters long"
+  //     },
+  //     email: "Please enter a valid email address"
+  //   },
+  //   // Make sure the form is submitted to the destination defined
+  //   // in the "action" attribute of the form when valid
+  //   submitHandler: function(form) {
+  //     form.submit();
+  //   }
+  // });
+
+});
+</script>
 @endsection
