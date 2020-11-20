@@ -13,6 +13,7 @@
 
 // Begin: Available Foods
   Route::get('available-foods', ['as' => 'availableFoods','uses' => 'AvailableFoods\AvailableFoodsController@availableFoodsView']);
+  Route::get('add-food', ['as' => 'addAvailableFoodsView','uses' => 'AvailableFoods\AvailableFoodsController@addAvailableFoodsView']);
 // End: Available Foods
 
 // Begin: Causes

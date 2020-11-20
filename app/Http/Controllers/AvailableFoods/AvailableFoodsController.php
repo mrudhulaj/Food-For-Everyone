@@ -13,6 +13,10 @@ class AvailableFoodsController extends Controller
         return view('availableFoods/availableFoods');
     }
 
+    public function addAvailableFoodsView(){
+      return view('availableFoods/addAvailableFoods');
+    }
+
     public function ViewData(){
         $donations = Donations::all();
         return view('availablefoods.availablefoods')->with('donations',$donations);

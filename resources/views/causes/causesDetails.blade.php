@@ -141,7 +141,6 @@
         $(".details-text").addClass('hide');
         var img = document.getElementById('img-new');
         var width = img.clientWidth + "px";
-        console.log("image width = " + width);
         $(".mainbox-cust").css("cssText", "width:" + width + " !important;");
         $(".details-text").removeClass('hide');
     });

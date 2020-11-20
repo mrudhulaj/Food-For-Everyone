@@ -129,7 +129,6 @@
     }
 
     .modal-header {
-        /* height: 15%; */
         background-color: #00E660;
         color: black;
         font-weight: bold;
@@ -220,7 +219,7 @@
                         <div class="form-group row mb-0" style=" margin-top: 30px">
                             <div class="col-md-12" style="display: flex;justify-content: center">
                                 <label for="" style="font-weight: normal">Don't have an account?
-                                    <a class="btn btn-link cust-a" data-toggle="modal" data-target="#exampleModal"
+                                    <a class="btn btn-link cust-a" data-toggle="modal" data-target="#registrationModal"
                                         style="padding-left: 0px;font-weight: bold;margin-top: -3px;">Sign Up</a>
                                 </label>
                             </div>
@@ -243,12 +242,12 @@
     </div>
 </div>
 {{-- Begin :Modal Registration Form --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="border-radius: 13px;border: none">
             <div class="modal-header ffe-font">
-                <h5 class="modal-title" id="exampleModalLabel">Join Us!
+                <h5 class="modal-title" id="registrationModalLabel">Join Us!
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

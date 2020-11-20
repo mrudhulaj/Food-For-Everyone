@@ -1251,3 +1251,20 @@
    .error {
     color: #0a6511;
    }
+
+   .a-none,.a-none:hover{
+     color: inherit;
+     text-decoration: none;
+   }
+
+   .mdl-btn-save{
+    padding: 6px 12px;
+    border-radius: 4px;
+   }
+
+   .mdl-btn-cancel{
+    padding: 6px 12px;
+    border-radius: 4px;
+    background-color: #B6B6B6;
+    color: inherit;
+   }
