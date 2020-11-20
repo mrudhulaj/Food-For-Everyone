@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="{{ url('css/responsive.css') }}">
 
     <script src="{{ asset('js/app.js') }}" defer></script>
-    {{--  <link href="{{ asset('css/app.css') }}" rel="stylesheet">  --}}
 
 </head>
 
@@ -196,10 +195,10 @@
     </div>
 
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/animationCounter.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/active.js') }}"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}" defer></script>
+    <script src="{{ asset('js/animationCounter.js') }}" defer></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
     <script>
         var _gaq = _gaq || [];
