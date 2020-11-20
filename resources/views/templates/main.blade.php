@@ -26,9 +26,12 @@
         position: fixed;
         top: 0;
         width: 100%;
-        background-color: #00381a;
+        background-color: white;
         opacity: 1;
-
+        z-index: 1000;
+        box-shadow: 0px 5px 20px 10px rgba(0, 0, 0, 0.5);
+        height: 100px;
+        margin-top: -20px;
     }
 
     .sticky+.content {
@@ -70,7 +73,7 @@
                 </div>
             </section>
             @if($activeTab != 'LOGIN')
-                <section class="header-bottom"> {{-- id="navbar" for sticky navbar --}}
+                <section class="header-bottom" id="navbar"> {{-- id="navbar" for sticky navbar --}}
                     <div class="container">
                         <div class="row">
                             <div class="col-md-3 col-sm-12 col-xs-12">
@@ -218,18 +221,18 @@
 
         //Begin:Make navbar sticky
 
-        // window.onscroll = function() {myFunction()};
+        window.onscroll = function() {myFunction()};
 
-        // var navbar = document.getElementById("navbar");
-        // var sticky = navbar.offsetTop;
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
 
-        // function myFunction() {
-        // 	if (window.pageYOffset >= sticky) {
-        // 		navbar.classList.add("sticky")
-        // 	} else {
-        // 		navbar.classList.remove("sticky");
-        // 	}
-        // }
+        function myFunction() {
+        	if (window.pageYOffset >= sticky) {
+        		navbar.classList.add("sticky")
+        	} else {
+        		navbar.classList.remove("sticky");
+        	}
+        }
 
         // End: Make Navbar sticky
 
