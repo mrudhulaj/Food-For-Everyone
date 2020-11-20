@@ -366,47 +366,47 @@
 </div>
 {{-- End :Modal Registration Form --}}
 
+<script src="{{ asset('vendor/jquery-validation/dist/jquery.validate.min.js') }}" defer></script>
 <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-<script src="{{ asset('vendor/jquery-validation/dist/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('js/app.js') }}" defer></script>
-<script src="{{ asset('js/owl.carousel.min.js') }}" defer></script>
+{{--  <script src="{{ asset('js/app.js') }}" defer></script>  --}}
+{{--  <script src="{{ asset('js/owl.carousel.min.js') }}" defer></script>  --}}
 <script>
 $(document).ready(function () {
   console.log("helloo");
-  // $("form[name='register']").validate({
-  //   rules: {
-  //     // The key name on the left side is the name attribute
-  //     // of an input field. Validation rules are defined
-  //     // on the right side
-  //     firstName: "required",
-  //     lastName: "required",
-  //     email: {
-  //       required: true,
-  //       // Specify that email should be validated
-  //       // by the built-in "email" rule
-  //       email: true
-  //     },
-  //     password: {
-  //       required: true,
-  //       minlength: 5
-  //     }
-  //   },
-  //   // Specify validation error messages
-  //   messages: {
-  //     firstName: "Please enter your firstName",
-  //     lastName: "Please enter your lastname",
-  //     password: {
-  //       required: "Please provide a password",
-  //       minlength: "Your password must be at least 5 characters long"
-  //     },
-  //     email: "Please enter a valid email address"
-  //   },
-  //   // Make sure the form is submitted to the destination defined
-  //   // in the "action" attribute of the form when valid
-  //   submitHandler: function(form) {
-  //     form.submit();
-  //   }
-  // });
+  $("form[name='register']").validate({
+    rules: {
+      // The key name on the left side is the name attribute
+      // of an input field. Validation rules are defined
+      // on the right side
+      firstName: "required",
+      lastName: "required",
+      email: {
+        required: true,
+        // Specify that email should be validated
+        // by the built-in "email" rule
+        email: true
+      },
+      password: {
+        required: true,
+        minlength: 5
+      }
+    },
+    // Specify validation error messages
+    messages: {
+      firstName: "Please enter your firstName",
+      lastName: "Please enter your lastname",
+      password: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 5 characters long"
+      },
+      email: "Please enter a valid email address"
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
 
 });
 </script>
