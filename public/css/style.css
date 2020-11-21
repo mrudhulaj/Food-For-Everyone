@@ -1160,6 +1160,14 @@
     padding-right: 0px;
  }
 
+ .pleft-0{
+  padding-left: 0px;
+  }
+
+  .pright-0{
+    padding-right: 0px;
+  }
+
  .mrl-0{
      margin-left: 0px;
      margin-right: 0px;
@@ -1267,4 +1275,12 @@
     border-radius: 4px;
     background-color: #B6B6B6;
     color: inherit;
+   }
+
+   .mdl-btn-cancel:hover{
+     font-weight: bold;
+   }
+
+   .btn{
+     outline: none !important;
    }
