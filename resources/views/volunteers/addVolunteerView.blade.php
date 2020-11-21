@@ -4,6 +4,7 @@
     href="{{ url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i') }}"
     rel="stylesheet">
 <link href="{{ url('css/form.css') }}" rel="stylesheet" media="all">
+<link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
 
 <style>
     .wrapper section>h2::before {
@@ -109,8 +110,13 @@
                                 </select>
                             </div>
                         </div>
-
                     </div>
+
+                    <div class="input-group col-lg-12">
+                      <label class="label ffe-font">Profile Photo</label>
+                      <input class="input--style-4" type="file" name="phone">
+                    </div>
+
                     <div class="" style="text-align: center;padding-top: 40px;">
                         <button type="button" id="submitbtn" class="btn button-bg-green"
                             style="padding: 0px;width: 120px;height: 60px;">
