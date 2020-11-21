@@ -416,10 +416,6 @@
             rules: {
                 firstName: "required",
                 lastName: "required",
-                loginEmail: {
-                    required: true,
-                    email: true
-                },
                 email: {
                     required: true,
                     email: true
@@ -430,10 +426,6 @@
                 },
                 typeOfAccount: {
                     required: true
-                },
-                loginPassword: {
-                    required: true,
-                    minlength: 5
                 },
                 password: {
                     required: true,
@@ -454,10 +446,6 @@
                     required: "Please enter your mobile number",
                     number:"Please enter numbers only"
                 },
-                loginPassword: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
-                },
                 password: {
                     required: "Please provide a password",
                     minlength: "Your password must be at least 5 characters long"
@@ -466,7 +454,6 @@
                     required: "Please confirm password",
                     minlength: "Your password must be at least 5 characters long"
                 },
-                loginEmail: "Please enter a valid email address",
                 email: "Please enter a valid email address"
             },
             submitHandler: function (form) {

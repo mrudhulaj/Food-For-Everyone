@@ -18,7 +18,8 @@
 
 // Begin: Causes
   Route::get('causes', ['as' => 'causes','uses' => 'Causes\CausesController@causesView']);
-  Route::get('causes-details', ['as' => 'causesDetails','uses' => 'Causes\CausesDetailsController@causesDetailsView']);
+  Route::get('causes-details', ['as' => 'causesDetails','uses' => 'Causes\CausesController@causesDetailsView']);
+  Route::get('add-causes', ['as' => 'addCauseView','uses' => 'Causes\CausesController@addCauseView']);
 // End: Causes
 
 // Begin: Volunteers

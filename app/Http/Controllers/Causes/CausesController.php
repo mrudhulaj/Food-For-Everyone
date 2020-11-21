@@ -11,4 +11,12 @@ class CausesController extends Controller
         Session::put('activeTab', 'CAUSES');
         return view('causes/causes');
     }
+
+    public function causesDetailsView(){
+      return view('causes/causesDetails');
+    }
+
+    public function addCauseView(){
+      return view('causes/addCauseView');
+    }
 }

@@ -1,5 +1,5 @@
 @extends('templates.main')
-<title>Add Available Food</title>
+<title>Add Cause</title>
 <link
     href="{{ url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i') }}"
     rel="stylesheet">
@@ -7,12 +7,8 @@
 
 <style>
     .wrapper section>h2::before {
-        width: 190px !important;
-        left: 42% !important;
-    }
-
-    .wrapper section>h2::before {
-        left: 43% !important;
+        width: 150px !important;
+        left: 44% !important;
     }
 
     .card {
@@ -33,18 +29,11 @@
         border-radius: 13px 13px 0px 0px;
     }
 
-    #state-error,
-    #district-error {
-        margin-top: -22px;
-        margin-bottom: 22px;
-    }
-
 </style>
 @section('content')
 <section>
-    <h2 style="margin-top: 0px;">Contribute here !</h2>
-    <p>Willing to contribute? Please make sure the food you provide is edible and passes the basic quality test,
-        <br> that is, you will be having no problem giving this food to your own children and family.</p>
+    <h2 style="margin-top: 0px;">Add a cause</h2>
+    {{--  <p></p>  --}}
 </section>
 
 <div class="page-wrapper p-b-100 font-poppins" style="padding-top: 50px">
@@ -52,20 +41,20 @@
         <div class="card card-4">
             <div class="card-body">
                 <form action="{{ url('insert-donation') }}" method="POST"
-                    enctype="multipart/form-data" name="addAvailableFood" id="addAvailableFood" data-toggle="modal" onsubmit="return myModal(this)">
+                    enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstName" value="">
+                                <input class="input--style-4" type="text" name="firstname" value="Qamr">
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastName" value="">
+                                <input class="input--style-4" type="text" name="lastname" value="Abdullah">
                             </div>
                         </div>
                     </div>
@@ -79,8 +68,8 @@
                                         <input type="radio" checked="checked" name="typeofdonation" value="Event">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <label class="radio-container ffe-font">Restaurant
-                                        <input type="radio" name="typeofdonation" value="Restaurant">
+                                    <label class="radio-container ffe-font">Restaurent
+                                        <input type="radio" name="typeofdonation" value="Restaurent">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
@@ -88,12 +77,8 @@
                         </div>
                     </div>
                     <div class="input-group col-lg-12 hide type-rest">
-                        <label class="label ffe-font">Restaurant Name</label>
-                        <input class="input--style-4" type="text" name="restaurantName">
-                    </div>
-                    <div class="input-group col-lg-12">
-                        <label class="label ffe-font">Email</label>
-                        <input class="input--style-4" type="text" name="email">
+                        <label class="label ffe-font">Restaurent Name</label>
+                        <input class="input--style-4" type="text" name="restaurent_name">
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Phone</label>
@@ -101,30 +86,27 @@
                     </div>
                     <div class="row row-space" style="padding-right: 0px">
                         <div class="col-lg-6">
-                            <div class="input-group col-lg-12 selectbox-div">
+                            <div class="input-group col-lg-12">
                                 <label class="label ffe-font">District</label>
-                                <select class="form-control input--style-4" style="" id="district" name="district">
-                                    <option hidden selected="" value="">Select District</option>
-                                    <option value="Kerala">Kerala</option>
+                                <select class="form-control input--style-4" style="">
+                                    <option>Select District</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="input-group col-lg-12 selectbox-div">
+                            <div class="input-group col-lg-12">
                                 <label class="label ffe-font">State</label>
-                                <select class="form-control input--style-4" style="" id="state" name="state">
-                                    <option hidden selected="" value="">Select District</option>
-                                    <option value="Calicut">Calicut</option>
+                                <select class="form-control input--style-4" style="">
+                                    <option>Select District</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="" style="text-align: center;padding-top: 40px;">
-                        <button type="button" id="submitbtn" class="btn button-bg-green"
-                            style="padding: 0px;width: 120px;height: 60px;">
+                        <button type="button" id="submitbtn" data-toggle="modal" data-target="#confirmationModal"
+                            class="btn button-bg-green" style="padding: 0px;width: 120px;height: 60px;">
                             Submit
                         </button>
-                        {{-- data-toggle="modal" data-target="#confirmationModal" --}}
                     </div>
                 </form>
             </div>
@@ -166,77 +148,11 @@
     $("input[name='typeofdonation']").change(function () {
         var type = $('input[name="typeofdonation"]:checked').val();
 
-        if (type == 'Restaurant') {
+        if (type == 'Restaurent') {
             $(".type-rest").removeClass('hide');
         } else {
             $(".type-rest").addClass('hide');
         }
-
-    });
-
-    $(document).ready(function () {
-
-        // Add Available Food form validation
-        $("form[name='addAvailableFood']").validate({
-            errorPlacement: function (error, element) {
-                if (element.parent().hasClass('selectbox-div')) {
-                    error.insertAfter(element.parent());
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            rules: {
-                firstName: "required",
-                lastName: "required",
-                restaurantName: "required",
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone: {
-                    required: true,
-                    number: true
-                },
-                district: {
-                    required: true
-                },
-                state: {
-                    required: true
-                },
-            },
-            messages: {
-                firstName: "Please enter your first name",
-                lastName: "Please enter your last name",
-                district: {
-                    required: "Please select a district",
-                },
-                state: {
-                    required: "Please select a state",
-                },
-                phone: {
-                    required: "Please enter your mobile number",
-                    number: "Please enter numbers only"
-                },
-                email: "Please enter a valid email address"
-            },
-        });
-
-        $('#submitbtn').click(function () {
-            $("#addAvailableFood").valid();
-            // $('#confirmationModal').modal('show');
-
-            // $('form').submit(function () {
-            //   if ($(this).valid()) {
-            //       $('#confirmationModal').modal('show');
-            //   } 
-            // });
-        });
-
-        // $('form').submit(function () {
-        //     if ($(this).valid()) {
-        //         $('#confirmationModal').modal('show');
-        //     }
-        // });
 
     });
 
