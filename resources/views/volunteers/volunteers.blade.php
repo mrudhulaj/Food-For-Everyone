@@ -30,7 +30,12 @@
 </style>
 @section('content')
 <section>
-    <h2 style="margin-top: 0px;">Our volunteers</h2>
+    <h2 style="margin-top: 0px;padding-left: 170px;">
+      Our volunteers
+      <button class="btn button-bg-green" style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">
+        <a class="a-none" href="{{ route('addVolunteerView') }}">Add Volunteer</a>
+      </button>
+    </h2>
     <p>Meet our superhero's.The people who bring joy to our kids and elders.The silent warriors.</p>
 </section>
 <div class="container" style="padding-bottom: 50px;padding-top: 50px;">

@@ -11,4 +11,8 @@ class VolunteersController extends Controller
         Session::put('activeTab', 'VOLUNTEERS');
         return view('volunteers/volunteers');
     }
+
+    public function addVolunteerView(){
+      return view('volunteers/addVolunteerView');
+  }
 }

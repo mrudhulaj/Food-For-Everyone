@@ -124,7 +124,7 @@
           We are expanding our reach!
           <button class="btn button-bg-green" style="padding: 0px;width: 100px;height: 40px;float: right;margin-right: 60px;">
             <a class="a-none" href="{{ route('addCauseView') }}">Add Cause</a>
-        </button>
+          </button>
         </h2>
         <p>We are continously trying to expand our reach to different areas where people need support to help build a
             better future.

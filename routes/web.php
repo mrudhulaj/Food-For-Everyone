@@ -24,6 +24,7 @@
 
 // Begin: Volunteers
   Route::get('volunteers', ['as' => 'volunteers','uses' => 'Volunteers\VolunteersController@volunteersView']);
+  Route::get('add-volunteer', ['as' => 'addVolunteerView','uses' => 'Volunteers\VolunteersController@addVolunteerView']);
 // End: Volunteers
 
 // Begin: Events

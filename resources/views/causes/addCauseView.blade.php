@@ -44,7 +44,7 @@
 @section('content')
 <section>
   <h2 style="margin-top: 0px;">Add cause</h2>
-  <p>Add causes and their details here.Please make sure the details you provide including the time and location are as accurate as possible.</p>
+  <p>Please make sure the details you provide including the time and location are as accurate as possible.</p>
 </section>
 
 <div class="page-wrapper p-b-100 font-poppins" style="padding-top: 50px">
