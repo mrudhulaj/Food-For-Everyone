@@ -3,7 +3,7 @@
 <style>
     .wrapper section>h2::before {
         width: 190px !important;
-        left: 42% !important;
+        left: 43% !important;
     }
 
     .item {

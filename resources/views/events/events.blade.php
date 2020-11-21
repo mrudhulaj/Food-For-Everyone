@@ -13,6 +13,10 @@
     text-align: center;
 }
 
+.wrapper section>h2::before{
+  width: 160px !important;
+  left: 44% !important;
+}
 
 </style>
 @section('content')
