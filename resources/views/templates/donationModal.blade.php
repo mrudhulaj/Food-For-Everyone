@@ -1,14 +1,5 @@
 {{-- Modal Donation Form --}}
 <style>
-    .left-input-addon {
-        background: #fafafa;
-        border-radius: 5px 0px 0px 5px;
-        box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
-        border: none;
-        border-right: none;
-        width: 50px;
-    }
-
     #amount-error{
       margin-top: -22px;
       margin-bottom: 22px;

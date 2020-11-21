@@ -29,132 +29,218 @@
         border-radius: 13px 13px 0px 0px;
     }
 
+    #expectedAmount-error{
+      margin-top: -22px;
+      margin-bottom: 22px;
+    }
+
+    #state-error,
+    #district-error,
+    #city-error {
+        margin-top: -22px;
+        margin-bottom: 22px;
+    }
 </style>
 @section('content')
 <section>
-    <h2 style="margin-top: 0px;">Add a cause</h2>
-    {{--  <p></p>  --}}
+  <h2 style="margin-top: 0px;">Add cause</h2>
+  <p>Add causes and their details here.Please make sure the details you provide including the time and location are as accurate as possible.</p>
 </section>
 
 <div class="page-wrapper p-b-100 font-poppins" style="padding-top: 50px">
-    <div class="wrapper wrapper--w680">
-        <div class="card card-4">
-            <div class="card-body">
-                <form action="{{ url('insert-donation') }}" method="POST"
-                    enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstname" value="Qamr">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastname" value="Abdullah">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
+  <div class="wrapper wrapper--w680">
+      <div class="card card-4">
+          <div class="card-body">
+              <form action="" method="POST"
+                  enctype="multipart/form-data" name="addCause" id="addCause">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  
+                  <div class="input-group col-lg-12">
+                    <label class="label ffe-font">Cause Title</label>
+                    <input class="input--style-4" type="text" name="causeTitle">
+                  </div>
 
-                        <div class="col-lg-12">
-                            <div class="input-group">
-                                <label class="label ffe-font">Type of Donation</label>
-                                <div class="p-t-10">
-                                    <label class="radio-container m-r-45 ffe-font">Event
-                                        <input type="radio" checked="checked" name="typeofdonation" value="Event">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="radio-container ffe-font">Restaurent
-                                        <input type="radio" name="typeofdonation" value="Restaurent">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
+                  <div class="input-group col-lg-12">
+                      <label class="label ffe-font">Cause Description</label>
+                      <textarea style="border: none;" name="causeDescription" id="causeDescription" class="input--style-4" id="" cols="35" rows="5"></textarea>
+                  </div>
+
+                  <label class="label ffe-font">Expected Amount</label>
+                  <div class="input-group col-lg-12 amount-div">
+                    <span class="input-group-addon left-input-addon" id="sizing-addon1">₹</span>
+                    <input class="input--style-4" id="expectedAmount" type="text" name="expectedAmount"
+                        aria-describedby="sizing-addon1" style="border-radius: 0px 5px 5px 0px;">
+                  </div>
+
+                  <div class="input-group col-lg-12">
+                      <label class="label ffe-font">Email (For more infrmation)</label>
+                      <input class="input--style-4" type="text" name="email">
+                  </div>
+                  <div class="input-group col-lg-12">
+                      <label class="label ffe-font">Phone (For more information</label>
+                      <input class="input--style-4" type="text" name="phone">
+                  </div>
+                  <div class="row row-space" style="padding-right: 0px">
+                      <div class="col-lg-4">
+                          <div class="input-group col-lg-12 selectbox-div">
+                              <label class="label ffe-font">District</label>
+                              <select class="form-control input--style-4" style="" id="district" name="district">
+                                  <option hidden selected="" value="">District</option>
+                                  <option value="Kerala">Kerala</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-lg-4">
+                          <div class="input-group col-lg-12 selectbox-div">
+                              <label class="label ffe-font">State</label>
+                              <select class="form-control input--style-4" style="" id="state" name="state">
+                                  <option hidden selected="" value="">District</option>
+                                  <option value="Calicut">Calicut</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="input-group col-lg-12 selectbox-div">
+                            <label class="label ffe-font">City</label>
+                            <select class="form-control input--style-4" style="" id="city" name="city">
+                                <option hidden selected="" value="">City</option>
+                                <option value="City">Puthiyara</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="input-group col-lg-12 hide type-rest">
-                        <label class="label ffe-font">Restaurent Name</label>
-                        <input class="input--style-4" type="text" name="restaurent_name">
-                    </div>
-                    <div class="input-group col-lg-12">
-                        <label class="label ffe-font">Phone</label>
-                        <input class="input--style-4" type="text" name="phone">
-                    </div>
-                    <div class="row row-space" style="padding-right: 0px">
-                        <div class="col-lg-6">
-                            <div class="input-group col-lg-12">
-                                <label class="label ffe-font">District</label>
-                                <select class="form-control input--style-4" style="">
-                                    <option>Select District</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="input-group col-lg-12">
-                                <label class="label ffe-font">State</label>
-                                <select class="form-control input--style-4" style="">
-                                    <option>Select District</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="" style="text-align: center;padding-top: 40px;">
-                        <button type="button" id="submitbtn" data-toggle="modal" data-target="#confirmationModal"
-                            class="btn button-bg-green" style="padding: 0px;width: 120px;height: 60px;">
-                            Submit
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+                  </div>
+                  <div class="" style="text-align: center;padding-top: 40px;">
+                      <button type="button" id="submitbtn" class="btn button-bg-green"
+                          style="padding: 0px;width: 120px;height: 60px;">
+                          Submit
+                      </button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
 </div>
 
 {{-- Begin :Confirmation box --}}
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="border-radius: 13px;border: none">
-            <div class="modal-header ffe-font">
-                <h5 class="modal-title" id="confirmationModalLabel">Confirm your contribution
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </h5>
-            </div>
-            <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
-                <p>By clicking the confirm button you hereby acknowledge that the food provided by you is safe and
-                    edible and if any problem is to occur after it's consumption, you take full responsibilty of it.</p>
-            </div>
-            <div class="modal-footer">
-                <button id="" type="submit" class="btn btn-primary button-bg-green"
-                    style="padding: 6px 12px;border-radius: 4px;">
-                    Confirm
-                </button>
-                <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content" style="border-radius: 13px;border: none">
+          <div class="modal-header ffe-font">
+              <h5 class="modal-title" id="confirmationModalLabel">Confirmation
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </h5>
+          </div>
+          <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
+              <p>By clicking the confirm button you hereby acknowledge that the details provided by you is genuine to the best of your knowledge.</p>
+          </div>
+          <div class="modal-footer">
+              <button id="" type="submit" class="btn btn-primary button-bg-green"
+                  style="padding: 6px 12px;border-radius: 4px;">
+                  Confirm
+              </button>
+              <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
+                  Cancel
+              </button>
+          </div>
+      </div>
+  </div>
 </div>
 {{-- End :Confirmation Box --}}
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
-    $("input[name='typeofdonation']").change(function () {
-        var type = $('input[name="typeofdonation"]:checked').val();
+  $("input[name='typeofdonation']").change(function () {
+      var type = $('input[name="typeofdonation"]:checked').val();
 
-        if (type == 'Restaurent') {
-            $(".type-rest").removeClass('hide');
-        } else {
-            $(".type-rest").addClass('hide');
-        }
+      if (type == 'Restaurant') {
+          $(".type-rest").removeClass('hide');
+      } else {
+          $(".type-rest").addClass('hide');
+      }
 
-    });
+  });
+
+  $(document).ready(function () {
+
+      // Add Available Food form validation
+      $("form[name='addCause']").validate({
+          errorPlacement: function (error, element) {
+              if ( element.parent().hasClass('selectbox-div') || element.parent().hasClass('amount-div') ) {
+                  error.insertAfter(element.parent());
+              } else {
+                  error.insertAfter(element);
+              }
+          },
+          rules: {
+              causeTitle: "required",
+              causeDescription: {
+                  required: true,
+                  minlength:8
+              },
+              restaurantName: "required",
+              email: {
+                  required: true,
+                  email: true
+              },
+              expectedAmount: {
+                  required: true,
+                  number: true
+              },
+              phone: {
+                  required: true,
+                  number: true
+              },
+              district: {
+                  required: true
+              },
+              state: {
+                  required: true
+              },
+              city: {
+                  required: true
+              },
+          },
+          messages: {
+              causeTitle: "Please enter the cause title",
+              causeDescription: {
+                  required: "Please enter the cause description",
+              },
+              district: {
+                  required: "Please select a district",
+              },
+              state: {
+                  required: "Please select a state",
+              },
+              city: {
+                  required: "Please select a city",
+              },
+              expectedAmount: {
+                  required: "Please enter expected amount of cause",
+                  number: "Please enter numbers only"
+              },
+              phone: {
+                  required: "Please enter your mobile number",
+                  number: "Please enter numbers only"
+              },
+              email: "Please enter a valid email address"
+          },
+      });
+
+      $('#submitbtn').click(function () {
+          var isFormValid = $('#addCause').valid();
+          if(isFormValid == true){
+            console.log("Form is valid");
+            jQuery.noConflict(); 
+            $('#confirmationModal').modal('show'); 
+          }
+          else{
+            console.log("Form is invalid");
+          }
+      });
+  });
 
 </script>
 @stop
