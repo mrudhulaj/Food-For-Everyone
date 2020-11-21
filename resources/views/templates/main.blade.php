@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ url('css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/style.css') }}">
     <link rel="stylesheet" href="{{ url('css/responsive.css') }}">
-
+    <link href="{{ url('css/form.css') }}" rel="stylesheet" media="all">
     <script src="{{ asset('js/app.js') }}" defer></script>
 
 </head>
@@ -202,7 +202,8 @@
     <script src="{{ asset('js/owl.carousel.min.js') }}" defer></script>
     <script src="{{ asset('js/animationCounter.js') }}" defer></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-
+    <script src="{{ asset('vendor/jquery-validation/dist/jquery.validate.min.js') }}" defer>
+    </script>
     <script>
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-36251023-1']);

@@ -297,7 +297,7 @@
                                 <option>I Want To Donate For 3</option>
                             </select>
                         </h4>
-                        <input type="submit" class="borderes" value="DONATE NOW">
+                        <input type="submit" class="borderes" value="DONATE NOW" style="width: auto;">
                     </form>
                 </div>
                 <div class="donors_image">

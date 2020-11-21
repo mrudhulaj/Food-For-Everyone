@@ -83,7 +83,7 @@
     }
 
     /* Create a custom checkbox */
-    .checkmark {
+    .checkmark-cust {
         position: absolute;
         top: 0;
         left: 0;
@@ -94,29 +94,29 @@
     }
 
     /* On mouse-over, add a grey background color */
-    .checkbox-container:hover input~.checkmark {
+    .checkbox-container:hover input~.checkmark-cust {
         background-color: #ccc;
     }
 
     /* When the checkbox is checked, add a blue background */
-    .checkbox-container input:checked~.checkmark {
+    .checkbox-container input:checked~.checkmark-cust {
         background-color: #00A348;
     }
 
     /* Create the checkmark/indicator (hidden when not checked) */
-    .checkmark:after {
+    .checkmark-cust:after {
         content: "";
         position: absolute;
         display: none;
     }
 
     /* Show the checkmark when checked */
-    .checkbox-container input:checked~.checkmark:after {
+    .checkbox-container input:checked~.checkmark-cust:after {
         display: block;
     }
 
     /* Style the checkmark/indicator */
-    .checkbox-container .checkmark:after {
+    .checkbox-container .checkmark-cust:after {
         left: 7px;
         top: 3px;
         width: 5px;
@@ -201,7 +201,7 @@
                                         </span>
                                         <input type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}>
-                                        <span class="checkmark"></span>
+                                        <span class="checkmark-cust"></span>
                                     </label>
                                 </div>
                             </div>
