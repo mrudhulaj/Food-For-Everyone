@@ -150,7 +150,8 @@
                         <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
                         <p class="progress-right">Goal: <span class="progress-amount">2400 ₹</span></p>
                     </div>
-                    <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a href="#">DONATE NOW</a></h2>
+                    <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a data-toggle="modal"
+                            data-target="#donationModal" href="#">DONATE NOW</a></h2>
                 </div>
             </div>
             {{-- End: To be repeated content --}}
@@ -256,5 +257,6 @@
                 </div>
             </div>
             {{-- End : Sample repeated Items --}}
-        </div>
+            @include('templates.donationModal')
+          </div>
         @stop
