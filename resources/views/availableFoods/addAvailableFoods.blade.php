@@ -52,7 +52,7 @@
         <div class="card card-4">
             <div class="card-body">
                 <form action="{{ url('insert-donation') }}" method="POST"
-                    enctype="multipart/form-data" name="addAvailableFood" id="addAvailableFood" data-toggle="modal" onsubmit="return myModal(this)">
+                    enctype="multipart/form-data" name="addAvailableFood" id="addAvailableFood">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="row row-space">
@@ -124,7 +124,6 @@
                             style="padding: 0px;width: 120px;height: 60px;">
                             Submit
                         </button>
-                        {{-- data-toggle="modal" data-target="#confirmationModal" --}}
                     </div>
                 </form>
             </div>
@@ -222,22 +221,16 @@
         });
 
         $('#submitbtn').click(function () {
-            $("#addAvailableFood").valid();
-            // $('#confirmationModal').modal('show');
-
-            // $('form').submit(function () {
-            //   if ($(this).valid()) {
-            //       $('#confirmationModal').modal('show');
-            //   } 
-            // });
+            var isFormValid = $('#addAvailableFood').valid();
+            if(isFormValid == true){
+              console.log("Form is valid");
+              jQuery.noConflict(); 
+              $('#confirmationModal').modal('show'); 
+            }
+            else{
+              console.log("Form is invalid");
+            }
         });
-
-        // $('form').submit(function () {
-        //     if ($(this).valid()) {
-        //         $('#confirmationModal').modal('show');
-        //     }
-        // });
-
     });
 
 </script>
