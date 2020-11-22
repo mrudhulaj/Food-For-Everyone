@@ -34,18 +34,20 @@
         background-color: #f2f2f2;
     }
 
-    .input--style-4{
-      height: 34px !important;
+    .input--style-4 {
+        height: 34px !important;
     }
 
-    td,th{
-      text-align: center !important;
+    td,
+    th {
+        text-align: center !important;
     }
+
 
 </style>
 @section('content')
 <div class="container">
-  @include('templates.alertSuccessMessage')
+    @include('templates.alertSuccessMessage')
     <section>
         <h2 style="margin-top: 0px;padding-left: 100px;">
             Waiting for you to pick up!
@@ -100,35 +102,51 @@
 
     </div>
 
-    <table class="table" style="margin-bottom: 50px;">
-        <thead class="table-striped">
-            <tr>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Restaurent Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Location</th>
-            </tr>
-        </thead>
-        <tbody>
-          @foreach($availableFoods as $availableFoodsData)
-            <tr>
-              <td>{{$availableFoodsData->FirstName}}</td>
-              <td>{{$availableFoodsData->LastName}}</td>
-              <td>{{$availableFoodsData->TypeOfDonation}}</td>
-              <td>
-                @if($availableFoodsData->TypeOfDonation != 'Event')
-                  {{$availableFoodsData->RestaurantName}}
-                @else
-                  Nil
-                @endif
-              </td>
-              <td>+91 {{$availableFoodsData->Phone}}</td>
-              <td>{{$availableFoodsData->City.", ".$availableFoodsData->District}}</td>
-            </tr>
-          @endforeach
-        </tbody>
-    </table>
+    <div style="margin-bottom: 50px">
+        <table class="table" style="" id="example">
+            <thead class="table-striped">
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Restaurent Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($availableFoods as $availableFoodsData)
+                    <tr>
+                        <td>{{ $availableFoodsData->FirstName }}</td>
+                        <td>{{ $availableFoodsData->LastName }}</td>
+                        <td>{{ $availableFoodsData->TypeOfDonation }}</td>
+                        <td>
+                            @if($availableFoodsData->TypeOfDonation != 'Event')
+                                {{ $availableFoodsData->RestaurantName }}
+                            @else
+                                Nil
+                            @endif
+                        </td>
+                        <td>+91 {{ $availableFoodsData->Phone }}</td>
+                        <td>{{ $availableFoodsData->City.", ".$availableFoodsData->District }}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+<script type="text/javascript" charset="utf8"
+    src="{{ asset('vendor/datatables.net/js/jquery.dataTables.min.js') }}" defer>
+</script>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+          "pagingType": "simple_numbers",
+        });
+    });
+
+</script>
 @stop

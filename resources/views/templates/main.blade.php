@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ url('css/responsive.css') }}">
     <link href="{{ url('css/form.css') }}" rel="stylesheet" media="all">
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <link rel="stylesheet" type="text/css" href="{{ url('vendor/datatables.net-dt/css/jquery.dataTables.min.css') }}">
 </head>
 
 <style>

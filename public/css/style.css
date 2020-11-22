@@ -1284,3 +1284,60 @@
    .btn{
      outline: none !important;
    }
+
+    /* Begin: To hide/disable datatable related icons and div */
+    table.dataTable thead .sorting, 
+    table.dataTable thead .sorting_asc, 
+    table.dataTable thead .sorting_desc {
+        background : none !important;
+        background-image: none !important;
+    }
+    .dataTables_length,.dataTables_filter{
+      display: none !important;
+    }
+
+      /* Pagination styles */
+      .paginate_button.previous{
+        border: 1px solid #00A348 !important;
+        border-radius: 5px 0px 0px 5px !important;
+        padding: 5px 10px 5px 10px !important;
+        margin-right: -5px !important; 
+        background: #00A348 !important;
+  
+        color: white !important;
+        font-family: "Roboto", sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 20px;
+      }
+  
+      .paginate_button.next{
+        border: 1px solid #00A348 !important;
+        border-radius: 0px 5px 5px 0px !important;
+        padding: 5px 10px 5px 10px !important;
+        margin-left: -1px !important; 
+        background: #00A348 !important;
+  
+        color: white !important;
+        font-family: "Roboto", sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 20px;
+      }
+  
+      .paginate_button.current{
+        border: 1px solid #00A348 !important;
+        padding: 5px 10px 5px 10px !important;
+        min-width: 2.5em !important;
+        background: #00E660 !important;
+      }
+
+      .dataTables_paginate.paging_simple_numbers{
+        padding-top: 20px !important;
+      }
+
+      .dataTables_info{
+        padding-top: 25px !important;
+      }
+
+    /* End: To hide/disable datatable related icons and div */
