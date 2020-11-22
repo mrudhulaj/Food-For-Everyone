@@ -6,6 +6,15 @@
 <link href="{{ url('css/form.css') }}" rel="stylesheet" media="all">
 <link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
 
+{{-- Test --}}
+
+{{--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  --}}
+
+{{-- End test --}}
+
 <style>
     .wrapper section>h2::before {
         width: 150px !important;
@@ -46,8 +55,8 @@
 @section('content')
 <section>
     <h2 style="margin-top: 0px;">Add a volunteer</h2>
-    <p>Please make sure the details you provide including the mobile number and email are correct, so that we can inform
-        you when you are needed with us.</p>
+    <p>Please make sure the details provided including the mobile number and email are correct, so that we can inform
+        the volunteer when they are needed with us.</p>
 </section>
 
 <div class="page-wrapper p-b-100 font-poppins" style="padding-top: 50px">
@@ -74,8 +83,8 @@
                     </div>
 
                     <div class="input-group col-lg-12">
-                      <label class="label ffe-font">Occupation</label>
-                      <input class="input--style-4" type="text" name="occupation">
+                        <label class="label ffe-font">Occupation</label>
+                        <input class="input--style-4" type="text" name="occupation">
                     </div>
 
                     <div class="input-group col-lg-12">
@@ -91,7 +100,8 @@
                         <div class="col-lg-6">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">District
-                                  <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="The district where you'll be available."></i>
+                                    <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                        title="The district where you'll be available."></i>
                                 </label>
                                 <select class="form-control input--style-4" style="" id="district" name="district">
                                     <option hidden selected="" value="">District</option>
@@ -102,7 +112,8 @@
                         <div class="col-lg-6">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">State
-                                  <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="The state where you'll be available."></i>
+                                    <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                        title="The state where you'll be available."></i>
                                 </label>
                                 <select class="form-control input--style-4" style="" id="state" name="state">
                                     <option hidden selected="" value="">District</option>
@@ -113,11 +124,31 @@
                     </div>
 
                     <div class="input-group col-lg-12">
-                      <label class="label ffe-font">Profile Photo</label>
-                      <input class="input--style-4" type="file" name="phone">
+                      <label class="label ffe-font">Facebook</label><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                      title="Enter your facebook profile link here."></i>
+                      <input class="input--style-4" type="text" name="facebook">
                     </div>
 
-                    <div class="" style="text-align: center;padding-top: 40px;">
+                  <div class="input-group col-lg-12">
+                    <label class="label ffe-font">Twitter</label><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                    title="Enter your twitter profile link here."></i>
+                    <input class="input--style-4" type="text" name="twitter">
+                  </div>
+
+                    <div class="input-group col-lg-12" style="margin-bottom: 0px;">
+                        <label class="label ffe-font">Profile Photo</label>
+
+                        <div class="col-md-12 input-group">
+                            <input class=" form-control input--style-4" id="fileName" type="text" style="height: 50px;"/>
+                            <div class="input-group-btn">
+                                <label for="files" class="btn btn-default input--style-4" style="height: 50px;border-radius: 0px 5px 5px 0px;">Browse</label>
+                                <input id="files" accept="image/*" type="file" class="btn btn-default" style="visibility:hidden;" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="" style="text-align: center;">
                         <button type="button" id="submitbtn" class="btn button-bg-green"
                             style="padding: 0px;width: 120px;height: 60px;">
                             Submit
@@ -143,7 +174,8 @@
             </div>
             <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
                 <p>By clicking the confirm button you hereby acknowledge that the details provided by you is genuine to
-                    the best of your knowledge and you are willing to participate in our events and programs as a volunteer.</p>
+                    the best of your knowledge and you are willing to participate in our events and programs as a
+                    volunteer.</p>
             </div>
             <div class="modal-footer">
                 <button id="" type="submit" class="btn btn-primary button-bg-green"
@@ -232,6 +264,12 @@
             }
         });
     });
+
+    $('input[type=file]').change(function() {
+        var filename = $('input[type=file]').val().split('\\').pop();
+        $('#fileName').val(filename);
+    });
+
 
 </script>
 @stop
