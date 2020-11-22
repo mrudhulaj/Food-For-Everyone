@@ -44,7 +44,7 @@
 @section('content')
 <section>
   <h2 style="margin-top: 0px;">Add cause</h2>
-  <p>Please make sure the details you provide including the time and location are as accurate as possible.</p>
+  <p>Please make sure the details you provide are as accurate as possible.</p>
 </section>
 
 <div class="page-wrapper p-b-100 font-poppins" style="padding-top: 50px">
@@ -110,6 +110,18 @@
                         </div>
                     </div>
                   </div>
+
+                  <div class="input-group col-lg-12" style="margin-bottom: 0px;">
+                    <label class="label ffe-font">Image</label>
+                    <div class="col-md-12 input-group">
+                        <input class=" form-control input--style-4" id="fileName" type="text" style="height: 50px;"/>
+                        <div class="input-group-btn">
+                            <label for="files" class="btn btn-default input--style-4" style="height: 50px;border-radius: 0px 5px 5px 0px;">Browse</label>
+                            <input id="files" accept="image/*" type="file" class="btn btn-default" style="visibility:hidden;" />
+                        </div>
+                    </div>
+                </div>
+
                   <div class="" style="text-align: center;padding-top: 40px;">
                       <button type="button" id="submitbtn" class="btn button-bg-green"
                           style="padding: 0px;width: 120px;height: 60px;">
@@ -240,6 +252,11 @@
             console.log("Form is invalid");
           }
       });
+  });
+
+  $('input[type=file]').change(function() {
+        var filename = $('input[type=file]').val().split('\\').pop();
+        $('#fileName').val(filename);
   });
 
 </script>
