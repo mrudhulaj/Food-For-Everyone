@@ -19,13 +19,6 @@
         box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);
     }
 
-    select {
-        background: #fafafa !important;
-        border-radius: 5px !important;
-        color: #666 !important;
-        height: 50px !important;
-    }
-
     .modal-header {
         background-color: #00E660;
         color: black;
@@ -34,7 +27,8 @@
     }
 
     #state-error,
-    #district-error {
+    #district-error,
+    #city-error{
         margin-top: -22px;
         margin-bottom: 22px;
     }
@@ -51,10 +45,9 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <form action="{{ url('insert-donation') }}" method="POST"
+                <form action="{{ route('addAvailableFoodsSave') }}" method="POST"
                     enctype="multipart/form-data" name="addAvailableFood" id="addAvailableFood">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    @csrf
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
@@ -100,24 +93,30 @@
                         <input class="input--style-4" type="text" name="phone">
                     </div>
                     <div class="row row-space" style="padding-right: 0px">
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">District</label>
                                 <select class="form-control input--style-4" style="" id="district" name="district">
-                                    <option hidden selected="" value="">Select District</option>
+                                    <option hidden selected="" value="">District</option>
                                     <option value="Kerala">Kerala</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">State</label>
                                 <select class="form-control input--style-4" style="" id="state" name="state">
-                                    <option hidden selected="" value="">Select District</option>
+                                    <option hidden selected="" value="">District</option>
                                     <option value="Calicut">Calicut</option>
                                 </select>
                             </div>
                         </div>
+                        <div class="col-lg-4">
+                          <div class="input-group col-lg-12 selectbox-div">
+                              <label class="label ffe-font">City</label>
+                              <input class="input--style-4" type="text" name="city" id="city">
+                          </div>
+                      </div>
                     </div>
                     <div class="" style="text-align: center;padding-top: 40px;">
                         <button type="button" id="submitbtn" class="btn button-bg-green"
@@ -148,7 +147,7 @@
                     edible and if any problem is to occur after it's consumption, you take full responsibilty of it.</p>
             </div>
             <div class="modal-footer">
-                <button id="" type="submit" class="btn btn-primary button-bg-green"
+                <button id="confirmForm" type="button" class="btn btn-primary button-bg-green"
                     style="padding: 6px 12px;border-radius: 4px;">
                     Confirm
                 </button>
@@ -202,6 +201,9 @@
                 state: {
                     required: true
                 },
+                city: {
+                    required: true
+                },
             },
             messages: {
                 firstName: "Please enter your first name",
@@ -211,6 +213,9 @@
                 },
                 state: {
                     required: "Please select a state",
+                },
+                city: {
+                    required: "Please enter a city",
                 },
                 phone: {
                     required: "Please enter your mobile number",
@@ -231,6 +236,11 @@
               console.log("Form is invalid");
             }
         });
+
+        $('#confirmForm').click(function () {
+          $('#addAvailableFood').submit();
+        });
+
     });
 
 </script>

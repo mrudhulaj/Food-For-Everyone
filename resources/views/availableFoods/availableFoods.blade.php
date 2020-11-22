@@ -37,6 +37,7 @@
 </style>
 @section('content')
 <div class="container">
+  @include('templates.alertSuccessMessage')
     <section>
         <h2 style="margin-top: 0px;padding-left: 100px;">
             Waiting for you to pick up!
@@ -103,30 +104,6 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Qamr</td>
-                <td>Abdullah</td>
-                <td>Restaurent</td>
-                <td>Paragon</td>
-                <td>+91 9989898889</td>
-                <td>Calicut, India</td>
-            </tr>
-            <tr>
-                <td>Qamr</td>
-                <td>Abdullah</td>
-                <td>Restaurent</td>
-                <td>Paragon</td>
-                <td>+91 9989898889</td>
-                <td>Calicut, India</td>
-            </tr>
-            <tr>
-                <td>Qamr</td>
-                <td>Abdullah</td>
-                <td>Restaurent</td>
-                <td>Paragon</td>
-                <td>+91 9989898889</td>
-                <td>Calicut, India</td>
-            </tr>
             <tr>
                 <td>Qamr</td>
                 <td>Abdullah</td>
