@@ -11,7 +11,10 @@ class AvailableFoodsController extends Controller
 
     public function availableFoodsView(){
         Session::put('activeTab', 'AVAILABLE FOODS');
-        return view('availableFoods/availableFoods');
+
+        $availableFoods = AvailableFoods::all();
+
+        return view('availableFoods/availableFoods',compact('availableFoods'));
     }
 
     public function addAvailableFoodsView(){

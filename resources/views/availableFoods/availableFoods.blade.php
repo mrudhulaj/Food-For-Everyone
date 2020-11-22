@@ -34,6 +34,14 @@
         background-color: #f2f2f2;
     }
 
+    .input--style-4{
+      height: 34px !important;
+    }
+
+    td,th{
+      text-align: center !important;
+    }
+
 </style>
 @section('content')
 <div class="container">
@@ -55,24 +63,24 @@
         <form class="form-inline">
             <div class="form-group">
                 <label for="" class="">Location</label>
-                <select class="form-control pr-20" style="width: 215px">
+                <select class="form-control pr-20 input--style-4" style="width: 215px">
                     <option>Select District</option>
                 </select>
-                <select class="form-control pr-20" style="width: 215px">
+                <select class="form-control pr-20 input--style-4" style="width: 215px">
                     <option>Select State</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="" class="pl-20">Time</label>
-                <select class="form-control" style="width: 188px">
+                <select class="form-control input--style-4" style="width: 188px">
                     <option>Less than 1 hour</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="" class="pl-20">Food Count</label>
-                <input type="text" class="pl-20 form-control" name="" id="" placeholder="Food Count"
+                <input type="text" class="pl-20 form-control input--style-4" name="" id="" placeholder="Food Count"
                     style="width: 150px">
             </div>
 
@@ -104,14 +112,22 @@
             </tr>
         </thead>
         <tbody>
+          @foreach($availableFoods as $availableFoodsData)
             <tr>
-                <td>Qamr</td>
-                <td>Abdullah</td>
-                <td>Restaurent</td>
-                <td>Paragon</td>
-                <td>+91 9989898889</td>
-                <td>Calicut, India</td>
+              <td>{{$availableFoodsData->FirstName}}</td>
+              <td>{{$availableFoodsData->LastName}}</td>
+              <td>{{$availableFoodsData->TypeOfDonation}}</td>
+              <td>
+                @if($availableFoodsData->TypeOfDonation != 'Event')
+                  {{$availableFoodsData->RestaurantName}}
+                @else
+                  Nil
+                @endif
+              </td>
+              <td>+91 {{$availableFoodsData->Phone}}</td>
+              <td>{{$availableFoodsData->City.", ".$availableFoodsData->District}}</td>
             </tr>
+          @endforeach
         </tbody>
     </table>
 </div>
