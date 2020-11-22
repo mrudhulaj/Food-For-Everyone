@@ -95,7 +95,7 @@
                                             <a href="{{ route('aboutUs') }}">ABOUT US</a>
                                         </li>
                                         <li class=" @if($activeTab == 'AVAILABLE FOODS') active-nav @endif ">
-                                            <a href="{{ route('availableFoods') }}">AVAILABLE
+                                            <a href="{{ route('availableFoodsView') }}">AVAILABLE
                                                 FOODS</a>
                                         </li>
                                         <li class=" @if($activeTab == 'CAUSES') active-nav @endif ">
@@ -164,7 +164,7 @@
                                     <ul>
                                         <li><a href="{{route('home')}}">Home</a></li>
                                         <li><a href="{{route('aboutUs')}}">About Us</a></li>
-                                        <li><a href="{{route('availableFoods')}}">Available Foods</a></li>
+                                        <li><a href="{{route('availableFoodsView')}}">Available Foods</a></li>
                                         <li><a href="{{route('causes')}}">Causes</a></li>
                                         <li><a href="{{route('volunteers')}}">Volunteers</a></li>
                                         <li><a href="{{route('events')}}">Events</a></li>
@@ -222,6 +222,13 @@
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(ga, s);
         })();
+
+        // Begin:To automatically fade and close alert messages
+        $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+            $(".alert").slideUp(500);
+        });
+        // End:To automatically fade and close alert messages
+
 
         //Begin:Make navbar sticky
 

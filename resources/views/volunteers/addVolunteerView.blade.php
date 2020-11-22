@@ -16,13 +16,6 @@
         box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);
     }
 
-    select {
-        background: #fafafa !important;
-        border-radius: 5px !important;
-        color: #666 !important;
-        height: 50px !important;
-    }
-
     .modal-header {
         background-color: #00E660;
         color: black;

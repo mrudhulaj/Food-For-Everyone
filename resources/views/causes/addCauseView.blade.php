@@ -15,13 +15,6 @@
         box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);
     }
 
-    select {
-        background: #fafafa !important;
-        border-radius: 5px !important;
-        color: #666 !important;
-        height: 50px !important;
-    }
-
     .modal-header {
         background-color: #00E660;
         color: black;
@@ -103,10 +96,7 @@
                       <div class="col-lg-4">
                         <div class="input-group col-lg-12 selectbox-div">
                             <label class="label ffe-font">City</label>
-                            <select class="form-control input--style-4" style="" id="city" name="city">
-                                <option hidden selected="" value="">City</option>
-                                <option value="City">Puthiyara</option>
-                            </select>
+                            <input class="input--style-4" type="text" name="city" id="city">
                         </div>
                     </div>
                   </div>
@@ -227,7 +217,7 @@
                   required: "Please select a state",
               },
               city: {
-                  required: "Please select a city",
+                  required: "Please enter a city",
               },
               expectedAmount: {
                   required: "Please enter expected amount of cause",

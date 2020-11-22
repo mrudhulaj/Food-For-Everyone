@@ -84,7 +84,7 @@
 
 .input--style-4 {
   line-height: 50px;
-  background: #fafafa;
+  background: #ececec;
   -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
   -moz-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
   box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
@@ -245,4 +245,11 @@ input {
   border: none;
   border-right: none;
   width: 50px;
+}
+
+select {
+  background: #ececec !important;
+  border-radius: 5px !important;
+  color: #666 !important;
+  height: 50px !important;
 }
