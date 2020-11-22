@@ -11,4 +11,8 @@ class EventsController extends Controller
         Session::put('activeTab', 'EVENTS');
         return view('events/events');
     }
+
+    public function addEventView(){
+      return view('events/addEventView');
+  }
 }
