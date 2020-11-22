@@ -162,10 +162,13 @@
                                 <div class="footer-text two">
                                     <h3>USEFUL LINKS</h3>
                                     <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Causes</a></li>
-                                        <li><a href="#">Event</a></li>
-                                        <li><a href="#">Blog</a></li>
+                                        <li><a href="{{route('home')}}">Home</a></li>
+                                        <li><a href="{{route('aboutUs')}}">About Us</a></li>
+                                        <li><a href="{{route('availableFoods')}}">Available Foods</a></li>
+                                        <li><a href="{{route('causes')}}">Causes</a></li>
+                                        <li><a href="{{route('volunteers')}}">Volunteers</a></li>
+                                        <li><a href="{{route('events')}}">Events</a></li>
+                                        <li><a href="{{route('contactUs')}}">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>
