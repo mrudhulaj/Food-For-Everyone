@@ -21,7 +21,12 @@
 </style>
 @section('content')
 <section class="events_section_area">
-  <h2 id="cust-h2">UPCOMING EVENTS</h2>
+  <h2 id="cust-h2" style="padding-left: 175px;">
+    UPCOMING EVENTS
+    <button class="btn button-bg-green" style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">
+      <a class="a-none" href="{{ route('addEventView') }}">Add Event</a>
+    </button>
+  </h2>
   <p>Missed our previous events? Don't worry, we have plenty of them coming up!</p>
   <div class="container" style="margin-bottom: 50px">
       <div class="row">

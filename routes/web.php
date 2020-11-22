@@ -29,6 +29,7 @@
 
 // Begin: Events
   Route::get('events', ['as' => 'events','uses' => 'Events\EventsController@eventsView']);
+  Route::get('addEventView', ['as' => 'addEventView','uses' => 'Events\EventsController@addEventView']);
 // End: Events
 
 // Begin: Contact Us
