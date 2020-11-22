@@ -6,6 +6,9 @@
 <link href="{{ url('css/form.css') }}" rel="stylesheet" media="all">
 <link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
 
+<link href="{{ url('vendor/flatpickr/dist/flatpickr.css') }}" rel="stylesheet" media="all">
+
+
 <style>
     .wrapper section>h2::before {
         width: 150px !important;
@@ -37,7 +40,9 @@
 
     #state-error,
     #district-error,
-    #city-error {
+    #city-error,
+    #beginTime-error,
+    #endTime-error {
         margin-top: -22px;
         margin-bottom: 22px;
     }
@@ -70,23 +75,14 @@
 
                     <label class="label ffe-font">Time</label>
                     <div class="row row-space" style="padding-right: 0px">
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <div class="input-group col-lg-12 selectbox-div">
-                                <input class="input--style-4" type="text" name="Hour" placeholder="Hour" id="hour">
+                                <input class="input--style-4" type="text" name="beginTime" placeholder="Begin" id="beginTime">
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <div class="input-group col-lg-12 selectbox-div">
-                                <input class="input--style-4" type="text" name="minute" placeholder="Minute">
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="input-group col-lg-12 selectbox-div">
-                                <select class="form-control input--style-4" style="" id="ampm" name="ampm">
-                                    <option hidden selected="" value="">AM/PM</option>
-                                    <option value="am">AM</option>
-                                    <option value="pm">pm</option>
-                                </select>
+                                <input class="input--style-4" type="text" name="endTime" placeholder="End" id="endTime"> 
                             </div>
                         </div>
                     </div>
@@ -191,6 +187,8 @@
 </div>
 {{-- End :Confirmation Box --}}
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+<script src="{{ asset('vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
+
 <script>
     $("input[name='typeofdonation']").change(function () {
         var type = $('input[name="typeofdonation"]:checked').val();
@@ -203,12 +201,19 @@
 
     });
 
+    $("#beginTime").flatpickr({
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "h:i:K",
+    });
+
+    $("#endTime").flatpickr({
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "h:i:K",
+    });
+
     $(document).ready(function () {
-      var $j = jQuery.noConflict();
-      $j('#hour').datepicker({
-          dateFormat: '',
-          timeFormat: 'hh:mm tt'
-      });
 
         // Add Available Food form validation
         $("form[name='addVolunteer']").validate({
@@ -221,10 +226,7 @@
                 }
             },
             rules: {
-                firstName: "required",
-                lastName: "required",
                 eventName: "required",
-                restaurantName: "required",
                 email: {
                     required: true,
                     email: true
@@ -233,10 +235,22 @@
                     required: true,
                     number: true
                 },
+                beginTime: {
+                    required: true
+                },
+                endTime: {
+                    required: true
+                },
+                eventDescription: {
+                    required: true
+                },
                 district: {
                     required: true
                 },
                 state: {
+                    required: true
+                },
+                city: {
                     required: true
                 },
             },
@@ -244,11 +258,23 @@
                 firstName: "Please enter your first name",
                 lastName: "Please enter your last name",
                 eventName: "Please enter your event name",
+                eventDescription: {
+                    required: "Please enter event description",
+                },
+                beginTime: {
+                    required: "Please enter begining time",
+                },
+                endTime: {
+                    required: "Please enter ending time",
+                },
                 district: {
                     required: "Please select a district",
                 },
                 state: {
                     required: "Please select a state",
+                },
+                city: {
+                    required: "Please select a city",
                 },
                 phone: {
                     required: "Please enter your mobile number",
