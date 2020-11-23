@@ -10,8 +10,8 @@
     }
 
     .wrapper section>h2::before {
-        width: 190px !important;
-        left: 42% !important;
+        background: transparent !important;
+        border: none !important;
     }
 
     .cust-center {
@@ -94,7 +94,7 @@
 @section('content')
 <section>
     <h2 style="margin-top: 0px;">
-      <span>
+      <span style="border-bottom: 2px solid #01d262;padding-bottom: 10px;">
         {{$causeData->CauseName}}
         {{--  <hr class="cust-hr">  --}}
       </span> 
@@ -102,10 +102,9 @@
 </section>
 <div class="container cust-center">
     <div class="col-lg-12 mainbox-cust plr-0 img-cust" style="">
-        <div>
+        <div style="overflow: hidden !important;">
             <img id="" src="{{ asset($causeData->Image) }}"
-            alt="" style="width: 940px;
-            height: 342px;">
+            alt="" style="width: 940px;height: 577px;margin-top: -15%;">
         </div>
         <div class="ffe-font" style="padding-left: 30px;padding-right: 30px;padding-top: 30px;">
 
@@ -140,7 +139,7 @@
 									aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
                 </div>
                 <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
-                <p class="progress-right">Goal: <span class="progress-amount">{{$causeData->ExpectedAmount}} ₹</span></p>
+                <p class="progress-right">Goal: <span class="progress-amount">{{number_format($causeData->ExpectedAmount)}} ₹</span></p>
 							</div>
 							<h2 class="borderes" style="text-align: center;margin-top: 100px;"><a style="text-decoration: none;" href="#" data-toggle="modal"
                 data-target="#donationModal">DONATE NOW</a></h2>

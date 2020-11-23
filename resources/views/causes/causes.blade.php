@@ -165,7 +165,7 @@
                                     aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
                             </div>
                             <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
-                            <p class="progress-right">Goal: <span class="progress-amount">{{$causesData->ExpectedAmount}} ₹</span></p>
+                            <p class="progress-right">Goal: <span class="progress-amount">{{number_format($causesData->ExpectedAmount)}} ₹</span></p>
                         </div>
                         <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a data-toggle="modal"
                                 data-target="#donationModal" href="#">DONATE NOW</a></h2>
