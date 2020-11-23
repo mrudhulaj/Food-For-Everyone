@@ -52,13 +52,13 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstName" value="">
+                                <input class="input--style-4" type="text" name="firstName" value="FirstName">
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastName" value="">
+                                <input class="input--style-4" type="text" name="lastName" value="LastName">
                             </div>
                         </div>
                     </div>
@@ -82,15 +82,15 @@
                     </div>
                     <div class="input-group col-lg-12 hide type-rest">
                         <label class="label ffe-font">Restaurant Name</label>
-                        <input class="input--style-4" type="text" name="restaurantName">
+                        <input class="input--style-4" type="text" name="restaurantName" value="RestaurentName">
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Email</label>
-                        <input class="input--style-4" type="text" name="email">
+                        <input class="input--style-4" type="text" name="email" value="email@email.com">
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Phone</label>
-                        <input class="input--style-4" type="text" name="phone">
+                        <input class="input--style-4" type="text" name="phone" value="9989888888">
                     </div>
                     <div class="row row-space" style="padding-right: 0px">
                         <div class="col-lg-4">
@@ -98,7 +98,7 @@
                                 <label class="label ffe-font">District</label>
                                 <select class="form-control input--style-4" style="" id="district" name="district">
                                     <option hidden selected="" value="">District</option>
-                                    <option value="Kerala">Kerala</option>
+                                    <option value="Kerala" selected>Kerala</option>
                                 </select>
                             </div>
                         </div>
@@ -107,14 +107,14 @@
                                 <label class="label ffe-font">State</label>
                                 <select class="form-control input--style-4" style="" id="state" name="state">
                                     <option hidden selected="" value="">District</option>
-                                    <option value="Calicut">Calicut</option>
+                                    <option value="Calicut" selected>Calicut</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4">
                           <div class="input-group col-lg-12 selectbox-div">
                               <label class="label ffe-font">City</label>
-                              <input class="input--style-4" type="text" name="city" id="city">
+                              <input class="input--style-4" type="text" name="city" id="city" value="Koduvally">
                           </div>
                       </div>
                     </div>

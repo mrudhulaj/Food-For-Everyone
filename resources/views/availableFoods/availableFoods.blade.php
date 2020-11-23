@@ -65,17 +65,17 @@
         <form class="form-inline">
             <div class="form-group">
                 <label for="" class="">Location</label>
-                <select class="form-control pr-20 input--style-4" style="width: 215px">
+                <select class="form-control pr-20 input--style-4" style="width: 215px" name="district">
                     <option>Select District</option>
                 </select>
-                <select class="form-control pr-20 input--style-4" style="width: 215px">
+                <select class="form-control pr-20 input--style-4" style="width: 215px" name="state">
                     <option>Select State</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="" class="pl-20">Time</label>
-                <select class="form-control input--style-4" style="width: 188px">
+                <select class="form-control input--style-4" style="width: 188px" name="time">
                     <option>Less than 1 hour</option>
                 </select>
             </div>
@@ -83,7 +83,7 @@
             <div class="form-group">
                 <label for="" class="pl-20">Food Count</label>
                 <input type="text" class="pl-20 form-control input--style-4" name="" id="" placeholder="Food Count"
-                    style="width: 150px">
+                    style="width: 150px" name="foodCount">
             </div>
 
             <div class="form-group">
@@ -95,7 +95,7 @@
 
             <div class="col-lg-12" style="text-align: center;margin-top: 20px;margin-bottom: 20px;">
                 <button class="btn button-bg-green" style="padding: 0px;width: 100px;height: 40px"
-                    type="submit">Filter</button>
+                    type="submit" id="filterbtn">Filter</button>
             </div>
 
         </form>
@@ -103,15 +103,17 @@
     </div>
 
     <div style="margin-bottom: 50px">
-        <table class="table" style="" id="example">
+        <table class="table" style="" id="example"> 
             <thead class="table-striped">
                 <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Restaurent Name</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Location</th>
+                    <th data-column="FirstName" data-order="false" scope="col">First Name</th>
+                    <th data-column="LastName" data-order="false" scope="col">Last Name</th>
+                    <th data-column="TypeOfDonation" data-order="false" scope="col">Type</th>
+                    <th data-column="RestaurentName" data-order="false" scope="col">Restaurent Name</th>
+                    <th data-column="Phone" data-order="false" scope="col">Phone</th>
+                    <th data-column="Location" data-order="false" scope="col">Location</th>
+                    <th data-column="AddedDate" data-order="false" scope="col">Added Date</th>
+                    <th data-column="Time" data-order="false" scope="col">Time</th>
                 </tr>
             </thead>
             <tbody>
@@ -130,10 +132,19 @@
                         <td>+91 {{ $availableFoodsData->Phone }}</td>
                         <td>{{ $availableFoodsData->City.", ".$availableFoodsData->District }}
                         </td>
+                        <td>{{ date('d-M-Y', strtotime($availableFoodsData->CreatedDate)) }}</td>
+                        <td>{{ date('h:i A', strtotime($availableFoodsData->CreatedDate)) }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        <form id="list-form">
+          <input type="hidden" name="district" id="district" value=""> 
+          <input type="hidden"name="state" id="state" value=""> 
+          <input type="hidden" name="time" id="time" value="">
+          <input type="hidden" name="foodCount" id="foodCount" value="">
+          <input type="hidden" name="vegFlag" id="vegFlag" value="">
+        </form>
     </div>
 </div>
 
@@ -146,6 +157,16 @@
         $('#example').DataTable({
           "pagingType": "simple_numbers",
         });
+
+        // $('#example').dataTable( {
+        //   "pagingType": "simple_numbers",
+        //   "ajax": {
+        //     "url": "data.json",
+        //     "data": {
+        //         "user_id": 451
+        //     }
+        //   }
+        // } );
     });
 
 </script>
