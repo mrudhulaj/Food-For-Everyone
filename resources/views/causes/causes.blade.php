@@ -8,7 +8,7 @@
 
     .box {
         width: 350px;
-        height: 725px;
+        min-height: 660px;
     }
 
     .mainbox {
@@ -24,7 +24,7 @@
         font-family: "Roboto", sans-serif;
         font-size: 20px;
         font-weight: 700;
-        margin: 100px 0 15px;
+        margin: 35px 0 15px;
     }
 
     hr {
@@ -119,149 +119,60 @@
 </style>
 @section('content')
 <div class="">
+    <div class="container" style="padding: 0px 10px 0px 50px;">
+        @include('templates.alertSuccessMessage')
+    </div>
     <section>
         <h2 style="margin-top: 0px;padding-left: 145px;">
-          We are expanding our reach!
-          <button class="btn button-bg-green" style="padding: 0px;width: 100px;height: 40px;float: right;margin-right: 60px;">
-            <a class="a-none" href="{{ route('addCauseView') }}">Add Cause</a>
-          </button>
+            We are expanding our reach!
+                <a class="a-none" href="{{ route('addCauseView') }}">
+                  <button class="btn button-bg-green"
+                  style="padding: 0px;width: 100px;height: 40px;float: right;margin-right: 60px;">
+                    Add Cause
+                </button>
+                </a>
         </h2>
         <p>We are continously trying to expand our reach to different areas where people need support to help build a
             better future.
-            <br>These are the current causes which we support currently.</p>
+            <br>These are the causes which we support currently.</p>
 
         <div class="container" style="margin-top: 70px;margin-bottom: 70px;padding-left: 5px;margin-right: 0px;">
             {{-- Begin: To be repeated content --}}
-            <div class="box mainbox">
-                <div class="img-div">
-                    <img src="{{ url('images/our_cuauses_one.jpg') }}"
-                        style="border-top-left-radius: inherit;border-top-right-radius: inherit;">
-                </div>
-                <div class="box-content" style="padding: 0 30px;">
-                    <a href="{{ route('causesDetails') }}" class="h2-title">
-                        <h2 style="text-align: center" class="h2-title">FUTURE FOR CHILDREN</h2>
-                    </a>
-                    <hr>
-                    <p class="box-p" style="height: 120px;">Join us in helping build our bright youngsters a school to
-                        showcase their skills and to make them a change and making the world a better place.
-                        <br> <a href="{{ route('causesDetails') }}" class="learn-more">Learn more.</a>
-                    </p>
-                    <div class="progress-text">
-                        <p class="progress-top">50%</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
-                        </div>
-                        <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
-                        <p class="progress-right">Goal: <span class="progress-amount">2400 ₹</span></p>
+            @foreach($causes as $causesData)
+                <div class="box mainbox">
+                    <div class="img-div">
+                        <img src="{{ asset($causesData->Image) }}"
+                            style="border-top-left-radius: inherit;border-top-right-radius: inherit;width: 420px;height: 220px;">
                     </div>
-                    <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a data-toggle="modal"
-                            data-target="#donationModal" href="#">DONATE NOW</a></h2>
+                    <div class="box-content" style="padding: 0 30px;">
+                        <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}" class="h2-title">
+                            <h2 style="text-align: center;text-transform: uppercase;" class="h2-title">
+                              {{$causesData->CauseName}}
+                            </h2>
+                            <hr class="cust-hr">
+                        </a>
+                        <p class="box-p" style="height: 120px;">
+                          {{$causesData->CauseShortDescription}}
+                            <br>
+                            <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}" class="learn-more">
+                              Learn more.
+                            </a>
+                        </p>
+                        <div class="progress-text">
+                            <p class="progress-top">50%</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                    aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
+                            </div>
+                            <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
+                            <p class="progress-right">Goal: <span class="progress-amount">{{$causesData->ExpectedAmount}} ₹</span></p>
+                        </div>
+                        <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a data-toggle="modal"
+                                data-target="#donationModal" href="#">DONATE NOW</a></h2>
+                    </div>
                 </div>
-            </div>
+            @endforeach
             {{-- End: To be repeated content --}}
-            {{-- Begin:  Sample repeated Items --}}
-            <div class="box mainbox">
-                <div class="img-div">
-                    <img src="{{ url('images/our_cuauses_one.jpg') }}"
-                        style="border-top-left-radius: inherit;border-top-right-radius: inherit;">
-                </div>
-                <div class="box-content" style="padding: 0 30px;">
-                    <a href="#" class="h2-title">
-                        <h2 style="text-align: center" class="h2-title">FUTURE FOR CHILDREN</h2>
-                    </a>
-                    <hr>
-                    <p class="box-p" style="height: 120px;">Join us in helping build our bright youngsters a school to
-                        showcase their skills and to make them a change and making the world a better place.
-                        <br> <a href="#" class="learn-more">Learn more.</a></p>
-                    <div class="progress-text">
-                        <p class="progress-top">50%</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
-                        </div>
-                        <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
-                        <p class="progress-right">Goal: <span class="progress-amount">2400 ₹</span></p>
-                    </div>
-                    <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a href="#">DONATE NOW</a></h2>
-                </div>
-            </div>
-            <div class="box mainbox">
-                <div class="img-div">
-                    <img src="{{ url('images/our_cuauses_one.jpg') }}"
-                        style="border-top-left-radius: inherit;border-top-right-radius: inherit;">
-                </div>
-                <div class="box-content" style="padding: 0 30px;">
-                    <a href="#" class="h2-title">
-                        <h2 style="text-align: center" class="h2-title">FUTURE FOR CHILDREN</h2>
-                    </a>
-                    <hr>
-                    <p class="box-p" style="height: 120px;">Join us in helping build our bright youngsters a school to
-                        showcase their skills and to make them a change and making the world a better place.
-                        <br> <a href="#" class="learn-more">Learn more.</a></p>
-                    <div class="progress-text">
-                        <p class="progress-top">50%</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
-                        </div>
-                        <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
-                        <p class="progress-right">Goal: <span class="progress-amount">2400 ₹</span></p>
-                    </div>
-                    <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a href="#">DONATE NOW</a></h2>
-                </div>
-            </div>
-            <div class="box mainbox">
-                <div class="img-div">
-                    <img src="{{ url('images/our_cuauses_one.jpg') }}"
-                        style="border-top-left-radius: inherit;border-top-right-radius: inherit;">
-                </div>
-                <div class="box-content" style="padding: 0 30px;">
-                    <a href="#" class="h2-title">
-                        <h2 style="text-align: center" class="h2-title">FUTURE FOR CHILDREN</h2>
-                    </a>
-                    <hr>
-                    <p class="box-p" style="height: 120px;">Join us in helping build our bright youngsters a school to
-                        showcase their skills and to make them a change and making the world a better place.
-                        <br> <a href="#" class="learn-more">Learn more.</a></p>
-                    <div class="progress-text">
-                        <p class="progress-top">50%</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
-                        </div>
-                        <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
-                        <p class="progress-right">Goal: <span class="progress-amount">2400 ₹</span></p>
-                    </div>
-                    <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a href="#">DONATE NOW</a></h2>
-                </div>
-            </div>
-            <div class="box mainbox">
-                <div class="img-div">
-                    <img src="{{ url('images/our_cuauses_one.jpg') }}"
-                        style="border-top-left-radius: inherit;border-top-right-radius: inherit;">
-                </div>
-                <div class="box-content" style="padding: 0 30px;">
-                    <a href="#" class="h2-title">
-                        <h2 style="text-align: center" class="h2-title">FUTURE FOR CHILDREN</h2>
-                    </a>
-                    <hr>
-                    <p class="box-p" style="height: 120px;">Join us in helping build our bright youngsters a school to
-                        showcase their skills and to make them a change and making the world a better place.
-                        <br> <a href="#" class="learn-more">Learn more.</a></p>
-                    <div class="progress-text">
-                        <p class="progress-top">50%</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
-                        </div>
-                        <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
-                        <p class="progress-right">Goal: <span class="progress-amount">2400 ₹</span></p>
-                    </div>
-                    <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a href="#">DONATE NOW</a></h2>
-                </div>
-            </div>
-            {{-- End : Sample repeated Items --}}
-            @include('templates.donationModal')
-          </div>
-        @stop
+@include('templates.donationModal')
+</div>
+@stop

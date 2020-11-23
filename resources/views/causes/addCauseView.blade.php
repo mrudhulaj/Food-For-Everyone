@@ -4,6 +4,7 @@
     href="{{ url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i') }}"
     rel="stylesheet">
 <link href="{{ url('css/form.css') }}" rel="stylesheet" media="all">
+<link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
 
 <style>
     .wrapper section>h2::before {
@@ -44,19 +45,28 @@
   <div class="wrapper wrapper--w680">
       <div class="card card-4">
           <div class="card-body">
-              <form action="" method="POST"
+              <form action="{{ route('addCauseSave') }}" method="POST"
                   enctype="multipart/form-data" name="addCause" id="addCause">
                   {{ csrf_field() }}
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   
                   <div class="input-group col-lg-12">
-                    <label class="label ffe-font">Cause Title</label>
-                    <input class="input--style-4" type="text" name="causeTitle">
+                    <label class="label ffe-font">Cause Name</label>
+                    <input class="input--style-4" type="text" name="causeName">
                   </div>
 
                   <div class="input-group col-lg-12">
-                      <label class="label ffe-font">Cause Description</label>
-                      <textarea style="border: none;" name="causeDescription" id="causeDescription" class="input--style-4" id="" cols="35" rows="5"></textarea>
+                    <label class="label ffe-font">Short Description</label>
+                    <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                        title="This will be displayed in the general view."></i>
+                    <textarea style="border: none;line-height: 25px;padding: 12px 22px;" name="causeShortDescription" id="causeShortDescription" class="input--style-4" id="" cols="35" rows="5"></textarea>
+                  </div>
+
+                  <div class="input-group col-lg-12">
+                      <label class="label ffe-font">Long Description</label>
+                      <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                        title="This will be displayed in the detailed view."></i>
+                      <textarea style="border: none;line-height: 25px;padding: 12px 22px;" name="causeLongDescription" id="causeLongDescription" class="input--style-4" id="" cols="35" rows="10"></textarea>
                   </div>
 
                   <label class="label ffe-font">Expected Amount</label>
@@ -88,7 +98,7 @@
                           <div class="input-group col-lg-12 selectbox-div">
                               <label class="label ffe-font">State</label>
                               <select class="form-control input--style-4" style="" id="state" name="state">
-                                  <option hidden selected="" value="">District</option>
+                                  <option hidden selected="" value="">State</option>
                                   <option value="Calicut">Calicut</option>
                               </select>
                           </div>
@@ -107,7 +117,7 @@
                         <input class=" form-control input--style-4" id="fileName" type="text" style="height: 50px;"/>
                         <div class="input-group-btn">
                             <label for="files" class="btn btn-default input--style-4" style="height: 50px;border-radius: 0px 5px 5px 0px;">Browse</label>
-                            <input id="files" accept="image/*" type="file" class="btn btn-default" style="visibility:hidden;" />
+                            <input name="causeImage" id="files" accept="image/*" type="file" class="btn btn-default" style="visibility:hidden;" />
                         </div>
                     </div>
                 </div>
@@ -140,7 +150,7 @@
               <p>By clicking the confirm button you hereby acknowledge that the details provided by you is genuine to the best of your knowledge.</p>
           </div>
           <div class="modal-footer">
-              <button id="" type="submit" class="btn btn-primary button-bg-green"
+              <button id="confirmForm" type="submit" class="btn btn-primary button-bg-green"
                   style="padding: 6px 12px;border-radius: 4px;">
                   Confirm
               </button>
@@ -177,8 +187,12 @@
               }
           },
           rules: {
-              causeTitle: "required",
-              causeDescription: {
+              causeName: "required",
+              causeLongDescription: {
+                  required: true,
+                  minlength:8
+              },
+              causeShortDescription: {
                   required: true,
                   minlength:8
               },
@@ -206,9 +220,12 @@
               },
           },
           messages: {
-              causeTitle: "Please enter the cause title",
-              causeDescription: {
-                  required: "Please enter the cause description",
+              causeName: "Please enter the cause name",
+              causeLongDescription: {
+                  required: "Please enter the long description",
+              },
+              causeShortDescription: {
+                  required: "Please enter the short description",
               },
               district: {
                   required: "Please select a district",
@@ -234,12 +251,10 @@
       $('#submitbtn').click(function () {
           var isFormValid = $('#addCause').valid();
           if(isFormValid == true){
-            console.log("Form is valid");
             jQuery.noConflict(); 
             $('#confirmationModal').modal('show'); 
           }
           else{
-            console.log("Form is invalid");
           }
       });
   });
@@ -247,6 +262,10 @@
   $('input[type=file]').change(function() {
         var filename = $('input[type=file]').val().split('\\').pop();
         $('#fileName').val(filename);
+  });
+
+  $('#confirmForm').click(function () {
+          $('#addCause').submit();
   });
 
 </script>

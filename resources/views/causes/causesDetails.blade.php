@@ -93,29 +93,43 @@
 </style>
 @section('content')
 <section>
-    <h2 style="margin-top: 0px;">Future for our children</h2>
+    <h2 style="margin-top: 0px;">
+      <span>
+        {{$causeData->CauseName}}
+        {{--  <hr class="cust-hr">  --}}
+      </span> 
+    </h2>
 </section>
 <div class="container cust-center">
     <div class="col-lg-12 mainbox-cust plr-0 img-cust" style="">
         <div>
-            <img id="img-new" src="{{ url('images/causes-details/causes-details-1.jpg') }}"
-                alt="">
+            <img id="" src="{{ asset($causeData->Image) }}"
+            alt="" style="width: 940px;
+            height: 342px;">
         </div>
-        <div class="ffe-font" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+        <div class="ffe-font" style="padding-left: 30px;padding-right: 30px;padding-top: 30px;">
 
             <div>
-                <p>Join us in helping build our bright youngsters a school to showcase their skills ,to make a
-                    change and making the world a better place.</p>
+                <p style="font-weight: bold">
+                  {{$causeData->CauseShortDescription}}
+                </p>
             </div>
             <div>
                 <p>
-                    We are planning to build a school in Ashok Nagar, Delhi for our children.This project requires
-                    lots of effort as well as capital.We have been blessed to have engineers and architects who have
-                    agreed to work voluntarily for us but still we have needs to meet inorder to make this dream a
-                    reality.Any help in the form of volunteering or donation is highly appreciated.We try to build
-                    all of our projects as transparent as possible.If you have any queries we'd be happy to help
-                    you.Please send us an email or contact us for more details.
+                  {{$causeData->CauseLongDescription}}
                 </p>
+            </div>
+            <div>
+              <p style="font-weight: bold">
+                  For more information please contact:
+              </p>
+              <p>
+                <b>Phone:</b> +91 {{$causeData->Phone}}
+              <br>
+                <b>Place:</b> {{ $causeData->State.", ".$causeData->District.", ".$causeData->City}}.
+              <br>
+                <b>Email:</b> {{$causeData->Email}}
+              </p>
             </div>
 						{{-- Begin:  Progress Bar --}}
 						<div class="progress-div col-lg-offset-3 col-lg-6" style="height: 215px;margin-top: 15px;">
@@ -126,15 +140,16 @@
 									aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
                 </div>
                 <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
-                <p class="progress-right">Goal: <span class="progress-amount">2400 ₹</span></p>
+                <p class="progress-right">Goal: <span class="progress-amount">{{$causeData->ExpectedAmount}} ₹</span></p>
 							</div>
-							<h2 class="borderes" style="text-align: center;margin-top: 100px;"><a style="text-decoration: none;" href="#">DONATE NOW</a></h2>
+							<h2 class="borderes" style="text-align: center;margin-top: 100px;"><a style="text-decoration: none;" href="#" data-toggle="modal"
+                data-target="#donationModal">DONATE NOW</a></h2>
 						</div>
             {{-- End: Progress Bar --}}
         </div>
     </div>
 </div>
-
+@include('templates.donationModal')
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
     $(document).ready(function () {
