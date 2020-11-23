@@ -47,7 +47,7 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <form action="" method="POST" enctype="multipart/form-data" name="addVolunteer" id="addVolunteer">
+                <form action="{{ route('addVolunteerSave') }}" method="POST" enctype="multipart/form-data" name="addVolunteer" id="addVolunteer">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -126,7 +126,7 @@
                             <input class=" form-control input--style-4" id="fileName" type="text" style="height: 50px;"/>
                             <div class="input-group-btn">
                                 <label for="files" class="btn btn-default input--style-4" style="height: 50px;border-radius: 0px 5px 5px 0px;">Browse</label>
-                                <input id="files" accept="image/*" type="file" class="btn btn-default" style="visibility:hidden;" />
+                                <input id="files" accept="image/*" type="file" class="btn btn-default" style="visibility:hidden;" name="profleImage"/>
                             </div>
                         </div>
 
@@ -162,7 +162,7 @@
                     volunteer.</p>
             </div>
             <div class="modal-footer">
-                <button id="" type="submit" class="btn btn-primary button-bg-green"
+                <button id="confirmForm" type="submit" class="btn btn-primary button-bg-green"
                     style="padding: 6px 12px;border-radius: 4px;">
                     Confirm
                 </button>
@@ -253,6 +253,11 @@
         var filename = $('input[type=file]').val().split('\\').pop();
         $('#fileName').val(filename);
     });
+
+    $('#confirmForm').click(function () {
+          $('#addVolunteer').submit();
+    });
+
 
 
 </script>

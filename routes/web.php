@@ -26,8 +26,9 @@
 // End: Causes
 
 // Begin: Volunteers
-  Route::get('volunteers', ['as' => 'volunteers','uses' => 'Volunteers\VolunteersController@volunteersView']);
+  Route::get('volunteers', ['as' => 'volunteersView','uses' => 'Volunteers\VolunteersController@volunteersView']);
   Route::get('add-volunteer', ['as' => 'addVolunteerView','uses' => 'Volunteers\VolunteersController@addVolunteerView']);
+  Route::post('add-volunteer-save', ['as' => 'addVolunteerSave','uses' => 'Volunteers\VolunteersController@addVolunteerSave']);
 // End: Volunteers
 
 // Begin: Events
