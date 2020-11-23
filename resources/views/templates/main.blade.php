@@ -99,7 +99,7 @@
                                                 FOODS</a>
                                         </li>
                                         <li class=" @if($activeTab == 'CAUSES') active-nav @endif ">
-                                            <a href="{{ route('causes') }}">CAUSES</a>
+                                            <a href="{{ route('causesView') }}">CAUSES</a>
                                         </li>
                                         <li class=" @if($activeTab == 'VOLUNTEERS') active-nav @endif ">
                                             <a href="{{ route('volunteers') }}">VOLUNTEERS </a>
@@ -165,7 +165,7 @@
                                         <li><a href="{{route('home')}}">Home</a></li>
                                         <li><a href="{{route('aboutUs')}}">About Us</a></li>
                                         <li><a href="{{route('availableFoodsView')}}">Available Foods</a></li>
-                                        <li><a href="{{route('causes')}}">Causes</a></li>
+                                        <li><a href="{{route('causesView')}}">Causes</a></li>
                                         <li><a href="{{route('volunteers')}}">Volunteers</a></li>
                                         <li><a href="{{route('events')}}">Events</a></li>
                                         <li><a href="{{route('contactUs')}}">Contact Us</a></li>
