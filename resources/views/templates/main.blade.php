@@ -105,7 +105,7 @@
                                             <a href="{{ route('volunteersView') }}">VOLUNTEERS </a>
                                         </li>
                                         <li class=" @if($activeTab == 'EVENTS') active-nav @endif ">
-                                            <a href="{{ route('events') }}">EVENTS</a>
+                                            <a href="{{ route('eventsView') }}">EVENTS</a>
                                         </li>
                                         <li class=" @if($activeTab == 'CONTACT') active-nav @endif ">
                                             <a href="{{ route('contactUs') }}">CONTACT</a>
@@ -167,7 +167,7 @@
                                         <li><a href="{{route('availableFoodsView')}}">Available Foods</a></li>
                                         <li><a href="{{route('causesView')}}">Causes</a></li>
                                         <li><a href="{{route('volunteersView')}}">Volunteers</a></li>
-                                        <li><a href="{{route('events')}}">Events</a></li>
+                                        <li><a href="{{route('eventsView')}}">Events</a></li>
                                         <li><a href="{{route('contactUs')}}">Contact Us</a></li>
                                     </ul>
                                 </div>
