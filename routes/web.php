@@ -32,8 +32,10 @@
 // End: Volunteers
 
 // Begin: Events
-  Route::get('events', ['as' => 'events','uses' => 'Events\EventsController@eventsView']);
-  Route::get('addEventView', ['as' => 'addEventView','uses' => 'Events\EventsController@addEventView']);
+  Route::get('events-view', ['as' => 'eventsView','uses' => 'Events\EventsController@eventsView']);
+  Route::get('add-event-view', ['as' => 'addEventView','uses' => 'Events\EventsController@addEventView']);
+  Route::post('add-event-save', ['as' => 'addEventSave','uses' => 'Events\EventsController@addEventSave']);
+  Route::get('event-details', ['as' => 'eventDetailsView','uses' => 'Events\EventsController@eventDetailsView']);
 // End: Events
 
 // Begin: Contact Us
