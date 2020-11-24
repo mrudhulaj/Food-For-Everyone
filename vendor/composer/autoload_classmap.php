@@ -6,8 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\CommonFunctions\\CommonFunctions' => $baseDir . '/app/CommonFunctions/CommonFunctions.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
-    'App\\Donations' => $baseDir . '/app/Donations.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AboutUs\\AboutUsController' => $baseDir . '/app/Http/Controllers/AboutUs/AboutUsController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -16,7 +16,6 @@ return array(
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\AvailableFoods\\AvailableFoodsController' => $baseDir . '/app/Http/Controllers/AvailableFoods/AvailableFoodsController.php',
     'App\\Http\\Controllers\\Causes\\CausesController' => $baseDir . '/app/Http/Controllers/Causes/CausesController.php',
-    'App\\Http\\Controllers\\Causes\\CausesDetailsController' => $baseDir . '/app/Http/Controllers/Causes/CausesDetailsController.php',
     'App\\Http\\Controllers\\ContactUs\\ContactUsController' => $baseDir . '/app/Http/Controllers/ContactUs/ContactUsController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DonationController' => $baseDir . '/app/Http/Controllers/DonationController.php',
@@ -32,6 +31,11 @@ return array(
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Models\\AvailableFoods' => $baseDir . '/app/Models/AvailableFoods.php',
+    'App\\Models\\Causes' => $baseDir . '/app/Models/Causes.php',
+    'App\\Models\\Donations' => $baseDir . '/app/Models/Donations.php',
+    'App\\Models\\Events' => $baseDir . '/app/Models/Events.php',
+    'App\\Models\\Volunteers' => $baseDir . '/app/Models/Volunteers.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

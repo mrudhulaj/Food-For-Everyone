@@ -402,8 +402,8 @@ class ComposerStaticInit37ed89163ea0b391a28253b69ccc819c
     );
 
     public static $classMap = array (
+        'App\\CommonFunctions\\CommonFunctions' => __DIR__ . '/../..' . '/app/CommonFunctions/CommonFunctions.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
-        'App\\Donations' => __DIR__ . '/../..' . '/app/Donations.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AboutUs\\AboutUsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AboutUs/AboutUsController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -412,7 +412,6 @@ class ComposerStaticInit37ed89163ea0b391a28253b69ccc819c
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\AvailableFoods\\AvailableFoodsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AvailableFoods/AvailableFoodsController.php',
         'App\\Http\\Controllers\\Causes\\CausesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Causes/CausesController.php',
-        'App\\Http\\Controllers\\Causes\\CausesDetailsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Causes/CausesDetailsController.php',
         'App\\Http\\Controllers\\ContactUs\\ContactUsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContactUs/ContactUsController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DonationController' => __DIR__ . '/../..' . '/app/Http/Controllers/DonationController.php',
@@ -428,6 +427,11 @@ class ComposerStaticInit37ed89163ea0b391a28253b69ccc819c
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Models\\AvailableFoods' => __DIR__ . '/../..' . '/app/Models/AvailableFoods.php',
+        'App\\Models\\Causes' => __DIR__ . '/../..' . '/app/Models/Causes.php',
+        'App\\Models\\Donations' => __DIR__ . '/../..' . '/app/Models/Donations.php',
+        'App\\Models\\Events' => __DIR__ . '/../..' . '/app/Models/Events.php',
+        'App\\Models\\Volunteers' => __DIR__ . '/../..' . '/app/Models/Volunteers.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
