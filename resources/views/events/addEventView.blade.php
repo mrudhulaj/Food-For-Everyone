@@ -51,31 +51,40 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <form action="" method="POST" enctype="multipart/form-data" name="addVolunteer" id="addVolunteer">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <form action="{{ route('addEventSave') }}" method="POST" enctype="multipart/form-data"
+                    name="addVolunteer" id="addVolunteer">
+                    @csrf
 
                     <div class="input-group col-lg-12">
-                        <label class="label ffe-font">Event Name</label>
+                        <label class="label ffe-font">Event/Venue Name</label>
                         <input class="input--style-4" type="text" name="eventName">
                     </div>
 
                     <div class="input-group col-lg-12">
-                        <label class="label ffe-font">Event Description</label>
-                        <textarea style="border: none;" name="eventDescription" id="eventDescription"
-                            class="input--style-4" id="" cols="35" rows="5"></textarea>
+                      <label class="label ffe-font">Short Description</label>
+                      <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                          title="This will be displayed in the general view."></i>
+                      <textarea style="border: none;line-height: 25px;padding: 12px 22px;" name="shortDescription" id="causeShortDescription" class="input--style-4" id="" cols="35" rows="5"></textarea>
+                    </div>
+  
+                    <div class="input-group col-lg-12">
+                        <label class="label ffe-font">Long Description</label>
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                          title="This will be displayed in the detailed view."></i>
+                        <textarea style="border: none;line-height: 25px;padding: 12px 22px;" name="longDescription" id="causeLongDescription" class="input--style-4" id="" cols="35" rows="10"></textarea>
                     </div>
 
                     <label class="label ffe-font">Time</label>
                     <div class="row row-space" style="padding-right: 0px">
                         <div class="col-lg-6">
                             <div class="input-group col-lg-12 selectbox-div">
-                                <input class="input--style-4" type="text" name="beginTime" placeholder="Begin" id="beginTime">
+                                <input class="input--style-4" type="text" name="beginTime" placeholder="Begin"
+                                    id="beginTime">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="input-group col-lg-12 selectbox-div">
-                                <input class="input--style-4" type="text" name="endTime" placeholder="End" id="endTime"> 
+                                <input class="input--style-4" type="text" name="endTime" placeholder="End" id="endTime">
                             </div>
                         </div>
                     </div>
@@ -105,7 +114,7 @@
                                 <label class="label ffe-font">State
                                 </label>
                                 <select class="form-control input--style-4" style="" id="state" name="state">
-                                    <option hidden selected="" value="">District</option>
+                                    <option hidden selected="" value="">State</option>
                                     <option value="Calicut">Calicut</option>
                                 </select>
                             </div>
@@ -127,7 +136,7 @@
                             <div class="input-group-btn">
                                 <label for="files" class="btn btn-default input--style-4"
                                     style="height: 50px;border-radius: 0px 5px 5px 0px;">Browse</label>
-                                <input id="files" accept="image/*" type="file" class="btn btn-default"
+                                <input name="eventImage" id="files" accept="image/*" type="file" class="btn btn-default"
                                     style="visibility:hidden;" />
                             </div>
                         </div>
@@ -160,11 +169,10 @@
             </div>
             <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
                 <p>By clicking the confirm button you hereby acknowledge that the details provided by you is genuine to
-                    the best of your knowledge and you are willing to participate in our events and programs as a
-                    volunteer.</p>
+                    the best of your knowledge and you are willing to provide more information if required.</p>
             </div>
             <div class="modal-footer">
-                <button id="" type="submit" class="btn btn-primary button-bg-green"
+                <button id="confirmForm" type="submit" class="btn btn-primary button-bg-green"
                     style="padding: 6px 12px;border-radius: 4px;">
                     Confirm
                 </button>
@@ -192,15 +200,15 @@
     });
 
     $("#beginTime").flatpickr({
-      enableTime: true,
-      noCalendar: true,
-      dateFormat: "h:i:K",
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "h:i:K",
     });
 
     $("#endTime").flatpickr({
-      enableTime: true,
-      noCalendar: true,
-      dateFormat: "h:i:K",
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "h:i:K",
     });
 
     $(document).ready(function () {
@@ -231,7 +239,10 @@
                 endTime: {
                     required: true
                 },
-                eventDescription: {
+                shortDescription: {
+                    required: true
+                },
+                longDescription: {
                     required: true
                 },
                 district: {
@@ -248,8 +259,11 @@
                 firstName: "Please enter your first name",
                 lastName: "Please enter your last name",
                 eventName: "Please enter your event name",
-                eventDescription: {
-                    required: "Please enter event description",
+                shortDescription: {
+                    required: "Please enter short description",
+                },
+                longDescription: {
+                    required: "Please enter long description",
                 },
                 beginTime: {
                     required: "Please enter begining time",
@@ -289,6 +303,10 @@
     $('input[type=file]').change(function () {
         var filename = $('input[type=file]').val().split('\\').pop();
         $('#fileName').val(filename);
+    });
+
+    $('#confirmForm').click(function () {
+          $('#addVolunteer').submit();
     });
 
 </script>
