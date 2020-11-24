@@ -213,7 +213,7 @@
 
     $(document).ready(function () {
 
-        // Add Available Food form validation
+        // Add Event form validation
         $("form[name='addVolunteer']").validate({
             errorPlacement: function (error, element) {
                 if (element.parent().hasClass('selectbox-div') || element.parent().hasClass(

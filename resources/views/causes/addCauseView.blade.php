@@ -177,7 +177,7 @@
 
   $(document).ready(function () {
 
-      // Add Available Food form validation
+      // Add Cause form validation
       $("form[name='addCause']").validate({
           errorPlacement: function (error, element) {
               if ( element.parent().hasClass('selectbox-div') || element.parent().hasClass('amount-div') ) {
