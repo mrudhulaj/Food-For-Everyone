@@ -96,7 +96,6 @@
     <h2 style="margin-top: 0px;">
       <span style="border-bottom: 2px solid #01d262;padding-bottom: 10px;">
         {{$causeData->CauseName}}
-        {{--  <hr class="cust-hr">  --}}
       </span> 
     </h2>
 </section>
