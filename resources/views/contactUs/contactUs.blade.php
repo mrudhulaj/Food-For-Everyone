@@ -3,9 +3,6 @@
 <link rel="stylesheet" href="{{ url('css/contact-us-css/util.css') }}">
 <link rel="stylesheet" href="{{ url('css/contact-us-css/main.css') }}">
 
-<link
-    href="{{ url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i') }}"
-    rel="stylesheet">
 <link href="{{ url('css/form.css') }}" rel="stylesheet" media="all">
 <style>
     ::placeholder {
@@ -45,11 +42,6 @@
         font-weight: bold;
     }
 
-    /*  */
-    .input--style-4 {
-        /* border-radius: 0px !important; */
-    }
-
 </style>
 @section('content')
 <div class="">
@@ -72,7 +64,7 @@
             </div>
             <div class="row mrl-0">
                 <div class="col-lg-12 cust-form-style">
-                    <form action="" method="POST" enctype="multipart/form-data" name="contactUs" id="contactUs">
+                    <form action="javascript:void(0)" method="POST" enctype="multipart/form-data" name="contactUs" id="contactUs">
                         @csrf
                         <div class="row row-space">
                             <div class="col-2">
@@ -106,7 +98,7 @@
                         </div>
 
                         <div class="" style="text-align: center;margin-top: 80px;">
-                            <button type="submit" id="submitbtn" class="btn button-bg-green"
+                            <button id="confirmForm" class="btn button-bg-green"
                                 style="padding: 0px;width: 120px;height: 60px;">
                                 Submit
                             </button>
@@ -130,7 +122,7 @@
                 </h5>
             </div>
             <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
-                <p>Thank you for reaching out to us.Your message was successfully sent, if there was any query we will get back to you shortly in your provided email.</p>
+                <p class="ffe-font">Thank you for reaching out to us.Your message was successfully sent, if there was any query we will get back to you shortly in your provided email.</p>
             </div>
             <div class="modal-footer">
                 <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
@@ -162,7 +154,6 @@
                 },
                 message: {
                     required: true,
-                    number: true
                 },
               },
             messages: {
@@ -179,33 +170,26 @@
             },
         });
 
-        var savedFlag = "{{$savedFlag}}";
-        console.log("Saved Flag = "+savedFlag);
-
     });
 
-    // $('#submitbtn').click(function () {
-    //         var isFormValid = $('#addVolunteer').valid();
-    //         if (isFormValid == true) {
+    $("#contactUs").on("submit", function(){            
 
-    //           var firstName   = $("#firstName").val();
-    //           var lastName    = $("#lastName").val();
-    //           var email       = $("#email").val();
-    //           var phone       = $("#phone").val();
-    //           var message     = $("#message").val();
-
-    //             $.ajax({
-    //                 url:'/getmsg',
-    //                 type:'POST',
-    //                 data:{
-    //                     name:name, 
-    //                     address:address
-    //                 },
-    //                 success:function(data) {
-    //                   $("#msg").html(data.msg);
-    //                 }
-    //             });
-    //         }
-    // });
+        $.ajax({
+            url:'{{ route("saveContactUs") }}',
+            type:'POST',
+            data:{
+                "_token": "{{ csrf_token() }}",
+                firstName   : $("#firstName").val(),
+                lastName    : $("#lastName").val(),
+                email       : $("#email").val(),
+                phone       : $("#phone").val(),
+                message     : $("#message").val()
+            },
+            success:function(data) {
+              jQuery.noConflict();
+              $('#successfullModal').modal('show');
+            }
+        });
+    });
 </script>
 @stop
