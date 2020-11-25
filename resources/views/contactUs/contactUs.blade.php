@@ -78,31 +78,31 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label ffe-font">First Name</label>
-                                    <input class="input--style-4" type="text" name="firstName" value="">
+                                    <input class="input--style-4" type="text" id="firstName" name="firstName" value="">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label ffe-font">Last name</label>
-                                    <input class="input--style-4" type="text" name="lastName" value="">
+                                    <input class="input--style-4" type="text" name="lastName" id="lastName" value="">
                                 </div>
                             </div>
                         </div>
 
                         <div class="input-group col-lg-12">
                             <label class="label ffe-font">Email</label>
-                            <input class="input--style-4" type="text" name="email">
+                            <input class="input--style-4" type="text" name="email" id="email">
                         </div>
 
                         <div class="input-group col-lg-12">
                             <label class="label ffe-font">Phone</label>
-                            <input class="input--style-4" type="text" name="phone">
+                            <input class="input--style-4" type="text" name="phone" id="phone">
                         </div>
 
                         <div class="input-group col-lg-12">
                             <label class="label ffe-font">Message</label>
                             <textarea style="border: none;line-height: 25px;padding: 12px 22px;" name="message"
-                                id="message" class="input--style-4" id="" cols="52" rows="10"></textarea>
+                                id="message" class="input--style-4" cols="52" rows="10"></textarea>
                         </div>
 
                         <div class="" style="text-align: center;margin-top: 80px;">
@@ -117,6 +117,30 @@
         </div>
     </div>
 </div>
+{{--  Begin: Message sent successfully Modal  --}}
+<div class="modal fade" id="successfullModal" tabindex="-1" role="dialog" aria-labelledby="successfullModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 13px;border: none">
+            <div class="modal-header ffe-font">
+                <h5 class="modal-title" id="successfullModalLabel">Success!
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h5>
+            </div>
+            <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
+                <p>Thank you for reaching out to us.Your message was successfully sent, if there was any query we will get back to you shortly in your provided email.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- End : Message sent successfully Modal --}}
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
 
@@ -155,8 +179,33 @@
             },
         });
 
+        var savedFlag = "{{$savedFlag}}";
+        console.log("Saved Flag = "+savedFlag);
+
     });
 
+    // $('#submitbtn').click(function () {
+    //         var isFormValid = $('#addVolunteer').valid();
+    //         if (isFormValid == true) {
 
+    //           var firstName   = $("#firstName").val();
+    //           var lastName    = $("#lastName").val();
+    //           var email       = $("#email").val();
+    //           var phone       = $("#phone").val();
+    //           var message     = $("#message").val();
+
+    //             $.ajax({
+    //                 url:'/getmsg',
+    //                 type:'POST',
+    //                 data:{
+    //                     name:name, 
+    //                     address:address
+    //                 },
+    //                 success:function(data) {
+    //                   $("#msg").html(data.msg);
+    //                 }
+    //             });
+    //         }
+    // });
 </script>
 @stop
