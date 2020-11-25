@@ -156,7 +156,7 @@
                                     <a href="{{route('eventsView')}}">EVENTS</a>
                                   </li>
                                   <li class=" @if($activeTab == 'CONTACT') active-nav @endif ">
-                                      <a href="{{ route('contactUs') }}">CONTACT</a>
+                                      <a href="{{ route('contactUsView') }}">CONTACT</a>
                                   </li>
                               </ul>
                           </div>

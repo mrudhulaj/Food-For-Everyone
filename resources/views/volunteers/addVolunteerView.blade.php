@@ -240,11 +240,8 @@
         $('#submitbtn').click(function () {
             var isFormValid = $('#addVolunteer').valid();
             if (isFormValid == true) {
-                console.log("Form is valid");
                 jQuery.noConflict();
                 $('#confirmationModal').modal('show');
-            } else {
-                console.log("Form is invalid");
             }
         });
     });
