@@ -4,6 +4,8 @@
     href="{{ url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i') }}"
     rel="stylesheet">
 <link href="{{ url('css/form.css') }}" rel="stylesheet" media="all">
+<link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
+<link href="{{ url('vendor/flatpickr/dist/flatpickr.css') }}" rel="stylesheet" media="all">
 
 <style>
     .wrapper section>h2::before {
@@ -52,21 +54,45 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstName" value="FirstName">
+                                <input class="input--style-4" type="text" name="firstName" value="">
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastName" value="LastName">
+                                <input class="input--style-4" type="text" name="lastName" value="">
                             </div>
                         </div>
                     </div>
                     <div class="row row-space">
+                      <div class="col-2">
+                          <div class="input-group">
+                              <label class="label ffe-font">Food Count </label>
+                              <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                title="How many people can be fed with your contribution?"></i>
+                              <input class="input--style-4" type="text" name="foodCount" id="foodCount" value="">
+                          </div>
+                      </div>
+                      <div class="col-2">
+                          <div class="input-group">
+                              <label class="label ffe-font">Expiry Time</label>
+                              <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                title="Within what time should this food be consumed?"></i>
+                              <select class="form-control input--style-4" style="" id="expiryTime" name="expiryTime">
+                                <option hidden selected="" value="">Expiry Time</option>
+                                <option value="1">Within 1 hour</option>
+                                <option value="2">Within 2 hours</option>
+                                <option value="3">Within 3 hours</option>
+                                <option value="4">Within 4 hours</option>
+                              </select>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row row-space">
 
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="input-group">
-                                <label class="label ffe-font">Type of Donation</label>
+                                <label class="label ffe-font pleft-0">Restaurent/Event</label>
                                 <div class="p-t-10">
                                     <label class="radio-container m-r-45 ffe-font">Event
                                         <input type="radio" checked="checked" name="typeofdonation" value="Event">
@@ -79,42 +105,57 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                          <div class="input-group">
+                              <label class="label ffe-font pleft-0">Veg/Non-Veg</label>
+                              <div class="p-t-10">
+                                  <label class="radio-container m-r-45 ffe-font">Veg
+                                      <input type="radio" checked="checked" name="vegFlag" value="Veg">
+                                      <span class="checkmark"></span>
+                                  </label>
+                                  <label class="radio-container ffe-font">Non-Veg
+                                      <input type="radio" name="vegFlag" value="Non-Veg">
+                                      <span class="checkmark"></span>
+                                  </label>
+                              </div>
+                          </div>
+                        </div>
                     </div>
                     <div class="input-group col-lg-12 hide type-rest">
                         <label class="label ffe-font">Restaurant Name</label>
-                        <input class="input--style-4" type="text" name="restaurantName" value="RestaurentName">
+                        <input class="input--style-4" type="text" name="restaurantName" value="">
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Email</label>
-                        <input class="input--style-4" type="text" name="email" value="email@email.com">
+                        <input class="input--style-4" type="text" name="email" value="">
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Phone</label>
-                        <input class="input--style-4" type="text" name="phone" value="9989888888">
+                        <input class="input--style-4" type="text" name="phone" value="">
                     </div>
                     <div class="row row-space" style="padding-right: 0px">
+                      <div class="col-lg-4">
+                          <div class="input-group col-lg-12 selectbox-div">
+                              <label class="label ffe-font">State</label>
+                              <select class="form-control input--style-4" style="" id="state" name="state">
+                                  <option hidden selected="" value="">State</option>
+                                  <option value="Kerala">Kerala</option>
+                              </select>
+                          </div>
+                        </div>
                         <div class="col-lg-4">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">District</label>
                                 <select class="form-control input--style-4" style="" id="district" name="district">
                                     <option hidden selected="" value="">District</option>
-                                    <option value="Kerala" selected>Kerala</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="input-group col-lg-12 selectbox-div">
-                                <label class="label ffe-font">State</label>
-                                <select class="form-control input--style-4" style="" id="state" name="state">
-                                    <option hidden selected="" value="">District</option>
-                                    <option value="Calicut" selected>Calicut</option>
+                                    <option value="Calicut">Calicut</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4">
                           <div class="input-group col-lg-12 selectbox-div">
                               <label class="label ffe-font">City</label>
-                              <input class="input--style-4" type="text" name="city" id="city" value="Koduvally">
+                              <input class="input--style-4" type="text" name="city" id="city" value="">
                           </div>
                       </div>
                     </div>
@@ -160,6 +201,7 @@
 </div>
 {{-- End :Confirmation Box --}}
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+<script src="{{ asset('vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
 <script>
     $("input[name='typeofdonation']").change(function () {
         var type = $('input[name="typeofdonation"]:checked').val();
@@ -204,6 +246,13 @@
                 city: {
                     required: true
                 },
+                foodCount: {
+                    required: true,
+                    number: true
+                },
+                expiryTime: {
+                    required: true
+                },
             },
             messages: {
                 firstName: "Please enter your first name",
@@ -216,6 +265,12 @@
                 },
                 city: {
                     required: "Please enter a city",
+                },
+                foodCount: {
+                    required: "Please enter the food count",
+                },
+                expiryTime: {
+                    required: "Please enter the expiry time",
                 },
                 phone: {
                     required: "Please enter your mobile number",
