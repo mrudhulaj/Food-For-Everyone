@@ -65,17 +65,19 @@
         <form class="form-inline">
             <div class="form-group">
                 <label for="" class="">Location</label>
-                <select class="form-control pr-20 input--style-4" style="width: 215px" name="district">
+                <select class="form-control pr-20 input--style-4" style="width: 215px" name="filterDistrict" id="filterDistrict">
                     <option>Select District</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
                 </select>
-                <select class="form-control pr-20 input--style-4" style="width: 215px" name="state">
+                <select class="form-control pr-20 input--style-4" style="width: 215px" name="filterState" id="filterState">
                     <option>Select State</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="" class="pl-20">Time</label>
-                <select class="form-control input--style-4" style="width: 188px" name="time">
+                <select class="form-control input--style-4" style="width: 188px" name="filterTime" id="filterTime">
                     <option>Less than 1 hour</option>
                 </select>
             </div>
@@ -95,7 +97,7 @@
 
             <div class="col-lg-12" style="text-align: center;margin-top: 20px;margin-bottom: 20px;">
                 <button class="btn button-bg-green" style="padding: 0px;width: 100px;height: 40px"
-                    type="submit" id="filterbtn">Filter</button>
+                    type="button" id="filterbtn">Filter</button>
             </div>
 
         </form>
@@ -103,7 +105,7 @@
     </div>
 
     <div style="margin-bottom: 50px">
-        <table class="table" style="" id="example"> 
+        <table class="table" style="" id="availableFoodsTable"> 
             <thead class="table-striped">
                 <tr>
                     <th data-column="FirstName" data-order="false" scope="col">First Name</th>
@@ -117,7 +119,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($availableFoods as $availableFoodsData)
+                {{--  @foreach($availableFoods as $availableFoodsData)
                     <tr>
                         <td>{{ $availableFoodsData->FirstName }}</td>
                         <td>{{ $availableFoodsData->LastName }}</td>
@@ -135,7 +137,7 @@
                         <td>{{ date('d-M-Y', strtotime($availableFoodsData->CreatedDate)) }}</td>
                         <td>{{ date('h:i A', strtotime($availableFoodsData->CreatedDate)) }}</td>
                     </tr>
-                @endforeach
+                @endforeach  --}}
             </tbody>
         </table>
         <form id="list-form">
@@ -153,12 +155,12 @@
     src="{{ asset('vendor/datatables.net/js/jquery.dataTables.min.js') }}" defer>
 </script>
 <script>
-    $(document).ready(function () {
-        $('#example').DataTable({
-          "pagingType": "simple_numbers",
-        });
+  $(document).ready(function () {
+        // $('#availableFoodsTable').DataTable({
+        //   "pagingType": "simple_numbers",
+        // });
 
-        // $('#example').dataTable( {
+        // $('#availableFoodsTable').dataTable( {
         //   "pagingType": "simple_numbers",
         //   "ajax": {
         //     "url": "data.json",
@@ -167,7 +169,87 @@
         //     }
         //   }
         // } );
+    // });
+
+    // Testing for data tables
+    fillDatatable();
+
+    function fillDatatable(filterDistrict = '', filterState = '', filterTime = '')
+    {
+        var dataTable = $('#availableFoodsTable').dataTable({
+            processing: true,
+            serverSide: true,
+            ajax:{
+                url: "{{ route('availableFoodListFilter') }}",
+                data:{
+                  filterDistrict:filterDistrict,
+                  filterState:filterState,
+                  filterTime:filterTime
+                }
+            },
+            columns: [
+                {
+                    data:'FirstName',
+                    name:'FirstName'
+                },
+                {
+                    data:'LastName',
+                    name:'LastName'
+                },
+                {
+                    data:'TypeOfDonation',
+                    name:'TypeOfDonation'
+                },
+                {
+                    data:'RestaurantName',
+                    name:'RestaurantName'
+                },
+                {
+                    data:'Phone',
+                    name:'Phone'
+                },
+                {
+                    data:'District',
+                    name:'District'
+                }
+                // {
+                //     data:'AddedDate',
+                //     name:'AddedDate'
+                // },
+                // {
+                //     data:'Time',
+                //     name:'Time'
+                // }
+            ]
+        });
+    }
+
+    $('#filterbtn').click(function(){
+        var filterDistrict    = $('#filterDistrict').val();
+        var filterState       = $('#filterState').val();
+        var filterTime        = $('#filterTime').val();
+
+        // if(filterDistrict != '' &&  filterDistrict != '' &&  filterTime != '')
+        if(filterDistrict != '')
+        {
+            $('#availableFoodsTable').DataTable().destroy();
+            fillDatatable(filterDistrict, filterState, filterTime);
+        }
+        else
+        {
+            alert('Select any filter option');
+        }
     });
+
+    // $('#reset').click(function(){
+    //     $('#filterDistrict').val('');
+    //     $('#filterState').val('');
+    //     $('#filterTime').val('');
+    //     $('#availableFoodsTable').DataTable().destroy();
+    //     fillDatatable();
+    // });
+
+  });
 
 </script>
 @stop
