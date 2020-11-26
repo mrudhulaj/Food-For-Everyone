@@ -6,6 +6,18 @@
         opacity: 1;
     }
 
+    .our_activity .single-Promo h2::before{
+      background: none !important;
+    }
+
+    .wrapper section>h2::before{
+      background: none !important;
+    }
+
+    .cust-underline{
+      border-bottom: 2px solid #01d262 !important;
+    }
+
 
 </style>
 @section('content')
@@ -56,7 +68,11 @@
 </div>
 
 <section class="our_activity">
-    <h2>OUR ACTIVITY</h2>
+    <h2>
+      <span class="cust-underline">
+        OUR ACTIVITIES
+      </span>
+    </h2>
     <p>We continuosly strive to provide the best care and feed every needy people out there. Please take a look at our
         activities and volunteer or contribute in any way you can !</p>
     <div class="container">
@@ -66,9 +82,15 @@
                     <div class="promo-icon">
                         <i class="material-icons">near_me</i>
                     </div>
-                    <h2 style="text-align: center;"><a href="#">Causes</a></h2>
-                    <p>We are continously trying to expand our reach to different areas where people need support to
-                        help build a better future.Click here to learn more about the causes we support currently.</p>
+                    <a href="{{route('causesView')}}" class="a-none ffe-font">
+                      <h2 style="text-align: center;font-size: 22px;text-decoration: underline;" >Causes</h2>
+                      <p>We are continously trying to expand our reach to different areas where people need support to
+                          help build a better future.
+                          <br>
+                        </p>
+                        <p style="margin-top: 16px;">
+                          Click <a href="{{route('causesView')}}" class="a-none" style="color: #00A348">here</a> to learn more about the causes we support currently.</p>
+                    </a>
                 </div>
             </div>
             <div class="col-md-4 col-xs-12">
@@ -76,10 +98,16 @@
                     <div class="promo-icon">
                         <i class="material-icons">favorite</i>
                     </div>
-                    <h2 style="text-align: center;"><a href="#">Volunteering</a></h2>
-                    <p>We are always looking for genuine, kind hearted volunters a.k.a superheroes to support our
-                        events. If you are one of them , click here to learn more about it and how you can join our
-                        family.</p>
+                    <a href="{{route('volunteersView')}}" class="a-none ffe-font">
+                      <h2 style="text-align: center;font-size: 22px;text-decoration: underline;" >Volunteering</h2>
+                      <p>We are always looking for genuine, kind hearted volunters to support & participate in
+                          events. 
+                          <br>
+                        </p>
+                        <p style="margin-top: 37px;">
+                          Click <a href="{{route('volunteersView')}}" class="a-none" style="color: #00A348">here</a> to learn more about it and how you can join our
+                          family.</p>
+                    </a>
                 </div>
             </div>
             <div class="col-md-4 col-xs-12">
@@ -87,10 +115,14 @@
                     <div class="promo-icon">
                         <i class="material-icons">dashboard</i>
                     </div>
-                    <h2 style="text-align: center;"><a href="#">Events</a></h2>
-                    <p>We always conduct transparent events with the only aim of helping the needy people.We are always
-                        open to ideas and trying out different events to bring more people into our family and to help
-                        every suffering soul.</p>
+                    <a href="{{route('eventsView')}}" class="a-none ffe-font">
+                      <h2 style="text-align: center;font-size: 22px;text-decoration: underline;" >Events</h2>
+                      <p>We always conduct transparent events with the only aim of helping the needy people.We are always open to ideas & events.
+                          <br>
+                      </p>
+                      <p>
+                          Click <a href="{{route('eventsView')}}" class="a-none" style="color: #00A348">here</a> to learn more about out our events.</p>
+                    </a>
                 </div>
             </div>
         </div>
@@ -114,13 +146,17 @@
                     <p class="progress-left">Raised: 12,500 ₹</p>
                     <p class="progress-right">Goal: 25,000 ₹</p>
                 </div>
-                <h2><a href="#">DONATE NOW</a></h2>
+                <h2><a href="#" data-toggle="modal" data-target="#donationModal">DONATE NOW</a></h2>
             </div>
         </div>
     </div>
 </section>
 <section class="events_section_area">
-    <h2>UPCOMING EVENTS</h2>
+    <h2>
+      <span class="cust-underline">
+        UPCOMING EVENTS
+      </span>
+    </h2>
     <p>Missed our previous events? Don't worry, we have plenty of them coming up!</p>
     <div class="container">
         <div class="row">
@@ -201,7 +237,11 @@
     </div>
 </div>
 <section class="our_cuauses">
-    <h2>OUR CAUSES</h2>
+    <h2>
+      <span class="cust-underline">
+        OUR CAUSES
+      </span>
+    </h2>
     <p>We also believe in investing for a better future for our kids and also to take care of our old pals by building
         them a place which they deserve.</p>
     <div class="container">
@@ -223,7 +263,7 @@
                                 <p class="progress-left">Raised: <span>1200 ₹</span></p>
                                 <p class="progress-right">Goal: <span>2400 ₹</span></p>
                             </div>
-                            <h2 class="borderes"><a href="#">DONATE NOW</a></h2>
+                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE NOW</a></h2>
                         </div>
                     </div>
                     <div class="item">
@@ -241,7 +281,7 @@
                                 <p class="progress-left">Raised: <span>1200 ₹</span></p>
                                 <p class="progress-right">Goal: <span>2400 ₹</span></p>
                             </div>
-                            <h2 class="borderes"><a href="#">DONATE NOW</a></h2>
+                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE NOW</a></h2>
                         </div>
                     </div>
                     <div class="item">
@@ -260,7 +300,7 @@
                                 <p class="progress-left">Raised: <span>1200 ₹</span></p>
                                 <p class="progress-right">Goal: <span>2400 ₹</span></p>
                             </div>
-                            <h2 class="borderes"><a href="#">DONATE NOW</a></h2>
+                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE NOW</a></h2>
                         </div>
                     </div>
                 </div>
@@ -331,7 +371,11 @@
 </section>
 <div class="clear"></div>
 <section class="volunteer_area">
-    <h2>Our Volunteers</h2>
+    <h2>
+      <span class="cust-underline">
+        Our Volunteers
+      </span>
+    </h2>
     <p>Meet our superhero's.The people who bring joy to our kids and elders.The silent warriors.</p>
     <div class="container">
         <div class="row">
@@ -406,7 +450,11 @@
     </div>
 </section>
 <section class="letast_news">
-    <h2>Latest News From Around The World</h2>
+    <h2>
+      <span class="cust-underline">
+        Latest News From Around The World
+      </span>
+    </h2>
     <p>Hungry stomach's and stretching arm's are not just around us, they are all over the world. </p>
     <div class="container">
         <div class="row">
@@ -450,7 +498,11 @@
     </div>
 </section>
 <section>
-    <h2 style="margin-top: 0px;">Our Supporting Partners</h2>
+    <h2 style="margin-top: 0px;">
+      <span class="cust-underline">
+        Our Supporting Partners
+      </span>
+    </h2>
 </section>
 <section class="footer_carosal">
     <div class="container">
@@ -477,4 +529,5 @@
     </div>
 </section>
 {{-- Main Content Ends --}}
+@include('templates.donationModal')
 @stop
