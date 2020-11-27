@@ -283,12 +283,8 @@
         $('#submitbtn').click(function () {
             var isFormValid = $('#addAvailableFood').valid();
             if(isFormValid == true){
-              console.log("Form is valid");
               jQuery.noConflict(); 
               $('#confirmationModal').modal('show'); 
-            }
-            else{
-              console.log("Form is invalid");
             }
         });
 

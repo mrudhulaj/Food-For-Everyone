@@ -44,16 +44,16 @@
         text-align: center !important;
     }
 
-    #availableFoodsTable{
-      width: auto !important;
+    #availableFoodsTable {
+        width: auto !important;
     }
 
-    .mr-30{
-      margin-right: 30px !important;
+    .mr-30 {
+        margin-right: 30px !important;
     }
 
-    .mr-10{
-      margin-right: 10px !important;
+    .mr-10 {
+        margin-right: 10px !important;
     }
 
 </style>
@@ -74,105 +74,110 @@
     </section>
     <div class="col-lg-12 plr-0 filter" style="margin-top: 30px;">
 
-        <form class="form-inline">
-          
-          <div class="col-lg-12">
-            <div class="col-lg-3 pright-0">
-              <div class="input-group" style="width: 100%;">
-                  <label class="label ffe-font">Location</label>
-                  <select class="form-control input--style-4" style="" id="filterCity" name="filterCity">
-                    <option value="" selected hidden>Select City</option>
-                    <option value="Koduvally">Koduvally</option>
-                    <option value="Kunnamangalam">Kunnamangalam</option>
-                  </select>
-              </div>
-            </div>
-            <div class="col-lg-3 pright-0">
-              <div class="input-group" style="width: 100%;">
-                  <label class="label ffe-font">&nbsp;</label>
-                  <select class="form-control input--style-4" style="" id="filterDistrict" name="filterDistrict">
-                    <option value="" selected hidden>Select District</option>
-                    <option value="Calicut">Calicut</option>
-                    <option value="Kannur">Kannur</option>                  
-                  </select>
-              </div>
-            </div>
-            <div class="col-lg-3 pright-0">
-              <div class="input-group" style="width: 100%;">
-                  <label class="label ffe-font">&nbsp;</label>
-                  <select class="form-control input--style-4" style="" id="filterState" name="filterState">
-                    <option value="" selected hidden>Select State</option>
-                    <option value="Kerala">Kerala</option>
-                    <option value="Tamil Nadu">Tamil Nadu</option>                 
-                  </select>
-              </div>
-            </div>
-            <div class="col-lg-3 pright-0">
-              <div class="input-group">
-                  <label class="label ffe-font">Expiry Time</label>
-                  <select class="form-control input--style-4" style="" id="filterExpTime" name="filterExpTime">
-                    <option value="" selected hidden>Select Time</option>
-                    <option>Less than 1 hour</option>
-                    <option>Less than 1 hour</option>           
-                  </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-12" style="margin-bottom: 30px">
+        <form class="form-inline" name="filterForm" id="filterForm">
 
-            <div class="col-lg-3 pright-0">
-              <div class="input-group col-lg-12">
-                <label class="label ffe-font">Food Count</label>
-                <input class="input--style-4" type="text" name="filterFoodCount" id="filterFoodCount" value="">
-              </div>
-            </div>
-
-            <div class="col-lg-3 pright-0">
-              <div class="input-group">
-                <label class="label ffe-font">Veg/Non-Veg</label>
-                <div class="p-t-10">
-                    <label class="radio-container mr-30 ffe-font">Vegeterian
-                        <input type="radio" checked="checked" name="filterVegFlag" value="Veg">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="radio-container ffe-font">Non Vegeterian
-                        <input type="radio" name="filterVegFlag" value="Non Veg">
-                        <span class="checkmark"></span>
-                    </label>
+            <div class="col-lg-12">
+                <div class="col-lg-3 pright-0">
+                    <div class="input-group" style="width: 100%;">
+                        <label class="label ffe-font">Location</label>
+                        <select class="form-control input--style-4" style="" id="filterCity" name="filterCity">
+                            <option value="" selected hidden>Select City</option>
+                            @foreach ($filterValues['City'] as $values)
+                             <option value="{{$values['City']}}">{{$values['City']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-             </div>
-            </div>
-
-            <div class="col-lg-3 pright-0">
-              <div class="input-group">
-                <label class="label ffe-font">Restaurent/Event</label>
-                <div class="p-t-10">
-                    <label class="radio-container mr-30 ffe-font">Restaurant
-                        <input type="radio" checked="checked" name="filterType" value="Veg">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="radio-container ffe-font">Event
-                        <input type="radio" name="filterType" value="Non Veg">
-                        <span class="checkmark"></span>
-                    </label>
+                <div class="col-lg-3 pright-0">
+                    <div class="input-group" style="width: 100%;">
+                        <label class="label ffe-font">&nbsp;</label>
+                        <select class="form-control input--style-4" style="" id="filterDistrict" name="filterDistrict">
+                            <option value="" selected hidden>Select District</option>
+                            @foreach ($filterValues['District'] as $values)
+                              <option value="{{$values['District']}}">{{$values['District']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-             </div>
-            </div>
-
-            <div class="col-lg-3 pright-0" style="padding-top: 28px;">
-              <div class="input-group col-lg-12">
-                <div class="col-lg-6 plr-0">
-                  <button class="btn button-bg-green" style="padding: 0px;width: 130px;height: 40px" type="button"
-                  id="filterbtn">Filter</button>
+                <div class="col-lg-3 pright-0">
+                    <div class="input-group" style="width: 100%;">
+                        <label class="label ffe-font">&nbsp;</label>
+                        <select class="form-control input--style-4" style="" id="filterState" name="filterState">
+                            <option value="" selected hidden>Select State</option>
+                            @foreach ($filterValues['State'] as $values)
+                              <option value="{{$values['State']}}">{{$values['State']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-                <div class="col-lg-6 plr-0">
-                  <button class="btn button-bg-green" style="padding: 0px;width: 130px;height: 40px" type="button"
-                  id="resetFilter">Reset</button>
+                <div class="col-lg-3 pright-0">
+                    <div class="input-group">
+                        <label class="label ffe-font">Expiry Time</label>
+                        <select class="form-control input--style-4" style="" id="filterExpTime" name="filterExpTime">
+                            <option value="" selected hidden>Select Time</option>
+                            <option value="1">Less than 1 hour</option>
+                            <option value="2">Less than 2 hour</option>
+                            <option value="3">Less than 3 hour</option>
+                            <option value="4">Less than 4 hour</option>
+                        </select>
+                    </div>
                 </div>
-              </div>
             </div>
+            <div class="col-lg-12" style="margin-bottom: 30px">
 
-          </div>
+                <div class="col-lg-3 pright-0">
+                    <div class="input-group col-lg-12">
+                        <label class="label ffe-font">Minimum Food Count</label>
+                        <input class="input--style-4" style="padding-right: 0px;" min="1" type="number" name="filterFoodCount" id="filterFoodCount" value="">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 pright-0">
+                    <div class="input-group">
+                        <label class="label ffe-font">Veg/Non-Veg</label>
+                        <div class="p-t-10">
+                            <label class="radio-container mr-30 ffe-font">Veg
+                                <input type="radio" name="filterVegFlag" value="Veg">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-container ffe-font">Non-Veg
+                                <input type="radio" name="filterVegFlag" value="Non-Veg">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 pright-0">
+                    <div class="input-group">
+                        <label class="label ffe-font">Restaurent/Event</label>
+                        <div class="p-t-10">
+                            <label class="radio-container mr-30 ffe-font">Restaurant
+                                <input type="radio" name="filterType" value="Restaurant">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-container ffe-font">Event
+                                <input type="radio" name="filterType" value="Event">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 pright-0" style="padding-top: 28px;">
+                    <div class="input-group col-lg-12">
+                        <div class="col-lg-6 plr-0">
+                            <button class="btn button-bg-green" style="padding: 0px;width: 130px;height: 40px"
+                                type="button" id="filterbtn">Filter</button>
+                        </div>
+                        <div class="col-lg-6 plr-0">
+                            <button class="btn button-bg-green" style="padding: 0px;width: 130px;height: 40px"
+                                type="button" id="resetFilter">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </form>
 
     </div>
@@ -198,7 +203,6 @@
         </table>
     </div>
 </div>
-@include('templates.defaultModal',['title' => "Error!", 'message' => "Please provide any filters to search."])
 
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script type="text/javascript" charset="utf8"
@@ -208,21 +212,19 @@
     $(document).ready(function () {
 
         fillDatatable();
-
-        function fillDatatable(filterCity='',filterDistrict='',filterState='',filterExpTime='',filterFoodCount='',filterVegFlag='',filterType='') {
+        $('.dataTables_empty').html('No data available');
+          function fillDatatable(filterValues) {
             var dataTable = $('#availableFoodsTable').dataTable({
+                "oLanguage": {
+                    "sEmptyTable": "No foods have been added today."
+                },
                 processing: true,
                 serverSide: true,
                 ajax: {
                     url: "{{ route('availableFoodListFilter') }}",
                     data: {
-                      filterCity      :filterCity,            
-                      filterDistrict  :filterDistrict,    
-                      filterState     :filterState,          
-                      filterExpTime   :filterExpTime,      
-                      filterFoodCount :filterFoodCount,  
-                      filterVegFlag   :filterVegFlag,      
-                      filterType      :filterType         
+                      filterValues : filterValues
+                    }
                 },
                 columns: [{
                         data: 'FirstName',
@@ -268,45 +270,43 @@
             });
         }
 
+
         $('#filterbtn').click(function () {
+            var filterValues = {
+            filterCity        : $('#filterCity').val(),
+            filterDistrict    : $('#filterDistrict').val(),
+            filterState       : $('#filterState').val(),
+            filterExpTime     : $('#filterExpTime').val(),
+            filterFoodCount   : $('#filterFoodCount').val(),
+            filterType        : $('input[name="filterType"]:checked').val(),
+            filterVegFlag     : $('input[name="filterVegFlag"]:checked').val()
+            };
 
-            var filterCity        = $('#filterCity').val();
-            var filterDistrict    = $('#filterDistrict').val();
-            var filterState       = $('#filterState').val();
-            var filterExpTime     = $('#filterExpTime').val();
-            var filterFoodCount   = $('#filterFoodCount').val();
-            var filterVegFlag     = $('#filterVegFlag').val();
-            var filterType        = $('#filterType').val();
-
-            if (
-              filterCity      != '' ||
-              filterDistrict  != '' ||
-              filterState     != '' ||
-              filterExpTime   != '' ||
-              filterFoodCount != '' ||
-              filterVegFlag   != '' ||
-              filterType      != ''
-              ){
-                $('#availableFoodsTable').DataTable().destroy();
-                fillDatatable(filterCity,filterDistrict,filterState,filterExpTime,filterFoodCount,filterVegFlag,filterType);
-              } else {
-                  jQuery.noConflict();
-                  $('#defaultModal').modal('show');
-              }
+            $('#availableFoodsTable').DataTable().destroy();
+            fillDatatable(filterValues);
         });
 
-        $('#resetFilter').click(function(){
+        $('#resetFilter').click(function () {
             $('#filterCity').val('');
             $('#filterDistrict').val('');
             $('#filterState').val('');
             $('#filterExpTime').val('');
             $('#filterFoodCount').val('');
-            $('#filterVegFlag').val('');
-            $('#filterType').val('');
+            $('input[type="radio"]').prop('checked', false); 
 
             $('#availableFoodsTable').DataTable().destroy();
             fillDatatable();
         });
+
+      if(
+        $('#filterDistrict option').length  == 1 &&
+        $('#filterState option').length     == 1 &&
+        $('#filterCity option').length      == 1 
+      ){
+
+        $('#filterDistrict,#filterState,#filterCity').append($("<option disabled>None</option>"));
+      }
+
 
     });
 

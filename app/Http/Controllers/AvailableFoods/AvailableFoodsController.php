@@ -16,9 +16,19 @@ class AvailableFoodsController extends Controller
   public function availableFoodsView(){
     Session::put('activeTab', 'AVAILABLE FOODS');
 
-    $availableFoods = AvailableFoods::orderBy('CreatedDate','desc')->get();
+    //Delete the foods where the expiry time specified by the user is over.
+      // AvailableFoods::where('ExpiryTime', '<=', date('Y-m-d H:i:s'))->delete();
 
-    return view('availableFoods/availableFoods',compact('availableFoods'));
+    $availableFoods        = AvailableFoods::orderBy('CreatedDate','desc')->get();
+
+    // To get filter dropdown values from AvailableFoods table.
+      $filterValues = [
+        "City"     => AvailableFoods::select('City')->distinct()->get(),
+        "State"    => AvailableFoods::select('State')->distinct()->get(),
+        "District" => AvailableFoods::select('District')->distinct()->get(),
+      ];
+
+    return view('availableFoods/availableFoods',compact('availableFoods','filterValues'));
   }
 
   public function addAvailableFoodsView(){
@@ -50,37 +60,41 @@ class AvailableFoodsController extends Controller
   }
 
   public function availableFoodListFilter() {
+    $filterValues =  Request::get('filterValues');
+    $data = DB::table('availableFoods')
+                ->where(function($query)use($filterValues){ 
 
-    if( !empty( Request::get('filterDistrict') ) )
-    {
-      $data = DB::table('availableFoods')
-              ->select('FirstName', 'LastName', 'TypeOfDonation', 'RestaurantName', 'Phone', 'District','State','City','EditedDate')
-              ->where('District', Request::get('filterDistrict'))
-              ->get();
+                    if (isset($filterValues['filterCity']) && $filterValues['filterCity'] != null && $filterValues['filterCity'] != "") {  
+                      $query->where('City',$filterValues['filterCity']);
+                    }
+                    
+                    if(isset($filterValues['filterDistrict']) && $filterValues['filterDistrict'] != null && $filterValues['filterDistrict'] != "") {
+                      $query->where('District', $filterValues['filterDistrict']);
+                    }
 
-                  // $PickupChargesLocation = DB::table('rs-settings-airpickup-cost')
-                  //               ->where(function($query)use($customsearch){ 
-                  //                   if (isset($customsearch['cityName']) && $customsearch['cityName'] != null && $customsearch['cityName'] != "") {  
-                  //                     $query->where('CityName',$customsearch['cityName']);
-                  //                   }
-                  //                   if(isset($customsearch['zipCode']) && $customsearch['zipCode'] != null && $customsearch['zipCode'] != "") {
-                  //                     $query->where('ZipCode', $customsearch['zipCode']);
-                  //                   } 
-                  //                 })
-                  //                 ->orderby('CityName','Asc')
-                  //                 ->select([ 'AirPickupCostPID',
-                  //                           'PickUpLocation',
-                  //                           'ZipCode',
-                  //                           'Commodity',
-                  //                           'CityName'
-                  //                           ])
-                  //                 ->paginate($length)
-                  //                 ->toArray();
-    }
-    else
-    {
-      $data = DB::table('availableFoods')
-            ->select('FirstName',
+                    if(isset($filterValues['filterState']) && $filterValues['filterState'] != null && $filterValues['filterState'] != "") {
+                      $query->where('State', $filterValues['filterState']);
+                    }
+
+                    if(isset($filterValues['filterExpTime']) && $filterValues['filterExpTime'] != null && $filterValues['filterExpTime'] != "") {
+                      $query->where('ExpiryTime','<=', date("Y-m-d H:i:s", strtotime('+'.$filterValues['filterExpTime'].' hours')));
+                    }
+
+                    if(isset($filterValues['filterType']) && $filterValues['filterType'] != null && $filterValues['filterType'] != "") {
+                      $query->where('TypeOfDonation', $filterValues['filterType']);
+                    }
+
+                    if(isset($filterValues['filterFoodCount']) && $filterValues['filterFoodCount'] != null && $filterValues['filterFoodCount'] != "") {
+                      $query->where('FoodCount','>=', $filterValues['filterFoodCount']);
+                    }
+
+                    if(isset($filterValues['filterVegFlag']) && $filterValues['filterVegFlag'] != null && $filterValues['filterVegFlag'] != "") {
+                      $query->where('VegNonVeg', $filterValues['filterVegFlag']);
+                    }
+
+                  })
+                  ->orderby('EditedDate','desc')
+                  ->select('FirstName',
                     'LastName',
                     'TypeOfDonation',
                     'VegNonVeg',
@@ -93,19 +107,18 @@ class AvailableFoodsController extends Controller
                     'FoodCount',
                     'EditedDate'
                     )
-            ->get();
+                  ->get();
 
-      foreach($data as $dataEach){
+    foreach($data as $dataEach){
 
-        $dataEach->Location   = $dataEach->City.", ".$dataEach->District.", ".$dataEach->State;
-        $dataEach->AddedDate  = date('d-M-Y', strtotime($dataEach->EditedDate));
-        $dataEach->ExpiryTime = date('h:i A', strtotime($dataEach->ExpiryTime));
+      $dataEach->Location   = $dataEach->City.", ".$dataEach->District.", ".$dataEach->State;
+      $dataEach->AddedDate  = date('d-M-Y', strtotime($dataEach->EditedDate));
+      $dataEach->ExpiryTime = date('h:i A', strtotime($dataEach->ExpiryTime));
 
-        if($dataEach->RestaurantName == ""){
-          $dataEach->RestaurantName = "Nil";
-        }
-
+      if($dataEach->RestaurantName == ""){
+        $dataEach->RestaurantName = "Nil";
       }
+
     }
 
     return DataTables::of($data)->make(true);
