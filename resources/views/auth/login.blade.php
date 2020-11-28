@@ -158,18 +158,18 @@
                 </div>
 
                 <div class="card-body" style="margin-top: 15px;">
-                    <form method="POST" name="login" action="{{ route('login') }}" aria-label="Login">
+                    <form method="POST" name="login" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @csrf
                         <div class="form-group row">
                             <div class="col-md-12" style="display: flex;justify-content: center">
                               <div class="col-md-11">
-                                <input id="email" type="email"
-                                class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                name="loginEmail" value="{{ old('email') }}" required autofocus
+                                <input id="Email" type="Email"
+                                class="form-control{{ $errors->has('Email') ? ' is-invalid' : '' }}"
+                                name="Email" value="{{ old('Email') }}" required autofocus
                                 placeholder="Email">
-                                @if($errors->has('email'))
+                                @if($errors->has('Email'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('Email') }}</strong>
                                     </span>
                                 @endif
                               </div>
@@ -180,12 +180,12 @@
                         <div class="form-group row">
                             <div class="col-md-12" style="display: flex;justify-content: center;">
                               <div class="col-md-11">
-                                <input id="password" type="password"
-                                class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                name="loginPassword" required placeholder="Password">
-                                @if($errors->has('password'))
+                                <input id="Password" type="Password"
+                                class="form-control{{ $errors->has('Password') ? ' is-invalid' : '' }}"
+                                name="Password" required placeholder="Password">
+                                @if($errors->has('Password'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('Password') }}</strong>
                                     </span>
                                 @endif
                               </div>
@@ -324,7 +324,7 @@
                         <div class="col-md-7">
                             <input id="registerEmail" type="email"
                                 class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                name="email" value="{{ old('email') }}" required>
+                                name="newEmail" value="{{ old('email') }}" required>
 
                             @if($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
@@ -340,7 +340,7 @@
                         <div class="col-md-7">
                             <input id="registerPassword" type="password"
                                 class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                name="password" required>
+                                name="newPassword" required>
 
                             @if($errors->has('password'))
                                 <span class="invalid-feedback" role="alert">

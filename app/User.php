@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'Password', 'remember_token',
     ];
+
+   /**
+   * Get the password for the user.
+   *
+   * @return string
+   */
+  public function getAuthPassword()
+  {
+      return $this->Password;
+  }
 }

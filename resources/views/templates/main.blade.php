@@ -59,13 +59,51 @@
                         <div class="col-md-4 col-sm-4">
                             <div class="join-us">
                                 <p>
-                                  <a href="{{ route('login') }}">
+                                  {{--  <a href="{{ route('login') }}">
                                       @if($activeTab == 'LOGIN')
                                           <a href="{{ route('home') }}">Home</a>
                                       @else
                                           Sign Up / Login
                                       @endif
-                                  </a>
+                                  </a>  --}}
+
+                                  @guest
+                                      <a href="{{ route('login') }}">
+                                        @if($activeTab == 'LOGIN')
+                                            <a href="{{ route('home') }}">Home</a>
+                                        @else
+                                            Sign Up / Login
+                                        @endif
+                                      </a>
+                                  @else
+
+                                  {{--  <a href="{{ route('login') }}">
+                                    @if($activeTab == 'LOGIN')
+                                        <a href="{{ route('home') }}">Home</a>
+                                    @else
+                                        Sign Up / Login
+                                    @endif
+                                  </a>  --}}
+                                  
+                                      <li class="nav-item dropdown">
+                                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                              {{ Auth::user()->name }} <span class="caret"></span>
+                                          </a>
+
+                                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                              document.getElementById('logout-form').submit();">
+                                                  {{ __('Logout') }}
+                                              </a>
+
+                                              <form id="logout-form" action="{{ route('logout') }}"
+                                                  method="POST" style="display: none;">
+                                                  @csrf
+                                              </form>
+                                          </div>
+                                      </li>
+                                  @endguest
                                 </p>
                             </div>
                         </div>

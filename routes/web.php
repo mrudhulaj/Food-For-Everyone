@@ -2,9 +2,10 @@
 
 // Begin: Home Page
   Route::get('/', function () {
-      return view('home');
+      return view('homePage/home');
   });
-  Route::get('home', ['as' => 'home','uses' => 'Home\HomeController@HomeView']);
+  
+  Route::get('/home', ['as' => 'home','uses' => 'Home\HomeController@HomeView']);
 // End: Home Page
 
 // Begin: About Us
