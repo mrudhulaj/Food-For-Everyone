@@ -41,20 +41,7 @@
   Route::post('save-contact-us', ['as' => 'saveContactUs','uses' => 'ContactUs\ContactUsController@saveContactUs']);
 // End: Contact Us
 
-
-Route::get('/donation' ,'DonationController@FormDonation');
-
-Route::post('/insert-donation','DonationController@InsertDonation');
-
-Route::get('/otheritems','OtherItemsController@ViewData');
-
-Route::get('edit-donation/{id}','DonationController@EditData');
-
-Route::get('delete-donation/{id}','DonationController@DeleteData');
-
-Route::post('update-donation','DonationController@UpdateData');
-
-
+// Begin: Authentication
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('check-email-exist', ['as' => 'checkEmailExist','uses' => 'Auth\RegisterController@checkEmailExist']);
+// End:Authentication

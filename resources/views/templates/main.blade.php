@@ -244,8 +244,8 @@
         })();
 
         // Begin:To automatically fade and close alert messages
-        $(".alert").fadeTo(2000, 500).slideUp(500, function(){
-            $(".alert").slideUp(500);
+        $(".alert").fadeTo(2000, 1000).slideUp(1000, function(){
+            $(".alert").slideUp(1000);
         });
         // End:To automatically fade and close alert messages
 

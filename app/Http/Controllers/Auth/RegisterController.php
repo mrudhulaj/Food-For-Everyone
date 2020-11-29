@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Request;
+use Redirect;
+use Response;
 
 class RegisterController extends Controller
 {
@@ -40,40 +43,24 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function register()
     {
-        return Validator::make($data, [
-            'firstName'     => 'required|string|max:255',
-            'lastName'      => 'required|string|max:255',
-            'email'         => 'required|string|email|max:255|unique:users',
-            'password'      => 'required|string|min:6|confirmed',
-            'typeOfAccount' => 'required|string|max:255',
-            'mobileNumber'  => 'required|integer|max:255',
-        ]);
+      $user                   = new User();
+      $user->FirstName        = Request::get('firstName');
+      $user->LastName         = Request::get('lastName');
+      $user->Phone            = Request::get('phone');
+      $user->TypeOfAccount    = Request::get('typeOfAccount');
+      $user->Email            = Request::get('newEmail');
+      $user->Password         = Hash::make(Request::get('newPassword'));
+      $user->save();
+
+      return Redirect::back()->with('status','User added successfully, please login to continue.');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return "ok";
-        return User::create([
-            'FirstName'         => $data['firstName'],
-            'LastName'          => $data['lastName'],
-            'Email'             => $data['email'],
-            'MobileNumber'      => $data['mobileNumber'],
-            'Password'          => Hash::make($data['password']),
-            'TypeOfAccount'     => $data['typeOfAccount'],
-        ]);
+    public function checkEmailExist(){
+      $emailExist = User::where('Email',Request::get('newEmail'))->get();
+      $emailExists = count($emailExist)>0 ? true : false;
+
+      return Response::json($emailExists);
     }
 }

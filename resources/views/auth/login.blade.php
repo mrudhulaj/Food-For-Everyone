@@ -144,6 +144,7 @@
 </style>
 @section('content')
 <div class="container">
+  @include('templates.alertSuccessMessage')
     <div class="row justify-content-center">
         <div class="col-md-4" style="margin-bottom: 50px;">
             <div style="text-align: center;">
@@ -192,7 +193,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row" style="margin-top: 25px;">
+                        {{--  <div class="form-group row" style="margin-top: 25px;">
                             <div class="col-md-12" style="display: flex;justify-content: center">
                                 <div class="form-check">
                                     <label class="checkbox-container">
@@ -205,9 +206,9 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div>  --}}
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0" style="margin-top: 30px;">
                             <div class="col-md-12" style="display: flex;justify-content: center">
                                 <button type="submit" class="button-bg-green btn btn-primary"
                                     style="padding: 0px;width: 80%;height: 40px">
@@ -255,7 +256,7 @@
             </div>
             <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
                 <form method="POST" action="{{ route('register') }}" aria-label="Register"
-                    name="register">
+                    name="register" id="register">
                     @csrf
 
                     <div class="form-group row">
@@ -265,12 +266,6 @@
                             <input id="firstName" type="text"
                                 class="form-control{{ $errors->has('FirstName') ? ' is-invalid' : '' }}"
                                 name="firstName" value="{{ old('FirstName') }}" required autofocus>
-
-                            @if($errors->has('FirstName'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('FirstName') }}</strong>
-                                </span>
-                            @endif
                         </div>
                     </div>
 
@@ -281,27 +276,15 @@
                             <input id="lastName" type="text"
                                 class="form-control{{ $errors->has('LastName') ? ' is-invalid' : '' }}"
                                 name="lastName" value="{{ old('LastName') }}" required autofocus>
-
-                            @if($errors->has('LastName'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('LastName') }}</strong>
-                                </span>
-                            @endif
                         </div>
                     </div>
 
                     <div class="form-group row">
-                      <label for="mobileNumber" class="col-md-5 col-form-label text-md-right">Mobile Number</label>
+                      <label for="phone" class="col-md-5 col-form-label text-md-right">Phone</label>
 
                       <div class="col-md-7">
-                          <input id="mobileNumber" name="mobileNumber" type="text"
+                          <input id="phone" name="phone" maxlength="10" minlength="10" type="text"
                               class="form-control" required autofocus>
-
-                          @if($errors->has('MobileNumber'))
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $errors->first('MobileNumber') }}</strong>
-                              </span>
-                          @endif
                       </div>
                     </div>
 
@@ -309,7 +292,7 @@
                         <label for="" class="col-md-5 col-form-label text-md-right">Type</label>
 
                         <div class="col-md-7">
-                            <select class="form-control" name="typeOfAccount" id="typeOfAccount">
+                            <select class="form-control" name="typeOfAccount" id="typeOfAccount" style="height: 34px !important;">
                                 <option hidden selected="" value="">Select</option>
                                 <option value="Volunteer">Volunteer</option>
                                 <option value="Donater">Donater</option>
@@ -319,34 +302,23 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="email" class="col-md-5 col-form-label text-md-right">E-Mail Address</label>
+                        <label for="newEmail" class="col-md-5 col-form-label text-md-right">E-Mail Address</label>
 
                         <div class="col-md-7">
-                            <input id="registerEmail" type="email"
-                                class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                name="newEmail" value="{{ old('email') }}" required>
-
-                            @if($errors->has('email'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                            @endif
+                            <input id="newEmail" type="email"
+                                class="form-control{{ $errors->has('newEmail') ? ' is-invalid' : '' }}"
+                                name="newEmail" value="{{ old('newEmail') }}" required>
+                                <label id="newEmailExist-error" style="color: #0a6511;" for="newEmail"></label>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="password" class="col-md-5 col-form-label text-md-right">Password</label>
+                        <label for="newPassword" class="col-md-5 col-form-label text-md-right">Password</label>
 
                         <div class="col-md-7">
-                            <input id="registerPassword" type="password"
-                                class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                            <input id="newPassword" type="password" data-rule-password="true"
+                                class="form-control{{ $errors->has('newPassword') ? ' is-invalid' : '' }}"
                                 name="newPassword" required>
-
-                            @if($errors->has('password'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
                         </div>
                     </div>
 
@@ -355,14 +327,14 @@
                             Password</label>
 
                         <div class="col-md-7">
-                            <input id="confirmPassword" type="password" class="form-control" name="confirmPassword"
+                            <input id="confirmPassword" data-rule-password="true" data-rule-equalTo="#newPassword" type="password" class="form-control" name="confirmPassword"
                                 required>
                         </div>
                     </div>
 
                     <div class="form-group row mb-0" style="text-align: right">
                         <div class="col-md-12">
-                            <button id="register" type="submit" class="btn btn-primary button-bg-green"
+                            <button id="registerbtn" type="button" class="btn btn-primary button-bg-green"
                                 style="padding: 6px 12px;border-radius: 4px;">
                                 Register
                             </button>
@@ -386,8 +358,31 @@
 <script>
     $(document).ready(function () {
 
-      // Login Form validation
+      // Check if email already exist, else submit the registration form.
+      $('#registerbtn').on('click', function() {
+          var isFormValid = $("#register").valid();
+          console.log("is valid = "+isFormValid);
+            if(isFormValid == true){
+              $.ajax({
+                  url:'{{ route("checkEmailExist") }}',
+                  type:'GET',
+                  data:{
+                    newEmail : $("#newEmail").val(),
+                  },
+                  success:function(data) {
+                    if(data == true){
+                      $('#newEmailExist-error').html("Email already exist. Click 'Forgot Password'");
+                      console.log("Email exist error");
+                    }
+                    else{
+                      $('#register').submit();
+                    }
+                  }
+              });
+            }
+      });
 
+      // Login Form validation
       $("form[name='login']").validate({
             rules: {
                 loginEmail: {
@@ -396,7 +391,7 @@
                 },
                 loginPassword: {
                     required: true,
-                    minlength: 5
+                    minlength: 8
                 }
             },
             messages: {
@@ -420,8 +415,10 @@
                     required: true,
                     email: true
                 },
-                mobileNumber: {
+                phone: {
                     required: true,
+                    minlength: 10,
+                    maxlength:10,
                     number:true
                 },
                 typeOfAccount: {
@@ -429,11 +426,11 @@
                 },
                 password: {
                     required: true,
-                    minlength: 5
+                    minlength: 8
                 },
                 confirmPassword: {
                     required: true,
-                    minlength: 5
+                    minlength: 8
                 },
             },
             messages: {
@@ -442,9 +439,10 @@
                 typeOfAccount: {
                     required: "Please select an account type",
                 },
-                mobileNumber: {
+                phone: {
                     required: "Please enter your mobile number",
-                    number:"Please enter numbers only"
+                    number:"Please enter numbers only",
+                    minlength: "Please enter valid number with 10 digits",
                 },
                 password: {
                     required: "Please provide a password",
@@ -452,7 +450,8 @@
                 },
                 confirmPassword: {
                     required: "Please confirm password",
-                    minlength: "Your password must be at least 5 characters long"
+                    minlength: "Your password must be at least 5 characters long",
+                    equalTo: "Please enter the same password as above"
                 },
                 email: "Please enter a valid email address"
             },
