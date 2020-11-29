@@ -1,10 +1,7 @@
 <?php
 
 // Begin: Home Page
-  Route::get('/', function () {
-      return view('homePage/home');
-  });
-  
+  Route::get('/', 'Home\HomeController@HomeView');
   Route::get('/home', ['as' => 'home','uses' => 'Home\HomeController@HomeView']);
 // End: Home Page
 

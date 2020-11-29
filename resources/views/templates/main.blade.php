@@ -47,7 +47,7 @@
     <div class="wrapper">
         <header class="header">
             <section class="header-top">
-                <div class="container">
+                <div class="container pright-0" style="width: 100%">
                     <div class="row">
                         <div class="col-md-8 col-sm-8 col-xs-12">
                             <div class="contact">
@@ -56,16 +56,9 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-4 col-sm-4" style="text-align: end;">
                             <div class="join-us">
                                 <p>
-                                  {{--  <a href="{{ route('login') }}">
-                                      @if($activeTab == 'LOGIN')
-                                          <a href="{{ route('home') }}">Home</a>
-                                      @else
-                                          Sign Up / Login
-                                      @endif
-                                  </a>  --}}
 
                                   @guest
                                       <a href="{{ route('login') }}">
@@ -76,33 +69,22 @@
                                         @endif
                                       </a>
                                   @else
-
-                                  {{--  <a href="{{ route('login') }}">
-                                    @if($activeTab == 'LOGIN')
-                                        <a href="{{ route('home') }}">Home</a>
-                                    @else
-                                        Sign Up / Login
-                                    @endif
-                                  </a>  --}}
-                                  
-                                      <li class="nav-item dropdown">
-                                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                              {{ Auth::user()->name }} <span class="caret"></span>
-                                          </a>
-
-                                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                              document.getElementById('logout-form').submit();">
-                                                  {{ __('Logout') }}
+                                      <div class="dropdown" style="height: 50px;">
+                                        <button class="dropdown-toggle cust-login-btn" type="button" data-toggle="dropdown">
+                                          {{ Auth::user()->FirstName }}
+                                        <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" id="dmenu">
+                                          <li class="cust-login-li">
+                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                                  Logout
                                               </a>
-
                                               <form id="logout-form" action="{{ route('logout') }}"
                                                   method="POST" style="display: none;">
                                                   @csrf
                                               </form>
-                                          </div>
-                                      </li>
+                                          </li>
+                                        </ul>
+                                      </div>
                                   @endguest
                                 </p>
                             </div>
@@ -267,22 +249,26 @@
         });
         // End:To automatically fade and close alert messages
 
+        // Begin: To fix Login/Logout dropdown UI bug
+        $(".cust-login-btn").click(function(){
+          console.log("hi");
+          $("#dmenu").addClass("hide");
+        });
+        // End: To fix Login/Logout dropdown UI bug
 
         //Begin:Make navbar sticky
+          // window.onscroll = function() {myFunction()};
 
-        // window.onscroll = function() {myFunction()};
+          // var navbar = document.getElementById("navbar");
+          // var sticky = navbar.offsetTop;
 
-        // var navbar = document.getElementById("navbar");
-        // var sticky = navbar.offsetTop;
-
-        // function myFunction() {
-        // 	if (window.pageYOffset >= sticky) {
-        // 		navbar.classList.add("sticky")
-        // 	} else {
-        // 		navbar.classList.remove("sticky");
-        // 	}
-        // }
-
+          // function myFunction() {
+          // 	if (window.pageYOffset >= sticky) {
+          // 		navbar.classList.add("sticky")
+          // 	} else {
+          // 		navbar.classList.remove("sticky");
+          // 	}
+          // }
         // End: Make Navbar sticky
 
     </script>
