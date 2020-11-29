@@ -530,4 +530,21 @@
 </section>
 {{-- Main Content Ends --}}
 @include('templates.donationModal')
+@include('templates.defaultModal', ['title' => 'Logged Out','message' => 'You have successfully logged out.'])
 @stop
+
+<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+<script src="{{ asset('vendor/jquery-validation/dist/jquery.validate.min.js') }}" defer></script>
+<script>
+    $(document).ready(function () {
+
+      // Display Logged out modal after logging out
+      var authenticated = "{{Session::get('authenticated')}}";
+      if( authenticated == "false" ){
+        jQuery.noConflict();
+        $('#defaultModal').modal('show');
+        "{{Session::put('authenticated','')}}";
+      }
+    });
+    
+</script>

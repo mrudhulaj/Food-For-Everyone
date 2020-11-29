@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function HomeView(){
-        // return $user = Auth::user();
-        Session::put('activeTab', 'HOME');
-        return view('homePage/home');
+      Session::put('activeTab', 'HOME');
+      return view('homePage/home');
     }
 }

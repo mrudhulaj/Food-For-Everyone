@@ -75,9 +75,14 @@
                                         <span class="caret"></span></button>
                                         <ul class="dropdown-menu" id="dmenu">
                                           <li class="cust-login-li">
+                                            <a class="dropdown-item" href="#">
+                                              Profile
+                                            </a>
+                                          </li>
+                                          <li class="cust-login-li" style="border-top: 1px solid #00A348;">
                                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                                  Logout
-                                              </a>
+                                                Logout
+                                            </a>
                                               <form id="logout-form" action="{{ route('logout') }}"
                                                   method="POST" style="display: none;">
                                                   @csrf
@@ -243,20 +248,17 @@
             s.parentNode.insertBefore(ga, s);
         })();
 
-        // Begin:To automatically fade and close alert messages
+        // To automatically fade and close alert messages
         $(".alert").fadeTo(2000, 1000).slideUp(1000, function(){
             $(".alert").slideUp(1000);
         });
-        // End:To automatically fade and close alert messages
 
-        // Begin: To fix Login/Logout dropdown UI bug
+        // To fix Login/Logout dropdown UI bug
         $(".cust-login-btn").click(function(){
-          console.log("hi");
           $("#dmenu").addClass("hide");
         });
-        // End: To fix Login/Logout dropdown UI bug
 
-        //Begin:Make navbar sticky
+        // Make navbar sticky
           // window.onscroll = function() {myFunction()};
 
           // var navbar = document.getElementById("navbar");
@@ -269,7 +271,6 @@
           // 		navbar.classList.remove("sticky");
           // 	}
           // }
-        // End: Make Navbar sticky
 
     </script>
 </body>
