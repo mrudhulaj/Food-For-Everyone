@@ -13,4 +13,10 @@ class HomeController extends Controller
       Session::put('activeTab', 'HOME');
       return view('homePage/home');
     }
+
+    public function adminHome(){
+      Auth::check() ? Session::put('user', Auth::user()->FirstName) : Session::put('user',"");
+      Session::put('activeTab', 'DASHBOARD');
+      return view('homePage/adminDashboard');
+    }
 }

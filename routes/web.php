@@ -3,6 +3,7 @@
 // Begin: Home Page
   Route::get('/', 'Home\HomeController@HomeView');
   Route::get('/home', ['as' => 'home','uses' => 'Home\HomeController@HomeView']);
+  Route::get('/admin-home', ['as' => 'adminHome','uses' => 'Home\HomeController@adminHome']);
 // End: Home Page
 
 // Begin: About Us

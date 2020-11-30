@@ -116,7 +116,8 @@
                             </div>
                             <div class="col-md-9 col-sm-12 col-xs-12">
                                 <div class="menu">
-                                    <ul class="nav navbar-nav">
+                                    {{--  Admin & Non admin users items  --}}
+                                    <ul id="nonAdminMenu" class="nav navbar-nav @if(Session::get('user')=="Admin") hide @endif">
                                         <li class=" @if($activeTab == 'HOME') active-nav @endif ">
                                             <a href="{{ route('home') }}">HOME</a>
                                         </li>
@@ -139,6 +140,34 @@
                                         <li class=" @if($activeTab == 'CONTACT') active-nav @endif ">
                                             <a href="{{ route('contactUsView') }}">CONTACT</a>
                                         </li>
+                                        <li style="width: 25px;" class="@if(Session::get('user')!="Admin") hide @endif">
+                                          <a href="javascript:void(0)" id="nonAdminMenuToggle">
+                                            <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                                          </a>
+                                        </li>
+                                    </ul>
+                                    {{--  Admin exclusive items  --}}
+                                    <ul class="nav navbar-nav @if(Session::get('user')!="Admin") hide @endif" id="adminMenu">
+                                      <li class=" @if($activeTab == 'DASHBOARD') active-nav @endif ">
+                                          <a href="#">DASHBOARD</a>
+                                      </li>
+                                      <li class=" @if($activeTab == 'REPORTS') active-nav @endif ">
+                                          <a href="#">REPORTS</a>
+                                      </li>
+                                      <li class=" @if($activeTab == 'PERMISSIONS') active-nav @endif">
+                                          <a href="#">PERMISSIONS</a>
+                                      </li>
+                                      <li class=" @if($activeTab == 'APPROVALS') active-nav @endif ">
+                                          <a href="#">APPROVALS</a>
+                                      </li>
+                                      <li class=" @if($activeTab == 'CONTACT') active-nav @endif ">
+                                          <a href="#">CONTACT</a>
+                                      </li>
+                                      <li style="width: 25px;">
+                                        <a href="javascript:void(0)" id="adminMenuToggle">
+                                          <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
+                                        </a>
+                                      </li>
                                     </ul>
                                 </div>
                             </div>
@@ -261,6 +290,12 @@
         $(".cust-login-btn").click(function(){
           $("#dmenu").addClass("hide");
         });
+
+        // To toggle Admin and Non Admin menu items
+        $("#adminMenuToggle,#nonAdminMenuToggle").click(function () {
+          $('#adminMenu').toggleClass("hide");
+          $('#nonAdminMenu').toggleClass("hide");
+        })
 
         // Make navbar sticky
           // window.onscroll = function() {myFunction()};
