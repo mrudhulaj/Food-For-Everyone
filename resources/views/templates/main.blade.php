@@ -71,8 +71,12 @@
                                   @else
                                       <div class="dropdown" style="height: 50px;">
                                         <button class="dropdown-toggle cust-login-btn" type="button" data-toggle="dropdown">
-                                          {{ Auth::user()->FirstName }}
-                                        <span class="caret"></span></button>
+                                          <div style="width: 100%;" class="col-lg-12">
+                                            <i style="font-size: 20px;" class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                            {{ Auth::user()->FirstName }}
+                                            <span class="caret"></span>
+                                          </div>
+                                      </button>
                                         <ul class="dropdown-menu" id="dmenu">
                                           <li class="cust-login-li">
                                             <a class="dropdown-item" href="#">
@@ -147,7 +151,7 @@
         @yield('content')
         {{-- Main Content Ends --}}
 
-        <footer class="footer" @if($activeTab == 'LOGIN') style="display: none;" @endif>
+        <footer class="footer" @if($activeTab == 'LOGIN' || Session::get('user')=="Admin" ) style="display: none;" @endif>
             <div class="container">
               {{--  <footer class="footer" >  --}}
                 {{--  <div class="container" >  --}}
@@ -222,8 +226,8 @@
                     Act, 1961.
                 </p>
             </div>
+          </div>
         </footer>
-    </div>
 
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('js/active.js') }}"></script>

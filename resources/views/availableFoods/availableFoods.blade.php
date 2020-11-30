@@ -61,10 +61,14 @@
 <div class="container">
     @include('templates.alertSuccessMessage')
     <section>
-        <h2 style="margin-top: 0px;padding-left: 100px;">
+        <h2 style="margin-top: 0px;padding-left: 115px;">
             Waiting for you to pick up!
-            <button class="btn button-bg-green" style="padding: 0px;width: 100px;height: 40px;float: right">
-                <a class="a-none" href="{{ route('addAvailableFoodsView') }}">Add Food</a>
+            <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right">
+              @guest
+                <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Donate Food</a>
+              @else
+                <a class="a-none" href="{{ route('addAvailableFoodsView') }}">Donate Food</a>
+              @endguest
             </button>
         </h2>
         <p>Here we list out the food's contributed by our user's and partner's.We make sure that these items comply
@@ -203,7 +207,7 @@
         </table>
     </div>
 </div>
-
+@include('templates.defaultModal', ['title' => 'Login Required','message' => 'Please login or sign up to continue.'])
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script type="text/javascript" charset="utf8"
     src="{{ asset('vendor/datatables.net/js/jquery.dataTables.min.js') }}" defer>

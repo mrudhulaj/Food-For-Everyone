@@ -123,14 +123,16 @@
         @include('templates.alertSuccessMessage')
     </div>
     <section>
-        <h2 style="margin-top: 0px;padding-left: 145px;">
+        <h2 style="margin-top: 0px; @if( Auth::check()) padding-left: 145px; @endif">
             We are expanding our reach!
+            @if( Auth::check())
                 <a class="a-none" href="{{ route('addCauseView') }}">
                   <button class="btn button-bg-green"
                   style="padding: 0px;width: 100px;height: 40px;float: right;margin-right: 60px;">
                     Add Cause
                 </button>
                 </a>
+            @endif
         </h2>
         <p>We are continously trying to expand our reach to different areas where people need support to help build a
             better future.

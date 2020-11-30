@@ -29,7 +29,13 @@
         UPCOMING EVENTS
         <button class="btn button-bg-green"
             style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">
-            <a class="a-none" href="{{ route('addEventView') }}">Add Event</a>
+            <a class="a-none" 
+             @guest 
+              href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal"
+             @else 
+              href="{{ route('addEventView') }}"
+             @endguest>Add Event
+            </a>
         </button>
     </h2>
     <p>Missed our previous events? Don't worry, we have plenty of them coming up!</p>
@@ -73,4 +79,5 @@
         </div>
     </div>
 </section>
+@include('templates.defaultModal', ['title' => 'Login Required','message' => 'Please login or sign up to continue.'])
 @stop

@@ -41,10 +41,20 @@
   <div class="container" style="padding: 0px 10px 0px 10px;">
     @include('templates.alertSuccessMessage')
   </div>
-    <h2 style="margin-top: 0px;padding-left: 170px;">
+    <h2 style="margin-top: 0px;padding-left: 232px;">
       Our volunteers
-      <button class="btn button-bg-green" style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">
-        <a class="a-none" href="{{ route('addVolunteerView') }}">Add Volunteer</a>
+      <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
+          @guest
+            <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Become A Volunteer</a>
+          @else
+            <a class="a-none" href="{{ route('addVolunteerView') }}">
+              @if(Session::get('user')=="Admin")
+                Add Volunteer
+              @else
+                Become A Volunteer
+              @endif
+            </a>
+          @endguest
       </button>
     </h2>
     <p>Meet our superhero's.The people who bring joy to our kids and elders.The silent warriors.</p>
@@ -80,6 +90,7 @@
   @endforeach
 </div>
 @include('templates.custom-scripts')
+@include('templates.defaultModal', ['title' => 'Login Required','message' => 'Please login or sign up to continue.'])
 <script>
   // To dynamically set Occup,Links etc to same height if name height differ
    $(document).ready(function () {
