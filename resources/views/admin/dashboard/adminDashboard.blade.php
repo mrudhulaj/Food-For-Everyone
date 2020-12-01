@@ -73,19 +73,6 @@
                     </div>
                     <div class="text col-lg-7 plr-0" style="height: 178px;">
                         <h3 class="vNames">Donations</h3>
-                        <h6 class="">Engineer</h6>
-                        <p>With us since 2015</p>
-                        <h5 style="" class="">
-                            <a href="#">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa fa-behance" aria-hidden="true"></i>
-                            </a>
-                        </h5>
                     </div>
                 </div>
             </div>
@@ -99,19 +86,6 @@
                     </div>
                     <div class="text col-lg-7 plr-0" style="height: 178px;">
                         <h3 class="vNames">Foods Added</h3>
-                        <h6 class="">Engineer</h6>
-                        <p>With us since 2015</p>
-                        <h5 style="" class="">
-                            <a href="#">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa fa-behance" aria-hidden="true"></i>
-                            </a>
-                        </h5>
                     </div>
                 </div>
             </div>
@@ -125,19 +99,6 @@
                     </div>
                     <div class="text col-lg-7 plr-0" style="height: 178px;">
                         <h3 class="vNames">Causes</h3>
-                        <h6 class="">Engineer</h6>
-                        <p>With us since 2015</p>
-                        <h5 style="" class="">
-                            <a href="#">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa fa-behance" aria-hidden="true"></i>
-                            </a>
-                        </h5>
                     </div>
                 </div>
             </div>
@@ -154,19 +115,6 @@
                   </div>
                   <div class="text col-lg-7 plr-0" style="height: 178px;">
                       <h3 class="vNames">Volunteers</h3>
-                      <h6 class="">Engineer</h6>
-                      <p>With us since 2015</p>
-                      <h5 style="" class="">
-                          <a href="#">
-                              <i class="fa fa-facebook" aria-hidden="true"></i>
-                          </a>
-                          <a href="#">
-                              <i class="fa fa-twitter" aria-hidden="true"></i>
-                          </a>
-                          <a href="#">
-                              <i class="fa fa-behance" aria-hidden="true"></i>
-                          </a>
-                      </h5>
                   </div>
               </div>
           </div>
@@ -180,19 +128,6 @@
                   </div>
                   <div class="text col-lg-7 plr-0" style="height: 178px;">
                       <h3 class="vNames">Events</h3>
-                      <h6 class="">Engineer</h6>
-                      <p>With us since 2015</p>
-                      <h5 style="" class="">
-                          <a href="#">
-                              <i class="fa fa-facebook" aria-hidden="true"></i>
-                          </a>
-                          <a href="#">
-                              <i class="fa fa-twitter" aria-hidden="true"></i>
-                          </a>
-                          <a href="#">
-                              <i class="fa fa-behance" aria-hidden="true"></i>
-                          </a>
-                      </h5>
                   </div>
               </div>
           </div>
@@ -206,19 +141,6 @@
                   </div>
                   <div class="text col-lg-7 plr-0" style="height: 178px;">
                       <h3 class="vNames">Contact</h3>
-                      <h6 class="">Engineer</h6>
-                      <p>With us since 2015</p>
-                      <h5 style="" class="">
-                          <a href="#">
-                              <i class="fa fa-facebook" aria-hidden="true"></i>
-                          </a>
-                          <a href="#">
-                              <i class="fa fa-twitter" aria-hidden="true"></i>
-                          </a>
-                          <a href="#">
-                              <i class="fa fa-behance" aria-hidden="true"></i>
-                          </a>
-                      </h5>
                   </div>
               </div>
           </div>

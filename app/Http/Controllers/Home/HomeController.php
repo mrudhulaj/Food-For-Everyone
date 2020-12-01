@@ -17,6 +17,6 @@ class HomeController extends Controller
     public function adminHome(){
       Auth::check() ? Session::put('user', Auth::user()->FirstName) : Session::put('user',"");
       Session::put('activeTab', 'DASHBOARD');
-      return view('homePage/adminDashboard');
+      return view('admin/dashboard/adminDashboard');
     }
 }
