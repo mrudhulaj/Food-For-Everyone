@@ -1394,3 +1394,134 @@
       font-weight: 900 !important;
       background-color: transparent !important;
   }
+
+  .ffe-font-heading{
+    color: #3c354e;
+    font-family: "Roboto", sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  /* Table */
+
+  thead {
+      background-color: #00E660;
+  }
+
+  .pr-20 {
+      padding-right: 20px !important;
+  }
+
+  .pl-20 {
+      padding-left: 20px
+  }
+
+  .mr-20 {
+      margin-right: 20px !important;
+  }
+
+  .ml-20 {
+      margin-left: 20px
+  }
+
+  tr:nth-child(even) {
+      background-color: #f2f2f2;
+  }
+
+  td,
+  th {
+      text-align: center !important;
+  }
+
+  .mr-30 {
+      margin-right: 30px !important;
+  }
+
+  .mr-10 {
+      margin-right: 10px !important;
+  }
+
+      /*Begin: Custom checkbox */
+
+    /* The container */
+    .checkbox-container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: normal;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+  }
+
+  /* Hide the browser's default checkbox */
+  .checkbox-container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+  }
+
+  /* Create a custom checkbox */
+  .checkmark-cust {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 18px;
+      width: 18px;
+      background-color: #dfe5f7;
+      border-radius: 5px;
+  }
+
+  /* On mouse-over, add a grey background color */
+  .checkbox-container:hover input~.checkmark-cust {
+      background-color: #ccc;
+  }
+
+  /* When the checkbox is checked, add a blue background */
+  .checkbox-container input:checked~.checkmark-cust {
+      background-color: #00A348;
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark-cust:after {
+      content: "";
+      position: absolute;
+      display: none;
+  }
+
+  /* Show the checkmark when checked */
+  .checkbox-container input:checked~.checkmark-cust:after {
+      display: block;
+  }
+
+  /* Style the checkmark/indicator */
+  .checkbox-container .checkmark-cust:after {
+      left: 7px;
+      top: 3px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+  }
+
+  .modal-header {
+      background-color: #00E660;
+      color: black;
+      font-weight: bold;
+      border-radius: 13px 13px 0px 0px;
+  }
+
+  .form-group label {
+      font-weight: normal;
+  }
+
+  /* End: Custom checkbok */

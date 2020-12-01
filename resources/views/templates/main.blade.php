@@ -149,13 +149,13 @@
                                     {{--  Admin exclusive items  --}}
                                     <ul class="nav navbar-nav @if(Session::get('user')!="Admin") hide @endif" id="adminMenu">
                                       <li class=" @if($activeTab == 'DASHBOARD') active-nav @endif ">
-                                          <a href="#">DASHBOARD</a>
+                                          <a href="{{ route('adminDashboardView') }}">DASHBOARD</a>
                                       </li>
                                       <li class=" @if($activeTab == 'REPORTS') active-nav @endif ">
                                           <a href="#">REPORTS</a>
                                       </li>
                                       <li class=" @if($activeTab == 'PERMISSIONS') active-nav @endif">
-                                          <a href="#">PERMISSIONS</a>
+                                          <a href="{{ route('adminPermissionsView') }}">PERMISSIONS</a>
                                       </li>
                                       <li class=" @if($activeTab == 'APPROVALS') active-nav @endif ">
                                           <a href="#">APPROVALS</a>

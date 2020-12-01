@@ -31,12 +31,13 @@ class LoginController extends Controller
     // protected $redirectTo = '/home';
 
     public function redirectTo(){
+      Auth::check() ? Session::put('user', Auth::user()->FirstName) : Session::put('user',"");
 
       // User type
       $type = Auth::user()->TypeOfAccount; 
 
       if($type == "Admin"){ 
-        return '/admin-home';
+        return '/admin-dashboard';
       }
       else{
         return '/home';
@@ -56,6 +57,7 @@ class LoginController extends Controller
     public function logout(Request $request) {
       Auth::logout();
       Session::put('authenticated', 'false');
+      Auth::check() ? Session::put('user', Auth::user()->FirstName) : Session::put('user',"");
       return redirect()->route('home'); 
     }
 
