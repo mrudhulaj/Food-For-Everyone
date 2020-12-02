@@ -1,5 +1,5 @@
 @extends('templates.main')
-<title>Admin Home</title>
+<title>Permissions</title>
 <link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
 <style>
     .wrapper .events_section_area #cust-h2 {
@@ -15,13 +15,12 @@
     }
 
     .wrapper section>h2::before {
-        width: 160px !important;
+        width: 150px !important;
         left: 44% !important;
     }
 
     tr:nth-child(even) {
         background-color: transparent !important;
-        /* border: none !important; */
     }
 
     .checkbox-container {
@@ -30,12 +29,13 @@
 
 </style>
 @section('content')
-<section class="events_section_area">
-    <h2 id="cust-h2">
-        Permissions
-    </h2>
-</section>
 <div class="container plr-0">
+@include('templates.alertSuccessMessage')
+<section class="events_section_area">
+  <h2 id="cust-h2">
+      Permissions
+  </h2>
+</section>
     <div class="col-lg-12">
         <form action="{{ route('adminPermissionsSave') }}" id="permissions">
           @csrf
@@ -43,12 +43,12 @@
                 <div class="col-lg-6">
                     <div class="input-group">
                         <div class="p-t-10">
-                            <label class="radio-container mr-30 ffe-font-heading" style="color: #3c354e;">Volunteers
-                                <input type="radio" name="volOrUser" checked value="volunteer">
+                            <label class="radio-container mr-30 ffe-font-heading" style="color: #3c354e;">Volunteer
+                                <input type="radio" name="volOrUser" value="Volunteer">
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="radio-container ffe-font-heading" style="color: #3c354e;">Users
-                                <input type="radio" name="volOrUser" value="user">
+                            <label class="radio-container ffe-font-heading" style="color: #3c354e;">User
+                                <input type="radio" name="volOrUser" value="User">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -79,31 +79,31 @@
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="createCheckbox" name="createAvailFoods" id="" value="1">
+                                    <input type="checkbox" class="createCheckbox" name="createAvailableFoods" id="" value="1"  @if($role->hasPermissionTo('create AvailableFoods')) checked @endif>
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="createCheckbox" name="createCauses" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('create Causes')) checked @endif class="createCheckbox" name="createCauses" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="createCheckbox" name="createVolunteers" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('create Volunteers')) checked @endif class="createCheckbox" name="createVolunteers" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="createCheckbox" name="createEvents" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('create Events')) checked @endif class="createCheckbox" name="createEvents" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="createCheckbox" name="createContactMsgs" id="" value="1">
+                                    <input type="checkbox" class="createCheckbox" name="createContactMessages" id="" value="1" @if($role->hasPermissionTo('create ContactMessages')) checked @endif>
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
@@ -115,31 +115,31 @@
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="updateCheckbox" name="updateAvailFoods" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('update AvailableFoods')) checked @endif class="updateCheckbox" name="updateAvailableFoods" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="updateCheckbox" name="updateCauses" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('update Causes')) checked @endif class="updateCheckbox" name="updateCauses" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="updateCheckbox" name="updateVolunteers" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('update Volunteers')) checked @endif class="updateCheckbox" name="updateVolunteers" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="updateCheckbox" name="updateEvents" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('update Events')) checked @endif class="updateCheckbox" name="updateEvents" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="updateCheckbox" name="updateContactMsgs" id="" value="1">
+                                    <input type="checkbox" class="updateCheckbox" name="updateContactMessages" id="" value="1" @if($role->hasPermissionTo('update ContactMessages')) checked @endif>
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
@@ -151,31 +151,31 @@
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="deleteCheckbox" name="deleteAvailFoods" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('delete AvailableFoods')) checked @endif class="deleteCheckbox" name="deleteAvailableFoods" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="deleteCheckbox" name="deleteCauses" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('delete Causes')) checked @endif class="deleteCheckbox" name="deleteCauses" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="deleteCheckbox" name="deleteVolunteers" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('delete Volunteers')) checked @endif class="deleteCheckbox" name="deleteVolunteers" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="deleteCheckbox" name="deleteEvents" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('delete Events')) checked @endif class="deleteCheckbox" name="deleteEvents" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="deleteCheckbox" name="deleteContactMsgs" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('delete ContactMessages')) checked @endif class="deleteCheckbox" name="deleteContactMessages" id="" value="1">
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
@@ -188,7 +188,14 @@
 </div>
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
-    // Check or Uncheck all pages permissions.
+
+    // To load data,check/uncheck, for volunteer or user based on selection
+    $("input[name='volOrUser']").change(function () {
+
+      location.reload();
+    });
+
+    // Check or Uncheck all categories permissions.
     $('.actionBtn').click(function () {
         let action = $(this).text().toLowerCase();
         let checkbox = "." + action + "Checkbox";

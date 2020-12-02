@@ -7,46 +7,67 @@ use Session;
 use Illuminate\Support\Facades\Auth;
 use Request;
 use Response;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
 {
     public function adminPermissionsView(){
+      $role   = "Volunteer";
+      $role   = Role::select('id')->where('name',$role)->first();
+
       Session::put('activeTab', 'PERMISSIONS');
-      return view('admin/permissions/permissions');
+      return view('admin/permissions/permissions',compact('role'));
     }
 
     public function adminPermissionsSave(){
-      // $volOrUser    = Request::get('volOrUser');
+      $role                   = Role::select('id')->where('name',Request::get('volOrUser'))->first();
 
-      // return $AvailFoods   = (Request::get('createAvailFoods')) == 1 ? 1 : 0;
-      // $Causes       = Request::get('createCauses');
-      // $Volunteers   = Request::get('createVolunteers');
-      // $Events       = Request::get('createEvents');
-      // $ContactMsgs  = Request::get('createContactMsgs');
-      
-      $permissionsArray = [];
+      // Created an array for all possible combinations
+      $permission['Action']   = ["create","update","delete"];
+      $permission['Category'] = ["AvailableFoods","Causes","Volunteers","Events","ContactMessages"];
 
-      for($i=1; $i<=3; $i++){
+      // Iterate through each above created combination for each checkbox in blade
+      foreach($permission['Category'] as $permissionCategory){
+        foreach($permission['Action'] as $permissionAction){
+          $permissionItem = Permission::where('name',$permissionAction." ".$permissionCategory)->first();
 
-        if($i == 1){
-          $action = "create";
+          // If checkbox checked, give permission only if it's not already existing.
+          if(Request::get($permissionAction.$permissionCategory)){
+            if( !($role->hasPermissionTo($permissionAction." ".$permissionCategory)) ){
+              $role->givePermissionTo($permissionItem);
+            }
+          }
+          // If checkbox unchecked, revoke permission only if permission exist.
+          else{
+            if( $role->hasPermissionTo($permissionAction." ".$permissionCategory) ){
+              $role->revokePermissionTo($permissionItem);
+            }
+          }
+
         }
-        elseif($i == 2){
-          $action = "update";
-        }
-        else{
-          $action = "delete";
-        }
-
-        $permissionsArray[$action."AvailFoods"]   = (Request::get($action."AvailFoods")) == 1 ? "Checked" : "Unchecked";
-        $permissionsArray[$action."Causes"]       = (Request::get($action."Causes")) == 1 ? "Checked" : "Unchecked";
-        $permissionsArray[$action."Volunteers"]   = (Request::get($action."Volunteers")) == 1 ? "Checked" : "Unchecked";
-        $permissionsArray[$action."Events"]       = (Request::get($action."Events")) == 1 ? "Checked" : "Unchecked";
-        $permissionsArray[$action."ContactMsgs"]  = (Request::get($action."ContactMsgs")) == 1 ? "Checked" : "Unchecked";
       }
-      
-      echo("<pre>".print_r($permissionsArray,true)."</pre>");
 
+      return redirect()->route('adminPermissionsView')->with('status', 'Permissions Updated Successfully!');
     }
+
+    // public function adminPermissionValues(){
+    //   $role         = Role::select('id')->where('name',Request::get('volOrUser'))->first();
+
+    //   // Created an array for all possible combinations
+    //   $permission['Action']   = ["create","update","delete"];
+    //   $permission['Category'] = ["AvailableFoods","Causes","Volunteers","Events","ContactMessages"];
+
+    //     // Iterate through each above created combination for each checkbox in blade
+    //     foreach($permission['Category'] as $permissionCategory){
+    //       foreach($permission['Action'] as $permissionAction){
+  
+    //       }
+    //     }
+
+    //   '<input type="checkbox" class="createCheckbox" name="createAvailableFoods" id="" value="1" @if($volunteer->hasPermissionTo("create AvailableFoods")) checked @endif>';
+
+    //   return $role;
+    // }
 
 }

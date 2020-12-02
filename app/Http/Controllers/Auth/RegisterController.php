@@ -7,9 +7,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\Roles;
+use App\Models\Permissions;
 use Request;
 use Redirect;
 use Response;
+
 
 class RegisterController extends Controller
 {
@@ -53,6 +56,47 @@ class RegisterController extends Controller
       $user->Email            = Request::get('newEmail');
       $user->Password         = Hash::make(Request::get('newPassword'));
       $user->save();
+
+      // To create new user roles for the first time only.
+      $roles = ["Admin","Volunteer","User"];
+      foreach($roles as $rolesData){
+        Roles::firstOrCreate(['name' => $rolesData]);
+      }
+
+       // To create new permissions for the first time only.
+
+       $permissions = [
+         "create AvailableFoods",
+         "update AvailableFoods",
+         "delete AvailableFoods",
+         "create Causes",
+         "update Causes",
+         "delete Causes",
+         "create Volunteers",
+         "update Volunteers",
+         "delete Volunteers",
+         "create Events",
+         "update Events",
+         "delete Events",
+         "create ContactMessages",
+         "update ContactMessages",
+         "delete ContactMessages",
+      ];
+
+       foreach($permissions as $permissionsData){
+         Permissions::firstOrCreate(['name' => $permissionsData]);
+       }
+
+      //  To give all permissions to Admin for the first time only
+      $permission['Action']   = ["create","update","delete"];
+      $permission['Category'] = ["AvailableFoods","Causes","Volunteers","Events","ContactMessages"];
+      $role                   = Role::select('id')->where('name',"Admin")->first();
+      foreach($permission['Category'] as $permissionCategory){
+        foreach($permission['Action'] as $permissionAction){
+            $permissionItem = Permission::where('name',$permissionAction." ".$permissionCategory)->first();
+            $role->givePermissionTo($permissionItem);
+        }
+      }
 
       return Redirect::back()->with('status','User added successfully, please login to continue.');
     }
