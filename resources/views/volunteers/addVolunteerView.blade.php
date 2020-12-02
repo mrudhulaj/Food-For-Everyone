@@ -8,8 +8,8 @@
 
 <style>
     .wrapper section>h2::before {
-        width: 150px !important;
-        left: 44% !important;
+        width: 200px !important;
+        left: 43% !important;
     }
 
     .card {
@@ -38,7 +38,13 @@
 </style>
 @section('content')
 <section>
-    <h2 style="margin-top: 0px;">Add a volunteer</h2>
+    <h2 style="margin-top: 0px;">
+      @if(Session::get('user')=="Admin" || Session::get('user')=="Volunteer")
+      Add a Volunteer
+      @else
+        Become A Volunteer
+      @endif
+    </h2>
     <p>Please make sure the details provided including the mobile number and email are correct, so that we can inform
         the volunteer when they are needed with us.</p>
 </section>

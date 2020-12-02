@@ -7,14 +7,23 @@ use Session;
 use App\Models\Causes;
 use Request;
 use Illuminate\Support\Facades\Crypt;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Auth;
 
 class CausesController extends Controller
 {
     public function causesView(){
       Session::put('activeTab', 'CAUSES');
+      if(Auth::check()){
+        $role   = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
+      }else{
+        $role = "";
+      }
+
       $causes = Causes::orderBy('CreatedDate','desc')->get();
     
-      return view('causes/causes',compact('causes'));
+      return view('causes/causes',compact('causes','role'));
     }
 
     public function causesDetailsView(){

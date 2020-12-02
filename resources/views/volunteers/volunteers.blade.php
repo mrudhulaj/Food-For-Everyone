@@ -48,7 +48,7 @@
             <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Become A Volunteer</a>
           @else
             <a class="a-none" href="{{ route('addVolunteerView') }}">
-              @if(Session::get('user')=="Admin")
+              @if(Session::get('user')=="Admin" || Session::get('user')=="Volunteer")
                 Add Volunteer
               @else
                 Become A Volunteer

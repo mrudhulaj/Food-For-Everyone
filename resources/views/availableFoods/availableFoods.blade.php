@@ -220,7 +220,7 @@
           function fillDatatable(filterValues) {
             var dataTable = $('#availableFoodsTable').dataTable({
                 "oLanguage": {
-                    "sEmptyTable": "No foods have been added today."
+                    "sEmptyTable": "No foods found."
                 },
                 processing: true,
                 serverSide: true,

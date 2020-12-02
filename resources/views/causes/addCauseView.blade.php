@@ -161,6 +161,7 @@
       </div>
   </div>
 </div>
+@include('templates.defaultModal', ['title' => 'Approval Required !','message' => 'The cause added will be subject to admin approval.Please make sure the cause is genuine and you are willing to provide more details on request of admin.'])
 {{-- End :Confirmation Box --}}
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
@@ -176,6 +177,9 @@
   });
 
   $(document).ready(function () {
+      // Show Approval Required modal on page load itself.
+      jQuery.noConflict(); 
+      $('#defaultModal').modal('show');  
 
       // Add Cause form validation
       $("form[name='addCause']").validate({

@@ -126,11 +126,11 @@
         <h2 style="margin-top: 0px; @if( Auth::check()) padding-left: 145px; @endif">
             We are expanding our reach!
             @if( Auth::check())
-                <a class="a-none" href="{{ route('addCauseView') }}">
+                <a class="a-none" @if($role->hasPermissionTo('create Causes')) href="{{ route('addCauseView') }}"     @else href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal" @endif>
                   <button class="btn button-bg-green"
                   style="padding: 0px;width: 100px;height: 40px;float: right;margin-right: 60px;">
-                    Add Cause
-                </button>
+                  Add Cause
+                  </button>
                 </a>
             @endif
         </h2>
@@ -176,5 +176,6 @@
             @endforeach
             {{-- End: To be repeated content --}}
 @include('templates.donationModal')
+@include('templates.defaultModal', ['title' => 'Permission Denied !','message' => 'You do not have the required permission to add a cause.Please request to become a volunteer or contact admin for adding causes.'])
 </div>
 @stop
