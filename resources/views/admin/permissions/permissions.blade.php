@@ -36,21 +36,26 @@
       Permissions
   </h2>
 </section>
-    <div class="col-lg-12">
+    <div class="col-lg-12 plr-0">
         <form action="{{ route('adminPermissionsSave') }}" id="permissions">
           @csrf
-            <div class="col-lg-12">
+            <div class="col-lg-12 plr-0">
                 <div class="col-lg-6">
                     <div class="input-group">
                         <div class="p-t-10">
-                            <label class="radio-container mr-30 ffe-font-heading" style="color: #3c354e;">Volunteer
-                                <input type="radio" name="volOrUser" value="Volunteer">
+                          <label class="radio-container mr-30 ffe-font-heading" id="volunteerLabel" style="color: #3c354e;">Volunteer
+                            <input type="hidden" name="USER" value="{{$user}}">
+                              <a href="{{route('adminPermissionsView',["role" => "Volunteer"])}}">
+                                <input type="radio" name="volOrUser" @if($user == "Volunteer") checked @endif value="Volunteer">
                                 <span class="checkmark"></span>
+                              </a> 
                             </label>
-                            <label class="radio-container ffe-font-heading" style="color: #3c354e;">User
-                                <input type="radio" name="volOrUser" value="User">
+                            <label class="radio-container ffe-font-heading" id="userLabel" style="color: #3c354e;">User
+                              <a href="{{route('adminPermissionsView',["role" => "User"])}}">
+                                <input type="radio" name="volOrUser" value="User" @if($user == "User") checked @endif>
                                 <span class="checkmark"></span>
-                            </label>
+                              </a>
+                              </label>
                         </div>
                     </div>
                 </div>
@@ -59,7 +64,7 @@
                         id="volOrUserSave">Save</button>
                 </div>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12 plr-0">
                 <table class="table table-bordered" style="" id="availableFoodsTable">
                     <thead class="">
                         <tr>
@@ -188,13 +193,6 @@
 </div>
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
-
-    // To load data,check/uncheck, for volunteer or user based on selection
-    $("input[name='volOrUser']").change(function () {
-
-      location.reload();
-    });
-
     // Check or Uncheck all categories permissions.
     $('.actionBtn').click(function () {
         let action = $(this).text().toLowerCase();
@@ -205,6 +203,14 @@
         } else {
             $(checkbox).prop('checked', true);
         }
+    });
+
+    $('#volunteerLabel').click(function () {
+        window.location.href = "{{route('adminPermissionsView',['role' => 'Volunteer'])}}";
+    });
+
+    $('#userLabel').click(function () {
+        window.location.href = "{{route('adminPermissionsView',['role' => 'User'])}}";
     });
 
 </script>

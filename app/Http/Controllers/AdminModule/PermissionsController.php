@@ -13,15 +13,16 @@ use Spatie\Permission\Models\Permission;
 class PermissionsController extends Controller
 {
     public function adminPermissionsView(){
-      $role   = "Volunteer";
-      $role   = Role::select('id')->where('name',$role)->first();
+      $user   = Request::has("role") ? Request::get('role') : "Volunteer";
+      $role   = Role::select('id')->where('name',$user)->first();
 
       Session::put('activeTab', 'PERMISSIONS');
-      return view('admin/permissions/permissions',compact('role'));
+      return view('admin/permissions/permissions',compact('role','user'));
     }
 
     public function adminPermissionsSave(){
-      $role                   = Role::select('id')->where('name',Request::get('volOrUser'))->first();
+      $user   = Request::get('volOrUser');
+      $role   = Role::select('id')->where('name',$user)->first();
 
       // Created an array for all possible combinations
       $permission['Action']   = ["create","update","delete"];
@@ -47,27 +48,8 @@ class PermissionsController extends Controller
 
         }
       }
-
-      return redirect()->route('adminPermissionsView')->with('status', 'Permissions Updated Successfully!');
+      
+      return redirect()->route('adminPermissionsView', ['user' => $user])->with('status', 'Permissions Updated Successfully!');
     }
-
-    // public function adminPermissionValues(){
-    //   $role         = Role::select('id')->where('name',Request::get('volOrUser'))->first();
-
-    //   // Created an array for all possible combinations
-    //   $permission['Action']   = ["create","update","delete"];
-    //   $permission['Category'] = ["AvailableFoods","Causes","Volunteers","Events","ContactMessages"];
-
-    //     // Iterate through each above created combination for each checkbox in blade
-    //     foreach($permission['Category'] as $permissionCategory){
-    //       foreach($permission['Action'] as $permissionAction){
-  
-    //       }
-    //     }
-
-    //   '<input type="checkbox" class="createCheckbox" name="createAvailableFoods" id="" value="1" @if($volunteer->hasPermissionTo("create AvailableFoods")) checked @endif>';
-
-    //   return $role;
-    // }
 
 }
