@@ -9,6 +9,9 @@ use Request;
 use DB;
 use Response;
 use DataTables;
+use Auth;
+use Illuminate\Support\Facades\Crypt;
+use DateTime;
 
 class AvailableFoodsController extends Controller
 {
@@ -52,7 +55,8 @@ class AvailableFoodsController extends Controller
     $availableFoods->District         = Request::get('district');
     $availableFoods->State            = Request::get('state');
     $availableFoods->City             = Request::get('city');
-    $availableFoods->CreatedUser      = 'TestUser';
+    $availableFoods->CreatedUser      = Auth::user()->FirstName . Auth::user()->LastName;
+    $availableFoods->CreatedUserID    = Auth::user()->id;
     $availableFoods->CreatedDate      = date('Y-m-d H:i:s');
     $availableFoods->save();
 
@@ -123,6 +127,38 @@ class AvailableFoodsController extends Controller
 
     return DataTables::of($data)->make(true);
 
+  }
+
+  public function editAvailableFoodsView(){
+
+    $editAvailableFoods        = AvailableFoods::where('CreatedUserID',Auth::user()->id)->orderBy('CreatedDate','desc')->get();
+
+    foreach($editAvailableFoods as $editAvailableFoodsData){
+
+      $editAvailableFoodsData->Location   = $editAvailableFoodsData->City.", ".$editAvailableFoodsData->District.", ".$editAvailableFoodsData->State;
+      $editAvailableFoodsData->AddedDate  = date('d-M-Y', strtotime($editAvailableFoodsData->EditedDate));
+      $editAvailableFoodsData->ExpiryTime = date('h:i A', strtotime($editAvailableFoodsData->ExpiryTime));
+
+      if($editAvailableFoodsData->RestaurantName == ""){
+        $editAvailableFoodsData->RestaurantName = "Nil";
+      }
+
+    }
+
+    return view('availableFoods/editAvailableFoodsView',compact('editAvailableFoods'));
+  }
+
+  public function editAvailableFoodsData(){
+    $editAvailableFoods        = AvailableFoods::where('ID',Crypt::decrypt(Request::get('foodID')))->first();
+
+    $createdDateTime    = strtotime($editAvailableFoods->EditedDate);
+    $expiryDateTime     = strtotime($editAvailableFoods->ExpiryTime);
+    $secs               = $expiryDateTime - $createdDateTime; // return sec in difference
+    $expiryTime         = round($secs / 3600); // convert sec to hours
+
+
+
+    return view('availableFoods/editAvailableFoodsData',compact('editAvailableFoods','expiryTime'));
   }
     
 }

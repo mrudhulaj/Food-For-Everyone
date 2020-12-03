@@ -61,13 +61,16 @@
 <div class="container">
     @include('templates.alertSuccessMessage')
     <section>
-        <h2 style="margin-top: 0px;padding-left: 115px;">
+        <h2 style="margin-top: 0px;@guest padding-left: 115px; @else padding-left: 250px; @endguest">
             Waiting for you to pick up!
             <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right">
               @guest
                 <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Donate Food</a>
               @else
-                <a class="a-none" href="{{ route('addAvailableFoodsView') }}">Donate Food</a>
+                <a class="a-none" href="{{ route('addAvailableFoodsView') }}">Donate</a>
+                <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right;margin-right: 10px">
+                  <a class="a-none" href="{{ route('editAvailableFoodsView') }}">Edit</a>
+                </button>
               @endguest
             </button>
         </h2>
@@ -197,7 +200,7 @@
                     <th scope="col">Veg/Non Veg</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Location</th>
-                    <th scope="col">Added Date & Time</th>
+                    <th scope="col">Added Date</th>
                     <th scope="col">Expiry Time</th>
                     <th scope="col">Food Count</th>
                 </tr>
