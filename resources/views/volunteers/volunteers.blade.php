@@ -58,6 +58,7 @@
       </button>
     </h2>
     <p>Meet our superhero's.The people who bring joy to our kids and elders.The silent warriors.</p>
+    @if(count($volunteers) == 0) <p style="text-align: center;margin-top: 100px"><b>No volunteers found.</b></p> @endif
 </section>
 <div class="container" style="padding-bottom: 100px;padding-top: 50px;">
   @php $i = 0; @endphp {{-- To dynamically set Occup,Links etc to same height if name height differ --}}
@@ -89,6 +90,30 @@
   @php $i++; @endphp {{-- To dynamically set Occup,Links etc to same height if name height differ --}}
   @endforeach
 </div>
+{{--  Begin: Submitted Modal  --}}
+<div class="modal fade" id="submittedModal" tabindex="-1" role="dialog" aria-labelledby="submittedModalLabel"
+aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content" style="border-radius: 13px;border: none">
+          <div class="modal-header ffe-font">
+              <h5 class="modal-title" id="submittedModalLabel">Volunteer Request Submitted !
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </h5>
+          </div>
+          <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
+              <p class="ffe-font">Your request is successfully submitted.The details provided will be subject to admin approval and you will be contacted soon.</p>
+          </div>
+          <div class="modal-footer">
+              <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
+                  Close
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
+{{--  End: Submitted Modal  --}}
 @include('templates.custom-scripts')
 @include('templates.defaultModal', ['title' => 'Login Required','message' => 'Please login or sign up to continue.'])
 <script>
@@ -103,6 +128,12 @@
           }
           i++;
       });
+
+      let saved = "{{$saved}}";
+      if(saved == '1'){
+        jQuery.noConflict(); 
+        $('#submittedModal').modal('show'); 
+      }
     });
 </script>
 @stop

@@ -147,7 +147,7 @@
               </h5>
           </div>
           <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
-              <p>By clicking the confirm button you hereby acknowledge that the details provided by you is genuine to the best of your knowledge.</p>
+              <p>By clicking the confirm button you here by acknowledge that the details provided by you is genuine to the best of your knowledge.</p>
           </div>
           <div class="modal-footer">
               <button id="confirmForm" type="submit" class="btn btn-primary button-bg-green"
@@ -161,7 +161,6 @@
       </div>
   </div>
 </div>
-@include('templates.defaultModal', ['title' => 'Approval Required !','message' => 'The cause added will be subject to admin approval.Please make sure the cause is genuine and you are willing to provide more details on request of admin.'])
 {{-- End :Confirmation Box --}}
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
@@ -177,10 +176,6 @@
   });
 
   $(document).ready(function () {
-      // Show Approval Required modal on page load itself.
-      jQuery.noConflict(); 
-      $('#defaultModal').modal('show');  
-
       // Add Cause form validation
       $("form[name='addCause']").validate({
           errorPlacement: function (error, element) {

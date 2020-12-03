@@ -14,13 +14,14 @@ class EventsController extends Controller
     public function eventsView(){
       Session::put('activeTab', 'EVENTS');
 
-      $events = Events::orderBy('CreatedDate','desc')->get();
+      $events   = Events::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
+      $saved    = Request::has('saved') ? Request::get('saved') : 0;
       foreach($events as $eventsData){
         $eventsData->BeginTime = date('h:i A', strtotime($eventsData->BeginTime));
         $eventsData->EndTime = date('h:i A', strtotime($eventsData->EndTime));
       }
 
-      return view('events/events',compact('events'));
+      return view('events/events',compact('events','saved'));
     }
 
     public function eventDetailsView(){
@@ -55,6 +56,7 @@ class EventsController extends Controller
       $events->District           = Request::get('district');
       $events->State              = Request::get('state');
       $events->City               = Request::get('city');
+      $events->IsApproved         = 0;
       $events->CreatedUser        = 'TestUser';
       $events->CreatedDate        = date('Y-m-d H:i:s');
 
@@ -70,7 +72,7 @@ class EventsController extends Controller
 
       $events->save();
 
-      return redirect()->route('eventsView')->with('status', 'Added Successfully!');
+      return redirect()->route('eventsView',["saved" => "1"]);
     }
 
 

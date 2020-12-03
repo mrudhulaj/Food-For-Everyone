@@ -21,9 +21,10 @@ class CausesController extends Controller
         $role = "";
       }
 
-      $causes = Causes::orderBy('CreatedDate','desc')->get();
+      $causes   = Causes::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
+      $saved    = Request::has('saved') ? Request::get('saved') : 0;
     
-      return view('causes/causes',compact('causes','role'));
+      return view('causes/causes',compact('causes','role','saved'));
     }
 
     public function causesDetailsView(){
@@ -48,6 +49,7 @@ class CausesController extends Controller
       $causes->District               = Request::get('district');
       $causes->State                  = Request::get('state');
       $causes->City                   = Request::get('city');
+      $causes->IsApproved             = 0;
       $causes->CreatedUser            = 'TestUser';
       $causes->CreatedDate            = date('Y-m-d H:i:s');
 
@@ -62,7 +64,6 @@ class CausesController extends Controller
       }
 
       $causes->save();
-
-      return redirect()->route('causesView')->with('status', 'Added Successfully!');
+      return redirect()->route('causesView',['saved' => '1']);
     }
 }

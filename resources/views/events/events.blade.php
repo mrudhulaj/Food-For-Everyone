@@ -79,5 +79,40 @@
         </div>
     </div>
 </section>
+{{--  Begin: Submitted Modal  --}}
+<div class="modal fade" id="submittedModal" tabindex="-1" role="dialog" aria-labelledby="submittedModalLabel"
+aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content" style="border-radius: 13px;border: none">
+          <div class="modal-header ffe-font">
+              <h5 class="modal-title" id="submittedModalLabel">Event Submitted !
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </h5>
+          </div>
+          <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
+              <p class="ffe-font">Your event is successfully submitted.The event added will be subject to admin approval.Please make sure the event is genuine and you are willing to provide more details on request of admin.</p>
+          </div>
+          <div class="modal-footer">
+              <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
+                  Close
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
+{{--  End: Submitted Modal  --}}
 @include('templates.defaultModal', ['title' => 'Login Required','message' => 'Please login or sign up to continue.'])
+<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+<script>
+   $(document).ready(function () {
+      let saved = "{{$saved}}";
+      console.log("saved = "+saved);
+      if(saved == '1'){
+        jQuery.noConflict(); 
+        $('#submittedModal').modal('show'); 
+      }
+   });
+</script>
 @stop

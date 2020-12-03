@@ -12,9 +12,10 @@ class VolunteersController extends Controller
 {
     public function volunteersView(){
       Session::put('activeTab', 'VOLUNTEERS');
-      $volunteers = Volunteers::orderBy('CreatedDate','desc')->get();
+      $volunteers   = Volunteers::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
+      $saved        = Request::has('saved') ? Request::get('saved') : 0;
 
-      return view('volunteers/volunteers',compact('volunteers'));
+      return view('volunteers/volunteers',compact('volunteers','saved'));
     }
 
   public function addVolunteerView(){
@@ -36,6 +37,7 @@ class VolunteersController extends Controller
     $volunteers->State        = Request::get('state');
     $volunteers->FacebookLink = Request::get('facebook');
     $volunteers->TwitterLink  = Request::get('twitter');
+    $volunteers->IsApproved   = 0;
     $volunteers->CreatedUser  = 'TestUser';
     $volunteers->CreatedDate  = date('Y-m-d H:i:s');
 
@@ -51,7 +53,7 @@ class VolunteersController extends Controller
 
     $volunteers->save();
 
-    return redirect()->route('volunteersView')->with('status', 'Added Successfully!');
+    return redirect()->route('volunteersView',["saved" => "1"]);
   }
 
 }
