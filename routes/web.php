@@ -14,7 +14,7 @@
     Route::get('available-food-list', ['as' => 'availableFoodListFilter','uses' => 'AvailableFoods\AvailableFoodsController@availableFoodListFilter']);
     Route::get('edit-food-view', ['as' => 'editAvailableFoodsView','uses' => 'AvailableFoods\AvailableFoodsController@editAvailableFoodsView']);
     Route::get('edit-food-data', ['as' => 'editAvailableFoodsData','uses' => 'AvailableFoods\AvailableFoodsController@editAvailableFoodsData']);
-
+    Route::post('edit-food-data-save', ['as' => 'editAvailableFoodsDataSave','uses' => 'AvailableFoods\AvailableFoodsController@editAvailableFoodsDataSave']);
   // Causes
     Route::get('causes', ['as' => 'causesView','uses' => 'Causes\CausesController@causesView']);
     Route::get('causes-details', ['as' => 'causesDetails','uses' => 'Causes\CausesController@causesDetailsView']);

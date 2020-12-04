@@ -160,5 +160,32 @@ class AvailableFoodsController extends Controller
 
     return view('availableFoods/editAvailableFoodsData',compact('editAvailableFoods','expiryTime'));
   }
+
+  public function editAvailableFoodsDataSave(){
+
+    $editAvailableFoods                   = AvailableFoods::where('ID',Request::get('foodID'))->first();
+    $editAvailableFoods->FirstName        = Request::get('firstName');
+    $editAvailableFoods->LastName         = Request::get('lastName');
+    $editAvailableFoods->foodCount        = Request::get('foodCount');
+    $editAvailableFoods->expiryTime       = date("Y-m-d H:i:s", strtotime('+'.Request::get('expiryTime').' hours'));
+    $editAvailableFoods->TypeOfDonation   = Request::get('typeofdonation');
+    $editAvailableFoods->VegNonVeg        = Request::get('vegFlag');
+    $editAvailableFoods->RestaurantName   = Request::get('restaurantName');
+    $editAvailableFoods->Email            = Request::get('email');
+    $editAvailableFoods->Phone            = Request::get('phone');
+    $editAvailableFoods->District         = Request::get('district');
+    $editAvailableFoods->State            = Request::get('state');
+    $editAvailableFoods->City             = Request::get('city');
+    $editAvailableFoods->CreatedUser      = Auth::user()->FirstName . Auth::user()->LastName;
+    $editAvailableFoods->CreatedUserID    = Auth::user()->id;
+    $editAvailableFoods->CreatedDate      = date('Y-m-d H:i:s');
+    $editAvailableFoods->EditedUser      = Auth::user()->FirstName . Auth::user()->LastName;
+    $editAvailableFoods->EditedUserID    = Auth::user()->id;
+    $editAvailableFoods->EditedDate      = date('Y-m-d H:i:s');
+    $editAvailableFoods->save();
+
+    return redirect()->route('editAvailableFoodsView')->with('status', 'Updated Successfully!');
+  }
+  
     
 }

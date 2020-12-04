@@ -47,20 +47,21 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <form action="{{ route('addAvailableFoodsSave') }}" method="POST"
+                <form action="{{ route('editAvailableFoodsDataSave') }}" method="POST"
                     enctype="multipart/form-data" name="addAvailableFood" id="addAvailableFood">
                     @csrf
+                    <input type="hidden" name="foodID" value="{{$editAvailableFoods->ID}}">
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstName" value="{{$editAvailableFoods->FirstName}}" disabled>
+                                <input class="input--style-4" type="text" name="firstName" value="{{$editAvailableFoods->FirstName}}" readonly>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastName" value="{{$editAvailableFoods->LastName}}" disabled>
+                                <input class="input--style-4" type="text" name="lastName" value="{{$editAvailableFoods->LastName}}" readonly>
                             </div>
                         </div>
                     </div>
