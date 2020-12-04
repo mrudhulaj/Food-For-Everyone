@@ -96,6 +96,13 @@
                 </tr>
             </thead>
             <tbody>
+              @if(count($editAvailableFoods)== 0)
+                <tr >
+                  <td colspan="9">
+                    <p style="margin-top: 20px"><b>You have not added any item to edit.</b></p>
+                  </td>
+                </tr>
+              @endif
               @foreach($editAvailableFoods as $editAvailableFoodsData)
                 <tr>
                     <td>{{$editAvailableFoodsData->TypeOfDonation}}</td>
@@ -111,8 +118,9 @@
                         <a class="a-none" href="{{route('editAvailableFoodsData',["foodID" => Crypt::encrypt($editAvailableFoodsData->ID)])}}">Edit</a>
                       </button>    
                       
-                      <button class="btn button-bg-green cust-btn" style="background-color: #c13131 !important;width: 55px !important;">
-                        <a class="a-none" href="{{route('availableFoodsView')}}">Delete</a>
+                      <button class="btn button-bg-green cust-btn" id="deleteFoodBtn" style="background-color: #c13131 !important;width: 55px !important;" data-value="{{$editAvailableFoodsData->ID}}" data-toggle="modal"
+                        data-target="#deleteModal">
+                        Delete
                       </button>  
                     </td>
                 </tr>
@@ -121,4 +129,50 @@
         </table>
     </div>
 </div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 13px;border: none">
+            <div class="modal-header ffe-font">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h5>
+            </div>
+            <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
+                <p class="ffe-font">Are you sure you want to delete this item?</p>
+            </div>
+            <div class="modal-footer">
+              <button id="confirmForm" type="button" class="btn btn-primary button-bg-green"
+                    style="padding: 6px 12px;border-radius: 4px;" data-dismiss="modal">
+                    Confirm
+                </button>
+                <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+<script>
+  var foodID;
+   $('#deleteFoodBtn').click(function () {
+     foodID = $(this).attr("data-value");
+    });
+
+    $('#confirmForm').click(function () {
+      $.ajax({
+            url:'{{ route("deleteAvailableFoodsData") }}',
+            type:'GET',
+            data:{
+                foodID   : foodID,
+            },
+            success:function(data) {
+              location.reload();
+            }
+      });
+    });
+</script>
 @stop

@@ -186,6 +186,12 @@ class AvailableFoodsController extends Controller
 
     return redirect()->route('editAvailableFoodsView')->with('status', 'Updated Successfully!');
   }
+
+  public function deleteAvailableFoodsData(){
+    AvailableFoods::where('ID',Request::get('foodID'))->delete();
+    Session::flash('status', 'Deleted Successfully!'); 
+    return Response::json();
+  }
   
     
 }
