@@ -1,5 +1,5 @@
 @extends('templates.main')
-<title>Causes</title>
+<title>Edit Causes</title>
 <style>
 .wrapper section>h2::before {
   width: 190px !important;
@@ -116,39 +116,59 @@ hr {
   text-decoration: none;
 }
 
+/* Image button */
+.container-cust {
+  position: relative;
+  width: 100%;
+}
+
+.container-cust img {
+  width: 100%;
+  height: auto;
+}
+
+.container-cust .btn {
+  position: absolute;
+  top: 10%;
+  left: 93%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.container-cust .btn:hover {
+  background-color: #989898;
+  color: black;
+  }
+
 </style>
 @section('content')
-<div class="">
-  <div class="container" style="padding: 0px 10px 0px 50px;">
+<div class="container">
+  <div class="" style="padding: 0px 10px 0px 0px;">
     @include('templates.alertSuccessMessage')
   </div>
 <section>
-<h2 style="margin-top: 0px; @if( Auth::check()) padding-left: 270px; @endif">
-    We are expanding our reach!
-    @if( Auth::check())
-        <a class="a-none" @if($role->hasPermissionTo('create Causes'))
-            href="{{ route('addCauseView') }}" @else href="javascript:void(0)"
-            data-toggle="modal" data-target="#permissionDeniedModal" @endif>
-            <button class="btn button-bg-green"
-                style="padding: 0px;width: 100px;height: 40px;float: right;margin-right: 60px;">
-                Add Cause
-            </button>
-            <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right;margin-right: 10px">
-              <a class="a-none" href="{{ route('editCauseView') }}">Edit</a>
-            </button>
-        </a>
-    @endif
+<h2 style="margin-top: 0px; @if( Auth::check()) padding-left: 100px; @endif">
+    Edit Your Causes
+    <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right">
+      <a class="a-none" href="{{route('causesView')}}">Back</a>
+    </button>
 </h2>
-<p>We are continously trying to expand our reach to different areas where people need support to help build a
-    better future.
-    <br>These are the causes which we support currently.</p>
-    @if(count($causes) == 0) <p style="text-align: center;margin-top: 100px"><b>No causes found.</b></p> @endif
+<p>Edit your causes here.Please make sure the details you have entered are correct.You are expected to provide more details on admins enquiry.</p>
+    @if(count($causes) == 0) <p style="text-align: center;margin-top: 100px"><b>You have not added any cause to edit.</b></p> @endif
 <div class="container" style="margin-top: 70px;margin-bottom: 70px;padding-left: 5px;margin-right: 0px;">
     @foreach($causes as $causesData)
         <div class="box mainbox">
-            <div class="img-div">
+            <div class="img-div container-cust">
                 <img src="{{ asset($causesData->Image) }}"
                     style="border-top-left-radius: inherit;border-top-right-radius: inherit;width: 420px;height: 220px;">
+                    <button data-toggle="modal" data-target="#deleteModal" class="btn" id="causeDeleteBtn" type="button" data-value="{{$causesData->ID}}">&times;</button>
             </div>
             <div class="box-content" style="padding: 0 30px;">
                 <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}"
@@ -177,46 +197,56 @@ hr {
                             class="progress-amount">{{ number_format($causesData->ExpectedAmount) }} ₹</span>
                     </p>
                 </div>
-                <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a data-toggle="modal"
-                        data-target="#donationModal" href="#">DONATE NOW</a></h2>
+                <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a href="{{route('editCauseData',["foodID" => Crypt::encrypt($causesData->ID)])}}">Edit</a></h2>
             </div>
         </div>
     @endforeach
-{{--  Begin: Permission denied Modal  --}}
-<div class="modal fade" id="permissionDeniedModal" tabindex="-1" role="dialog" aria-labelledby="permissionDeniedModalLabel"
-aria-hidden="true">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content" style="border-radius: 13px;border: none">
-          <div class="modal-header ffe-font">
-              <h5 class="modal-title" id="permissionDeniedModalLabel">Permission Denied !
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </h5>
-          </div>
-          <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
-              <p class="ffe-font">You do not have the permission to do this action , please contact admin for more details.</p>
-          </div>
-          <div class="modal-footer">
-              <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
-                  Close
-              </button>
-          </div>
-      </div>
-  </div>
 </div>
-{{--  End: Permission denied Modal  --}}
-@include('templates.donationModal')
-@include('templates.defaultModal', ['title' => 'Cause submitted !','message' => 'Your cause is successfully submitted.The cause added will be subject to admin approval.Please make sure the cause is genuine and you are willing to provide more details on request of admin.'])
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 13px;border: none">
+            <div class="modal-header ffe-font">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h5>
+            </div>
+            <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
+                <p class="ffe-font">Are you sure you want to delete this cause?</p>
+            </div>
+            <div class="modal-footer">
+              <button id="confirmForm" type="button" class="btn btn-primary button-bg-green"
+                    style="padding: 6px 12px;border-radius: 4px;" data-dismiss="modal">
+                    Confirm
+                </button>
+                <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
-  $(document).ready(function () {
-    let saved = "{{$saved}}";
-    if(saved == '1'){
-      jQuery.noConflict(); 
-      $('#defaultModal').modal('show'); 
-    }
-  });
+  var causeID;
+    $('#causeDeleteBtn').click(function () {
+      causeID = $(this).attr("data-value");
+    });
+
+    $('#confirmForm').click(function () {
+      $.ajax({
+            url:'{{ route("deleteCauseData") }}',
+            type:'GET',
+            data:{
+              causeID   : causeID,
+            },
+            success:function(data) {
+              location.reload();
+            }
+      });
+    });
 </script>
 @stop

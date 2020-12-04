@@ -16,11 +16,17 @@
     Route::get('edit-food-data', ['as' => 'editAvailableFoodsData','uses' => 'AvailableFoods\AvailableFoodsController@editAvailableFoodsData']);
     Route::post('edit-food-data-save', ['as' => 'editAvailableFoodsDataSave','uses' => 'AvailableFoods\AvailableFoodsController@editAvailableFoodsDataSave']);
     Route::get('delete-food-data', ['as' => 'deleteAvailableFoodsData','uses' => 'AvailableFoods\AvailableFoodsController@deleteAvailableFoodsData']);
-    // Causes
+
+  // Causes
     Route::get('causes', ['as' => 'causesView','uses' => 'Causes\CausesController@causesView']);
     Route::get('causes-details', ['as' => 'causesDetails','uses' => 'Causes\CausesController@causesDetailsView']);
     Route::get('add-causes', ['as' => 'addCauseView','uses' => 'Causes\CausesController@addCauseView']);
     Route::post('add-cause-save', ['as' => 'addCauseSave','uses' => 'Causes\CausesController@addCauseSave']);
+    Route::get('edit-cause-view', ['as' => 'editCauseView','uses' => 'Causes\CausesController@editCauseView']);
+    Route::get('edit-cause-data', ['as' => 'editCauseData','uses' => 'Causes\CausesController@editCauseData']);
+    Route::post('edit-cause-data-save', ['as' => 'editCauseDataSave','uses' => 'Causes\CausesController@editCauseDataSave']);
+    Route::get('delete-cause-data', ['as' => 'deleteCauseData','uses' => 'Causes\CausesController@deleteCauseData']);
+    Route::get('delete-cause-image', ['as' => 'deleteCauseImage','uses' => 'Causes\CausesController@deleteCauseImage']);
 
   // Volunteers
     Route::get('volunteers', ['as' => 'volunteersView','uses' => 'Volunteers\VolunteersController@volunteersView']);
