@@ -1,11 +1,4 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<p align="center"><img src="https://user-images.githubusercontent.com/27756559/101247868-d2903480-3741-11eb-9355-f6cc40f57298.png" width=100 height=100></p>
 
 ## Food For Everyone
 
@@ -47,6 +40,7 @@ This module also provides the capability to review the messages recieved from ot
 ## Volunteer Module
 
 Volunteer Module is the module handled by the approved volunteers.From here one can approve the added causes, other volunteers, events if the permission is allowed by the administrator.
+<p align="center"><img src="https://user-images.githubusercontent.com/27756559/101247868-d2903480-3741-11eb-9355-f6cc40f57298.png" width=100 height=100></p>
 
 Within this module one can control or monitor the activities of the other normal users as well.
 
