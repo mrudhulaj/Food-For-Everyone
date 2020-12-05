@@ -25,18 +25,24 @@
     @include('templates.alertSuccessMessage')
 </div>
 <section class="events_section_area">
-    <h2 id="cust-h2" style="padding-left: 175px;">
+    <h2 id="cust-h2" @guest style="padding-left: 175px;" @else style="padding-left: 280px;" @endguest>
         UPCOMING EVENTS
-        <button class="btn button-bg-green"
-            style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">
-            <a class="a-none" 
-             @guest 
-              href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal"
-             @else 
-              href="{{ route('addEventView') }}"
-             @endguest>Add Event
-            </a>
-        </button>
+        @guest
+          <button class="btn button-bg-green"
+              style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">
+              <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">
+                Add Event
+              </a>
+          </button>
+        @else
+          <button class="btn button-bg-green"
+              style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">
+              <a class="a-none" href="{{ route('addEventView') }}">Add Event</a>
+          </button>
+          <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right;margin-right: 10px">
+            <a class="a-none" href="{{ route('editEventView') }}">Edit</a>
+          </button>
+        @endguest
     </h2>
     <p>Missed our previous events? Don't worry, we have plenty of them coming up!</p>
     <div class="container" style="margin-bottom: 50px">

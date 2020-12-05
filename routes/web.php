@@ -39,6 +39,12 @@
     Route::post('add-event-save', ['as' => 'addEventSave','uses' => 'Events\EventsController@addEventSave']);
     Route::get('event-details', ['as' => 'eventDetailsView','uses' => 'Events\EventsController@eventDetailsView']);
 
+    Route::get('edit-event-view', ['as' => 'editEventView','uses' => 'Events\EventsController@editEventView']);
+    Route::get('edit-event-data', ['as' => 'editEventData','uses' => 'Events\EventsController@editEventData']);
+    Route::post('edit-event-data-save', ['as' => 'editEventDataSave','uses' => 'Events\EventsController@editEventDataSave']);
+    Route::get('delete-event-data', ['as' => 'deleteEventData','uses' => 'Events\EventsController@deleteEventData']);
+    Route::get('delete-event-image', ['as' => 'deleteEventImage','uses' => 'Events\EventsController@deleteEventImage']);
+
   // Contact Us
     Route::get('contact-us', ['as' => 'contactUsView','uses' => 'ContactUs\ContactUsController@contactUsView']);
     Route::post('save-contact-us', ['as' => 'saveContactUs','uses' => 'ContactUs\ContactUsController@saveContactUs']);

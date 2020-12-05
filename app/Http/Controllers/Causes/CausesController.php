@@ -51,10 +51,10 @@ class CausesController extends Controller
       $causes->State                  = Request::get('state');
       $causes->City                   = Request::get('city');
       $causes->IsApproved             = 0;
-      $causes->CreatedUser            = Auth::user()->FirstName . Auth::user()->LastName;
+      $causes->CreatedUser            = Auth::user()->FirstName." ".Auth::user()->LastName;
       $causes->CreatedUserID          = Auth::user()->id;
       $causes->CreatedDate            = date('Y-m-d H:i:s');
-      $causes->EditedUser             = Auth::user()->FirstName . Auth::user()->LastName;
+      $causes->EditedUser             = Auth::user()->FirstName." ".Auth::user()->LastName;
       $causes->EditedUserID           = Auth::user()->id;
       $causes->EditedDate             = date('Y-m-d H:i:s');
   
@@ -95,10 +95,10 @@ class CausesController extends Controller
     $causes->State                  = Request::get('state');
     $causes->City                   = Request::get('city');
     $causes->IsApproved             = 0;
-    $causes->CreatedUser            = Auth::user()->FirstName . Auth::user()->LastName;
+    $causes->CreatedUser            = Auth::user()->FirstName." ".Auth::user()->LastName;
     $causes->CreatedUserID          = Auth::user()->id;
     $causes->CreatedDate            = date('Y-m-d H:i:s');
-    $causes->EditedUser             = Auth::user()->FirstName . Auth::user()->LastName;
+    $causes->EditedUser             = Auth::user()->FirstName." ".Auth::user()->LastName;
     $causes->EditedUserID           = Auth::user()->id;
     $causes->EditedDate             = date('Y-m-d H:i:s');
 

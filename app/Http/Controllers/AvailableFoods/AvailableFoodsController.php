@@ -55,7 +55,7 @@ class AvailableFoodsController extends Controller
     $availableFoods->District         = Request::get('district');
     $availableFoods->State            = Request::get('state');
     $availableFoods->City             = Request::get('city');
-    $availableFoods->CreatedUser      = Auth::user()->FirstName . Auth::user()->LastName;
+    $availableFoods->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
     $availableFoods->CreatedUserID    = Auth::user()->id;
     $availableFoods->CreatedDate      = date('Y-m-d H:i:s');
     $availableFoods->save();
@@ -176,10 +176,10 @@ class AvailableFoodsController extends Controller
     $editAvailableFoods->District         = Request::get('district');
     $editAvailableFoods->State            = Request::get('state');
     $editAvailableFoods->City             = Request::get('city');
-    $editAvailableFoods->CreatedUser      = Auth::user()->FirstName . Auth::user()->LastName;
+    $editAvailableFoods->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
     $editAvailableFoods->CreatedUserID    = Auth::user()->id;
     $editAvailableFoods->CreatedDate      = date('Y-m-d H:i:s');
-    $editAvailableFoods->EditedUser      = Auth::user()->FirstName . Auth::user()->LastName;
+    $editAvailableFoods->EditedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
     $editAvailableFoods->EditedUserID    = Auth::user()->id;
     $editAvailableFoods->EditedDate      = date('Y-m-d H:i:s');
     $editAvailableFoods->save();
