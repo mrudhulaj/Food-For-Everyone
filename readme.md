@@ -1,8 +1,8 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/27756559/101247868-d2903480-3741-11eb-9355-f6cc40f57298.png" width=100 height=100></p>
 
 <p align="center">    
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png" alt="HTML 5" width=40 height=45>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png" alt="CSS" width=40 height=45>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png" alt="HTML 5" width=45 height=45>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png" alt="CSS" width=35 height=45>
 <img src="https://i.pinimg.com/originals/41/95/cf/4195cf989fac0128a89669f40a1e3496.png" alt="Bootstrap" width=40 height=40>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/768px-JavaScript-logo.png" alt="Javascript" width=40 height=40>
 <img src="https://cdn4.iconfinder.com/data/icons/scripting-and-programming-languages/512/JQuery_logo-512.png" alt="JQuery" width=40 height=40>
