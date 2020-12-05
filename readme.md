@@ -1,3 +1,12 @@
+<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+</p>
+
 ## Food For Everyone
 
 Food For Everyone is a website which helps to connect restaurent owners and event planners to distribute the leftover food to the needy people instead of letting them go to waste.The website front end is designed with HTML, CSS, Bootstrap, Javascript/Jquery.The backend is created with PHP(Laravel Framework).MySQL is used for database management.
