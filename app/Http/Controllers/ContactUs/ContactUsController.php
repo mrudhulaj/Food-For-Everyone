@@ -7,6 +7,7 @@ use Session;
 use App\Models\ContactUs;
 use Request;
 use Response;
+use Auth;
 
 class ContactUsController extends Controller
 {
@@ -18,14 +19,18 @@ class ContactUsController extends Controller
 
     public function saveContactUs(){
 
-      $contactUs               = new ContactUs();
-      $contactUs->FirstName    = Request::get('firstName');
-      $contactUs->LastName     = Request::get('lastName');
-      $contactUs->Email        = Request::get('email');
-      $contactUs->Phone        = Request::get('phone');
-      $contactUs->Message      = Request::get('message');
-      $contactUs->CreatedUser  = 'TestUser';
-      $contactUs->CreatedDate  = date('Y-m-d H:i:s');
+      $contactUs                  = new ContactUs();
+      $contactUs->FirstName       = Request::get('firstName');
+      $contactUs->LastName        = Request::get('lastName');
+      $contactUs->Email           = Request::get('email');
+      $contactUs->Phone           = Request::get('phone');
+      $contactUs->Message         = Request::get('message');
+      $contactUs->CreatedUser     = Auth::user()->FirstName." ".Auth::user()->LastName;
+      $contactUs->CreatedUserID   = Auth::user()->id;
+      $contactUs->CreatedDate     = date('Y-m-d H:i:s');
+      $contactUs->EditedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
+      $contactUs->EditedUserID    = Auth::user()->id;
+      $contactUs->EditedDate      = date('Y-m-d H:i:s');
       $contactUs->save();
 
       return Response::json();
