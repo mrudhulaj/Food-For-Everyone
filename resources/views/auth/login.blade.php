@@ -295,7 +295,7 @@
                             <select class="form-control" name="typeOfAccount" id="typeOfAccount" style="height: 34px !important;">
                                 <option hidden selected="" value="">Select</option>
                                 <option value="Volunteer">Volunteer</option>
-                                <option value="Donater">Donater</option>
+                                {{--  <option value="Donater">Donater</option>  --}}
                                 <option value="User">User</option>
                             </select>
                         </div>

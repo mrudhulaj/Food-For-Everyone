@@ -32,6 +32,10 @@
     Route::get('volunteers', ['as' => 'volunteersView','uses' => 'Volunteers\VolunteersController@volunteersView']);
     Route::get('add-volunteer', ['as' => 'addVolunteerView','uses' => 'Volunteers\VolunteersController@addVolunteerView']);
     Route::post('add-volunteer-save', ['as' => 'addVolunteerSave','uses' => 'Volunteers\VolunteersController@addVolunteerSave']);
+  
+  // User
+    Route::get('edit-user', ['as' => 'editProfileView','uses' => 'User\UserController@editProfileView']);
+    Route::post('edit-user-save', ['as' => 'editProfileSave','uses' => 'User\UserController@editProfileSave']);
 
   // Events
     Route::get('events-view', ['as' => 'eventsView','uses' => 'Events\EventsController@eventsView']);

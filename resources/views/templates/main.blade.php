@@ -79,7 +79,7 @@
                                       </button>
                                         <ul class="dropdown-menu" id="dmenu">
                                           <li class="cust-login-li">
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{route('editProfileView')}}">
                                               Profile
                                             </a>
                                           </li>

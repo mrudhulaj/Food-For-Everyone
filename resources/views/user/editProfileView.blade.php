@@ -1,5 +1,5 @@
 @extends('templates.main')
-<title>Add Volunteer</title>
+<title>Edit Profile</title>
 <link
     href="{{ url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i') }}"
     rel="stylesheet">
@@ -35,95 +35,138 @@
         margin-bottom: 22px;
     }
 
+        /* Image button */
+.container-cust {
+  position: relative;
+  width: 100%;
+}
+
+.container-cust img {
+  width: 100%;
+  height: auto;
+}
+
+.container-cust .btn {
+  position: absolute;
+  top: 10%;
+  left: 95%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.container-cust .btn:hover {
+  background-color: #989898;
+  color: black;
+  }
+
+
 </style>
 @section('content')
 <section>
     <h2 style="margin-top: 0px;">
-      @if(Session::get('user')=="Admin" || Session::get('user')=="Volunteer")
-      Add a Volunteer
-      @else
-        Become A Volunteer
-      @endif
+     Edit Profile
     </h2>
-    <p>Please make sure the details provided including the mobile number and email are correct, so that we can inform
-        the volunteer when they are needed with us.</p>
+    <p>Please make sure the details provided including the mobile number and email are correct, so that we can inform when you are needed with us.</p>
 </section>
 
 <div class="page-wrapper p-b-100 font-poppins" style="padding-top: 50px">
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <form action="{{ route('addVolunteerSave') }}" method="POST" enctype="multipart/form-data" name="addVolunteer" id="addVolunteer">
+                <form action="" method="POST" enctype="multipart/form-data" name="editProfile" id="editProfile">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                    <div class="row row-space">
+                        <div>
+                          {{--  <img src="" alt="">  --}}
+                          <i style="font-size: 100px;" class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        </div>
+                    </div>
 
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstName" value="">
+                                <input class="input--style-4" type="text" name="firstName" value="{{$profile->FirstName}}">
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastName" value="">
+                                <input class="input--style-4" type="text" name="lastName" value="{{$profile->LastName}}">
                             </div>
                         </div>
                     </div>
 
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Occupation</label>
-                        <input class="input--style-4" type="text" name="occupation">
+                        <input class="input--style-4" type="text" name="occupation" value="{{$profile->Occupation}}">
                     </div>
 
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Email</label>
-                        <input class="input--style-4" type="text" name="email">
+                        <input class="input--style-4" type="text" name="email" value="{{$profile->Email}}">
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Phone</label>
-                        <input class="input--style-4" type="text" name="phone">
+                        <input class="input--style-4" type="text" name="phone" value="{{$profile->Phone}}">
                     </div>
 
                     <div class="row row-space" style="padding-right: 0px">
                         <div class="col-lg-6">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">District
+                                  @if($profile->isVolunteer)
                                     <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                                         title="The district where you'll be available."></i>
+                                  @endif
                                 </label>
                                 <select class="form-control input--style-4" style="" id="district" name="district">
-                                    <option hidden selected="" value="">District</option>
-                                    <option value="Kerala">Kerala</option>
+                                    <option hidden value="">District</option>
+                                    <option @if($profile->District) selected @endif value="Kerala">Kerala</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">State
+                                  @if($profile->isVolunteer)
                                     <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                                         title="The state where you'll be available."></i>
+                                  @endif
                                 </label>
                                 <select class="form-control input--style-4" style="" id="state" name="state">
-                                    <option hidden selected="" value="">State</option>
-                                    <option value="Calicut">Calicut</option>
+                                    <option hidden value="">State</option>
+                                    <option value="Calicut" @if($profile->State) selected @endif>Calicut</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
+                    @if($profile->isVolunteer)
+                      <div class="input-group col-lg-12">
+                        <label class="label ffe-font">Facebook</label><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                        title="Enter your facebook profile link here."></i>
+                        <input class="input--style-4" type="text" name="facebook" value="{{$profile->FacebookLink}}">
+                      </div>
+                    @endif
+                  
+                  @if($profile->isVolunteer)
                     <div class="input-group col-lg-12">
-                      <label class="label ffe-font">Facebook</label><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
-                      title="Enter your facebook profile link here."></i>
-                      <input class="input--style-4" type="text" name="facebook">
+                      <label class="label ffe-font">Twitter</label><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                      title="Enter your twitter profile link here."></i>
+                      <input class="input--style-4" type="text" name="twitter" value="{{$profile->TwitterLink}}">
                     </div>
+                  @endif
 
-                  <div class="input-group col-lg-12">
-                    <label class="label ffe-font">Twitter</label><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
-                    title="Enter your twitter profile link here."></i>
-                    <input class="input--style-4" type="text" name="twitter">
-                  </div>
 
                     <div class="input-group col-lg-12" style="margin-bottom: 0px;">
                         <label class="label ffe-font">Profile Photo</label>
@@ -137,6 +180,19 @@
                         </div>
 
                     </div>
+
+                    @if(!$profile->ProfileImage)
+                      <div class="col-lg-12 noImagediv" style="text-align: center;margin-top: -50px;">
+                        <label class="label ffe-font">No image added</label>
+                      </div>
+                    @endif
+
+                    @if($profile->ProfileImage)
+                      <div class="container-cust input-group col-lg-12" style="margin-bottom: 0px;border: 2px solid #ececec;border-radius: 5px">
+                        <img src="{{ asset($profile->ProfileImage) }}" alt="" width="100px" height="100px" style="border-radius: 5px">
+                        <button class="btn" id="imgDeleteBtn" type="button" data-value="{{$profile->ID}}">&times;</button>
+                      </div>
+                    @endif
 
                     <div class="" style="text-align: center;">
                         <button type="button" id="submitbtn" class="btn button-bg-green"
@@ -196,7 +252,7 @@
     $(document).ready(function () {
 
         // Add Volunteer form validation
-        $("form[name='addVolunteer']").validate({
+        $("form[name='editProfile']").validate({
             errorPlacement: function (error, element) {
                 if (element.parent().hasClass('selectbox-div') || element.parent().hasClass(
                         'amount-div')) {
@@ -244,7 +300,7 @@
         });
 
         $('#submitbtn').click(function () {
-            var isFormValid = $('#addVolunteer').valid();
+            var isFormValid = $('#editProfile').valid();
             if (isFormValid == true) {
                 jQuery.noConflict();
                 $('#confirmationModal').modal('show');
@@ -258,7 +314,7 @@
     });
 
     $('#confirmForm').click(function () {
-          $('#addVolunteer').submit();
+          $('#editProfile').submit();
     });
 
 
