@@ -36,6 +36,7 @@
   // User
     Route::get('edit-user', ['as' => 'editProfileView','uses' => 'User\UserController@editProfileView']);
     Route::post('edit-user-save', ['as' => 'editProfileSave','uses' => 'User\UserController@editProfileSave']);
+    Route::get('del-user-img', ['as' => 'delProfileImg','uses' => 'User\UserController@delProfileImg']);
 
   // Events
     Route::get('events-view', ['as' => 'eventsView','uses' => 'Events\EventsController@eventsView']);

@@ -35,61 +35,57 @@
         margin-bottom: 22px;
     }
 
-        /* Image button */
-.container-cust {
-  position: relative;
-  width: 100%;
-}
-
-.container-cust img {
-  width: 100%;
-  height: auto;
-}
-
-.container-cust .btn {
-  position: absolute;
-  top: 10%;
-  left: 95%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: #555;
-  color: white;
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.container-cust .btn:hover {
-  background-color: #989898;
-  color: black;
-  }
-
 
 </style>
 @section('content')
+
 <section>
+    <div style="margin: 0px 50px 0px 50px;">
+      @include('templates.alertSuccessMessage')
+    </div>
     <h2 style="margin-top: 0px;">
      Edit Profile
     </h2>
-    <p>Please make sure the details provided including the mobile number and email are correct, so that we can inform when you are needed with us.</p>
+    <p>Please make sure the details provided including the mobile number and email are correct
+      @if(!$profile->isVolunteer)
+        .
+      @else
+        , so that we can inform when you are needed with us.
+      @endif
+    </p>
 </section>
 
 <div class="page-wrapper p-b-100 font-poppins" style="padding-top: 50px">
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <form action="" method="POST" enctype="multipart/form-data" name="editProfile" id="editProfile">
+                <form action="{{route('editProfileSave')}}" method="POST" enctype="multipart/form-data" name="editProfile" id="editProfile">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                    <div class="row row-space">
+                      <div class="row row-space profileImgDiv" style="color: #00A348">
                         <div>
-                          {{--  <img src="" alt="">  --}}
-                          <i style="font-size: 100px;" class="fa fa-user-circle-o" aria-hidden="true"></i>
+                          
+                          @if(!$profile->ProfileImage)
+                            <i style="font-size: 120px;" class="fa fa-user-circle-o" aria-hidden="true"></i>
+                          @else
+                            <img src="{{ url('images/volanteer_1.jpg') }}" alt="" style="border-radius: 50%;height: 170px;width: 160px;box-shadow: 0px 2px 20px 15px rgba(0, 0, 0, 0.08);">
+                          @endif
+
                         </div>
-                    </div>
+                      </div>
+
+                      <div class="col-sm-offset-7 profileImgDiv" style="margin-bottom: 10px;margin-top: -10px;">
+                        @if($profile->ProfileImage)
+                          <label class="btn btn-default" style="background: transparent;border:none">
+                            <i id="delProfileImg" class="fa fa-trash" aria-hidden="true" style="font-size: 20px;color: #00a74a"></i>
+                          </label>
+                        @endif
+                        <label for="files" class="btn btn-default" style="background: transparent;border:none">
+                            <i class="fa fa-upload" style="font-size: 20px;color: #00a74a" aria-hidden="true"></i>
+                        </label>
+                        <input id="files" accept="image/*" type="file" class="btn btn-default" style="visibility:hidden;" name="profileImage"/>
+                      </div>
 
                     <div class="row row-space">
                         <div class="col-2">
@@ -167,35 +163,8 @@
                     </div>
                   @endif
 
-
-                    <div class="input-group col-lg-12" style="margin-bottom: 0px;">
-                        <label class="label ffe-font">Profile Photo</label>
-
-                        <div class="col-md-12 input-group">
-                            <input class=" form-control input--style-4" id="fileName" type="text" style="height: 50px;"/>
-                            <div class="input-group-btn">
-                                <label for="files" class="btn btn-default input--style-4" style="height: 50px;border-radius: 0px 5px 5px 0px;">Browse</label>
-                                <input id="files" accept="image/*" type="file" class="btn btn-default" style="visibility:hidden;" name="profleImage"/>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    @if(!$profile->ProfileImage)
-                      <div class="col-lg-12 noImagediv" style="text-align: center;margin-top: -50px;">
-                        <label class="label ffe-font">No image added</label>
-                      </div>
-                    @endif
-
-                    @if($profile->ProfileImage)
-                      <div class="container-cust input-group col-lg-12" style="margin-bottom: 0px;border: 2px solid #ececec;border-radius: 5px">
-                        <img src="{{ asset($profile->ProfileImage) }}" alt="" width="100px" height="100px" style="border-radius: 5px">
-                        <button class="btn" id="imgDeleteBtn" type="button" data-value="{{$profile->ID}}">&times;</button>
-                      </div>
-                    @endif
-
-                    <div class="" style="text-align: center;">
-                        <button type="button" id="submitbtn" class="btn button-bg-green"
+                    <div class="" style="text-align: center;margin-top: 30px;">
+                        <button type="submit" id="submitbtn" class="btn button-bg-green"
                             style="padding: 0px;width: 120px;height: 60px;">
                             Submit
                         </button>
@@ -206,48 +175,8 @@
     </div>
 </div>
 
-{{-- Begin :Confirmation box --}}
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="border-radius: 13px;border: none">
-            <div class="modal-header ffe-font">
-                <h5 class="modal-title" id="confirmationModalLabel">Confirmation
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </h5>
-            </div>
-            <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
-                <p>By clicking the confirm button you hereby acknowledge that the details provided by you is genuine to
-                    the best of your knowledge and you are willing to participate in our events and programs as a
-                    volunteer.</p>
-            </div>
-            <div class="modal-footer">
-                <button id="confirmForm" type="submit" class="btn btn-primary button-bg-green"
-                    style="padding: 6px 12px;border-radius: 4px;">
-                    Confirm
-                </button>
-                <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- End :Confirmation Box --}}
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
-    $("input[name='typeofdonation']").change(function () {
-        var type = $('input[name="typeofdonation"]:checked').val();
-
-        if (type == 'Restaurant') {
-            $(".type-rest").removeClass('hide');
-        } else {
-            $(".type-rest").addClass('hide');
-        }
-
-    });
 
     $(document).ready(function () {
 
@@ -264,8 +193,6 @@
             rules: {
                 firstName: "required",
                 lastName: "required",
-                occupation: "required",
-                restaurantName: "required",
                 email: {
                     required: true,
                     email: true
@@ -274,23 +201,10 @@
                     required: true,
                     number: true
                 },
-                district: {
-                    required: true
-                },
-                state: {
-                    required: true
-                },
             },
             messages: {
                 firstName: "Please enter your first name",
                 lastName: "Please enter your last name",
-                occupation: "Please enter your occupation",
-                district: {
-                    required: "Please select a district",
-                },
-                state: {
-                    required: "Please select a state",
-                },
                 phone: {
                     required: "Please enter your mobile number",
                     number: "Please enter numbers only"
@@ -299,25 +213,21 @@
             },
         });
 
-        $('#submitbtn').click(function () {
-            var isFormValid = $('#editProfile').valid();
-            if (isFormValid == true) {
-                jQuery.noConflict();
-                $('#confirmationModal').modal('show');
+    });
+
+    $('#delProfileImg').click(function () {
+      $.ajax({
+            url:'{{ route("delProfileImg") }}',
+            type:'GET',
+            success:function(data) {
+              location.reload();
             }
-        });
+      });
     });
 
-    $('input[type=file]').change(function() {
-        var filename = $('input[type=file]').val().split('\\').pop();
-        $('#fileName').val(filename);
+    $('#files').change(function(){
+      $('#editProfile').submit();
     });
-
-    $('#confirmForm').click(function () {
-          $('#editProfile').submit();
-    });
-
-
 
 </script>
 @stop

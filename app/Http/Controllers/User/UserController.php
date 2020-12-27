@@ -9,11 +9,13 @@ use Request;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
 use App\User;
+use Response;
 
 class UserController extends Controller
 {
 
   public function editProfileView(){
+    Session::put('activeTab', '');
     $profile                 = User::where('id',Auth::user()->id)->first();
     $profile->isVolunteer    = false;
 
@@ -21,45 +23,45 @@ class UserController extends Controller
       $profile                 = Volunteers::where('CreatedUserID',Auth::user()->id)->first();
       $profile->isVolunteer    = true;
     }
-
   
     return view('user/editProfileView',compact('profile'));
   }
 
   public function editProfileSave(){
 
-    // If user is also a volunteer
-    $volunteers                   = Volunteers::where('CreatedUserID',Auth::user()->id)->first();
-    $volunteers->FirstName        = Request::get('firstName');
-    $volunteers->LastName         = Request::get('lastName');
-    $volunteers->Occupation       = Request::get('occupation');
-    $volunteers->Email            = Request::get('email');
-    $volunteers->Phone            = Request::get('phone');
-    $volunteers->District         = Request::get('district');
-    $volunteers->State            = Request::get('state');
-    $volunteers->FacebookLink     = Request::get('facebook');
-    $volunteers->TwitterLink      = Request::get('twitter');
-    $volunteers->IsApproved       = 0;
-    $volunteers->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
-    $volunteers->CreatedUserID    = Auth::user()->id;
-    $volunteers->CreatedDate      = date('Y-m-d H:i:s');
-    $volunteers->EditedUser       = Auth::user()->FirstName." ".Auth::user()->LastName;
-    $volunteers->EditedUserID     = Auth::user()->id;
-    $volunteers->EditedDate       = date('Y-m-d H:i:s');
+    $user                   = User::where('id',Auth::user()->id)->first();
+    $user->FirstName        = Request::get('firstName');
+    $user->LastName         = Request::get('lastName');
+    $user->Email            = Request::get('email');
+    $user->Phone            = Request::get('phone');
+    $user->Occupation       = Request::get('occupation');
+    $user->District         = Request::get('district');
+    $user->State            = Request::get('state');
 
-    if (Request::hasFile('profleImage')) {
-      $file                       = Request::file('profleImage');
-      $extension                  = $file->getClientOriginalExtension();
-      $savedFileName              = date('d-m-Y H-i-s') . '.' . $extension;
-      $destinationPath            = public_path().'/SavedImages/Volunteers/' ;
-      $file->move($destinationPath,$savedFileName);
-
-      $volunteers->ProfileImage   = 'SavedImages/Volunteers/'.$savedFileName ;
+    if($user->TypeOfAccount == 'Volunteer'){
+      $user->FacebookLink     = Request::get('facebook');
+      $user->TwitterLink      = Request::get('twitter');
     }
 
-    $volunteers->save();
+    if (Request::hasFile('profileImage')) {
+      $file                       = Request::file('profileImage');
+      $extension                  = $file->getClientOriginalExtension();
+      $savedFileName              = date('d-m-Y H-i-s') . '.' . $extension;
+      $destinationPath            = public_path().'/SavedImages/User/' ;
+      $file->move($destinationPath,$savedFileName);
 
-    return redirect()->route('editVolunteerView',["saved" => "1"]);
+      $user->ProfileImage   = 'SavedImages/User/'.$savedFileName ;
+    }
+
+    $user->save();
+
+    return redirect()->route('editProfileView')->with('status', "Updated Successfully!");
+  }
+
+  public function delProfileImg(){
+    User::where('id',Auth::user()->id)->update(["ProfileImage" => ""]);
+    Session::flash('status', 'Image Deleted Successfully!'); 
+    return Response::json();
   }
 
 }
