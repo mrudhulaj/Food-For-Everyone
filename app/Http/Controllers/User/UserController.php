@@ -20,7 +20,7 @@ class UserController extends Controller
     $profile->isVolunteer    = false;
 
     if($profile->TypeOfAccount == 'Volunteer'){
-      $profile                 = Volunteers::where('CreatedUserID',Auth::user()->id)->first();
+      $profile                 = Volunteers::where('ID',Auth::user()->id)->first();
       $profile->isVolunteer    = true;
     }
   

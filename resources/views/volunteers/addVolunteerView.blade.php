@@ -57,33 +57,60 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
+                    <div class="row row-space " style="color: #00A348">
+                      <div class="profileImgDefault">
+                        
+                        @if(!$profile->ProfileImage)
+                          <i style="font-size: 120px;" class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        @else
+                          <img src="{{ url('images/volanteer_1.jpg') }}" alt="" style="border-radius: 50%;height: 170px;width: 160px;box-shadow: 0px 2px 20px 15px rgba(0, 0, 0, 0.08);">
+                        @endif
+
+                      </div>
+                      <div class="profileImgNonDefault hide">
+                        <i style="font-size: 120px;" class="fa fa-user-circle-o" aria-hidden="true"></i>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-offset-7 profileImgDiv" style="margin-bottom: 10px;margin-top: -10px;">
+                      @if($profile->ProfileImage)
+                        <label class="btn btn-default" style="background: transparent;border:none">
+                          <i id="delVolunteerImg" class="fa fa-trash" aria-hidden="true" style="font-size: 20px;color: #00a74a"></i>
+                        </label>
+                      @endif
+                      <label for="files" class="btn btn-default" style="background: transparent;border:none">
+                          <i class="fa fa-upload" style="font-size: 20px;color: #00a74a" aria-hidden="true"></i>
+                      </label>
+                      <input id="files" accept="image/*" type="file" class="btn btn-default" style="visibility:hidden;" name="profileImage"/>
+                    </div>
+
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstName" value="">
+                                <input class="input--style-4" type="text" name="firstName" value="{{$profile->FirstName}}">
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastName" value="">
+                                <input class="input--style-4" type="text" name="lastName" value="{{$profile->LastName}}">
                             </div>
                         </div>
                     </div>
 
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Occupation</label>
-                        <input class="input--style-4" type="text" name="occupation">
+                        <input class="input--style-4" type="text" name="occupation" value="{{$profile->Occupation}}">
                     </div>
 
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Email</label>
-                        <input class="input--style-4" type="text" name="email">
+                        <input class="input--style-4" type="text" name="email" value="{{$profile->Email}}">
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Phone</label>
-                        <input class="input--style-4" type="text" name="phone">
+                        <input class="input--style-4" type="text" name="phone" value="{{$profile->Phone}}">
                     </div>
 
                     <div class="row row-space" style="padding-right: 0px">
@@ -95,7 +122,7 @@
                                 </label>
                                 <select class="form-control input--style-4" style="" id="district" name="district">
                                     <option hidden selected="" value="">District</option>
-                                    <option value="Kerala">Kerala</option>
+                                    <option @if($profile->District) selected @endif value="Kerala">Kerala</option>
                                 </select>
                             </div>
                         </div>
@@ -107,7 +134,7 @@
                                 </label>
                                 <select class="form-control input--style-4" style="" id="state" name="state">
                                     <option hidden selected="" value="">State</option>
-                                    <option value="Calicut">Calicut</option>
+                                    <option value="Calicut" @if($profile->State) selected @endif>Calicut</option>
                                 </select>
                             </div>
                         </div>
@@ -124,19 +151,6 @@
                     title="Enter your twitter profile link here."></i>
                     <input class="input--style-4" type="text" name="twitter">
                   </div>
-
-                    <div class="input-group col-lg-12" style="margin-bottom: 0px;">
-                        <label class="label ffe-font">Profile Photo</label>
-
-                        <div class="col-md-12 input-group">
-                            <input class=" form-control input--style-4" id="fileName" type="text" style="height: 50px;"/>
-                            <div class="input-group-btn">
-                                <label for="files" class="btn btn-default input--style-4" style="height: 50px;border-radius: 0px 5px 5px 0px;">Browse</label>
-                                <input id="files" accept="image/*" type="file" class="btn btn-default" style="visibility:hidden;" name="profleImage"/>
-                            </div>
-                        </div>
-
-                    </div>
 
                     <div class="" style="text-align: center;">
                         <button type="button" id="submitbtn" class="btn button-bg-green"
@@ -259,6 +273,26 @@
 
     $('#confirmForm').click(function () {
           $('#addVolunteer').submit();
+    });
+
+    $('#delVolunteerImg').click(function () {
+      $.ajax({
+            url:'{{ route("delVolunteerImg") }}',
+            type:'GET',
+            success:function(data) {
+              if(data == "True"){
+                location.reload();
+              }
+              else{
+                $('.profileImgNonDefault').removeClass('hide');
+                $('.profileImgDefault').addClass('hide');
+              }
+            }
+      });
+    });
+
+    $('#files').change(function(){
+      $('#addVolunteer').submit();
     });
 
 

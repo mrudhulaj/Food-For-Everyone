@@ -8,20 +8,34 @@ use App\Models\Volunteers;
 use Request;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
-use App\Users;
+use App\User;
 
 class VolunteersController extends Controller
 {
     public function volunteersView(){
       Session::put('activeTab', 'VOLUNTEERS');
-      $volunteers   = Volunteers::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
-      $saved        = Request::has('saved') ? Request::get('saved') : 0;
+      $volunteers             = Volunteers::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
+      $saved                  = Request::has('saved') ? Request::get('saved') : 0;
+      if(Auth::check()){
+        $isUserVolunteerExist   = Volunteers::where('UserID',Auth::user()->id)->where('IsApproved',0)->exists();
+      }
+      else{
+        $isUserVolunteerExist = false;
+      }
 
-      return view('volunteers/volunteers',compact('volunteers','saved'));
+      return view('volunteers/volunteers',compact('volunteers','saved','isUserVolunteerExist'));
     }
 
   public function addVolunteerView(){
-      return view('volunteers/addVolunteerView');
+    $profile                 = User::where('id',Auth::user()->id)->first();
+    $profile->isVolunteer    = false;
+    Session::put('DefImgDel',0);
+
+    if($profile->TypeOfAccount == 'Volunteer'){
+      $profile                 = Volunteers::where('ID',Auth::user()->id)->first();
+      $profile->isVolunteer    = true;
+    }
+      return view('volunteers/addVolunteerView',compact('profile'));
   }
 
   public function addCauseView(){
@@ -30,6 +44,7 @@ class VolunteersController extends Controller
 
   public function addVolunteerSave(){
     $volunteers                   = new Volunteers();
+    $volunteers->UserID           = Auth::user()->id;
     $volunteers->FirstName        = Request::get('firstName');
     $volunteers->LastName         = Request::get('lastName');
     $volunteers->Occupation       = Request::get('occupation');
@@ -47,14 +62,20 @@ class VolunteersController extends Controller
     $volunteers->EditedUserID     = Auth::user()->id;
     $volunteers->EditedDate       = date('Y-m-d H:i:s');
 
-    if (Request::hasFile('profleImage')) {
-      $file                       = Request::file('profleImage');
+    if (Request::hasFile('profileImage')) {
+      $file                       = Request::file('profileImage');
       $extension                  = $file->getClientOriginalExtension();
       $savedFileName              = date('d-m-Y H-i-s') . '.' . $extension;
       $destinationPath            = public_path().'/SavedImages/Volunteers/' ;
       $file->move($destinationPath,$savedFileName);
 
       $volunteers->ProfileImage   = 'SavedImages/Volunteers/'.$savedFileName ;
+    }
+    else{
+      if(Session::get('DefImgDel') != 1){
+        $user                       = User::where('id',Auth::user()->id)->first();
+        $volunteers->ProfileImage   = $user->ProfileImage ;
+      }
     }
 
     $volunteers->save();
@@ -80,7 +101,7 @@ class VolunteersController extends Controller
     $volunteers->State            = Request::get('state');
     $volunteers->FacebookLink     = Request::get('facebook');
     $volunteers->TwitterLink      = Request::get('twitter');
-    $volunteers->IsApproved       = 0;
+    // $volunteers->IsApproved       = 0;
     $volunteers->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
     $volunteers->CreatedUserID    = Auth::user()->id;
     $volunteers->CreatedDate      = date('Y-m-d H:i:s');
@@ -88,8 +109,8 @@ class VolunteersController extends Controller
     $volunteers->EditedUserID     = Auth::user()->id;
     $volunteers->EditedDate       = date('Y-m-d H:i:s');
 
-    if (Request::hasFile('profleImage')) {
-      $file                       = Request::file('profleImage');
+    if (Request::hasFile('profileImage')) {
+      $file                       = Request::file('profileImage');
       $extension                  = $file->getClientOriginalExtension();
       $savedFileName              = date('d-m-Y H-i-s') . '.' . $extension;
       $destinationPath            = public_path().'/SavedImages/Volunteers/' ;
@@ -101,6 +122,18 @@ class VolunteersController extends Controller
     $volunteers->save();
 
     return redirect()->route('editVolunteerView',["saved" => "1"]);
+  }
+
+  public function delVolunteerImg(){
+    $volunteers = Volunteers::where('UserID',Auth::user()->id)->exists();
+    if($volunteers){
+      Volunteers::where('ID',Auth::user()->id)->update(["ProfileImage" => ""]);
+    }
+    else{
+      Session::put('DefImgDel',1);
+    }
+    $volunteers = $volunteers ? 'True' : "False" ;
+    return $volunteers;
   }
 
 }

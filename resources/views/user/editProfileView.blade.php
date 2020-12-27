@@ -225,9 +225,6 @@
       });
     });
 
-    $('#files').change(function(){
-      $('#editProfile').submit();
-    });
 
 </script>
 @stop

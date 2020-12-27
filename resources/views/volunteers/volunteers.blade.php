@@ -41,21 +41,27 @@
   <div class="container" style="padding: 0px 10px 0px 10px;">
     @include('templates.alertSuccessMessage')
   </div>
-    <h2 style="margin-top: 0px;padding-left: 232px;">
+    <h2 style="margin-top: 0px;@guest padding-left: 232px; @else @if(!$isUserVolunteerExist) padding-left: 232px; @endif @endguest">
       Our volunteers
-      <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
           @guest
-            <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Become A Volunteer</a>
-          @else
-            <a class="a-none" href="{{ route('addVolunteerView') }}">
+              <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
+                    <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Become A Volunteer</a>
+              </button>
+            @else
               @if(Session::get('user')=="Admin" || Session::get('user')=="Volunteer")
-                Add Volunteer
-              @else
-                Become A Volunteer
+                <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
+                    <a class="a-none" href="{{ route('addVolunteerView') }}">
+                        Add Volunteer
+                    </a>
+                </button>
+              @elseif(!$isUserVolunteerExist)
+                <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
+                  <a class="a-none" href="{{ route('addVolunteerView') }}">
+                    Become A Volunteer
+                  </a>
+                </button>
               @endif
-            </a>
           @endguest
-      </button>
     </h2>
     <p>Meet our superhero's.The people who bring joy to our kids and elders.The silent warriors.</p>
     @if(count($volunteers) == 0) <p style="text-align: center;margin-top: 100px"><b>No volunteers found.</b></p> @endif
