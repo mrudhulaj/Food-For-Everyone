@@ -54,7 +54,7 @@
                         Add Volunteer
                     </a>
                 </button>
-              @elseif(!$isUserVolunteerExist)
+              @elseif(!$isUserVolunteerExist && $role->hasPermissionTo('create Volunteers'))
                 <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
                   <a class="a-none" href="{{ route('addVolunteerView') }}">
                     Become A Volunteer

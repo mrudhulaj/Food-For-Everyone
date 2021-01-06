@@ -9,13 +9,15 @@ use Request;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
 use App\User;
+use Spatie\Permission\Models\Role;
 
 class VolunteersController extends Controller
 {
     public function volunteersView(){
       Session::put('activeTab', 'VOLUNTEERS');
-      $volunteers             = Volunteers::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
-      $saved                  = Request::has('saved') ? Request::get('saved') : 0;
+      $volunteers   = Volunteers::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
+      $role         = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
+      $saved        = Request::has('saved') ? Request::get('saved') : 0;
       if(Auth::check()){
         $isUserVolunteerExist   = Volunteers::where('UserID',Auth::user()->id)->where('IsApproved',0)->exists();
       }
@@ -23,7 +25,7 @@ class VolunteersController extends Controller
         $isUserVolunteerExist = false;
       }
 
-      return view('volunteers/volunteers',compact('volunteers','saved','isUserVolunteerExist'));
+      return view('volunteers/volunteers',compact('volunteers','saved','isUserVolunteerExist','role'));
     }
 
   public function addVolunteerView(){
