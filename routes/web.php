@@ -55,9 +55,13 @@
     Route::get('contact-us', ['as' => 'contactUsView','uses' => 'ContactUs\ContactUsController@contactUsView']);
     Route::post('save-contact-us', ['as' => 'saveContactUs','uses' => 'ContactUs\ContactUsController@saveContactUs']);
 
+  //Donation Modal
+    Route::post('add-donation', ['as' => 'addDonation','uses' => 'Donation\DonationController@addDonation']);
+
   // Authentication
-  Auth::routes();
-  Route::get('check-email-exist', ['as' => 'checkEmailExist','uses' => 'Auth\RegisterController@checkEmailExist']);
+    Auth::routes();
+    Route::get('check-email-exist', ['as' => 'checkEmailExist','uses' => 'Auth\RegisterController@checkEmailExist']);
+
 // End: Normal Views
 
 // Begin: Admin Views
