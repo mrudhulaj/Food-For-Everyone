@@ -6,18 +6,17 @@
         opacity: 1;
     }
 
-    .our_activity .single-Promo h2::before{
-      background: none !important;
+    .our_activity .single-Promo h2::before {
+        background: none !important;
     }
 
-    .wrapper section>h2::before{
-      background: none !important;
+    .wrapper section>h2::before {
+        background: none !important;
     }
 
-    .cust-underline{
-      border-bottom: 2px solid #01d262 !important;
+    .cust-underline {
+        border-bottom: 2px solid #01d262 !important;
     }
-
 
 </style>
 @section('content')
@@ -69,9 +68,9 @@
 
 <section class="our_activity">
     <h2>
-      <span class="cust-underline">
-        OUR ACTIVITIES
-      </span>
+        <span class="cust-underline">
+            OUR ACTIVITIES
+        </span>
     </h2>
     <p>We continuosly strive to provide the best care and feed every needy people out there. Please take a look at our
         activities and volunteer or contribute in any way you can !</p>
@@ -82,14 +81,15 @@
                     <div class="promo-icon">
                         <i class="material-icons">near_me</i>
                     </div>
-                    <a href="{{route('causesView')}}" class="a-none ffe-font">
-                      <h2 style="text-align: center;font-size: 22px;text-decoration: underline;" >Causes</h2>
-                      <p>We are continously trying to expand our reach to different areas where people need support to
-                          help build a better future.
-                          <br>
+                    <a href="{{ route('causesView') }}" class="a-none ffe-font">
+                        <h2 style="text-align: center;font-size: 22px;text-decoration: underline;">Causes</h2>
+                        <p>We are continously trying to expand our reach to different areas where people need support to
+                            help build a better future.
+                            <br>
                         </p>
                         <p style="margin-top: 16px;">
-                          Click <a href="{{route('causesView')}}" class="a-none" style="color: #00A348">here</a> to learn more about the causes we support currently.</p>
+                            Click <a href="{{ route('causesView') }}" class="a-none"
+                                style="color: #00A348">here</a> to learn more about the causes we support currently.</p>
                     </a>
                 </div>
             </div>
@@ -98,15 +98,16 @@
                     <div class="promo-icon">
                         <i class="material-icons">favorite</i>
                     </div>
-                    <a href="{{route('volunteersView')}}" class="a-none ffe-font">
-                      <h2 style="text-align: center;font-size: 22px;text-decoration: underline;" >Volunteering</h2>
-                      <p>We are always looking for genuine, kind hearted volunters to support & participate in
-                          events. 
-                          <br>
+                    <a href="{{ route('volunteersView') }}" class="a-none ffe-font">
+                        <h2 style="text-align: center;font-size: 22px;text-decoration: underline;">Volunteering</h2>
+                        <p>We are always looking for genuine, kind hearted volunters to support & participate in
+                            events.
+                            <br>
                         </p>
                         <p style="margin-top: 37px;">
-                          Click <a href="{{route('volunteersView')}}" class="a-none" style="color: #00A348">here</a> to learn more about it and how you can join our
-                          family.</p>
+                            Click <a href="{{ route('volunteersView') }}" class="a-none"
+                                style="color: #00A348">here</a> to learn more about it and how you can join our
+                            family.</p>
                     </a>
                 </div>
             </div>
@@ -115,13 +116,15 @@
                     <div class="promo-icon">
                         <i class="material-icons">dashboard</i>
                     </div>
-                    <a href="{{route('eventsView')}}" class="a-none ffe-font">
-                      <h2 style="text-align: center;font-size: 22px;text-decoration: underline;" >Events</h2>
-                      <p>We always conduct transparent events with the only aim of helping the needy people.We are always open to ideas & events.
-                          <br>
-                      </p>
-                      <p>
-                          Click <a href="{{route('eventsView')}}" class="a-none" style="color: #00A348">here</a> to learn more about out our events.</p>
+                    <a href="{{ route('eventsView') }}" class="a-none ffe-font">
+                        <h2 style="text-align: center;font-size: 22px;text-decoration: underline;">Events</h2>
+                        <p>We always conduct transparent events with the only aim of helping the needy people.We are
+                            always open to ideas & events.
+                            <br>
+                        </p>
+                        <p>
+                            Click <a href="{{ route('eventsView') }}" class="a-none"
+                                style="color: #00A348">here</a> to learn more about out our events.</p>
                     </a>
                 </div>
             </div>
@@ -153,50 +156,39 @@
 </section>
 <section class="events_section_area">
     <h2>
-      <span class="cust-underline">
-        UPCOMING EVENTS
-      </span>
+        <span class="cust-underline">
+            UPCOMING EVENTS
+        </span>
     </h2>
     <p>Missed our previous events? Don't worry, we have plenty of them coming up!</p>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-xs-12">
-                <div class="events_single">
-                    <img src="{{ url('images/events_single_one.jpg') }}">
-                    <p><span class="event_left"><i class="material-icons">access_time</i>9:00 am - 2:00 pm</span><span
-                            class="event_right"><i class="material-icons">location_on</i>Nagaland</span></p>
-                    <div class="clear"></div>
-                    <h3 style="text-decoration: none;">Angels Orphanage</h3>
-                    <h6>We are planning a program to engage with our beatiful kids from Angels Orphanage to spend some
-                        quality time with them and give them some tasty launch.
-                        <br>
-                        Click <span><a href="#" style="color: #00A348;text-decoration: none"> here </a></span>to see more details.</h6>
+            @foreach($events as $eventsData)
+                <div class="col-md-4 col-xs-12">
+                    <div class="events_single">
+                        <img style="width: 351px;height: 207px;border-radius: 10px;" src="{{ asset($eventsData->EventImage) }}">
+                        <p><span class="event_left"><i
+                                    class="material-icons">access_time</i>{{ $eventsData->BeginTime }} -
+                                {{ $eventsData->EndTime }}</span>
+                            <span class="event_right"><i
+                                    class="material-icons">location_on</i>{{ $eventsData->District.", ".$eventsData->State }}</span>
+                        </p>
+                        <div class="clear"></div>
+                        <h3 style="text-decoration: none;"> <a href="{{route('eventDetailsView',['eventID' => Crypt::encrypt($eventsData->ID)])}}" class="a-none">{{$eventsData->EventName}}</a> </h3>
+                        <h6 style="min-height: 128px;">{{$eventsData->EventShortDescription}}</h6>
+                    </div>
+                    <div style="text-align: center;">
+                      <span>
+                        Click 
+                          <a href="{{route('eventDetailsView',['eventID' => Crypt::encrypt($eventsData->ID)])}}" style="color: #00A348;text-decoration: none"> 
+                            here 
+                          </a>
+                        to see more details.
+                      </span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-                <div class="events_single">
-                    <img src="{{ url('images/events_single_two.jpg') }}">
-                    <p><span class="event_left"><i class="material-icons">access_time</i>2:00 pm - 9:00 pm</span><span
-                            class="event_right"><i class="material-icons">location_on</i>Chennai</span></p>
-                    <h3 style="text-decoration: none;">Goverment Old Age Home</h3>
-                    <h6>We are planning to visit our charming grandma's and grandpa's at Government Old Age Home,
-                        Chennai.We have some amazing activites planned along with a fabulous dinner.
-                        <br>
-                        Click <span><a href="#" style="color: #00A348;text-decoration: none"> here </a></span>to see more details.</h6>
-                </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-                <div class="events_single">
-                    <img src="{{ url('images/events_single_three.jpg') }}">
-                    <p><span class="event_left"><i class="material-icons">access_time</i>9:00 pm - 3:00 pm</span><span
-                            class="event_right"><i class="material-icons">location_on</i>Kerala</span></p>
-                    <h3 style="text-decoration: none;">Mytra School For Special Children</h3>
-                    <h6>We are planning to see our friends from Mytra School For Special Children, Kerala.We have
-                        arranged a grand breakfast and lunch along with some fun games and activities.
-                        <br>
-                        Click <span><a href="#" style="color: #00A348;text-decoration: none"> here </a></span>to see more details.</h6>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </div>
 </section>
@@ -238,9 +230,9 @@
 </div>
 <section class="our_cuauses">
     <h2>
-      <span class="cust-underline">
-        OUR CAUSES
-      </span>
+        <span class="cust-underline">
+            OUR CAUSES
+        </span>
     </h2>
     <p>We also believe in investing for a better future for our kids and also to take care of our old pals by building
         them a place which they deserve.</p>
@@ -263,7 +255,8 @@
                                 <p class="progress-left">Raised: <span>1200 ₹</span></p>
                                 <p class="progress-right">Goal: <span>2400 ₹</span></p>
                             </div>
-                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE NOW</a></h2>
+                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE
+                                    NOW</a></h2>
                         </div>
                     </div>
                     <div class="item">
@@ -281,7 +274,8 @@
                                 <p class="progress-left">Raised: <span>1200 ₹</span></p>
                                 <p class="progress-right">Goal: <span>2400 ₹</span></p>
                             </div>
-                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE NOW</a></h2>
+                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE
+                                    NOW</a></h2>
                         </div>
                     </div>
                     <div class="item">
@@ -300,7 +294,8 @@
                                 <p class="progress-left">Raised: <span>1200 ₹</span></p>
                                 <p class="progress-right">Goal: <span>2400 ₹</span></p>
                             </div>
-                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE NOW</a></h2>
+                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE
+                                    NOW</a></h2>
                         </div>
                     </div>
                 </div>
@@ -372,9 +367,9 @@
 <div class="clear"></div>
 <section class="volunteer_area">
     <h2>
-      <span class="cust-underline">
-        Our Volunteers
-      </span>
+        <span class="cust-underline">
+            Our Volunteers
+        </span>
     </h2>
     <p>Meet our superhero's.The people who bring joy to our kids and elders.The silent warriors.</p>
     <div class="container">
@@ -451,9 +446,9 @@
 </section>
 <section class="letast_news">
     <h2>
-      <span class="cust-underline">
-        Latest News From Around The World
-      </span>
+        <span class="cust-underline">
+            Latest News From Around The World
+        </span>
     </h2>
     <p>Hungry stomach's and stretching arm's are not just around us, they are all over the world. </p>
     <div class="container">
@@ -499,9 +494,9 @@
 </section>
 <section>
     <h2 style="margin-top: 0px;">
-      <span class="cust-underline">
-        Our Supporting Partners
-      </span>
+        <span class="cust-underline">
+            Our Supporting Partners
+        </span>
     </h2>
 </section>
 <section class="footer_carosal">
@@ -533,18 +528,19 @@
 @include('templates.defaultModal', ['title' => 'Logged Out','message' => 'You have successfully logged out.'])
 @stop
 
-<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-<script src="{{ asset('vendor/jquery-validation/dist/jquery.validate.min.js') }}" defer></script>
-<script>
-    $(document).ready(function () {
+    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-validation/dist/jquery.validate.min.js') }}" defer>
+    </script>
+    <script>
+        $(document).ready(function () {
 
-      // Display Logged out modal after logging out
-      var authenticated = "{{Session::get('authenticated')}}";
-      if( authenticated == "false" ){
-        jQuery.noConflict();
-        $('#defaultModal').modal('show');
-        "{{Session::put('authenticated','')}}";
-      }
-    });
-    
-</script>
+            // Display Logged out modal after logging out
+            var authenticated = "{{ Session::get('authenticated') }}";
+            if (authenticated == "false") {
+                jQuery.noConflict();
+                $('#defaultModal').modal('show');
+                "{{ Session::put('authenticated','') }}";
+            }
+        });
+
+    </script>
