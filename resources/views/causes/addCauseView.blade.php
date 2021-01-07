@@ -78,11 +78,11 @@
 
                   <div class="input-group col-lg-12">
                       <label class="label ffe-font">Email (For more infrmation)</label>
-                      <input class="input--style-4" type="text" name="email">
+                      <input class="input--style-4" type="text" name="email" value="">
                   </div>
                   <div class="input-group col-lg-12">
-                      <label class="label ffe-font">Phone (For more information</label>
-                      <input class="input--style-4" type="text" name="phone">
+                      <label class="label ffe-font">Phone (For more information)</label>
+                      <input class="input--style-4" type="text" name="phone" value="">
                   </div>
                   <div class="row row-space" style="padding-right: 0px">
                       <div class="col-lg-4">

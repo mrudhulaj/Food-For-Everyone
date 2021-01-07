@@ -54,13 +54,13 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstName" value="">
-                            </div>
+                                <input class="input--style-4" type="text" name="firstName" value="{{Auth::user()->FirstName}}" readonly>
+                              </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastName" value="">
+                                <input class="input--style-4" type="text" name="lastName" value="{{Auth::user()->LastName}}" readonly>
                             </div>
                         </div>
                     </div>
@@ -127,11 +127,11 @@
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Email</label>
-                        <input class="input--style-4" type="text" name="email" value="">
+                        <input class="input--style-4" type="text" name="email" value="{{Auth::user()->Email}}" readonly>
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Phone</label>
-                        <input class="input--style-4" type="text" name="phone" value="">
+                        <input class="input--style-4" type="text" name="phone" value="{{Auth::user()->Phone}}" readonly>
                     </div>
                     <div class="row row-space" style="padding-right: 0px">
                       <div class="col-lg-4">
