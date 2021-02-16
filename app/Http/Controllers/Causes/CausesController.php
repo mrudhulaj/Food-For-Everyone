@@ -23,6 +23,12 @@ class CausesController extends Controller
       }
 
       $causes   = Causes::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
+      foreach($causes as $causeData){
+        if($causeData->ExpectedAmount != 0){
+          $causeData->raisedAmountPercentage = ($causeData->RaisedAmount/$causeData->ExpectedAmount)*100;
+        }
+      }
+
       $saved    = Request::has('saved') ? Request::get('saved') : 0;
     
       return view('causes/causes',compact('causes','role','saved'));
@@ -31,6 +37,9 @@ class CausesController extends Controller
     public function causesDetailsView(){
       $causeID    = Crypt::decrypt(Request::get('causeID'));
       $causeData  = Causes::where('ID',$causeID)->first();
+      if($causeData->ExpectedAmount != 0){
+        $causeData->raisedAmountPercentage = ($causeData->RaisedAmount/$causeData->ExpectedAmount)*100;
+      }
 
       return view('causes/causesDetails',compact('causeData'));
     }
@@ -47,6 +56,7 @@ class CausesController extends Controller
       $causes->ExpectedAmount         = Request::get('expectedAmount');
       $causes->Email                  = Request::get('email');
       $causes->Phone                  = Request::get('phone');
+      $causes->Landmark               = Request::get('landmark');
       $causes->District               = Request::get('district');
       $causes->State                  = Request::get('state');
       $causes->City                   = Request::get('city');
@@ -92,6 +102,7 @@ class CausesController extends Controller
     $causes->Email                  = Request::get('email');
     $causes->Phone                  = Request::get('phone');
     $causes->District               = Request::get('district');
+    $causes->Landmark               = Request::get('landmark');
     $causes->State                  = Request::get('state');
     $causes->City                   = Request::get('city');
     $causes->IsApproved             = 0;

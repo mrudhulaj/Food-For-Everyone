@@ -55,6 +55,7 @@ class EventsController extends Controller
       $events->EndTime          = $endTime;
       $events->Email            = Request::get('email');
       $events->Phone            = Request::get('phone');
+      $events->Landmark         = Request::get('landmark');
       $events->District         = Request::get('district');
       $events->State            = Request::get('state');
       $events->City             = Request::get('city');
@@ -114,6 +115,7 @@ class EventsController extends Controller
       $events->EndTime          = $endTime;
       $events->Email            = Request::get('email');
       $events->Phone            = Request::get('phone');
+      $events->Landmark         = Request::get('landmark');
       $events->District         = Request::get('district');
       $events->State            = Request::get('state');
       $events->City             = Request::get('city');

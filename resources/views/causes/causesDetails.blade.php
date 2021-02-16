@@ -132,12 +132,12 @@
 						{{-- Begin:  Progress Bar --}}
 						<div class="progress-div col-lg-offset-3 col-lg-6" style="height: 215px;margin-top: 15px;">
 							<div class="progress-text">
-								<p class="progress-top">50%</p>
+								<p class="progress-top">{{$causeData->raisedAmountPercentage}}%</p>
                 <div class="progress">
 									<div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-									aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
+									aria-valuemax="100" style="width:{{$causeData->raisedAmountPercentage}}%;background-color: #01d262;"></div>
                 </div>
-                <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
+                <p class="progress-left">Raised: <span class="progress-amount">{{ number_format($causeData->RaisedAmount) }} ₹</span></p>
                 <p class="progress-right">Goal: <span class="progress-amount">{{number_format($causeData->ExpectedAmount)}} ₹</span></p>
 							</div>
 							<h2 class="borderes" style="text-align: center;margin-top: 100px;"><a style="text-decoration: none;" href="#" data-toggle="modal"

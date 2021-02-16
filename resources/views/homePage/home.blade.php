@@ -18,6 +18,162 @@
         border-bottom: 2px solid #01d262 !important;
     }
 
+    /* Causes css */
+
+    .box {
+        width: 350px;
+        min-height: 660px;
+    }
+
+    .mainbox {
+        margin-bottom: 80px;
+        border-radius: 13px;
+        box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);
+        display: inline-block;
+        margin-right: 50px;
+    }
+
+    .box .box-content h2 {
+        color: #3c354e;
+        font-family: "Roboto", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 35px 0 15px;
+    }
+
+    hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 2px solid #01d262 !important;
+        width: 50% !important;
+    }
+
+    .box-p,
+    .progress-text {
+        color: #595959;
+        font-family: "Roboto", sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        margin: 0;
+        text-align: center;
+    }
+
+    .progress-text {
+        margin: 0 auto;
+        position: relative;
+        text-align: center;
+    }
+
+    .progress {
+        background-color: #e5e5e5 !important;
+        height: 10px !important;
+        margin-top: 20px !important;
+        max-width: 100% !important;
+    }
+
+    .progress-amount {
+        color: #01d262;
+    }
+
+    .progress-left {
+        left: 0;
+        margin-top: 15px;
+        position: absolute;
+    }
+
+    .progress-right {
+        right: 0;
+        margin-top: 15px;
+        position: absolute;
+    }
+
+    .box-content h2 a {
+        background: #fff none repeat scroll 0 0;
+        border-radius: 30px;
+        color: #05ce68;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 15px 40px;
+        text-decoration: none;
+        border: 1px solid #05ce68;
+    }
+
+    .box-content h2 a:hover {
+        background: #01d262 none repeat scroll 0 0;
+        color: white;
+    }
+
+    .img-div {
+        overflow: hidden;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        display: flex;
+        justify-content: center;
+    }
+
+    .learn-more {
+        color: #00ab47;
+    }
+
+    .learn-more:hover {
+        color: #00A348 !important;
+        font-weight: bold !important;
+        text-decoration: none;
+    }
+
+    .h2-title:hover {
+        color: #00A348 !important;
+        font-weight: bold !important;
+        text-decoration: none;
+    }
+
+    /* End causes css */
+
+    .cust-volunteer>.owl-stage-outer{
+      padding-left: 100px;
+    }
+
+    /* Begin: Volunteers css */
+
+    .item-vol {
+        box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.15);
+        width: 365px;
+        margin-right: 10px;
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
+
+    .item-vol .text {
+        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
+        float: right;
+        width: 205px;
+        padding: 5px 30px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .item-vol .text h5 a{
+      padding-right: 10px;
+    }
+
+    .cust-img-div-vol{
+      width: 160px !important;
+      height: 178px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
+      border-radius: 10px 0px 0px 10px;
+    }
+
+    /* End:Volunteers css */
+
+    .h2-title:hover {
+      color: #00A348 !important;
+      font-weight: bold !important;
+      text-decoration: none;
+    }
+
 </style>
 @section('content')
 {{-- Main Content Begins --}}
@@ -139,17 +295,18 @@
                 <p>We understand everyone's struggles, but it's the thought that always counts. If you like , it's
                     always possible to contribute to help our volunteers and the people. Our activites and events are
                     always transparent and you are always welcome to attend any of our events.</p>
-                <h4 style="margin-top: 35px;">Next upcoming event at Government Childrens Hospital, Calicut</h4>
+                <h4 style="margin-top: 35px;">Next upcoming event at {{$latestEvent->Landmark.", ".$latestEvent->District}}</h4>
+                <h4 style="margin-top: 35px;">Latest cause we are supporting: {{$latestCause->CauseName." at ".$latestCause->District.", ".$latestCause->State}}</h4>
                 <div class="progress-text">
-                    <p class="progress-top">50%</p>
+                    <p class="progress-top">{{ number_format($latestCause->RaisedAmount) }}%</p>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                            aria-valuemax="100" style="width:50%"></div>
+                            aria-valuemax="100" style="width:{{ number_format($latestCause->RaisedAmount) }}%"></div>
                     </div>
-                    <p class="progress-left">Raised: 12,500 ₹</p>
-                    <p class="progress-right">Goal: 25,000 ₹</p>
+                    <p class="progress-left">Raised: {{ number_format($latestCause->RaisedAmount) }} ₹</p>
+                    <p class="progress-right">Goal: {{ number_format($latestCause->ExpectedAmount) }} ₹</p>
                 </div>
-                <h2><a href="#" data-toggle="modal" data-target="#donationModal">DONATE NOW</a></h2>
+                <h2><a href="#" data-toggle="modal" class="donateButton" data-causeID="{{$latestCause->ID}}" data-target="#donationModal">DONATE NOW FOR {{strtoupper($latestCause->CauseName)}}</a></h2>
             </div>
         </div>
     </div>
@@ -161,32 +318,44 @@
         </span>
     </h2>
     <p>Missed our previous events? Don't worry, we have plenty of them coming up!</p>
+    <p>
+      <a href="{{route('eventsView',)}}" style="color: #00A348;text-decoration: none"> 
+      See all 
+      </a>
+    </p>
     <div class="container">
         <div class="row">
             @foreach($events as $eventsData)
-                <div class="col-md-4 col-xs-12">
-                    <div class="events_single">
-                        <img style="width: 351px;height: 207px;border-radius: 10px;" src="{{ asset($eventsData->EventImage) }}">
-                        <p><span class="event_left"><i
-                                    class="material-icons">access_time</i>{{ $eventsData->BeginTime }} -
-                                {{ $eventsData->EndTime }}</span>
-                            <span class="event_right"><i
-                                    class="material-icons">location_on</i>{{ $eventsData->District.", ".$eventsData->State }}</span>
-                        </p>
-                        <div class="clear"></div>
-                        <h3 style="text-decoration: none;"> <a href="{{route('eventDetailsView',['eventID' => Crypt::encrypt($eventsData->ID)])}}" class="a-none">{{$eventsData->EventName}}</a> </h3>
-                        <h6 style="min-height: 128px;">{{$eventsData->EventShortDescription}}</h6>
-                    </div>
-                    <div style="text-align: center;">
-                      <span>
-                        Click 
-                          <a href="{{route('eventDetailsView',['eventID' => Crypt::encrypt($eventsData->ID)])}}" style="color: #00A348;text-decoration: none"> 
-                            here 
-                          </a>
-                        to see more details.
-                      </span>
-                    </div>
-                </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="events_single" style="height: 570px;width: 351px;border-radius: 13px;
+              box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);">
+                  <div style="width: 351px;height: 207px;overflow: hidden;border-radius: 13px 13px 0px 0px;">
+                      <img style="width: 351px;height: 207px;" src="{{ asset($eventsData->EventImage) }}">
+                  </div>
+                  <div style="padding: 10px;">
+                    <p><span class="event_left"><i
+                      class="material-icons">access_time</i>{{ $eventsData->BeginTime }} -
+                  {{ $eventsData->EndTime }}</span>
+                  <br>
+                    <span class="event_right" style="right: auto"><i
+                      class="material-icons">location_on</i>{{$eventsData->Landmark.", ".$eventsData->City.", ".$eventsData->District.", ".$eventsData->State}}</span>
+                     </p>
+                    <div class="clear"></div>
+                    <h3 style="text-decoration: none;"> <a href="{{route('eventDetailsView',['eventID' => Crypt::encrypt($eventsData->ID)])}}" class="a-none">{{$eventsData->EventName}}</a> </h3>
+                    <h6 style="min-height: 128px;">{{$eventsData->EventShortDescription}}</h6>
+                        <br>
+                  </div>
+                  <div style="text-align: center;">
+                    <span>
+                      Click 
+                        <a href="{{route('eventDetailsView',['eventID' => Crypt::encrypt($eventsData->ID)])}}" style="color: #00A348;text-decoration: none"> 
+                          here 
+                        </a>
+                      to see more details.
+                    </span>
+                  </div>
+              </div>
+          </div>
             @endforeach
 
         </div>
@@ -200,28 +369,28 @@
             <div class="col-md-3 col-sm-3 col-xs-6 for-border">
                 <div class="block">
                     <p><i class="material-icons">favorite</i></p>
-                    <p class="counter-wrapper"><span class="white-bold">117</span></p>
-                    <p class="text-block">Donaters</p>
+                    <p class="counter-wrapper"><span class="white-bold">{{$countItems['donations']}}</span></p>
+                    <p class="text-block">Donations</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 for-border">
                 <div class="block">
                     <p><i class="material-icons">language</i></p>
-                    <p class="counter-wrapper"><span class="white-bold">37</span></p>
-                    <p class="text-block">Places</p>
+                    <p class="counter-wrapper"><span class="white-bold">{{$countItems['events']}}</span></p>
+                    <p class="text-block">Events</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 for-border">
                 <div class="block">
                     <p><i class="material-icons">person_add</i></p>
-                    <p class="counter-wrapper"><span class="white-bold">18</span></p>
+                    <p class="counter-wrapper"><span class="white-bold">{{$countItems['volunteers']}}</span></p>
                     <p class="text-block">Volunteers</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 for-border">
                 <div class="block">
                     <p><i class="material-icons">people</i></p>
-                    <p class="counter-wrapper"><span class="white-bold">348</span></p>
+                    <p class="counter-wrapper"><span class="white-bold">{{$countItems['food']}}</span></p>
                     <p class="text-block">People Served</p>
                 </div>
             </div>
@@ -236,130 +405,84 @@
     </h2>
     <p>We also believe in investing for a better future for our kids and also to take care of our old pals by building
         them a place which they deserve.</p>
+    <p>
+      <a href="{{route('causesView',)}}" style="color: #00A348;text-decoration: none"> 
+      See all 
+      </a>
+    </p>
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="our_cuauses_single owl-carousel owl-theme">
-                    <div class="item">
-                        <img src="{{ url('images/our_cuauses_one.jpg') }}">
-                        <div class="for_padding">
-                            <h2>FUTURE FOR CHILDREN</h2>
-                            <p style="height: 120px;">Join us in helping build our bright youngsters a school to
-                                showcase their skills and to make them a change and making the world a better place.</p>
-                            <div class="progress-text">
-                                <p class="progress-top">50%</p>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                        aria-valuemax="100" style="width:50%"></div>
-                                </div>
-                                <p class="progress-left">Raised: <span>1200 ₹</span></p>
-                                <p class="progress-right">Goal: <span>2400 ₹</span></p>
+            <div class="col-md-12" style="margin-top: 50px;">
+                {{-- If Causes <= 2 use static items else uses carousel items.Done to avoid carousel style breaking --}}
+                @if(count($causes) <= 2)
+                    @foreach($causes as $causesData)
+                        <div class="box mainbox">
+                            <div class="img-div">
+                                <img src="{{ asset($causesData->Image) }}"
+                                    style="border-top-left-radius: inherit;border-top-right-radius: inherit;width: 420px;height: 220px;">
                             </div>
-                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE
-                                    NOW</a></h2>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="{{ url('images/our_cuauses_two.jpg') }}">
-                        <div class="for_padding">
-                            <h2>CARE HOME FOR ELDERS</h2>
-                            <p style="height: 120px;">Let's not forget how we got here.Join us in building our elders a
-                                safe and protective home to assure them that kindness still exists.</p>
-                            <div class="progress-text">
-                                <p class="progress-top">50%</p>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                        aria-valuemax="100" style="width:50%"></div>
+                            <div class="box-content" style="padding: 0 30px;">
+                                <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}"
+                                    class="h2-title">
+                                    <h2 style="text-align: center;text-transform: uppercase;" class="h2-title">
+                                        {{ $causesData->CauseName }}
+                                    </h2>
+                                </a>
+                                <p class="box-p" style="height: 120px;margin-top: 30px;">
+                                    {{ $causesData->CauseShortDescription }}
+                                    <br>
+                                    <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}"
+                                        class="learn-more">
+                                        Learn more.
+                                    </a>
+                                </p>
+                                <div class="progress-text">
+                                    <p class="progress-top">{{ number_format($causesData->RaisedAmount) }}%</p>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="50"
+                                            aria-valuemin="0" aria-valuemax="100"
+                                            style="width:{{ number_format($causesData->RaisedAmount) }}%;background-color: #01d262;"></div>
+                                    </div>
+                                    <p class="progress-left">Raised: <span class="progress-amount">{{ number_format($causesData->RaisedAmount) }} ₹</span></p>
+                                    <p class="progress-right">Goal: <span
+                                            class="progress-amount">{{ number_format($causesData->ExpectedAmount) }}
+                                            ₹</span>
+                                    </p>
                                 </div>
-                                <p class="progress-left">Raised: <span>1200 ₹</span></p>
-                                <p class="progress-right">Goal: <span>2400 ₹</span></p>
+                                <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a
+                                        data-toggle="modal" class="donateButton" data-causeID="{{$causesData->ID}}" data-target="#donationModal" href="#">DONATE NOW</a></h2>
                             </div>
-                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE
-                                    NOW</a></h2>
                         </div>
+                    @endforeach
+                @else
+                    <div class="our_cuauses_single owl-carousel owl-theme">
+                      @foreach($causes as $causesData)
+                          <div class="item">
+                              <img src="{{ asset($causesData->Image) }}" style="border-radius: 10px 10px 0px 0px;">
+                              <div class="for_padding">
+                                <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}"
+                                  class="h2-title">
+                                  <h2 class="h2-title">
+                                      {{ $causesData->CauseName }}
+                                  </h2>
+                              </a>
+                                  <p style="height: 120px;">{{ $causesData->CauseShortDescription }}</p>
+                                  <div class="progress-text">
+                                      <p class="progress-top">{{ number_format($causesData->RaisedAmount) }}%</p>
+                                      <div class="progress">
+                                          <div class="progress-bar" role="progressbar" aria-valuenow="50"
+                                              aria-valuemin="0" aria-valuemax="100" style="width:{{ number_format($causesData->RaisedAmount) }}%"></div>
+                                      </div>
+                                      <p class="progress-left">Raised: <span>{{ number_format($causesData->RaisedAmount) }}₹</span></p>
+                                      <p class="progress-right">Goal: <span>{{ number_format($causesData->ExpectedAmount) }}₹</span></p>
+                                  </div>
+                                  <h2 class="borderes"><a href="#" class="donateButton" data-causeID="{{$causesData->ID}}" data-toggle="modal" data-target="#donationModal">DONATE
+                                          NOW</a></h2>
+                              </div>
+                          </div>
+                      @endforeach
                     </div>
-                    <div class="item">
-                        <img src="{{ url('images/our_cuauses_three.jpg') }}">
-                        <div class="for_padding">
-                            <h2>CHARITABLE HOSPITAL FOR ALL</h2>
-                            <p style="height: 120px;">The most helpless one's are the most disease prone
-                                one's.Malnutrition , unhygenic living conditions comes at a cost.But we help them
-                                recover for a better tommorow.Join us in helping this dream a possibility.</p>
-                            <div class="progress-text">
-                                <p class="progress-top">50%</p>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                                        aria-valuemax="100" style="width:50%"></div>
-                                </div>
-                                <p class="progress-left">Raised: <span>1200 ₹</span></p>
-                                <p class="progress-right">Goal: <span>2400 ₹</span></p>
-                            </div>
-                            <h2 class="borderes"><a href="#" data-toggle="modal" data-target="#donationModal">DONATE
-                                    NOW</a></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="donors">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="donors_input">
-                    <h2>DONATE NOW</h2>
-                    <form action="#" method="post">
-                        <p class="amount">
-                            <label for="usd">AMOUNT : </label>
-                            <input type="radio" name="usd" id="usd" checked>20 ₹
-                            <input type="radio" name="usd" id="usd">50 ₹
-                            <input type="radio" name="usd" id="usd">100 ₹</p>
-                        <p class="type">
-                            <label for="type">TYPE : </label>
-                            <input type="radio" name="time" id="type" checked>One Time
-                            <input type="radio" name="time" id="type">Monthly
-                            <input type="radio" name="time" id="type">Yearly <br>
-                        </p>
-                        <h5>
-                            <input type="text" placeholder="Name">
-                            <input type="email" placeholder="Email">
-                        </h5>
-                        <h4>
-                            <select>
-                                <option>I Want To Donate For 1</option>
-                                <option>I Want To Donate For 2</option>
-                                <option>I Want To Donate For 3</option>
-                            </select>
-                        </h4>
-                        <input type="submit" class="borderes" value="DONATE NOW" style="width: auto;">
-                    </form>
-                </div>
-                <div class="donors_image">
-                    <h2>FEATURED DONORS</h2>
-                    <div class="donors_featured owl-carousel owl-theme">
-                        <div class="item">
-                            <img src="{{ url('images/donors_featured_one.jpg') }}">
-                            <h3>Kenneth J. Garnica</h3>
-                            <p>Donated Amount : <span>1,000 ₹</span> </p>
-                        </div>
-                        <div class="item">
-                            <img src="{{ url('images/donors_featured_one.jpg') }}">
-                            <h3>Kenneth J. Garnica</h3>
-                            <p>Donated Amount : <span>6,000 ₹</span> </p>
-                        </div>
-                        <div class="item">
-                            <img src="{{ url('images/donors_featured_one.jpg') }}">
-                            <h3>Kenneth J. Garnica</h3>
-                            <p>Donated Amount : <span>12,000 ₹</span> </p>
-                        </div>
-                        <div class="item">
-                            <img src="{{ url('images/donors_featured_one.jpg') }}">
-                            <h3>Kenneth J. Garnica</h3>
-                            <p>Donated Amount : <span>15,500 ₹</span> </p>
-                        </div>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -372,126 +495,67 @@
         </span>
     </h2>
     <p>Meet our superhero's.The people who bring joy to our kids and elders.The silent warriors.</p>
+    <p>
+      <a href="{{route('volunteersView',)}}" style="color: #00A348;text-decoration: none"> 
+      See all 
+      </a>
+    </p>
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="volunteer_single owl-carousel owl-theme" style="padding-left: 100px;">
-                    <div class="item">
-                        <img src="{{ url('images/volanteer_1.jpg') }}">
-                        <div class="text" style="height: 178px;">
-                            <h3>Laura Jammy</h3>
-                            <h6>Designer</h6>
-                            <p>With us since 2015</p>
-                            <h5><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i
-                                        class="fa fa-twitter" aria-hidden="true"></i></a><a href="#"><i
-                                        class="fa fa-behance" aria-hidden="true"></i></a></h5>
-                        </div>
+            <div class="col-md-12" @if(count($volunteers)<= 3) style="margin-bottom: 100px;" @endif >
+                @if(count($volunteers)<= 3)
+                @php $i = 0; @endphp {{-- To dynamically set Occup,Links etc to same height if name height differ --}}
+                @foreach($volunteers as $volunteersData)
+                <div class="col-lg-12" style="width: auto">
+                  <div class="item-vol" style="border-radius: 10px;">
+                    <div class="col-lg-5 plr-0 cust-img-div-vol">
+                      <img src="{{ asset($volunteersData->ProfileImage) }}"
+                      style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;width: 160px;height: 178px;">
                     </div>
-                    <div class="item">
-                        <img src="{{ url('images/volanteer_2.jpg') }}">
-                        <div class="text" style="height: 178px;">
-                            <h3>Albert R. Ardoin</h3>
-                            <h6>Actor</h6>
-                            <p>With us since 2018</p>
-                            <h5><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i
-                                        class="fa fa-twitter" aria-hidden="true"></i></a><a href="#"><i
-                                        class="fa fa-behance" aria-hidden="true"></i></a></h5>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="{{ url('images/volanteer_3.jpg') }}">
-                        <div class="text" style="height: 178px;">
-                            <h3>Cynthia Anni</h3>
-                            <h6>Singer</h6>
-                            <p>With us since 2020</p>
-                            <h5><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i
-                                        class="fa fa-twitter" aria-hidden="true"></i></a><a href="#"><i
-                                        class="fa fa-behance" aria-hidden="true"></i></a></h5>
-                        </div>
-                    </div>
+                      <div class="text col-lg-7 plr-0" style="height: 178px;">
+                          <h3 class="vNames">{{$volunteersData->FirstName." ".$volunteersData->LastName}}</h3>
+                          <h6 class="vOccup-{{$i}}">{{$volunteersData->Occupation}}</h6>
+                          <p>With us since {{ date('Y', strtotime($volunteersData->CreatedDate)) }}</p>
+                          <h5 style="" class="">
+                            <a href="#">
+                              <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                            <a href="#">
+                              <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                            <a href="#">
+                              <i class="fa fa-behance" aria-hidden="true"></i>
+                            </a>
+                          </h5>
+                      </div>
+                  </div>
                 </div>
+                @php $i++; @endphp {{-- To dynamically set Occup,Links etc to same height if name height differ --}}
+                @endforeach
+                @else
+                <div class="volunteer_single owl-carousel owl-theme cust-volunteer">
+                @foreach($volunteers as $volunteersData)
+
+                       <div class="item">
+                        <img src="{{ asset($volunteersData->ProfileImage) }}">
+                        <div class="text" style="height: 178px;">
+                            <h3>{{$volunteersData->FirstName." ".$volunteersData->LastName}}</h3>
+                            <h6>{{$volunteersData->Occupation}}</h6>
+                            <p>With us since {{ date('Y', strtotime($volunteersData->CreatedDate)) }}</p>
+                            <h5><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i
+                                        class="fa fa-twitter" aria-hidden="true"></i></a><a href="#"><i
+                                        class="fa fa-behance" aria-hidden="true"></i></a></h5>
+                        </div>
+                    </div>
+                  @endforeach
+                </div>
+
+                @endif
             </div>
         </div>
     </div>
 </section>
 
-<section class="carosal_bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="carosal_bottom_single owl-carousel owl-theme">
-                    <div class="item">
-                        <img src="{{ url('images/volanteer_1.jpg') }}">
-                        <p>Genuine people,genuine love. Every activity, every transaction is transparent and open for
-                            anyone to check.That's what I love about this group. They are happy to answer you questions
-                            about donations or any other issues.This is what seperates them from other's.You can be sure
-                            your money and effort are going to the right causes here.</p>
-                        <h5><i class="material-icons">format_quote</i></h5>
-                        <h4>Florence M. Cofer</h4>
-                        <h6>Designer</h6>
-                    </div>
-                    <div class="item">
-                        <img src="{{ url('images/volanteer_2.jpg') }}">
-                        <p>I have never seen this level of sincerity anywhere else.Kudos to the entire team and
-                            organizers for keeping up this wonderful project. I am so happy to be a part of this great
-                            team and effort.Looking forward to bringing this mission to even greater heights!</p>
-                        <h5><i class="material-icons">format_quote</i></h5>
-                        <h4>Florence M. Cofer</h4>
-                        <h6>Designer</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="letast_news">
-    <h2>
-        <span class="cust-underline">
-            Latest News From Around The World
-        </span>
-    </h2>
-    <p>Hungry stomach's and stretching arm's are not just around us, they are all over the world. </p>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="single_news">
-                    <img src="{{ url('images/news_images_1.jpg') }}">
-                    <div class="texts" style="height: 250px;">
-                        <p class="date"><a href="#">30 May, 2020</a></p>
-                        <h3>Bill Gates Donates $10mn towards childrens welfare in Africa</h3>
-                        <p class="test">The Billionare and ex chairman of Microsoft announced this in his recent press
-                            conference in Washington, USA.</p>
-                        <h3><a href="#">READ MORE</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="single_news">
-                    <img src="{{ url('images/news_images_2.jpg') }}">
-                    <div class="texts" style="height: 250px;">
-                        <p class="date"><a href="#">22 June, 2020</a></p>
-                        <h3>Amazon to build schools and hospitals in Uganda</h3>
-                        <p class="test">The tech conglomerate announced their plans to build a brighter future for the
-                            children and elders in their annual conference held at LA, USA.</p>
-                        <h3><a href="#">READ MORE</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="single_news">
-                    <img src="{{ url('images/news_images_3.jpg') }}">
-                    <div class="texts" style="height: 250px;">
-                        <p class="date"><a href="#">15 Sep, 2020</a></p>
-                        <h3>UN joins hands with governments to eradicate polio.</h3>
-                        <p class="test">UN has joined with world leaders and governments to ensure that no child will
-                            have to suffer from polio anymore and to completly eradicate it within the next 5 years.</p>
-                        <h3><a href="#">READ MORE</a></h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <section>
     <h2 style="margin-top: 0px;">
         <span class="cust-underline">
@@ -541,6 +605,13 @@
                 $('#defaultModal').modal('show');
                 "{{ Session::put('authenticated','') }}";
             }
+
+            Pass CauseID to donation modal on donate button click
+            $(".donateButton").click(function () {
+                // var causeID = $(this).attr('data-causeID');
+                $('#causeIdDonation').val( $(this).attr('data-causeID') );
+            });
+
         });
 
     </script>

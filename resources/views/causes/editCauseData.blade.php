@@ -116,8 +116,12 @@
                       <input class="input--style-4" type="text" name="email" value="{{$editCause->Email}}">
                   </div>
                   <div class="input-group col-lg-12">
-                      <label class="label ffe-font">Phone (For more information</label>
+                      <label class="label ffe-font">Phone (For more information)</label>
                       <input class="input--style-4" type="text" name="phone" value="{{$editCause->Phone}}">
+                  </div>
+                  <div class="input-group col-lg-12">
+                    <label class="label ffe-font">Landmark</label>
+                    <input class="input--style-4" type="text" name="landmark" value="{{$editCause->Landmark}}">
                   </div>
                   <div class="row row-space" style="padding-right: 0px">
                       <div class="col-lg-4">
@@ -254,6 +258,9 @@
               city: {
                   required: true
               },
+              landmark: {
+                  required: true
+              },
           },
           messages: {
               causeName: "Please enter the cause name",
@@ -271,6 +278,9 @@
               },
               city: {
                   required: "Please enter a city",
+              },
+              landmark: {
+                  required: "Please enter a landmark",
               },
               expectedAmount: {
                   required: "Please enter expected amount of cause",

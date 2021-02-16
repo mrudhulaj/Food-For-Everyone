@@ -99,16 +99,14 @@
                             <button data-toggle="modal" data-target="#deleteModal" class="btn" id="eventDeleteBtn" type="button" data-value="{{$eventsData->ID}}">&times;</button>
                         </div>
                         <div style="padding: 10px;">
-                          <p>
-                            <span class="event_left">
+                            <div class="event_left">
                               <i class="fas fa-clock"></i>
                               {{$eventsData->BeginTime}} - {{$eventsData->EndTime}}
-                            </span>
-                            <span class="event_right">
+                            </div>
+                            <div class="event_right">
                               <i class="fas fa-map-marker-alt"></i>
-                              {{$eventsData->District.", ".$eventsData->State}}
-                            </span>
-                          </p>
+                              {{$eventsData->Landmark.", ".$eventsData->City.", ".$eventsData->District.", ".$eventsData->State}}
+                            </div>
                           <div class="clear"></div>
                           <h3 style="text-decoration: none;">{{$eventsData->EventName}}</h3>
                           <h6 style="min-height: 128px;">{{$eventsData->EventShortDescription}}</h6>

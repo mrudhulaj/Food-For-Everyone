@@ -55,16 +55,14 @@
                             <img style="width: 351px;height: 207px;" src="{{ asset($eventsData->EventImage) }}">
                         </div>
                         <div style="padding: 10px;">
-                          <p>
-                            <span class="event_left">
+                            <div class="" style="margin-bottom: 5px">
                               <i class="fas fa-clock"></i>
                               {{$eventsData->BeginTime}} - {{$eventsData->EndTime}}
-                            </span>
-                            <span class="event_right">
+                            </div>
+                            <div class="">
                               <i class="fas fa-map-marker-alt"></i>
-                              {{$eventsData->District.", ".$eventsData->State}}
-                            </span>
-                          </p>
+                              {{$eventsData->Landmark.", ".$eventsData->City.", ".$eventsData->District.", ".$eventsData->State}}
+                            </div>
                           <div class="clear"></div>
                           <h3 style="text-decoration: none;"> <a href="{{route('eventDetailsView',['eventID' => Crypt::encrypt($eventsData->ID)])}}" class="a-none">{{$eventsData->EventName}}</a> </h3>
                           <h6 style="min-height: 128px;">{{$eventsData->EventShortDescription}}</h6>

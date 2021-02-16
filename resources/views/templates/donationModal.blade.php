@@ -84,6 +84,7 @@
                                             be send to your email after the donation is made.</p>
                                     </div>
                                     <div class="" style="text-align: center;">
+                                        {{-- <input type="hidden" name="causeIdDonation" id="causeIdDonation" value=""> --}}
                                         <button id="submitbtn" class="btn button-bg-green"
                                             style="padding: 0px;width: 120px;height: 60px;">
                                             Donate
@@ -182,7 +183,8 @@
 
   $("#donationForm").on("submit", function(){    
     jQuery.noConflict();
-    $('#donationModal').modal('hide');        
+    $('#donationModal').modal('hide');
+    
     $.ajax({
         url:'{{ route("addDonation") }}',
         type:'POST',
@@ -193,6 +195,7 @@
             amount      : $("input[name=amount]").val(),
             email       : $("input[name=email]").val(),
             phone       : $("input[name=phone]").val(),
+            causeId     : $("input[name=causeIdDonation]").val(),
         },
         success:function(data) {
           jQuery.noConflict();

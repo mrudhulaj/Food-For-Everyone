@@ -98,6 +98,11 @@
                         <input class="input--style-4" type="text" name="phone">
                     </div>
 
+                    <div class="input-group col-lg-12">
+                      <label class="label ffe-font">Landmark</label>
+                      <input class="input--style-4" type="text" name="landmark">
+                    </div>
+
                     <div class="row row-space" style="padding-right: 0px">
                         <div class="col-lg-4">
                             <div class="input-group col-lg-12 selectbox-div">
@@ -105,7 +110,7 @@
                                 </label>
                                 <select class="form-control input--style-4" style="" id="district" name="district">
                                     <option hidden selected="" value="">District</option>
-                                    <option value="Kerala">Kerala</option>
+                                    <option value="Calicut">Calicut</option>
                                 </select>
                             </div>
                         </div>
@@ -115,7 +120,7 @@
                                 </label>
                                 <select class="form-control input--style-4" style="" id="state" name="state">
                                     <option hidden selected="" value="">State</option>
-                                    <option value="Calicut">Calicut</option>
+                                    <option value="Kerala">Kerala</option>
                                 </select>
                             </div>
                         </div>
@@ -254,6 +259,9 @@
                 city: {
                     required: true
                 },
+                landmark: {
+                    required: true
+                },
             },
             messages: {
                 firstName: "Please enter your first name",
@@ -279,6 +287,9 @@
                 },
                 city: {
                     required: "Please enter a city",
+                },
+                landmark: {
+                    required: "Please enter a landmark",
                 },
                 phone: {
                     required: "Please enter your mobile number",

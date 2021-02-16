@@ -16,13 +16,14 @@ class VolunteersController extends Controller
     public function volunteersView(){
       Session::put('activeTab', 'VOLUNTEERS');
       $volunteers   = Volunteers::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
-      $role         = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
       $saved        = Request::has('saved') ? Request::get('saved') : 0;
       if(Auth::check()){
         $isUserVolunteerExist   = Volunteers::where('UserID',Auth::user()->id)->where('IsApproved',0)->exists();
+        $role                   = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
       }
       else{
         $isUserVolunteerExist = false;
+        $role                 = false;
       }
 
       return view('volunteers/volunteers',compact('volunteers','saved','isUserVolunteerExist','role'));
