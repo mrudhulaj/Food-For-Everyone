@@ -85,7 +85,10 @@ class EventsController extends Controller
     // Edit
 
     public function editEventView(){
-      $events        = Events::where('CreatedUserID',Auth::user()->id)->orderBy('CreatedDate','desc')->get();
+      $events        = Events::where('CreatedUserID',Auth::user()->id)
+                              ->where('IsApproved',0)
+                              ->orderBy('CreatedDate','desc')
+                              ->get();
       foreach($events as $eventsData){
         $eventsData->BeginTime   = date('h:i A', strtotime($eventsData->BeginTime));
         $eventsData->EndTime     = date('h:i A', strtotime($eventsData->EndTime));  

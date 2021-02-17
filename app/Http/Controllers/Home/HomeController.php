@@ -27,6 +27,14 @@ class HomeController extends Controller
       // Causes
       $causes                     = Causes::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
       $latestCause                = Causes::where('IsApproved',1)->orderBy('CreatedDate','desc')->first();
+      foreach($causes as $causeData){
+        if($causeData->ExpectedAmount != 0){
+          $causeData->raisedAmountPercentage = round((($causeData->RaisedAmount/$causeData->ExpectedAmount)*100),2);
+        }
+      }
+      if($latestCause->ExpectedAmount != 0){
+        $latestCause->raisedAmountPercentage = round((($latestCause->RaisedAmount/$latestCause->ExpectedAmount)*100),2);
+      }
 
       // Volunteers
       $volunteers                 = Volunteers::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();

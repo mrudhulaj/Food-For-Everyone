@@ -25,7 +25,7 @@ class CausesController extends Controller
       $causes   = Causes::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
       foreach($causes as $causeData){
         if($causeData->ExpectedAmount != 0){
-          $causeData->raisedAmountPercentage = ($causeData->RaisedAmount/$causeData->ExpectedAmount)*100;
+          $causeData->raisedAmountPercentage = round((($causeData->RaisedAmount/$causeData->ExpectedAmount)*100),2);
         }
       }
 
@@ -38,7 +38,7 @@ class CausesController extends Controller
       $causeID    = Crypt::decrypt(Request::get('causeID'));
       $causeData  = Causes::where('ID',$causeID)->first();
       if($causeData->ExpectedAmount != 0){
-        $causeData->raisedAmountPercentage = ($causeData->RaisedAmount/$causeData->ExpectedAmount)*100;
+        $causeData->raisedAmountPercentage = round((($causeData->RaisedAmount/$causeData->ExpectedAmount)*100),2);
       }
 
       return view('causes/causesDetails',compact('causeData'));
@@ -83,7 +83,10 @@ class CausesController extends Controller
     }
 
   public function editCauseView(){
-    $causes        = Causes::where('CreatedUserID',Auth::user()->id)->orderBy('CreatedDate','desc')->get();
+    $causes        = Causes::where('CreatedUserID',Auth::user()->id)
+                            ->where('IsApproved',0)
+                            ->orderBy('CreatedDate','desc')
+                            ->get();
     return view('causes/editCauseView',compact('causes'));
   }
 

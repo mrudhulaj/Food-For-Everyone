@@ -160,8 +160,13 @@ hr {
       <a class="a-none" href="{{route('causesView')}}">Back</a>
     </button>
 </h2>
-<p>Edit your causes here.Please make sure the details you have entered are correct.You are expected to provide more details on admins enquiry.</p>
-    @if(count($causes) == 0) <p style="text-align: center;margin-top: 100px"><b>You have not added any cause to edit.</b></p> @endif
+<div class="col-md-12" style="text-align: center;margin-bottom: 30px">
+  <div class="col-md-offset-2 col-md-8">
+    <p>Only causes that are pending for approval can be edited, causes that are already approved or rejected cannot be edited from here.For such cases raise a ticket from the contact page and you will be contacted back by our team.</p>
+    <p>Please make sure the details you have entered are correct.You are expected to provide more details on admins enquiry.</p>
+  </div>
+</div>
+  @if(count($causes) == 0) <p style="text-align: center;margin-top: 100px"><b>You have not added any cause to edit.</b></p> @endif
 <div class="container" style="margin-top: 70px;margin-bottom: 70px;padding-left: 5px;margin-right: 0px;">
     @foreach($causes as $causesData)
         <div class="box mainbox">
@@ -187,10 +192,10 @@ hr {
                     </a>
                 </p>
                 <div class="progress-text">
-                    <p class="progress-top">50%</p>
+                    <p class="progress-top">0%</p>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                            aria-valuemax="100" style="width:50%;background-color: #01d262;"></div>
+                            aria-valuemax="100" style="width:0%;background-color: #01d262;"></div>
                     </div>
                     <p class="progress-left">Raised: <span class="progress-amount">1200 ₹</span></p>
                     <p class="progress-right">Goal: <span

@@ -298,10 +298,10 @@
                 <h4 style="margin-top: 35px;">Next upcoming event at {{$latestEvent->Landmark.", ".$latestEvent->District}}</h4>
                 <h4 style="margin-top: 35px;">Latest cause we are supporting: {{$latestCause->CauseName." at ".$latestCause->District.", ".$latestCause->State}}</h4>
                 <div class="progress-text">
-                    <p class="progress-top">{{ number_format($latestCause->RaisedAmount) }}%</p>
+                    <p class="progress-top"><b>{{ number_format($latestCause->raisedAmountPercentage) }}%</b></p>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                            aria-valuemax="100" style="width:{{ number_format($latestCause->RaisedAmount) }}%"></div>
+                            aria-valuemax="100" style="width:{{ number_format($latestCause->raisedAmountPercentage) }}%"></div>
                     </div>
                     <p class="progress-left">Raised: {{ number_format($latestCause->RaisedAmount) }} ₹</p>
                     <p class="progress-right">Goal: {{ number_format($latestCause->ExpectedAmount) }} ₹</p>
@@ -437,11 +437,11 @@
                                     </a>
                                 </p>
                                 <div class="progress-text">
-                                    <p class="progress-top">{{ number_format($causesData->RaisedAmount) }}%</p>
+                                    <p class="progress-top">{{ number_format($causesData->raisedAmountPercentage) }}%</p>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" aria-valuenow="50"
                                             aria-valuemin="0" aria-valuemax="100"
-                                            style="width:{{ number_format($causesData->RaisedAmount) }}%;background-color: #01d262;"></div>
+                                            style="width:{{ number_format($causesData->raisedAmountPercentage) }}%;background-color: #01d262;"></div>
                                     </div>
                                     <p class="progress-left">Raised: <span class="progress-amount">{{ number_format($causesData->RaisedAmount) }} ₹</span></p>
                                     <p class="progress-right">Goal: <span
@@ -468,10 +468,10 @@
                               </a>
                                   <p style="height: 120px;">{{ $causesData->CauseShortDescription }}</p>
                                   <div class="progress-text">
-                                      <p class="progress-top">{{ number_format($causesData->RaisedAmount) }}%</p>
+                                      <p class="progress-top">{{ number_format($causesData->raisedAmountPercentage) }}%</p>
                                       <div class="progress">
                                           <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                              aria-valuemin="0" aria-valuemax="100" style="width:{{ number_format($causesData->RaisedAmount) }}%"></div>
+                                              aria-valuemin="0" aria-valuemax="100" style="width:{{ number_format($causesData->raisedAmountPercentage) }}%"></div>
                                       </div>
                                       <p class="progress-left">Raised: <span>{{ number_format($causesData->RaisedAmount) }}₹</span></p>
                                       <p class="progress-right">Goal: <span>{{ number_format($causesData->ExpectedAmount) }}₹</span></p>
