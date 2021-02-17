@@ -70,26 +70,72 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label ffe-font">First Name</label>
-                                    <input class="input--style-4" type="text" id="firstName" name="firstName" value="">
+                                    <input class="input--style-4" type="text" id="firstName" name="firstName" 
+                                    @if(Auth::check()) value="{{Auth::user()->FirstName}}" @else value="" @endif>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label ffe-font">Last name</label>
-                                    <input class="input--style-4" type="text" name="lastName" id="lastName" value="">
+                                    <input class="input--style-4" type="text" name="lastName" id="lastName" 
+                                    @if(Auth::check()) value="{{Auth::user()->LastName}}" @else value="" @endif>
                                 </div>
                             </div>
                         </div>
 
                         <div class="input-group col-lg-12">
                             <label class="label ffe-font">Email</label>
-                            <input class="input--style-4" type="text" name="email" id="email">
+                            <input class="input--style-4" type="text" name="email" id="email"
+                            @if(Auth::check()) value="{{Auth::user()->Email}}" @else value="" @endif>
                         </div>
 
                         <div class="input-group col-lg-12">
                             <label class="label ffe-font">Phone</label>
-                            <input class="input--style-4" type="text" name="phone" id="phone">
+                            <input class="input--style-4" type="text" name="phone" id="phone"
+                            @if(Auth::check()) value="{{Auth::user()->Phone}}" @else value="" @endif>
                         </div>
+
+                        @if(Auth::check())
+                          <div class="input-group col-lg-12 ffe-font" style="margin-bottom: 0px;">
+                            <label class="checkbox-container">Raise a ticket
+                              <input type="checkbox" class="createCheckbox" id="raiseTicket" name="raiseTicket" id="" value="0">
+                              <span class="checkmark-cust" style="top: 4px !important;"></span>
+                            </label>
+                          </div>
+
+                          <div class="row row-space" style="margin-left: -12px;margin-bottom: -25px;">
+                            <div class="col-2">
+                                <div class="input-group">
+                                  <label class="label ffe-font">Category</label>
+                                  <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                    title="Within what time should this food be consumed?"></i>
+                                  <select class="form-control input--style-4" style="" id="expiryTime" name="expiryTime">
+                                    <option hidden selected="" value="">Select Category</option>
+                                    <option value="1">Available Foods</option>
+                                    <option value="2">Causes</option>
+                                    <option value="3">Volunteers</option>
+                                    <option value="4">Events</option>
+                                  </select>                                
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                  <div class="input-group">
+                                    <label class="label ffe-font">Item</label>
+                                    <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                      title="Within what time should this food be consumed?"></i>
+                                    <select class="form-control input--style-4" style="" id="expiryTime" name="expiryTime">
+                                      <option hidden selected="" value="">Select Item</option>
+                                      <option value="1">Available Foods</option>
+                                      <option value="2">Causes</option>
+                                      <option value="3">Volunteers</option>
+                                      <option value="4">Events</option>
+                                    </select>                                
+                                  </div>                                
+                                </div>
+                            </div>
+                          </div>
+                        @endif
 
                         <div class="input-group col-lg-12">
                             <label class="label ffe-font">Message</label>
@@ -97,7 +143,7 @@
                                 id="message" class="input--style-4" cols="52" rows="10"></textarea>
                         </div>
 
-                        <div class="" style="text-align: center;margin-top: 80px;">
+                        <div class="" style="text-align: center;@if(Auth::check()) margin-top: 30px; @else margin-top: 80px; @endif">
                             <button id="confirmForm" class="btn button-bg-green"
                                 style="padding: 0px;width: 120px;height: 60px;">
                                 Submit
@@ -183,7 +229,8 @@
                 lastName    : $("#lastName").val(),
                 email       : $("#email").val(),
                 phone       : $("#phone").val(),
-                message     : $("#message").val()
+                message     : $("#message").val(),
+                raiseTicket : $("#raiseTicket").val(),
             },
             success:function(data) {
               jQuery.noConflict();

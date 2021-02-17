@@ -25,12 +25,17 @@ class ContactUsController extends Controller
       $contactUs->Email           = Request::get('email');
       $contactUs->Phone           = Request::get('phone');
       $contactUs->Message         = Request::get('message');
-      $contactUs->CreatedUser     = Auth::user()->FirstName." ".Auth::user()->LastName;
-      $contactUs->CreatedUserID   = Auth::user()->id;
       $contactUs->CreatedDate     = date('Y-m-d H:i:s');
-      $contactUs->EditedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
-      $contactUs->EditedUserID    = Auth::user()->id;
       $contactUs->EditedDate      = date('Y-m-d H:i:s');
+
+      if(Auth::check()){
+        $contactUs->RaisedTicket    = Request::get('raiseTicket');
+        $contactUs->CreatedUser     = Auth::user()->FirstName." ".Auth::user()->LastName;
+        $contactUs->CreatedUserID   = Auth::user()->id;
+        $contactUs->EditedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
+        $contactUs->EditedUserID    = Auth::user()->id;
+      }
+      
       $contactUs->save();
 
       return Response::json();

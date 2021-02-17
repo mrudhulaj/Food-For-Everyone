@@ -84,7 +84,11 @@
               </a>
           </button>
     </h2>
-    <p>Edit your added events here.</p>
+    <div class="col-md-12" style="text-align: center;margin-bottom: 30px">
+      <div class="col-md-offset-2 col-md-8">
+        <p>Only events that are pending for approval can be edited, events that are already approved or rejected cannot be edited from here.For such cases raise a ticket from the contact page and you will be contacted back by our team.</p>
+      </div>
+    </div>
     @if(count($events) == 0)
      <p style="text-align: center;margin-top: 100px"><b>You have not added any events to edit.</b></p> 
     @endif
