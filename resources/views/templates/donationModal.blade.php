@@ -7,7 +7,7 @@
 
 </style>
 
-<div class="modal fade" id="donationModal" tabindex="-1" role="dialog" aria-labelledby="donationModalLabel"
+<div class="modal fade" id="donationModal" role="dialog" aria-labelledby="donationModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="border-radius: 13px;border: none">
@@ -103,7 +103,7 @@
 </div>
 
 {{--  Begin: Donation sent successfully Modal  --}}
-<div class="modal fade" id="successfullModal" tabindex="-1" role="dialog" aria-labelledby="successfullModalLabel"
+<div class="modal fade" id="successfullModal" role="dialog" aria-labelledby="successfullModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="border-radius: 13px;border: none">
