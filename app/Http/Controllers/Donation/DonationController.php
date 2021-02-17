@@ -17,7 +17,7 @@ class DonationController extends Controller
       $donations->Firstname        = Request::get('firstName');
       $donations->Lastname         = Request::get('lastName');
       $donations->Amount           = Request::get('amount');
-      $donations->CauseID          = Request::get('causeIdDonation');
+      $donations->CauseID          = Request::get('causeId');
       $donations->Email            = Request::get('email');
       $donations->Phone            = Request::get('phone');
 
@@ -31,8 +31,8 @@ class DonationController extends Controller
       $donations->CreatedDate      = date('Y-m-d H:i:s');
       $donations->save();
 
-      if(Request::get('causeIdDonation') != ""){
-        $causes                         = Causes::where('ID',Request::get('causeIdDonation'))->first();
+      if(Request::get('causeId') != ""){
+        $causes                         = Causes::where('ID',Request::get('causeId'))->first();
         $causes->RaisedAmount           = $causes->RaisedAmount + Request::get('amount');
         $causes->save();
       }

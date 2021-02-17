@@ -179,7 +179,7 @@ hr {
                     </p>
                 </div>
                 <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a data-toggle="modal"
-                        data-target="#donationModal" href="#">DONATE NOW</a></h2>
+                        data-target="#donationModal" href="#" data-causeID="{{$causesData->ID}}" class="donateButton">DONATE NOW</a></h2>
             </div>
         </div>
     @endforeach
@@ -218,6 +218,11 @@ aria-hidden="true">
       jQuery.noConflict(); 
       $('#defaultModal').modal('show'); 
     }
+
+      // Pass CauseID to donation modal on donate button click
+      $(".donateButton").click(function () {
+        $('#causeIdDonation').val( $(this).attr('data-causeID') );
+      });
   });
 </script>
 @stop

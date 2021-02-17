@@ -84,7 +84,7 @@
                                             be send to your email after the donation is made.</p>
                                     </div>
                                     <div class="" style="text-align: center;">
-                                        {{-- <input type="hidden" name="causeIdDonation" id="causeIdDonation" value=""> --}}
+                                        <input type="hidden" name="causeIdDonation" id="causeIdDonation" value="">
                                         <button id="submitbtn" class="btn button-bg-green"
                                             style="padding: 0px;width: 120px;height: 60px;">
                                             Donate

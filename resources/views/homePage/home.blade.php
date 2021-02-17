@@ -608,7 +608,6 @@
 
             // Pass CauseID to donation modal on donate button click
             $(".donateButton").click(function () {
-                // var causeID = $(this).attr('data-causeID');
                 $('#causeIdDonation').val( $(this).attr('data-causeID') );
             });
 
