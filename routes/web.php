@@ -54,6 +54,7 @@
   // Contact Us
     Route::get('contact-us', ['as' => 'contactUsView','uses' => 'ContactUs\ContactUsController@contactUsView']);
     Route::post('save-contact-us', ['as' => 'saveContactUs','uses' => 'ContactUs\ContactUsController@saveContactUs']);
+    Route::get('contact-us-ticketData', ['as' => 'contactUsTicketData','uses' => 'ContactUs\ContactUsController@contactUsTicketData']);
 
   //Donation Modal
     Route::post('add-donation', ['as' => 'addDonation','uses' => 'Donation\DonationController@addDonation']);

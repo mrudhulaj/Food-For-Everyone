@@ -98,52 +98,67 @@
                         @if(Auth::check())
                           <div class="input-group col-lg-12 ffe-font" style="margin-bottom: 0px;">
                             <label class="checkbox-container">Raise a ticket
-                              <input type="checkbox" class="createCheckbox" id="raiseTicket" name="raiseTicket" id="" value="0">
+                              <input type="checkbox" class="createCheckbox" id="raiseTicket" name="raiseTicket" value="0">
                               <span class="checkmark-cust" style="top: 4px !important;"></span>
                             </label>
                           </div>
 
-                          <div class="row row-space" style="margin-left: -12px;margin-bottom: -25px;">
+                          <div class="row row-space hide" id="raiseTicketDiv" style="margin-left: -12px;">
                             <div class="col-2">
                                 <div class="input-group">
                                   <label class="label ffe-font">Category</label>
                                   <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                                     title="Within what time should this food be consumed?"></i>
-                                  <select class="form-control input--style-4" style="" id="expiryTime" name="expiryTime">
+                                  <select class="form-control input--style-4" style="" id="ticketCategory" name="ticketCategory">
                                     <option hidden selected="" value="">Select Category</option>
-                                    <option value="1">Available Foods</option>
-                                    <option value="2">Causes</option>
-                                    <option value="3">Volunteers</option>
-                                    <option value="4">Events</option>
+                                    <option value="Available Foods">Available Foods</option>
+                                    <option value="Causes">Causes</option>
+                                    <option value="Volunteers">Volunteers</option>
+                                    <option value="Events">Events</option>
                                   </select>                                
                                 </div>
                             </div>
                             <div class="col-2">
-                                <div class="input-group">
+                                <div class="input-group" id="ticketItemDiv">
                                   <div class="input-group">
                                     <label class="label ffe-font">Item</label>
-                                    <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                      title="Within what time should this food be consumed?"></i>
-                                    <select class="form-control input--style-4" style="" id="expiryTime" name="expiryTime">
+                                    <select class="form-control input--style-4" style="" id="ticketItem" name="ticketItem">
                                       <option hidden selected="" value="">Select Item</option>
-                                      <option value="1">Available Foods</option>
-                                      <option value="2">Causes</option>
-                                      <option value="3">Volunteers</option>
-                                      <option value="4">Events</option>
                                     </select>                                
                                   </div>                                
                                 </div>
                             </div>
+
+                            <div class="col-12" style="margin-left: 14px;">
+                              <div class="input-group">
+                                <label class="label ffe-font">Severity</label>
+                                <div class="" style="margin-left: 8px;">
+                                    <label class="radio-container mr-30 ffe-font" style="padding-right: 80px;">Low
+                                        <input type="radio" name="severity" value="0" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="radio-container ffe-font" style="padding-right: 80px;">Medium
+                                        <input type="radio" name="severity" value="1">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="radio-container ffe-font">High
+                                      <input type="radio" name="severity" value="2">
+                                      <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                              </div>
+                            </div>
+
                           </div>
                         @endif
 
                         <div class="input-group col-lg-12">
                             <label class="label ffe-font">Message</label>
                             <textarea style="border: none;line-height: 25px;padding: 12px 22px;" name="message"
-                                id="message" class="input--style-4" cols="52" rows="10"></textarea>
+                                id="message" class="input--style-4" cols="52" rows="6"></textarea>
                         </div>
 
-                        <div class="" style="text-align: center;@if(Auth::check()) margin-top: 30px; @else margin-top: 80px; @endif">
+                        <div class="" style="text-align: center;@if(Auth::check()) margin-top: 23px; @else margin-top: 80px; @endif">
                             <button id="confirmForm" class="btn button-bg-green"
                                 style="padding: 0px;width: 120px;height: 60px;">
                                 Submit
@@ -181,6 +196,7 @@
 {{-- End : Message sent successfully Modal --}}
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
+<script src="{{ asset('vendor/moment/moment.js') }}"></script>
 
 <script>
     $(document).ready(function () {
@@ -224,17 +240,70 @@
             url:'{{ route("saveContactUs") }}',
             type:'POST',
             data:{
-                "_token": "{{ csrf_token() }}",
-                firstName   : $("#firstName").val(),
-                lastName    : $("#lastName").val(),
-                email       : $("#email").val(),
-                phone       : $("#phone").val(),
-                message     : $("#message").val(),
-                raiseTicket : $("#raiseTicket").val(),
+                "_token"         : "{{ csrf_token() }}",
+                firstName        : $("#firstName").val(),
+                lastName         : $("#lastName").val(),
+                email            : $("#email").val(),
+                phone            : $("#phone").val(),
+                message          : $("#message").val(),
+                raiseTicket      : $("#raiseTicket").val(),
+                ticketCategory   : $("#ticketCategory").val(),
+                ticketCategoryID : $("#ticketItem").val(),
+                ticketSeverity   : $('input[name="severity"]:checked').val(),
             },
             success:function(data) {
               jQuery.noConflict();
               $('#successfullModal').modal('show');
+            }
+        });
+    });
+
+    $("#raiseTicket").change(function() {
+        if(this.checked) {
+          $("#raiseTicketDiv").toggleClass("hide");
+          $("#raiseTicket").val("1");
+          console.log("Raise ticket check value = "+$("#raiseTicket").val());
+        }
+        else{
+          $("#raiseTicketDiv").toggleClass("hide");
+          $("#raiseTicket").val("0");
+          console.log("Raise ticket uncheck value = "+$("#raiseTicket").val());
+        }
+    });
+
+    $('#ticketCategory').on('change', function() {
+      $('#ticketItem').empty().append('<option selected="selected" value="" hidden>Select Item</option>');
+      let category = this.value;
+
+      if(category == "Volunteers"){
+        $("#ticketItemDiv").addClass("hide");
+      }
+      else{
+        $("#ticketItemDiv").removeClass("hide");
+      }
+
+      $.ajax({
+            url:'{{ route("contactUsTicketData") }}',
+            type:'GET',
+            data:{
+                ticketCategory   : category,
+            },
+            success:function(data) {
+              $.each(data, function (i) {
+                  $.each(data[i], function (key, val) {
+                    if(category == "Available Foods"){
+                      var itemName = "Added at :"+moment(data[i]['EditedDate']).format("D/M/YYYY, h:mm:ss a");
+                    }
+                    else if(category == "Causes"){
+                      var itemName = data[i]['CauseName'];
+                    }
+                    else if(category == "Events"){
+                      var itemName = data[i]['EventName'];
+                    }
+                    $('#ticketItem').append($("<option></option>").attr("value", data[i]['ID']).text(itemName)); 
+                    return false;
+                  });
+              });
             }
         });
     });
