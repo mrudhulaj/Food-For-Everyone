@@ -50,7 +50,12 @@ class ContactUsController extends Controller
           if( Request::get('ticketCategory') != "" ){
             $raisedTickets                = new RaisedTickets();
             $raisedTickets->Category      = Request::get('ticketCategory');
-            $raisedTickets->CategoryID    = Request::get('ticketCategoryID');
+            if( $raisedTickets->Category == "Volunteers" ){
+              $raisedTickets->CategoryID    = Auth::user()->id;
+            }
+            else{
+              $raisedTickets->CategoryID    = Request::get('ticketCategoryID');
+            }
             $raisedTickets->ContactUsID   = $contactUs->ID;
             $raisedTickets->Severity      = Request::get('ticketSeverity');
             $raisedTickets->Message       = Request::get('message');

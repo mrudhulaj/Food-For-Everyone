@@ -42,6 +42,10 @@
         font-weight: bold;
     }
 
+    #ticketCategory-error,#ticketItem-error{
+      margin-top: -20px;
+    }
+
 </style>
 @section('content')
 <div class="">
@@ -105,7 +109,7 @@
 
                           <div class="row row-space hide" id="raiseTicketDiv" style="margin-left: -12px;">
                             <div class="col-2">
-                                <div class="input-group">
+                                <div class="input-group custvalid">
                                   <label class="label ffe-font">Category</label>
                                   <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                                     title="Within what time should this food be consumed?"></i>
@@ -120,7 +124,7 @@
                             </div>
                             <div class="col-2">
                                 <div class="input-group" id="ticketItemDiv">
-                                  <div class="input-group">
+                                  <div class="input-group custvalid">
                                     <label class="label ffe-font">Item</label>
                                     <select class="form-control input--style-4" style="" id="ticketItem" name="ticketItem">
                                       <option hidden selected="" value="">Select Item</option>
@@ -203,6 +207,13 @@
 
         // Add Contact form validation
         $("form[name='contactUs']").validate({
+            errorPlacement: function (error, element) {
+                if (element.parent().hasClass('custvalid')) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
             rules: {
                 firstName: "required",
                 lastName: "required",
@@ -227,6 +238,12 @@
                 },
                 message: {
                     required: "Please enter your message",
+                },
+                ticketCategory: {
+                    required: "Please select a category",
+                },
+                ticketItem: {
+                    required: "Please select an item",
                 },
                 email: "Please enter a valid email address"
             },
@@ -262,12 +279,27 @@
         if(this.checked) {
           $("#raiseTicketDiv").toggleClass("hide");
           $("#raiseTicket").val("1");
-          console.log("Raise ticket check value = "+$("#raiseTicket").val());
+
+          // validation
+            $('#ticketCategory').rules('add', {
+              required: true
+            });
+
+            if( $("#ticketCategory").val() != "" || $("#ticketCategory").val() != "Volunteers" ){
+              $('#ticketItem').rules('add', {
+                required: true
+              });
+            }
+
         }
         else{
           $("#raiseTicketDiv").toggleClass("hide");
           $("#raiseTicket").val("0");
-          console.log("Raise ticket uncheck value = "+$("#raiseTicket").val());
+
+          // validation
+          $('#ticketCategory').rules('remove');
+          $('#ticketItem').rules('remove');
+          
         }
     });
 
@@ -277,9 +309,15 @@
 
       if(category == "Volunteers"){
         $("#ticketItemDiv").addClass("hide");
+        $('#ticketItem').rules('remove');
+        $("form[name='contactUs']").validate();
       }
       else{
         $("#ticketItemDiv").removeClass("hide");
+        $('#ticketItem').rules('add', {
+                required: true
+        });
+        $("form[name='contactUs']").validate();
       }
 
       $.ajax({
