@@ -39,7 +39,7 @@
 @section('content')
 <section>
     <h2 style="margin-top: 0px;">
-      @if(Session::get('user')=="Admin" || Session::get('user')=="Volunteer")
+      @if(Session::get('user')=="Admin" || Session::get('user')=="Volunteer" || $profile->isVolunteer)
       Add a Volunteer
       @else
         Become A Volunteer
@@ -60,10 +60,10 @@
                     <div class="row row-space " style="color: #00A348">
                       <div class="profileImgDefault">
                         
-                        @if(!$profile->ProfileImage)
+                        @if(!$profile->ProfileImage || $profile->isVolunteer)
                           <i style="font-size: 120px;" class="fa fa-user-circle-o" aria-hidden="true"></i>
                         @else
-                          <img src="{{ url('images/volanteer_1.jpg') }}" alt="" style="border-radius: 50%;height: 170px;width: 160px;box-shadow: 0px 2px 20px 15px rgba(0, 0, 0, 0.08);">
+                          <img src="{{ asset($profile->ProfileImage) }}" alt="" style="border-radius: 50%;height: 170px;width: 160px;box-shadow: 0px 2px 20px 15px rgba(0, 0, 0, 0.08);">
                         @endif
 
                       </div>
@@ -88,29 +88,29 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstName" value="{{$profile->FirstName}}">
+                                <input class="input--style-4" type="text" name="firstName" @if(!$profile->isVolunteer) value="{{$profile->FirstName}}" @else value="" @endif>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastName" value="{{$profile->LastName}}">
+                                <input class="input--style-4" type="text" name="lastName" @if(!$profile->isVolunteer) value="{{$profile->LastName}}" @else value="" @endif>
                             </div>
                         </div>
                     </div>
 
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Occupation</label>
-                        <input class="input--style-4" type="text" name="occupation" value="{{$profile->Occupation}}">
+                        <input class="input--style-4" type="text" name="occupation" @if(!$profile->isVolunteer) value="{{$profile->Occupation}}" @else value="" @endif>
                     </div>
 
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Email</label>
-                        <input class="input--style-4" type="text" name="email" value="{{$profile->Email}}">
+                        <input class="input--style-4" type="text" name="email" @if(!$profile->isVolunteer) value="{{$profile->Email}}" @else value="" @endif>
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Phone</label>
-                        <input class="input--style-4" type="text" name="phone" value="{{$profile->Phone}}">
+                        <input class="input--style-4" type="text" name="phone" @if(!$profile->isVolunteer) value="{{$profile->Phone}}" @else value="" @endif>
                     </div>
 
                     <div class="row row-space" style="padding-right: 0px">
@@ -122,7 +122,7 @@
                                 </label>
                                 <select class="form-control input--style-4" style="" id="district" name="district">
                                     <option hidden selected="" value="">District</option>
-                                    <option @if($profile->District) selected @endif value="Kerala">Kerala</option>
+                                    <option @if( !$profile->isVolunteer && $profile->District) selected @endif value="Kerala">Kerala</option>
                                 </select>
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                                 </label>
                                 <select class="form-control input--style-4" style="" id="state" name="state">
                                     <option hidden selected="" value="">State</option>
-                                    <option value="Calicut" @if($profile->State) selected @endif>Calicut</option>
+                                    <option value="Calicut" @if(!$profile->isVolunteer && $profile->State) selected @endif>Calicut</option>
                                 </select>
                             </div>
                         </div>

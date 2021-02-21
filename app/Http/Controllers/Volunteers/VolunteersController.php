@@ -38,6 +38,13 @@ class VolunteersController extends Controller
       $profile                 = Volunteers::where('ID',Auth::user()->id)->first();
       $profile->isVolunteer    = true;
     }
+    else{
+      $volunteerValidation     = Volunteers::where('UserID',Auth::user()->id)->first();
+      if(!empty($volunteerValidation)){
+        $profile->isVolunteer    = true;
+      }
+    }
+
       return view('volunteers/addVolunteerView',compact('profile'));
   }
 
