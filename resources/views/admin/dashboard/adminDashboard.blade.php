@@ -55,6 +55,11 @@
       color: #00A348;
     }
 
+    .dashboard-font{
+      font-size: 50px !important;
+      color:#0d6d38 !important;
+    }
+
 </style>
 @section('content')
 <section class="events_section_area">
@@ -73,6 +78,12 @@
                     </div>
                     <div class="text col-lg-7 plr-0" style="height: 178px;">
                         <h3 class="vNames">Donations</h3>
+                        <p>In last 24h:</p>
+                        <div style="padding: 15px 0px;">
+                          <span class="ffe-font dashboard-font">
+                            {{$dashboardCount['donations']}}
+                          </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,6 +97,12 @@
                     </div>
                     <div class="text col-lg-7 plr-0" style="height: 178px;">
                         <h3 class="vNames">Foods Added</h3>
+                        <p>In last 24h:</p>
+                        <div style="padding: 15px 0px;">
+                          <span class="ffe-font dashboard-font">
+                            {{$dashboardCount['availableFoods']}}
+                          </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,13 +116,19 @@
                     </div>
                     <div class="text col-lg-7 plr-0" style="height: 178px;">
                         <h3 class="vNames">Causes</h3>
+                        <p>Total pending approval:</p>
+                        <div style="padding: 15px 0px;">
+                          <span class="ffe-font dashboard-font">
+                            {{$dashboardCount['causes']}}
+                          </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-12 plr-0" style="margin-top: 50px;">
+    <div class="col-lg-12 plr-0" style="margin-top: 50px;margin-bottom: 50px;">
 
       <div class="col-lg-4">
           <div class="col-lg-12" style="width: auto">
@@ -115,6 +138,12 @@
                   </div>
                   <div class="text col-lg-7 plr-0" style="height: 178px;">
                       <h3 class="vNames">Volunteers</h3>
+                      <p>Total pending approval:</p>
+                      <div style="padding: 15px 0px;">
+                        <span class="ffe-font dashboard-font">
+                          {{$dashboardCount['volunteers']}}
+                        </span>
+                      </div>
                   </div>
               </div>
           </div>
@@ -128,6 +157,12 @@
                   </div>
                   <div class="text col-lg-7 plr-0" style="height: 178px;">
                       <h3 class="vNames">Events</h3>
+                      <p>Total pending approval:</p>
+                      <div style="padding: 15px 0px;">
+                        <span class="ffe-font dashboard-font">
+                          {{$dashboardCount['events']}}
+                        </span>
+                      </div>
                   </div>
               </div>
           </div>
@@ -141,6 +176,18 @@
                   </div>
                   <div class="text col-lg-7 plr-0" style="height: 178px;">
                       <h3 class="vNames">Contact</h3>
+                      <span>Total Raised Tickets:</span>
+                      <div style="padding: 5px 0px;">
+                        <span class="ffe-font" style="font-size: 25px;color: #0d6d38 !important;">
+                          {{$dashboardCount['contactRaisedTickets']}}
+                        </span>
+                      </div>
+                      <span>Non Tickets (Last 24h):</span>
+                      <div style="padding: 5px 0px;">
+                        <span class="ffe-font" style="font-size: 25px;color: #0d6d38 !important;">
+                          {{$dashboardCount['contactNonRaisedTickets']}}
+                        </span>
+                      </div>
                   </div>
               </div>
           </div>
