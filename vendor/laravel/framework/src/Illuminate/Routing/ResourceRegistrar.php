@@ -68,7 +68,7 @@ class ResourceRegistrar
      * @param  string  $name
      * @param  string  $controller
      * @param  array   $options
-     * @return \Illuminate\Routing\RouteCollection
+     * @return void
      */
     public function register($name, $controller, array $options = [])
     {
@@ -92,15 +92,9 @@ class ResourceRegistrar
 
         $defaults = $this->resourceDefaults;
 
-        $collection = new RouteCollection;
-
         foreach ($this->getResourceMethods($defaults, $options) as $m) {
-            $collection->add($this->{'addResource'.ucfirst($m)}(
-                $name, $base, $controller, $options
-            ));
+            $this->{'addResource'.ucfirst($m)}($name, $base, $controller, $options);
         }
-
-        return $collection;
     }
 
     /**
@@ -113,7 +107,7 @@ class ResourceRegistrar
      */
     protected function prefixedResource($name, $controller, array $options)
     {
-        [$name, $prefix] = $this->getResourcePrefix($name);
+        list($name, $prefix) = $this->getResourcePrefix($name);
 
         // We need to extract the base resource from the resource name. Nested resources
         // are supported in the framework, but we need to know what name to use for a

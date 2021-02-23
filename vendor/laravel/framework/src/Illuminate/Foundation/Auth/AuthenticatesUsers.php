@@ -5,7 +5,6 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use Session;
 
 trait AuthenticatesUsers
 {
@@ -18,7 +17,6 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        Session::put('activeTab', 'LOGIN');
         return view('auth.login');
     }
 
@@ -158,18 +156,7 @@ trait AuthenticatesUsers
 
         $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect('/');
-    }
-
-    /**
-     * The user has logged out of the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return mixed
-     */
-    protected function loggedOut(Request $request)
-    {
-        //
+        return redirect('/');
     }
 
     /**

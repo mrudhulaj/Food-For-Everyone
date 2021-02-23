@@ -197,11 +197,11 @@ class Mailer implements MailerContract, MailQueueContract
         // First we need to parse the view, which could either be a string or an array
         // containing both an HTML and plain text versions of the view which should
         // be used when sending an e-mail. We will extract both of them out here.
-        [$view, $plain, $raw] = $this->parseView($view);
+        list($view, $plain, $raw) = $this->parseView($view);
 
         $data['message'] = $this->createMessage();
 
-        return $this->renderView($view ?: $plain, $data);
+        return $this->renderView($view, $data);
     }
 
     /**
@@ -221,7 +221,7 @@ class Mailer implements MailerContract, MailQueueContract
         // First we need to parse the view, which could either be a string or an array
         // containing both an HTML and plain text versions of the view which should
         // be used when sending an e-mail. We will extract both of them out here.
-        [$view, $plain, $raw] = $this->parseView($view);
+        list($view, $plain, $raw) = $this->parseView($view);
 
         $data['message'] = $message = $this->createMessage();
 
@@ -236,7 +236,7 @@ class Mailer implements MailerContract, MailQueueContract
         // message. This is primarily useful during local development in which each
         // message should be delivered into a single mail address for inspection.
         if (isset($this->to['address'])) {
-            $this->setGlobalToAndRemoveCcAndBcc($message);
+            $this->setGlobalTo($message);
         }
 
         // Next we will determine if the message should be sent. We give the developer
@@ -347,7 +347,7 @@ class Mailer implements MailerContract, MailQueueContract
      * @param  \Illuminate\Mail\Message  $message
      * @return void
      */
-    protected function setGlobalToAndRemoveCcAndBcc($message)
+    protected function setGlobalTo($message)
     {
         $message->to($this->to['address'], $this->to['name'], true);
         $message->cc(null, null, true);
@@ -456,7 +456,7 @@ class Mailer implements MailerContract, MailQueueContract
      * Send a Swift Message instance.
      *
      * @param  \Swift_Message  $message
-     * @return int|null
+     * @return void
      */
     protected function sendSwiftMessage($message)
     {

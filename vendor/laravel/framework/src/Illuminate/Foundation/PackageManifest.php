@@ -97,8 +97,6 @@ class PackageManifest
             $this->build();
         }
 
-        $this->files->get($this->manifestPath, true);
-
         return $this->manifest = file_exists($this->manifestPath) ?
             $this->files->getRequire($this->manifestPath) : [];
     }
@@ -113,9 +111,7 @@ class PackageManifest
         $packages = [];
 
         if ($this->files->exists($path = $this->vendorPath.'/composer/installed.json')) {
-            $installed = json_decode($this->files->get($path), true);
-
-            $packages = $installed['packages'] ?? $installed;
+            $packages = json_decode($this->files->get($path), true);
         }
 
         $ignoreAll = in_array('*', $ignore = $this->packagesToIgnore());
@@ -170,8 +166,7 @@ class PackageManifest
         }
 
         $this->files->put(
-            $this->manifestPath, '<?php return '.var_export($manifest, true).';',
-            true
+            $this->manifestPath, '<?php return '.var_export($manifest, true).';'
         );
     }
 }
