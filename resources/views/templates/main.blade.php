@@ -158,7 +158,7 @@
                                           <a href="{{ route('adminPermissionsView') }}">PERMISSIONS</a>
                                       </li>
                                       <li class=" @if($activeTab == 'APPROVALS') active-nav @endif ">
-                                          <a href="#">APPROVALS</a>
+                                          <a href="{{ route('approvalsCausesView') }}">APPROVALS</a>
                                       </li>
                                       <li class=" @if($activeTab == 'CONTACT') active-nav @endif ">
                                           <a href="#">CONTACT</a>
