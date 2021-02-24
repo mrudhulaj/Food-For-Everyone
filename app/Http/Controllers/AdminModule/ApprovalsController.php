@@ -79,7 +79,10 @@ class ApprovalsController extends Controller
         $events->save();
         return Redirect::route('approvalsEventsView');
       }
+    }
 
-
+    public function approvalsVolunteerProfile(){
+      $profile = Volunteers::where('ID',Crypt::decrypt(Request::get('ID')))->first();
+      return view('admin/approvals/approvalsVolunteersProfile',compact('profile'));
     }
 }

@@ -74,10 +74,15 @@
     Route::get('/admin-permissions-save', ['as' => 'adminPermissionsSave','uses' => 'AdminModule\PermissionsController@adminPermissionsSave']);
 
   // Approvals
-    Route::get('/approvalsCauses', ['as' => 'approvalsCausesView','uses' => 'AdminModule\ApprovalsController@approvalsCausesView']);
-    Route::get('/approvalsVolunteers', ['as' => 'approvalsVolunteersView','uses' => 'AdminModule\ApprovalsController@approvalsVolunteersView']);
-    Route::get('/approvalsEvents', ['as' => 'approvalsEventsView','uses' => 'AdminModule\ApprovalsController@approvalsEventsView']);
     Route::get('/approvalsDecisions', ['as' => 'approvalsDecisions','uses' => 'AdminModule\ApprovalsController@approvalsDecisions']);
-
+    // Causes
+      Route::get('/approvalsCauses', ['as' => 'approvalsCausesView','uses' => 'AdminModule\ApprovalsController@approvalsCausesView']);
+    
+    // Volunteers
+      Route::get('/approvalsVolunteers', ['as' => 'approvalsVolunteersView','uses' => 'AdminModule\ApprovalsController@approvalsVolunteersView']);
+      Route::get('/approvalsVolunteerProfile', ['as' => 'approvalsVolunteerProfile','uses' => 'AdminModule\ApprovalsController@approvalsVolunteerProfile']);
+    
+    // Events
+      Route::get('/approvalsEvents', ['as' => 'approvalsEventsView','uses' => 'AdminModule\ApprovalsController@approvalsEventsView']);
 
 // End: Admin Views
