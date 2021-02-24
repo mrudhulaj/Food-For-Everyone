@@ -130,7 +130,17 @@
               </p>
             </div>
 						{{-- Begin:  Progress Bar --}}
-            @if (Auth::user()->TypeOfAccount != "Admin")
+            @if (Auth::check())
+              @if(Auth::user()->TypeOfAccount == "Admin")
+                <div style="padding: 50px">
+                  <p style="text-align: center">Goal: <span class="progress-amount">{{number_format($causeData->ExpectedAmount)}} ₹</span></p>
+                  <h2 class="borderes" style="text-align: center;">
+                    <a style="text-decoration: none;" href="{{route('approvalsDecisions',['category' => "Causes",'Decision' => "1",'ID' => Crypt::encrypt($causeData->ID)])}}" >Accept</a>
+                    <a class="approvalDecline" style="text-decoration: none;" href="{{route('approvalsDecisions',['category' => "Causes",'Decision' => "2",'ID' => Crypt::encrypt($causeData->ID)])}}" >Decline</a>
+                  </h2>
+                </div>
+              @endif
+            @else
               <div class="progress-div col-lg-offset-3 col-lg-6" style="height: 215px;margin-top: 15px;">
                 <div class="progress-text">
                   <p class="progress-top">{{$causeData->raisedAmountPercentage}}%</p>
@@ -143,14 +153,6 @@
                 </div>
                   <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a style="text-decoration: none;" href="#" data-toggle="modal"
                     data-target="#donationModal">DONATE NOW</a></h2>
-              </div>
-            @else
-              <div style="padding: 50px">
-                <p style="text-align: center">Goal: <span class="progress-amount">{{number_format($causeData->ExpectedAmount)}} ₹</span></p>
-                <h2 class="borderes" style="text-align: center;">
-                  <a style="text-decoration: none;" href="{{route('approvalsDecisions',['category' => "Causes",'Decision' => "1",'ID' => Crypt::encrypt($causeData->ID)])}}" >Accept</a>
-                  <a class="approvalDecline" style="text-decoration: none;" href="{{route('approvalsDecisions',['category' => "Causes",'Decision' => "2",'ID' => Crypt::encrypt($causeData->ID)])}}" >Decline</a>
-                </h2>
               </div>
             @endif
             {{-- End: Progress Bar --}}
