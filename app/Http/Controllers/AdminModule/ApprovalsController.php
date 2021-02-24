@@ -9,6 +9,8 @@ use App\Models\Causes;
 use App\Models\Volunteers;
 use App\Models\Events;
 use Request;
+use Redirect;
+use Crypt;
 
 class ApprovalsController extends Controller
 {
@@ -53,5 +55,31 @@ class ApprovalsController extends Controller
       $badgesCount['volunteers']   = Volunteers::where('IsApproved', '0')->count();
       $badgesCount['events']       = Events::where('IsApproved', '0')->count();
       return $badgesCount;
+    }
+
+    public function approvalsDecisions(){
+      $selection   = Request::get('category');
+      $badgesCount = $this->approvalsBadges();
+
+      if($selection == "Causes"){
+        $causes= Causes::where('ID',Crypt::decrypt(Request::get('ID')))->first();
+        $causes->IsApproved = Request::get('Decision');
+        $causes->save();
+        return Redirect::route('approvalsCausesView');
+      }
+      elseif($selection == "Volunteers"){ 
+        $volunteers= Volunteers::where('ID',Crypt::decrypt(Request::get('ID')))->first();
+        $volunteers->IsApproved = Request::get('Decision');
+        $volunteers->save();
+        return Redirect::route('approvalsVolunteersView');
+      }
+      elseif($selection == "Events"){
+        $events= Events::where('ID',Crypt::decrypt(Request::get('ID')))->first();
+        $events->IsApproved = Request::get('Decision');
+        $events->save();
+        return Redirect::route('approvalsEventsView');
+      }
+
+
     }
 }

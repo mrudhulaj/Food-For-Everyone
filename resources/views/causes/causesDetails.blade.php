@@ -130,19 +130,29 @@
               </p>
             </div>
 						{{-- Begin:  Progress Bar --}}
-						<div class="progress-div col-lg-offset-3 col-lg-6" style="height: 215px;margin-top: 15px;">
-							<div class="progress-text">
-								<p class="progress-top">{{$causeData->raisedAmountPercentage}}%</p>
-                <div class="progress">
-									<div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-									aria-valuemax="100" style="width:{{$causeData->raisedAmountPercentage}}%;background-color: #01d262;"></div>
+            @if (Auth::user()->TypeOfAccount != "Admin")
+              <div class="progress-div col-lg-offset-3 col-lg-6" style="height: 215px;margin-top: 15px;">
+                <div class="progress-text">
+                  <p class="progress-top">{{$causeData->raisedAmountPercentage}}%</p>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                    aria-valuemax="100" style="width:{{$causeData->raisedAmountPercentage}}%;background-color: #01d262;"></div>
+                  </div>
+                  <p class="progress-left">Raised: <span class="progress-amount">{{ number_format($causeData->RaisedAmount) }} ₹</span></p>
+                  <p class="progress-right">Goal: <span class="progress-amount">{{number_format($causeData->ExpectedAmount)}} ₹</span></p>
                 </div>
-                <p class="progress-left">Raised: <span class="progress-amount">{{ number_format($causeData->RaisedAmount) }} ₹</span></p>
-                <p class="progress-right">Goal: <span class="progress-amount">{{number_format($causeData->ExpectedAmount)}} ₹</span></p>
-							</div>
-							<h2 class="borderes" style="text-align: center;margin-top: 100px;"><a style="text-decoration: none;" href="#" data-toggle="modal"
-                data-target="#donationModal">DONATE NOW</a></h2>
-						</div>
+                  <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a style="text-decoration: none;" href="#" data-toggle="modal"
+                    data-target="#donationModal">DONATE NOW</a></h2>
+              </div>
+            @else
+              <div style="padding: 50px">
+                <p style="text-align: center">Goal: <span class="progress-amount">{{number_format($causeData->ExpectedAmount)}} ₹</span></p>
+                <h2 class="borderes" style="text-align: center;">
+                  <a style="text-decoration: none;" href="{{route('approvalsDecisions',['category' => "Causes",'Decision' => "1",'ID' => Crypt::encrypt($causeData->ID)])}}" >Accept</a>
+                  <a class="approvalDecline" style="text-decoration: none;" href="{{route('approvalsDecisions',['category' => "Causes",'Decision' => "2",'ID' => Crypt::encrypt($causeData->ID)])}}" >Decline</a>
+                </h2>
+              </div>
+            @endif
             {{-- End: Progress Bar --}}
         </div>
     </div>

@@ -1525,3 +1525,17 @@
   }
 
   /* End: Custom checkbok */
+
+  /* Admin Approval */
+
+  .approvalDecline{
+    color: #d64f4f !important;
+    border: 1px solid #d64f4f !important;
+  }
+
+  .approvalDecline:hover{
+    background: #d64f4f none repeat scroll 0 0 !important;
+    color: white !important;
+  }
+
+  /* End Admin Approval */

@@ -77,6 +77,7 @@
     Route::get('/approvalsCauses', ['as' => 'approvalsCausesView','uses' => 'AdminModule\ApprovalsController@approvalsCausesView']);
     Route::get('/approvalsVolunteers', ['as' => 'approvalsVolunteersView','uses' => 'AdminModule\ApprovalsController@approvalsVolunteersView']);
     Route::get('/approvalsEvents', ['as' => 'approvalsEventsView','uses' => 'AdminModule\ApprovalsController@approvalsEventsView']);
+    Route::get('/approvalsDecisions', ['as' => 'approvalsDecisions','uses' => 'AdminModule\ApprovalsController@approvalsDecisions']);
 
 
 // End: Admin Views

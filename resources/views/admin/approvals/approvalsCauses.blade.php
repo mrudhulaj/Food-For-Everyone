@@ -222,26 +222,14 @@ hr {
               </a>
               <p class="box-p" style="height: 120px;">
                   {{ $causesData->CauseShortDescription }}
-                  <br>
-                  <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}"
-                      class="learn-more">
-                      Learn more.
-                  </a>
               </p>
-              <div class="progress-text">
-                  <p class="progress-top">{{$causesData->raisedAmountPercentage}}%
-                  </p>
-                  <div class="progress">
-                      <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                          aria-valuemax="100" style="width:{{$causesData->raisedAmountPercentage}}%;background-color: #01d262;"></div>
-                  </div>
-                  <p class="progress-left">Raised: <span class="progress-amount">{{ number_format($causesData->RaisedAmount) }} ₹</span></p>
-                  <p class="progress-right">Goal: <span
-                          class="progress-amount">{{ number_format($causesData->ExpectedAmount) }} ₹</span>
-                  </p>
+              <div style="margin-top: 100px;">
+                <p style="text-align: center">Goal: <span
+                  class="progress-amount">{{ number_format($causesData->ExpectedAmount) }} ₹</span>
+                </p>
+                <h2 class="borderes" style="text-align: center;">
+                  <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}" data-causeID="{{$causesData->ID}}" class="donateButton">View</a></h2>
               </div>
-              <h2 class="borderes" style="text-align: center;margin-top: 100px;"><a data-toggle="modal"
-                      data-target="#donationModal" href="#" data-causeID="{{$causesData->ID}}" class="donateButton">DONATE NOW</a></h2>
           </div>
       </div>
   @endforeach
