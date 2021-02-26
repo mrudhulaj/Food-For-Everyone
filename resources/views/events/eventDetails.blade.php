@@ -146,6 +146,16 @@
                   Email: {{$eventData->Email}}
               </p>
             </div>
+            @if (Auth::check())
+              @if(Auth::user()->TypeOfAccount == "Admin")
+                <div style="margin-bottom: 50px">
+                  <h2 class="borderes" style="text-align: center;">
+                    <a style="text-decoration: none;margin-right: 30px" href="{{route('approvalsDecisions',['category' => "Events",'Decision' => "1",'ID' => Crypt::encrypt($eventData->ID)])}}" >Accept</a>
+                    <a class="approvalDecline" style="text-decoration: none;" href="{{route('approvalsDecisions',['category' => "Events",'Decision' => "2",'ID' => Crypt::encrypt($eventData->ID)])}}" >Decline</a>
+                  </h2>
+                </div>
+              @endif
+            @endif
         </div>
     </div>
 </div>
