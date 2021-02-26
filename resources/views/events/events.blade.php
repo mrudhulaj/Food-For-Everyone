@@ -19,6 +19,25 @@
         left: 44% !important;
     }
 
+     /* View button */
+
+     .box-content h2 a {
+        background: #fff none repeat scroll 0 0;
+        border-radius: 30px;
+        color: #05ce68;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 10px 55px;
+        text-decoration: none;
+        border: 1px solid #05ce68;
+    }
+
+    .box-content h2 a:hover {
+        background: #01d262 none repeat scroll 0 0;
+        color: white;
+    }
+
 </style>
 @section('content')
 <div class="container" style="padding: 0px 10px 0px 30px;">
@@ -49,7 +68,7 @@
         <div class="row">
             @foreach($events as $eventsData)
                 <div class="col-md-4 col-xs-12">
-                    <div class="events_single" style="height: 570px;width: 351px;border-radius: 13px;
+                    <div class="events_single box-content" style="height: 570px;width: 351px;border-radius: 13px;
                     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);">
                         <div style="width: 351px;height: 207px;overflow: hidden;border-radius: 13px 13px 0px 0px;">
                             <img style="width: 351px;height: 207px;" src="{{ asset($eventsData->EventImage) }}">
@@ -69,13 +88,8 @@
                               <br>
                         </div>
                         <div style="text-align: center;">
-                          <span>
-                            Click 
-                              <a href="{{route('eventDetailsView',['eventID' => Crypt::encrypt($eventsData->ID)])}}" style="color: #00A348;text-decoration: none"> 
-                                here 
-                              </a>
-                            to see more details.
-                          </span>
+                          <h2 class="cust-button" style="text-align: center;margin-top: 15px">
+                            <a href="{{route('eventDetailsView',['eventID' => Crypt::encrypt($eventsData->ID)])}}" class="donateButton">View</a></h2>
                         </div>
                     </div>
                 </div>
