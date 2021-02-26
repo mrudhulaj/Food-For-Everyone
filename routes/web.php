@@ -69,6 +69,10 @@
   // Dashboard
     Route::get('/admin-dashboard', ['as' => 'adminDashboardView','uses' => 'AdminModule\DashboardController@adminDashboardView']);
   
+  // Contact Messages
+  Route::get('/admin-contact-messages', ['as' => 'adminContactMessagesView','uses' => 'AdminModule\ContactMessagesController@adminContactMessagesView']);
+  Route::get('/admin-contact-messages-filter', ['as' => 'adminContactMessagesFilter','uses' => 'AdminModule\ContactMessagesController@adminContactMessagesFilter']);
+
   // Permissions
     Route::get('/admin-permissions', ['as' => 'adminPermissionsView','uses' => 'AdminModule\PermissionsController@adminPermissionsView']);
     Route::get('/admin-permissions-save', ['as' => 'adminPermissionsSave','uses' => 'AdminModule\PermissionsController@adminPermissionsSave']);

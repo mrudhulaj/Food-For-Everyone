@@ -160,8 +160,8 @@
                                       <li class=" @if($activeTab == 'APPROVALS') active-nav @endif ">
                                           <a href="{{ route('approvalsCausesView') }}">APPROVALS</a>
                                       </li>
-                                      <li class=" @if($activeTab == 'CONTACT') active-nav @endif ">
-                                          <a href="#">CONTACT</a>
+                                      <li class=" @if($activeTab == 'CONTACTMESSAGES') active-nav @endif ">
+                                          <a href="{{ route('adminContactMessagesView') }}">CONTACT MESSAGES</a>
                                       </li>
                                       <li style="width: 25px;">
                                         <a href="javascript:void(0)" id="adminMenuToggle">
