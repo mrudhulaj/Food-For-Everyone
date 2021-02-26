@@ -157,6 +157,11 @@
                         @endif
 
                         <div class="input-group col-lg-12">
+                          <label class="label ffe-font">Subject</label>
+                          <input class="input--style-4" type="text" name="subject" id="subject" value="">
+                        </div>
+
+                        <div class="input-group col-lg-12">
                             <label class="label ffe-font">Message</label>
                             <textarea style="border: none;line-height: 25px;padding: 12px 22px;" name="message"
                                 id="message" class="input--style-4" cols="52" rows="6"></textarea>
@@ -228,6 +233,9 @@
                 message: {
                     required: true,
                 },
+                subject: {
+                    required: true,
+                },
               },
             messages: {
                 firstName: "Please enter your first name",
@@ -238,6 +246,9 @@
                 },
                 message: {
                     required: "Please enter your message",
+                },
+                subject: {
+                    required: "Please enter a subject",
                 },
                 ticketCategory: {
                     required: "Please select a category",
@@ -263,6 +274,7 @@
                 email            : $("#email").val(),
                 phone            : $("#phone").val(),
                 message          : $("#message").val(),
+                subject          : $("#subject").val(),
                 raiseTicket      : $("#raiseTicket").val(),
                 ticketCategory   : $("#ticketCategory").val(),
                 ticketCategoryID : $("#ticketItem").val(),

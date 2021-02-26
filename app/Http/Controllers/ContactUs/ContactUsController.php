@@ -30,6 +30,7 @@ class ContactUsController extends Controller
       $contactUs->Email           = Request::get('email');
       $contactUs->Phone           = Request::get('phone');
       $contactUs->Message         = Request::get('message');
+      $contactUs->Subject         = Request::get('subject');
       $contactUs->CreatedDate     = date('Y-m-d H:i:s');
       $contactUs->EditedDate      = date('Y-m-d H:i:s');
 
@@ -59,6 +60,7 @@ class ContactUsController extends Controller
             $raisedTickets->ContactUsID   = $contactUs->ID;
             $raisedTickets->Severity      = Request::get('ticketSeverity');
             $raisedTickets->Message       = Request::get('message');
+            $raisedTickets->Subject       = Request::get('subject');
             $raisedTickets->save();
           }
         }      
