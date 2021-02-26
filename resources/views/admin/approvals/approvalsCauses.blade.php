@@ -205,7 +205,7 @@ hr {
       <a class="a-none @if($selection == 'Events') active-nav @endif" href="{{ route('approvalsEventsView',['selection' => "Events"]) }}">Events <span class="badge cust-badge">{{$badgesCount['events']}}</span></a>
     </span>
 </div>
-@if(count($causes) == 0) <p class="ffe-font" style="text-align: center;margin-top: 100px">No causes pending for approval!</p> @endif
+@if(count($causes) == 0) <p class="ffe-font" style="text-align: center;margin-top: 100px">No causes pending for approval.</p> @endif
 <div class="container" style="margin-top: 70px;margin-bottom: 70px;padding-left: 5px;margin-right: 0px;">
   @foreach($causes as $causesData)
       <div class="box mainbox">

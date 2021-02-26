@@ -142,7 +142,7 @@
             <span class="badge cust-badge">{{ $badgesCount['events'] }}</span></a>
     </span>
 </div>
-@if(count($volunteers) == 0) <p class="ffe-font" style="text-align: center;margin-top: 100px">No volunteers pending for approval!</p> @endif
+@if(count($volunteers) == 0) <p class="ffe-font" style="text-align: center;margin-top: 100px">No volunteers pending for approval.</p> @endif
 <div class="container" style="padding-bottom: 100px;padding-top: 50px;">
     @foreach($volunteers as $volunteersData)
         <div class="col-lg-12" style="width: auto">
