@@ -29,7 +29,7 @@ class ContactMessagesController extends Controller
 
     public function adminContactMessagesFilter() {
       $filterValues =  Request::get('filterValues');
-      if( $filterValues == "" ){
+      if( $filterValues == ""){
         $data = DB::table('contactUs')
                     ->join('raisedTickets','raisedTickets.ContactUsID','=','contactUs.ID')
                     ->where(function($query)use($filterValues){ 
@@ -101,8 +101,52 @@ class ContactMessagesController extends Controller
 
           // Date
           $dataEach->Date = date('j-n-Y h:i A', strtotime($categoryData->EditedDate));
+
+          // Ticket Status
+          $dataEach->TicketStatus = "Raised";
     
         }
+      }
+      elseif($filterValues['filterTicketStatus'] == "0"){
+
+        $data = DB::table('contactUs')
+                    ->where(function($query)use($filterValues){ 
+    
+                        if (isset($filterValues['filterTicketStatus']) && $filterValues['filterTicketStatus'] != null && $filterValues['filterTicketStatus'] != "") {  
+                          $query->where('RaisedTicket',$filterValues['filterTicketStatus']);
+                        }
+    
+                      })
+                      ->orderby('EditedDate','desc')
+                      ->select('FirstName',
+                        'LastName',
+                        'CreatedUserID',
+                        'Email',
+                        'Phone',
+                        'Subject',
+                        'EditedDate'
+                        )
+                      ->get();
+
+        foreach($data as $dataEach){
+
+          // Type Of Account
+          if($dataEach->CreatedUserID == null || $dataEach->CreatedUserID == ""  ){
+            $dataEach->UserType = "Guest";
+          }
+          else{
+            $userType             = User::where('id',$dataEach->CreatedUserID)->first();
+            $dataEach->UserType   = $userType->TypeOfAccount;
+          }
+
+          // Date
+          $dataEach->Date = date('j-n-Y h:i A', strtotime($dataEach->EditedDate));
+
+          // Ticket Status
+          $dataEach->TicketStatus = "Non-Raised";
+    
+        }
+
       }
   
       return DataTables::of($data)->make(true);

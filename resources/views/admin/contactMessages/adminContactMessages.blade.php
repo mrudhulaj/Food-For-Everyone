@@ -125,9 +125,9 @@
         fillDatatable();
         $('.dataTables_empty').html('No data available');
           function fillDatatable(filterValues) {
-            var dataTable = $('#contactMessageTable').dataTable({
+            var dataTable = $('#contactMessageTable').DataTable({
                 "oLanguage": {
-                    "sEmptyTable": "No foods found."
+                    "sEmptyTable": "No data found"
                 },
                 processing: true,
                 serverSide: true,
@@ -163,20 +163,36 @@
                     },
                     {
                         data: 'Severity',
-                        name: 'Severity'
+                        name: 'Severity',
+                        "defaultContent": ""
                     },
                     {
                         data: 'Category',
-                        name: 'Category'
+                        name: 'Category',
+                        "defaultContent": ""
                     },
                     {
                         data: 'CategoryDetails',
-                        name: 'CategoryDetails'
+                        name: 'CategoryDetails',
+                        "defaultContent": ""
                     },
                     {
                         data: 'Date',
                         name: 'Date'
                     }
+                ],
+                "columnDefs": [
+                         {
+                            'targets': [6],
+                            'render': function (data, row){
+                                var ticketStatus =$('input[name="ticketStatus"]:checked').val();
+                                if(ticketStatus == "0"){
+                                  $('td:nth-child(7),th:nth-child(7)').hide();
+                                  $('td:nth-child(8),th:nth-child(8)').hide();
+                                  $('td:nth-child(9),th:nth-child(9)').hide();
+                                }
+                            }
+                        },
                 ],
                 "rowCallback": function( row, data ) {
                   if ( data.Severity == "Low" ) {
@@ -188,6 +204,7 @@
                   else if(data.Severity == "High"){
                     $('td:eq(6)', row).html( '<span style="color:red">High</span>' );
                   }
+
                 }
             });
         }
