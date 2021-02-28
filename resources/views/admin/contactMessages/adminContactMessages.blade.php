@@ -19,6 +19,10 @@
         left: 41% !important;
     }
 
+    .odd:hover , .even:hover {
+      background-color:#9cf19c;
+    }
+
 </style>
 @section('content')
 <section class="events_section_area">
@@ -36,7 +40,7 @@
                         <label class="label ffe-font">Ticket Status</label>
                         <div class="p-t-10">
                             <label class="radio-container mr-30 ffe-font">Raised
-                                <input type="radio" name="ticketStatus" value="1" checked>
+                                <input type="radio" id="ticketStatusRaised" name="ticketStatus" value="1" checked>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="radio-container ffe-font">Non-Raised
@@ -122,7 +126,14 @@
 
       });
 
-        fillDatatable();
+        var filterValues = {
+            filterTicketStatus        : $('input[name="ticketStatus"]:checked').val(),
+            filterTicketSeverity      : $('input[name="ticketSeverity"]:checked').val()
+            };
+
+        var table;
+
+        fillDatatable(filterValues);
         $('.dataTables_empty').html('No data available');
           function fillDatatable(filterValues) {
             var dataTable = $('#contactMessageTable').DataTable({
@@ -191,6 +202,11 @@
                                   $('td:nth-child(8),th:nth-child(8)').hide();
                                   $('td:nth-child(9),th:nth-child(9)').hide();
                                 }
+                                else{
+                                  $('td:nth-child(7),th:nth-child(7)').show();
+                                  $('td:nth-child(8),th:nth-child(8)').show();
+                                  $('td:nth-child(9),th:nth-child(9)').show();
+                                }
                             }
                         },
                 ],
@@ -205,8 +221,15 @@
                     $('td:eq(6)', row).html( '<span style="color:red">High</span>' );
                   }
 
-                }
+                },
+                fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    responsiveHelper.createExpandIcon(nRow);
+                    $(nRow).click(function() {
+                        document.location.href = 'www.google.com';
+                    });
+                },
             });
+
         }
 
 
@@ -217,15 +240,27 @@
             };
 
             $('#contactMessageTable').DataTable().destroy();
+            console.log(filterValues);
             fillDatatable(filterValues);
+            table = $('#contactMessageTable').DataTable();
+
         });
 
         $('#resetFilter').click(function () {
-            $('input[type="radio"]').prop('checked', false); 
+            $("#ticketStatusRaised").prop("checked", true);
+            $(".ticketSeverityDiv").removeClass('hide');
 
             $('#contactMessageTable').DataTable().destroy();
-            fillDatatable();
+            fillDatatable(filterValues);
         });
+
+        table = $('#contactMessageTable').DataTable();
+
+        $('#contactMessageTable tbody').on('click', 'tr', function () {
+          var data = table.row( this ).data();
+          console.log(data);
+          alert( 'You clicked on '+data['FirstName']+'\'s row' );
+        } );
 
     });
 

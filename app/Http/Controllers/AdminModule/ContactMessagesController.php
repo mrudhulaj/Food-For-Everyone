@@ -29,7 +29,7 @@ class ContactMessagesController extends Controller
 
     public function adminContactMessagesFilter() {
       $filterValues =  Request::get('filterValues');
-      if( $filterValues == ""){
+      if( $filterValues['filterTicketStatus'] == "1"){
         $data = DB::table('contactUs')
                     ->join('raisedTickets','raisedTickets.ContactUsID','=','contactUs.ID')
                     ->where(function($query)use($filterValues){ 
@@ -47,10 +47,12 @@ class ContactMessagesController extends Controller
                       ->orderby('raisedTickets.Severity','desc')
                       ->select('contactUs.FirstName',
                         'contactUs.LastName',
+                        'contactUs.ID as contactUsID',
                         'contactUs.CreatedUserID',
                         'contactUs.Email',
                         'contactUs.Phone',
                         'contactUs.Subject',
+                        'raisedTickets.ID as raisedTicketsID',
                         'raisedTickets.Severity',
                         'raisedTickets.Category',
                         'raisedTickets.CategoryID',
@@ -91,7 +93,6 @@ class ContactMessagesController extends Controller
           }
           elseif($dataEach->Category == "Volunteers"){
             $categoryData = User::where('id',$dataEach->CategoryID)->first();
-            // if(empty($categoryData)){ return $dataEach->CategoryID;}
             $dataEach->CategoryDetails = $categoryData->FirstName." ".$categoryData->LastName;
           }
           elseif($dataEach->Category == "Available Foods"){
@@ -124,6 +125,7 @@ class ContactMessagesController extends Controller
                         'Email',
                         'Phone',
                         'Subject',
+                        'ID as contactUsID',
                         'EditedDate'
                         )
                       ->get();
