@@ -47,12 +47,12 @@ class ContactMessagesController extends Controller
                       ->orderby('raisedTickets.Severity','desc')
                       ->select('contactUs.FirstName',
                         'contactUs.LastName',
-                        'contactUs.ID as contactUsID',
+                        'contactUs.ID as ContactUsID',
                         'contactUs.CreatedUserID',
                         'contactUs.Email',
                         'contactUs.Phone',
                         'contactUs.Subject',
-                        'raisedTickets.ID as raisedTicketsID',
+                        'raisedTickets.ID as RaisedTicketsID',
                         'raisedTickets.Severity',
                         'raisedTickets.Category',
                         'raisedTickets.CategoryID',
@@ -125,7 +125,7 @@ class ContactMessagesController extends Controller
                         'Email',
                         'Phone',
                         'Subject',
-                        'ID as contactUsID',
+                        'ID as ContactUsID',
                         'EditedDate'
                         )
                       ->get();
@@ -153,5 +153,20 @@ class ContactMessagesController extends Controller
   
       return DataTables::of($data)->make(true);
   
+    }
+
+    public function adminContactMessagesDetails(){
+      return $ticketStatus       = Request::get('ticketStatus');
+      $contactUsID        = Request::get('ContactUsID');
+      $RaisedTicketsID    = Request::get('RaisedTicketsID');
+
+      if($ticketStatus == "Raised"){
+        return $data = DB::table('contactUs')
+                ->join('raisedTickets','raisedTickets.ContactUsID','=','contactUs.ID')
+                ->where('contactUs.ID','=',$contactUsID)
+                ->first();
+      }
+
+      return view('admin/contactMessages/adminContactMessagesDetails');
     }
 }

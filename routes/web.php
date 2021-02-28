@@ -72,6 +72,7 @@
   // Contact Messages
   Route::get('/admin-contact-messages', ['as' => 'adminContactMessagesView','uses' => 'AdminModule\ContactMessagesController@adminContactMessagesView']);
   Route::get('/admin-contact-messages-filter', ['as' => 'adminContactMessagesFilter','uses' => 'AdminModule\ContactMessagesController@adminContactMessagesFilter']);
+  Route::get('/admin-contact-messages-details', ['as' => 'adminContactMessagesDetails','uses' => 'AdminModule\ContactMessagesController@adminContactMessagesDetails']);
 
   // Permissions
     Route::get('/admin-permissions', ['as' => 'adminPermissionsView','uses' => 'AdminModule\PermissionsController@adminPermissionsView']);

@@ -257,9 +257,15 @@
         table = $('#contactMessageTable').DataTable();
 
         $('#contactMessageTable tbody').on('click', 'tr', function () {
-          var data = table.row( this ).data();
-          console.log(data);
-          alert( 'You clicked on '+data['FirstName']+'\'s row' );
+          var data                      = table.row( this ).data();
+          var detailsTicketStatus       = data['TicketStatus'];
+          var detailscontactUsID        = data['ContactUsID'];
+          var detailsRaisedTicketsID    = data['RaisedTicketsID'];
+          // console.log(data);
+          // window.location.href = "{{route('adminContactMessagesDetails',['ticketStatus' => '"+detailsTicketStatus+"','ContactUsID' => '"+detailscontactUsID+"','RaisedTicketsID' => '"+detailsRaisedTicketsID+"'])}}";
+
+          window.location.href = "{{route('adminContactMessagesDetails',['ticketStatus' => "+detailsTicketStatus+"])}}";
+
         } );
 
     });
