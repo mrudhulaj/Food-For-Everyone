@@ -21,6 +21,7 @@
 
     .odd:hover , .even:hover {
       background-color:#9cf19c;
+      cursor: pointer;
     }
 
 </style>
@@ -31,6 +32,7 @@
     </h2>
 </section>
 <div class="container plr-0">
+@include('templates.alertSuccessMessage')
     {{-- Begin:Filter Area --}}
     <div class="col-lg-12 plr-0 filter" style="margin-top: 30px;">
         <form class="form-inline" name="filterForm" id="filterForm">
@@ -257,14 +259,20 @@
         table = $('#contactMessageTable').DataTable();
 
         $('#contactMessageTable tbody').on('click', 'tr', function () {
-          var data                      = table.row( this ).data();
-          var detailsTicketStatus       = data['TicketStatus'];
-          var detailscontactUsID        = data['ContactUsID'];
-          var detailsRaisedTicketsID    = data['RaisedTicketsID'];
-          // console.log(data);
-          // window.location.href = "{{route('adminContactMessagesDetails',['ticketStatus' => '"+detailsTicketStatus+"','ContactUsID' => '"+detailscontactUsID+"','RaisedTicketsID' => '"+detailsRaisedTicketsID+"'])}}";
+          var data                  = table.row( this ).data();
+          var route                 = "{!! route('adminContactMessagesDetails',['ticketStatus' => 'ticketStatusData','ContactUsID' => 'ContactUsIDData','RaisedTicketsID' => 'RaisedTicketsIDData']) !!}";
 
-          window.location.href = "{{route('adminContactMessagesDetails',['ticketStatus' => "+detailsTicketStatus+"])}}";
+          var mapObj = {
+                        ticketStatusData    : data['TicketStatus'],
+                        ContactUsIDData     : data['ContactUsID'],
+                        RaisedTicketsIDData : data['RaisedTicketsID']
+                      };
+
+          route = route.replace(/ticketStatusData|ContactUsIDData|RaisedTicketsIDData/gi, function(matched){
+            return mapObj[matched];
+          });
+
+          window.location.href = route;
 
         } );
 

@@ -11,6 +11,7 @@ use App\Models\Causes;
 use App\Models\Events;
 use App\Models\Volunteers;
 use App\Models\AvailableFoods;
+use App\Models\RaisedTickets;
 use App\User;
 use Request;
 use DB;
@@ -43,7 +44,7 @@ class ContactMessagesController extends Controller
                         }
     
                       })
-                      ->where('contactUs.TicketStatus','=','1')
+                      ->where('contactUs.TicketStatus','=',0)
                       ->orderby('raisedTickets.Severity','desc')
                       ->select('contactUs.FirstName',
                         'contactUs.LastName',
@@ -118,6 +119,7 @@ class ContactMessagesController extends Controller
                         }
     
                       })
+                      ->where('TicketStatus',0)
                       ->orderby('EditedDate','desc')
                       ->select('FirstName',
                         'LastName',
@@ -156,17 +158,76 @@ class ContactMessagesController extends Controller
     }
 
     public function adminContactMessagesDetails(){
-      return $ticketStatus       = Request::get('ticketStatus');
+
+      $ticketStatus       = Request::get('ticketStatus');
       $contactUsID        = Request::get('ContactUsID');
-      $RaisedTicketsID    = Request::get('RaisedTicketsID');
+      $raisedTicketsID    = Request::get('RaisedTicketsID');
 
       if($ticketStatus == "Raised"){
-        return $data = DB::table('contactUs')
+        $contactUsdata = DB::table('contactUs')
                 ->join('raisedTickets','raisedTickets.ContactUsID','=','contactUs.ID')
                 ->where('contactUs.ID','=',$contactUsID)
                 ->first();
+
+        $modelName    ='App\Models' . '\\' . str_replace(" ","",$contactUsdata->Category);
+        if($contactUsdata->Category != "Volunteers"){
+          $categoryData = $modelName::where('ID',$contactUsdata->CategoryID)->first();
+
+          if($contactUsdata->Category == "Available Foods"){
+            $categoryData = date('j-n-Y h:i A', strtotime($categoryData->EditedDate));
+          }
+          else if($contactUsdata->Category == "Causes"){
+            $categoryData = $categoryData->CauseName;
+
+          }
+          else if($contactUsdata->Category == "Events"){
+            $categoryData = $categoryData->EventName;
+          }
+
+        }
+        else{
+          $categoryData = $modelName::where('UserID',$contactUsdata->CategoryID)->first();
+          $categoryData = $categoryData->FirstName." ".$categoryData->LastName;
+        }
+
+      }
+      else{
+        $contactUsdata = DB::table('contactUs')
+                ->where('ID','=',$contactUsID)
+                ->first();
+
+        $categoryData = null;
       }
 
-      return view('admin/contactMessages/adminContactMessagesDetails');
+      return view('admin/contactMessages/adminContactMessagesDetails',compact('contactUsdata','ticketStatus','categoryData','raisedTicketsID','contactUsID'));
+    }
+
+    public function adminContactMessagesDetailsSave(){
+
+      if(Request::get('raiseTicket') == 1){
+        $contactUsData                      = ContactUs::where('ID',Request::get('contactUsID'))->first();
+        $contactUsData->TicketStatus        = Request::get('status');
+        $contactUsData->save();
+
+        $raisedTicketsData                  = RaisedTickets::where('ID',Request::get('raisedTicketsID'))->first();
+        $raisedTicketsData->TicketStatus    = Request::get('status');
+        $raisedTicketsData->save();
+      }
+      else{
+        $contactUsData                      = ContactUs::where('ID',Request::get('contactUsID'))->first();
+        $contactUsData->TicketStatus        = Request::get('status');
+        $contactUsData->save();
+      }
+
+
+      if(Request::get('status') == 1){
+        $message = "Added to Review";
+      }
+      else{
+        $message = "Added to Resolved";
+      }
+
+      return redirect()->route('adminContactMessagesView')->with('status', $message);
+
     }
 }
