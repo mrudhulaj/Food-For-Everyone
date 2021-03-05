@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 04, 2021 at 10:47 PM
+-- Generation Time: Mar 05, 2021 at 07:48 PM
 -- Server version: 8.0.23-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -208,6 +208,22 @@ CREATE TABLE `raisedTickets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rejectedActivities`
+--
+
+CREATE TABLE `rejectedActivities` (
+  `ID` int NOT NULL,
+  `Activity` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ActivityID` int NOT NULL,
+  `Reason` text NOT NULL,
+  `ActivityCreatedBy` varchar(200) NOT NULL,
+  `ActivityCreatedByID` int NOT NULL,
+  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `roles`
 --
 
@@ -362,6 +378,12 @@ ALTER TABLE `raisedTickets`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `rejectedActivities`
+--
+ALTER TABLE `rejectedActivities`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -452,6 +474,12 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `raisedTickets`
 --
 ALTER TABLE `raisedTickets`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rejectedActivities`
+--
+ALTER TABLE `rejectedActivities`
   MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 
 --
