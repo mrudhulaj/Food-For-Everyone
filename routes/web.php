@@ -80,7 +80,7 @@
     Route::get('/admin-permissions-save', ['as' => 'adminPermissionsSave','uses' => 'AdminModule\PermissionsController@adminPermissionsSave']);
 
   // Approvals
-    Route::get('/approvalsDecisions', ['as' => 'approvalsDecisions','uses' => 'AdminModule\ApprovalsController@approvalsDecisions']);
+    Route::post('/approvalsDecisions', ['as' => 'approvalsDecisions','uses' => 'AdminModule\ApprovalsController@approvalsDecisions']);
     // Causes
       Route::get('/approvalsCauses', ['as' => 'approvalsCausesView','uses' => 'AdminModule\ApprovalsController@approvalsCausesView']);
     

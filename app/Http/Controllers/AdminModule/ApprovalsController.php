@@ -7,6 +7,7 @@ use Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Causes;
 use App\Models\Volunteers;
+use App\Models\RejectedActivities;
 use App\Models\Events;
 use Request;
 use Redirect;
@@ -62,23 +63,50 @@ class ApprovalsController extends Controller
       $badgesCount = $this->approvalsBadges();
 
       if($selection == "Causes"){
-        $causes= Causes::where('ID',Crypt::decrypt(Request::get('ID')))->first();
-        $causes->IsApproved = Request::get('Decision');
-        $causes->save();
+        $activity               = Causes::where('ID',Crypt::decrypt(Request::get('ID')))->first();
+        $activity->IsApproved   = Request::get('Decision');
+        $activity->save();
+
+        if(Request::get('Decision') == 2){
+          $rejectedActivities     = $this->rejectedActivitiesSave($activity);
+        }
+
         return Redirect::route('approvalsCausesView');
       }
       elseif($selection == "Volunteers"){ 
-        $volunteers= Volunteers::where('ID',Crypt::decrypt(Request::get('ID')))->first();
-        $volunteers->IsApproved = Request::get('Decision');
-        $volunteers->save();
+        $activity               = Volunteers::where('ID',Crypt::decrypt(Request::get('ID')))->first();
+        $activity->IsApproved   = Request::get('Decision');
+        $activity->save();
+
+        if(Request::get('Decision') == 2){
+          $rejectedActivities     = $this->rejectedActivitiesSave($activity);
+        }
+
         return Redirect::route('approvalsVolunteersView');
       }
       elseif($selection == "Events"){
-        $events= Events::where('ID',Crypt::decrypt(Request::get('ID')))->first();
-        $events->IsApproved = Request::get('Decision');
-        $events->save();
+        $activity               = Events::where('ID',Crypt::decrypt(Request::get('ID')))->first();
+        $activity->IsApproved   = Request::get('Decision');
+        $activity->save();
+
+        if(Request::get('Decision') == 2){
+          $rejectedActivities     = $this->rejectedActivitiesSave($activity);
+        }
+
         return Redirect::route('approvalsEventsView');
       }
+
+    }
+
+    private function rejectedActivitiesSave($activity){
+      $rejectedActivities                       = new RejectedActivities();
+      $rejectedActivities->Activity             = Request::get('category');
+      $rejectedActivities->ActivityID           = Crypt::decrypt(Request::get('ID'));
+      $rejectedActivities->Reason               = Request::get('rejectionReason');
+      $rejectedActivities->ActivityCreatedBy    = $activity->CreatedUser;
+      $rejectedActivities->ActivityCreatedByID  = $activity->CreatedUserID;
+      $rejectedActivities->save();      
+      return $rejectedActivities;
     }
 
     public function approvalsVolunteerProfile(){

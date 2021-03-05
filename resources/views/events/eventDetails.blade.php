@@ -151,9 +151,44 @@
                 <div style="margin-bottom: 50px">
                   <h2 class="borderes" style="text-align: center;">
                     <a style="text-decoration: none;margin-right: 30px" href="{{route('approvalsDecisions',['category' => "Events",'Decision' => "1",'ID' => Crypt::encrypt($eventData->ID)])}}" >Accept</a>
-                    <a class="approvalDecline" style="text-decoration: none;" href="{{route('approvalsDecisions',['category' => "Events",'Decision' => "2",'ID' => Crypt::encrypt($eventData->ID)])}}" >Decline</a>
+                    <a class="approvalDecline" style="text-decoration: none;" href="javascript:void(0)" data-toggle="modal" data-target="#declineModal">Reject</a>
                   </h2>
                 </div>
+                {{-- Begin:Decline Modal --}}
+                <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="declineModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="border-radius: 13px;border: none">
+                            <div class="modal-header ffe-font">
+                                <h5 class="modal-title" id="declineModalLabel">Rejection Confirmation
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </h5>
+                            </div>
+                            <form action="{{route('approvalsDecisions')}}" method="POST" enctype="multipart/form-data" name="" id="">
+                              @csrf
+                              <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
+                                <label class="ffe-font">Reason for rejection</label>
+                                <textarea style="border: none;line-height: 25px;padding: 12px 22px;" name="rejectionReason"
+                                id="rejectionReason" class="input--style-4" cols="56" rows="6"></textarea>                            
+                            </div>
+                            <div class="modal-footer">
+                                <button id="" type="submit" class="btn btn-danger">
+                                    Confirm
+                                </button>
+                                <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
+                                    Close
+                                </button>
+                            </div>
+                            <input type="hidden" name="category" value="Events">
+                            <input type="hidden" name="Decision" value="2">
+                            <input type="hidden" name="ID" value="{{Crypt::encrypt($eventData->ID)}}">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {{-- End:Decline Modal --}}
               @endif
             @endif
         </div>
