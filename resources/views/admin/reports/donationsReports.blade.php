@@ -27,29 +27,66 @@
         display: initial !important;
     }
 
-    .ffe-font{
-      font-size: 20px !important;
+    .ffe-font {
+        font-size: 20px !important;
     }
 
-    table{
-      margin-bottom: 0px !important;
+    table {
+        margin-bottom: 0px !important;
+    }
+
+    .pagination > .active > span{
+      z-index: 3;
+      color: #fff;
+      cursor: default;
+      background-color: #00A348 !important;
+      border-color: #00A348 !important;
+    }
+
+    .pagination > li > a{
+      color: black !important;
     }
 
 </style>
 @section('content')
 <div class="container plr-0">
-@include('templates.alertSuccessMessage')
-<section class="events_section_area">
-  <h2 id="cust-h2">
-      Donations Reports
-  </h2>
-</section>
+    @include('templates.alertSuccessMessage')
+    <section class="events_section_area">
+        <h2 id="cust-h2">
+            Donations Reports
+        </h2>
+    </section>
 </div>
-<div class="container">
-  
+<div class="container" style="margin-bottom: 50px">
+    <table class="table" style="" id="">
+        <thead class="table-striped">
+            <tr>
+                <th class="txt-left">Name</th>
+                <th class="txt-left">Amount Donated (₹)</th>
+                <th class="txt-left">Cause</th>
+                <th class="txt-left">Cause Goal (₹)</th>
+                <th class="txt-left">Account Type</th>
+                <th class="txt-left">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($donations as $donationsData)
+                <tr>
+                    <td class="txt-left">{{ $donationsData->donationFirstName." ".$donationsData->donationLastName }}</td>
+                    <td class="txt-left">{{ number_format($donationsData->donationAmount) }}</td>
+                    <td class="txt-left">{{ $donationsData->ActivityName }}</td>
+                    <td class="txt-left">{{ number_format($donationsData->Goal) }}</td>
+                    <td class="txt-left">{{ $donationsData->AccountType }}</td>
+                    <td class="txt-left">{{ $donationsData->Date }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div style="text-align: right">
+      {!! $donations->render() !!}
+    </div>
 </div>
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
-
 </script>
 @stop

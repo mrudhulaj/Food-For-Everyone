@@ -65,8 +65,4 @@ class ReportsController extends Controller
 
       return view('admin/reports/reports',compact('donations','foodsAdded','causes','volunteers','events','contactMessages'));
     }
-
-    public function donationsReport(){
-      return view('admin/reports/donationsReports');
-    }
 }

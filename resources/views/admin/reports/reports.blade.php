@@ -131,7 +131,7 @@
         </tr>
         <tr>
           <td  class="txt-left">
-            <a href="{{ route('donationsReport') }}" class="report-heading"
+            <a href="{{ route('reportsDonationView') }}" class="report-heading"
             style="text-decoration: none">See all</a>
           </td>
           <td class="txt-left">
