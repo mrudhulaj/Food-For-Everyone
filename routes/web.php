@@ -77,6 +77,7 @@
 
   // Reports
   Route::get('/admin-reports', ['as' => 'adminReportsView','uses' => 'AdminModule\ReportsController@adminReportsView']);
+  Route::get('/admin-donations-reports', ['as' => 'donationsReport','uses' => 'AdminModule\ReportsController@donationsReport']);
 
 
   // Permissions

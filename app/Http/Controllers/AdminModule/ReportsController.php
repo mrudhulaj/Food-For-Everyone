@@ -12,6 +12,8 @@ use App\Models\Volunteers;
 use App\Models\Donations;
 use App\Models\AvailableFoods;
 use App\Models\ContactUs;
+use App\User;
+use DB;
 
 class ReportsController extends Controller
 {
@@ -19,16 +21,52 @@ class ReportsController extends Controller
       Session::put('activeTab', 'REPORTS');
       
       // Donations
-      // return $donations                        = Donations::orderby('CreatedDate','desc')->groupBy('CauseID')->take(10)->get();
-      return $donations                        = Donations::groupBy('CauseID')->take(10)->get();
-      // foreach($donations as $donationsData){
-      //   $cause                          = Causes::where('ID',$donationsData->CauseID)->first();
-      //   $donationsData->ActivityName    = $cause->CauseName;
-      //   $donationsData->Goal            = $cause->ExpectedAmount;
-      //   $donationsData->Raised          = $cause->RaisedAmount;
-      //   $donationsData->Date            = date('d-M-Y', strtotime($donationsData->CreatedDate));
-      // }
+      $donations = DB::table('donations')
+                    ->join('causes','causes.ID','=','donations.CauseID')
+                    ->select('causes.CauseName as ActivityName',
+                    'causes.ExpectedAmount as Goal',
+                    'causes.RaisedAmount as Raised',
+                    'causes.ID as CauseID',
+                    )
+                    ->groupBy('donations.CauseID')
+                    ->take(10)
+                    ->get();
+      foreach($donations as $donationsData){
+        $latestDonationDate                   = Donations::where('CauseID',$donationsData->CauseID)->first();
+        $latestDonationDate                   = date('d-M-Y', strtotime($latestDonationDate->CreatedDate));
+        $donationsData->Date                  = $latestDonationDate;
+      }
 
-      return view('admin/reports/reports',compact('donations'));
+      // Foods Added
+      $foodsAdded = AvailableFoods::orderBy('EditedDate','desc')->take(10)->get();
+
+      // Causes
+      $causes = Causes::orderBy('EditedDate','desc')->take(10)->get();
+
+      // Volunteers
+      $volunteers = Volunteers::orderBy('EditedDate','desc')->take(10)->get();
+
+      // Events
+      $events = Events::orderBy('EditedDate','desc')->take(10)->get();
+
+      // Contact Messages
+      $contactMessages = ContactUs::orderBy('EditedDate','desc')->take(10)->get();
+
+      foreach($contactMessages as $contactMessagesData){ // Type Of Account
+        if($contactMessagesData->CreatedUserID == null || $contactMessagesData->CreatedUserID == ""  ){
+          $contactMessagesData->UserType = "Guest";
+        }
+        else{
+          $userType             = User::where('id',$contactMessagesData->CreatedUserID)->first();
+          $contactMessagesData->UserType   = $userType->TypeOfAccount;
+        }
+      }
+
+
+      return view('admin/reports/reports',compact('donations','foodsAdded','causes','volunteers','events','contactMessages'));
+    }
+
+    public function donationsReport(){
+      return view('admin/reports/donationsReports');
     }
 }
