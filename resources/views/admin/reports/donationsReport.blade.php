@@ -1,5 +1,5 @@
 @extends('templates.main')
-<title>Reports</title>
+<title>Donations Report</title>
 <link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
 <style>
     .wrapper .events_section_area #cust-h2 {

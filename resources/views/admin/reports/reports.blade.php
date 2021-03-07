@@ -135,7 +135,7 @@
             style="text-decoration: none">See all</a>
           </td>
           <td class="txt-left">
-            <a href="#" class="report-heading"
+            <a href="{{ route('reportsFoodsAddedView') }}" class="report-heading"
             style="text-decoration: none">See all</a>
           </td>
         </tr>
@@ -227,7 +227,7 @@
         </tr>
         <tr>
           <td  class="txt-left">
-            <a href="#" class="report-heading"
+            <a href="{{ route('reportsCausesView') }}" class="report-heading"
             style="text-decoration: none">See all</a>
           </td>
           <td class="txt-left">

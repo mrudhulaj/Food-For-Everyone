@@ -77,8 +77,10 @@
 
   // Reports
   Route::get('/admin-reports', ['as' => 'adminReportsView','uses' => 'AdminModule\ReportsController@adminReportsView']);
-    // Reports-Donations
-    Route::get('/reports-donations', ['as' => 'reportsDonationView','uses' => 'AdminModule\Reports\DonationReportsController@reportsDonationView']);
+  Route::get('/reports-donations', ['as' => 'reportsDonationView','uses' => 'AdminModule\ReportsController@reportsDonationView']);
+  Route::get('/reports-foodsAdded', ['as' => 'reportsFoodsAddedView','uses' => 'AdminModule\ReportsController@reportsFoodsAddedView']);
+  Route::get('/reports-causes', ['as' => 'reportsCausesView','uses' => 'AdminModule\ReportsController@reportsCausesView']);
+  Route::get('/reports-causes-details', ['as' => 'reportsCausesDetailsView','uses' => 'AdminModule\ReportsController@reportsCausesDetailsView']);
 
   // Permissions
     Route::get('/admin-permissions', ['as' => 'adminPermissionsView','uses' => 'AdminModule\PermissionsController@adminPermissionsView']);

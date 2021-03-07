@@ -61,8 +61,62 @@ class ReportsController extends Controller
           $contactMessagesData->UserType   = $userType->TypeOfAccount;
         }
       }
-
-
       return view('admin/reports/reports',compact('donations','foodsAdded','causes','volunteers','events','contactMessages'));
     }
+
+    public function reportsDonationView(){
+      $donations = DB::table('donations')
+                  ->join('causes','causes.ID','=','donations.CauseID')
+                  ->select('causes.CauseName as ActivityName',
+                  'causes.ExpectedAmount as Goal',
+                  'causes.RaisedAmount as Raised',
+                  'causes.ID as CauseID',
+                  'donations.FirstName as donationFirstName',
+                  'donations.LastName as donationLastName',
+                  'donations.Amount as donationAmount',
+                  'donations.CreatedUserID as donationCreatedUserID',
+                  )->paginate(10);
+
+      foreach($donations as $donationsData){
+        $latestDonationDate             = Donations::where('CauseID',$donationsData->CauseID)->first();
+        $latestDonationDate             = date('d-M-Y', strtotime($latestDonationDate->CreatedDate));
+        $donationsData->Date            = $latestDonationDate;
+
+        if($donationsData->donationCreatedUserID != ""){
+          $usertype                     = User::where('id',$donationsData->donationCreatedUserID)->first();
+          $donationsData->AccountType   = $usertype->TypeOfAccount;
+        }
+        else{
+          $donationsData->AccountType   = "Guest";
+        }
+      }
+
+      return view('admin/reports/donationsReport',compact('donations'));
+    }
+
+    public function reportsFoodsAddedView(){
+      $foodsAdded = AvailableFoods::orderBy('EditedDate','desc')->paginate(10);
+      foreach($foodsAdded as $foodsAddedData){
+        if($foodsAddedData->CreatedUserID != ""){
+          $usertype                     = User::where('id',$foodsAddedData->CreatedUserID)->first();
+          $foodsAddedData->AccountType  = $usertype->TypeOfAccount;
+        }
+          $foodsAddedData->AddedDate  = date('h:i A', strtotime($foodsAddedData->EditedDate));
+          $foodsAddedData->ExpiryTime = date('h:i A', strtotime($foodsAddedData->ExpiryTime));
+
+          if($foodsAddedData->RestaurantName == ""){
+            $foodsAddedData->RestaurantName = "Nil";
+          }
+      }
+      return view('admin/reports/foodsAddedReport',compact('foodsAdded'));
+    }
+
+    public function reportsCausesView(){
+      $causes = Causes::orderBy('EditedDate','desc')->paginate(10);
+      foreach($causes as $causesData){
+          $causesData->Date  = date('d-M-Y', strtotime($causesData->EditedDate));
+      }
+      return view('admin/reports/causesReport',compact('causes'));
+    }
+
 }
