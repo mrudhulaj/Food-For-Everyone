@@ -87,9 +87,14 @@
     Route::get('/reports-causes', ['as' => 'reportsCausesView','uses' => 'AdminModule\ReportsController@reportsCausesView']);
     Route::get('/reports-causes-details', ['as' => 'reportsCausesDetailsView','uses' => 'AdminModule\ReportsController@reportsCausesDetailsView']);
 
-    // Reports - Causes
+    // Reports - Volunteers
     Route::get('/reports-volunteers', ['as' => 'reportsVolunteersView','uses' => 'AdminModule\ReportsController@reportsVolunteersView']);
     Route::get('/reports-volunteers-details', ['as' => 'reportsVolunteersDetailsView','uses' => 'AdminModule\ReportsController@reportsVolunteersDetailsView']);
+    
+    // Reports - Events
+    Route::get('/reports-events', ['as' => 'reportsEventsView','uses' => 'AdminModule\ReportsController@reportsEventsView']);
+    Route::get('/reports-events-details', ['as' => 'reportsEventsDetailsView','uses' => 'AdminModule\ReportsController@reportsEventsDetailsView']);
+    
     
   // Permissions
     Route::get('/admin-permissions', ['as' => 'adminPermissionsView','uses' => 'AdminModule\PermissionsController@adminPermissionsView']);

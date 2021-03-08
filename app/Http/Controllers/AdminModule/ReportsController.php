@@ -154,4 +154,28 @@ class ReportsController extends Controller
       return view('admin/reports/volunteerReportDetails',compact('volunteerData'));
     }
 
+    public function reportsEventsView(){
+      $events                       = Events::orderBy('EditedDate','desc')->paginate(10);
+      foreach($events as $eventsData){
+          $eventsData->Date         = date('d-M-Y', strtotime($eventsData->CreatedDate));
+          $eventsData->BeginTime    = date('h:i A , d-M-Y', strtotime($eventsData->BeginTime));
+          $eventsData->EndTime      = date('h:i A , d-M-Y', strtotime($eventsData->EndTime));
+      }
+      return view('admin/reports/eventsReport',compact('events'));
+    }
+
+    public function reportsEventsDetailsView(){
+      $eventData = Events::where('ID',Request::get('EventsID'))->first();
+
+      if($eventData->IsApproved == "2"){
+        $rejectedReason = RejectedActivities::where('Activity','Events')->where('ActivityID',Request::get('EventsID'))->first();
+        $eventData->RejectedReason = $rejectedReason->Reason;
+      }
+
+      $eventData->BeginTime   = date('h:i A', strtotime($eventData->BeginTime));
+      $eventData->EndTime     = date('h:i A', strtotime($eventData->EndTime));
+
+      return view('admin/reports/eventReportDetails',compact('eventData'));
+    }
+
 }
