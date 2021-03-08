@@ -178,4 +178,58 @@ class ReportsController extends Controller
       return view('admin/reports/eventReportDetails',compact('eventData'));
     }
 
+
+    public function reportsContactMessagesView(){
+      $contactMessages = ContactUs::orderBy('EditedDate','desc')->paginate(10);
+
+      foreach($contactMessages as $contactMessagesData){
+          $contactMessagesData->Date         = date('d-M-Y', strtotime($contactMessagesData->CreatedDate));
+      }
+
+      return view('admin/reports/contactMessagesReport',compact('contactMessages'));
+    }
+
+    public function reportsContactMessagesDetailsView(){
+      $contactUsID        = Request::get('ContactUsID');
+      $ticketStatus       = Request::get('ticketStatus');
+
+      if($ticketStatus == "Raised"){
+        $contactUsdata = DB::table('contactUs')
+                ->join('raisedTickets','raisedTickets.ContactUsID','=','contactUs.ID')
+                ->where('contactUs.ID','=',$contactUsID)
+                ->first();
+
+        $modelName    ='App\Models' . '\\' . str_replace(" ","",$contactUsdata->Category);
+        if($contactUsdata->Category != "Volunteers"){
+          $categoryData = $modelName::where('ID',$contactUsdata->CategoryID)->first();
+
+          if($contactUsdata->Category == "Available Foods"){
+            $categoryData = date('j-n-Y h:i A', strtotime($categoryData->EditedDate));
+          }
+          else if($contactUsdata->Category == "Causes"){
+            $categoryData = $categoryData->CauseName;
+
+          }
+          else if($contactUsdata->Category == "Events"){
+            $categoryData = $categoryData->EventName;
+          }
+
+        }
+        else{
+          $categoryData = $modelName::where('UserID',$contactUsdata->CategoryID)->first();
+          $categoryData = $categoryData->FirstName." ".$categoryData->LastName;
+        }
+
+      }
+      else{
+        $contactUsdata = DB::table('contactUs')
+                ->where('ID','=',$contactUsID)
+                ->first();
+
+        $categoryData = null;
+      }
+
+      return view('admin/reports/contactMessagesDetailReport',compact('contactUsdata','ticketStatus','categoryData','contactUsID'));
+    }
+
 }

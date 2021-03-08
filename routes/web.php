@@ -95,6 +95,10 @@
     Route::get('/reports-events', ['as' => 'reportsEventsView','uses' => 'AdminModule\ReportsController@reportsEventsView']);
     Route::get('/reports-events-details', ['as' => 'reportsEventsDetailsView','uses' => 'AdminModule\ReportsController@reportsEventsDetailsView']);
     
+    // Reports - Contact Messages
+    Route::get('/reports-contactmessages', ['as' => 'reportsContactMessagesView','uses' => 'AdminModule\ReportsController@reportsContactMessagesView']);
+    Route::get('/reports-contactmessages-details', ['as' => 'reportsContactMessagesDetailsView','uses' => 'AdminModule\ReportsController@reportsContactMessagesDetailsView']);
+    
     
   // Permissions
     Route::get('/admin-permissions', ['as' => 'adminPermissionsView','uses' => 'AdminModule\PermissionsController@adminPermissionsView']);
