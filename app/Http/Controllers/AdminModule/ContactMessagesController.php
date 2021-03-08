@@ -44,7 +44,7 @@ class ContactMessagesController extends Controller
                         }
     
                       })
-                      ->where('contactUs.TicketStatus','=',0)
+                      ->where('contactUs.TicketStatus','!=',2)
                       ->orderby('raisedTickets.Severity','desc')
                       ->select('contactUs.FirstName',
                         'contactUs.LastName',
