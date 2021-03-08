@@ -12,8 +12,10 @@ use App\Models\Volunteers;
 use App\Models\Donations;
 use App\Models\AvailableFoods;
 use App\Models\ContactUs;
+use App\Models\RejectedActivities;
 use App\User;
 use DB;
+use Request;
 
 class ReportsController extends Controller
 {
@@ -117,6 +119,20 @@ class ReportsController extends Controller
           $causesData->Date  = date('d-M-Y', strtotime($causesData->EditedDate));
       }
       return view('admin/reports/causesReport',compact('causes'));
+    }
+
+    public function reportsCausesDetailsView(){
+      $causeData = Causes::where('ID',Request::get('CauseID'))->first();
+      if($causeData->ExpectedAmount != 0){
+        $causeData->raisedAmountPercentage = round((($causeData->RaisedAmount/$causeData->ExpectedAmount)*100),2);
+      }
+
+      if($causeData->IsApproved == "2"){
+        $rejectedReason = RejectedActivities::where('Activity','Causes')->where('ActivityID',Request::get('CauseID'))->first();
+        $causeData->RejectedReason = $rejectedReason->Reason;
+      }
+
+      return view('admin/reports/causesReportDetails',compact('causeData'));
     }
 
 }

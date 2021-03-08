@@ -47,6 +47,10 @@
       color: black !important;
     }
 
+    .tr-cust{
+      cursor: pointer;
+    }
+
 </style>
 @section('content')
 <div class="container plr-0">
@@ -58,7 +62,7 @@
     </section>
 </div>
 <div class="container plr-0" style="margin-bottom: 50px">
-    <table class="table" style="" id="">
+    <table class="table" style="" id="causeTable">
         <thead class="table-striped">
             <tr>
                 <th class="txt-left">Name</th>
@@ -74,7 +78,7 @@
         </thead>
         <tbody>
             @foreach($causes as $causesData)
-                <tr>
+                <tr class="tr-cust" data-id="{{$causesData->ID}}">
                     <td class="txt-left">{{ $causesData->CauseName }}</td>
                     <td class="txt-left">{{ number_format($causesData->ExpectedAmount) }}</td>
                     <td class="txt-left">{{ number_format($causesData->RaisedAmount) }}</td>
@@ -87,7 +91,7 @@
                       @elseif($causesData->IsApproved == '2')
                         <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
                       @else
-                        <i class="fa fa-minus" aria-hidden="true" style="color: rgb(0, 0, 0)"></i>
+                        <i class="fa fa-minus" aria-hidden="true" style="color: orange"></i>
                       @endif
                     </td>                    <td class="txt-left">{{ $causesData->CreatedUser }}</td>
                     <td class="txt-left">{{ $causesData->Date }}</td>
@@ -101,5 +105,11 @@
 </div>
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
+  $('#causeTable tbody').on('click', 'tr', function () {
+    var route               = "{!! route('reportsCausesDetailsView',['CauseID' => 'CauseIDData']) !!}";
+    var route               = route.replace('CauseIDData',$(this).attr("data-id") );
+    window.location.href    = route;
+
+  } );
 </script>
 @stop
