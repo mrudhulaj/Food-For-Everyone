@@ -77,11 +77,20 @@
 
   // Reports
   Route::get('/admin-reports', ['as' => 'adminReportsView','uses' => 'AdminModule\ReportsController@adminReportsView']);
-  Route::get('/reports-donations', ['as' => 'reportsDonationView','uses' => 'AdminModule\ReportsController@reportsDonationView']);
-  Route::get('/reports-foodsAdded', ['as' => 'reportsFoodsAddedView','uses' => 'AdminModule\ReportsController@reportsFoodsAddedView']);
-  Route::get('/reports-causes', ['as' => 'reportsCausesView','uses' => 'AdminModule\ReportsController@reportsCausesView']);
-  Route::get('/reports-causes-details', ['as' => 'reportsCausesDetailsView','uses' => 'AdminModule\ReportsController@reportsCausesDetailsView']);
+    // Reports - Donations
+    Route::get('/reports-donations', ['as' => 'reportsDonationView','uses' => 'AdminModule\ReportsController@reportsDonationView']);
+  
+    // Reports- Foods Added
+    Route::get('/reports-foodsAdded', ['as' => 'reportsFoodsAddedView','uses' => 'AdminModule\ReportsController@reportsFoodsAddedView']);
+  
+    // Reports - Causes
+    Route::get('/reports-causes', ['as' => 'reportsCausesView','uses' => 'AdminModule\ReportsController@reportsCausesView']);
+    Route::get('/reports-causes-details', ['as' => 'reportsCausesDetailsView','uses' => 'AdminModule\ReportsController@reportsCausesDetailsView']);
 
+    // Reports - Causes
+    Route::get('/reports-volunteers', ['as' => 'reportsVolunteersView','uses' => 'AdminModule\ReportsController@reportsVolunteersView']);
+    Route::get('/reports-volunteers-details', ['as' => 'reportsVolunteersDetailsView','uses' => 'AdminModule\ReportsController@reportsVolunteersDetailsView']);
+    
   // Permissions
     Route::get('/admin-permissions', ['as' => 'adminPermissionsView','uses' => 'AdminModule\PermissionsController@adminPermissionsView']);
     Route::get('/admin-permissions-save', ['as' => 'adminPermissionsSave','uses' => 'AdminModule\PermissionsController@adminPermissionsSave']);

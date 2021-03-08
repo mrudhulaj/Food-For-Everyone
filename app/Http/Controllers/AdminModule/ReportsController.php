@@ -135,4 +135,23 @@ class ReportsController extends Controller
       return view('admin/reports/causesReportDetails',compact('causeData'));
     }
 
+    public function reportsVolunteersView(){
+      $volunteers = Volunteers::orderBy('EditedDate','desc')->paginate(10);
+      foreach($volunteers as $volunteersData){
+          $volunteersData->Date  = date('d-M-Y', strtotime($volunteersData->CreatedDate));
+      }
+      return view('admin/reports/volunteersReport',compact('volunteers'));
+    }
+
+    public function reportsVolunteersDetailsView(){
+      $volunteerData = Volunteers::where('ID',Request::get('VolunteerID'))->first();
+
+      if($volunteerData->IsApproved == "2"){
+        $rejectedReason = RejectedActivities::where('Activity','Volunteers')->where('ActivityID',Request::get('VolunteerID'))->first();
+        $volunteerData->RejectedReason = $rejectedReason->Reason;
+      }
+
+      return view('admin/reports/volunteerReportDetails',compact('volunteerData'));
+    }
+
 }

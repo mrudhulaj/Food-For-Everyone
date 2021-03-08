@@ -231,7 +231,7 @@
             style="text-decoration: none">See all</a>
           </td>
           <td class="txt-left">
-            <a href="#" class="report-heading"
+            <a href="{{ route('reportsVolunteersView') }}" class="report-heading"
             style="text-decoration: none">See all</a>
           </td>
         </tr>
