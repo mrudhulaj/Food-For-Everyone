@@ -155,19 +155,9 @@
                     <h3 class="vNames">
                         {{ $volunteersData->FirstName." ".$volunteersData->LastName }}</h3>
                     <h6 class="">{{ $volunteersData->Occupation }}</h6>
-                    <p>With us since {{ date('Y', strtotime($volunteersData->CreatedDate)) }}
+                    <p>{{ date('d-M-Y', strtotime($volunteersData->CreatedDate)) }}
                     </p>
-                    <h5 style="" class="">
-                        <a href="#">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa fa-behance" aria-hidden="true"></i>
-                        </a>
-                    </h5>
+
                     <h2 class="cust-button" style="text-align: center;margin-top: 15px">
                         <a href="{{route('approvalsVolunteerProfile',['ID' => Crypt::encrypt($volunteersData->ID)])}}" class="donateButton">View</a></h2>
                 </div>

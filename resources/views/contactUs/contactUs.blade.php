@@ -164,7 +164,7 @@
                         <div class="input-group col-lg-12">
                             <label class="label ffe-font">Message</label>
                             <textarea style="border: none;line-height: 25px;padding: 12px 22px;" name="message"
-                                id="message" class="input--style-4" cols="52" rows="6"></textarea>
+                                id="message" class="input--style-4" cols="67" rows="6"></textarea>
                         </div>
 
                         <div class="" style="text-align: center;@if(Auth::check()) margin-top: 23px; @else margin-top: 80px; @endif">

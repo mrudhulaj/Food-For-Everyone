@@ -1538,4 +1538,22 @@
     color: white !important;
   }
 
+  .back-button{
+    background-color: #05ce68;
+    border-radius: 30px;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 25px;
+    text-decoration: none;
+    border: 1px solid #05ce68;
+    outline: none !important;
+  }
+
+  .back-button:hover{
+    background-color: #089549;
+    border: 1px solid #089549;
+  }
+
   /* End Admin Approval */

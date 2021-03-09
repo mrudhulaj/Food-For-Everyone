@@ -106,6 +106,9 @@
       </span> 
     </h2>
 </section>
+<div class="col-lg-12" style="text-align: right;margin-top: -90px;padding-right: 62px;">
+  <button class="back-button"><a style="text-decoration: none;color: inherit !important;" href="{{ URL::previous() }}">Back</a></button>
+</div>
 <div class="container cust-center">
     <div class="col-lg-12 mainbox-cust plr-0 img-cust" style="width: 940px !important;">
         <div style="overflow: hidden !important;">

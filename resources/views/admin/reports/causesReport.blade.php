@@ -51,6 +51,11 @@
       cursor: pointer;
     }
 
+    .tr-cust:hover {
+      background-color:#9cf19c !important;
+      cursor: pointer !important;
+    }
+
 </style>
 @section('content')
 <div class="container plr-0">
@@ -60,6 +65,9 @@
             Causes Report
         </h2>
     </section>
+</div>
+<div class="col-lg-12" style="text-align: right;margin-top: -90px;padding-right: 62px;">
+  <button class="back-button"><a style="text-decoration: none;color: inherit !important;" href="{{ route('adminReportsView') }}">Back</a></button>
 </div>
 <div class="container plr-0" style="margin-bottom: 50px">
     <table class="table" style="" id="causeTable">

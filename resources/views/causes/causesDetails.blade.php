@@ -96,9 +96,12 @@
     <h2 style="margin-top: 0px;">
       <span style="border-bottom: 2px solid #01d262;padding-bottom: 10px;">
         {{$causeData->CauseName}}
-      </span> 
+      </span>
     </h2>
 </section>
+<div class="col-lg-12" style="text-align: right;margin-top: -90px;padding-right: 62px;">
+    <button class="back-button"><a style="text-decoration: none;color: inherit !important;" href="{{ URL::previous() }}">Back</a></button>
+</div>
 <div class="container cust-center">
     <div class="col-lg-12 mainbox-cust plr-0 img-cust" style="">
         <div style="overflow: hidden !important;">

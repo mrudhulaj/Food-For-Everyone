@@ -81,6 +81,9 @@
     <section>
         <h2 style="margin-top: 0px;">CONTACT MESSAGE DETAILS</h2>
     </section>
+    <div class="col-lg-12" style="text-align: right;margin-top: -90px;padding-right: 62px;">
+      <button class="back-button"><a style="text-decoration: none;color: inherit !important;" href="{{ URL::previous() }}">Back</a></button>
+    </div>
     <div class="container mainbox plr-0" style="margin-bottom: 50px;width: 50%">
         <div class="col-lg-12 plr-0" style="">
             <div class="row mrl-0" style="margin-top: 50px">

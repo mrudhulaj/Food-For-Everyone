@@ -48,7 +48,9 @@
     <p>Please make sure the details provided including the mobile number and email are correct, so that we can inform
         the volunteer when they are needed with us.</p>
 </section>
-
+<div class="col-lg-12" style="text-align: right;margin-top: -130px;padding-right: 62px;">
+  <button class="back-button"><a style="text-decoration: none;color: inherit !important;" href="{{ URL::previous() }}">Back</a></button>
+</div>
 <div class="page-wrapper p-b-100 font-poppins" style="padding-top: 50px">
     <div class="wrapper wrapper--w680">
         <div class="card card-4">

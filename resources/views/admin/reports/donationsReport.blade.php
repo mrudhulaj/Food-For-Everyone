@@ -57,6 +57,9 @@
         </h2>
     </section>
 </div>
+<div class="col-lg-12" style="text-align: right;margin-top: -90px;padding-right: 62px;">
+  <button class="back-button"><a style="text-decoration: none;color: inherit !important;" href="{{ URL::previous() }}">Back</a></button>
+</div>
 <div class="container" style="margin-bottom: 50px">
     <table class="table" style="" id="">
         <thead class="table-striped">

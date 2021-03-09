@@ -35,7 +35,7 @@ class VolunteersController extends Controller
     Session::put('DefImgDel',0);
 
     if($profile->TypeOfAccount == 'Volunteer'){
-      $profile                 = Volunteers::where('ID',Auth::user()->id)->first();
+      $profile                 = Volunteers::where('UserID',Auth::user()->id)->first();
       $profile->isVolunteer    = true;
     }
     else{
