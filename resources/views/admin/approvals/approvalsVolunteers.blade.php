@@ -148,7 +148,7 @@
         <div class="col-lg-12" style="width: auto">
             <div class="item" style="border-radius: 10px;">
                 <div class="col-lg-5 plr-0 cust-img-div">
-                    <img src="{{ asset($volunteersData->ProfileImage) }}"
+                    <img src="{{ asset($volunteersData->ProfileImage) }}" alt="Not Found" onerror=this.src="{{url('images/user-icon.png')}}"
                         style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;width: 160px;height: 178px;">
                 </div>
                 <div class="text col-lg-7 plr-0 box-content" style="height: 178px;">

@@ -41,7 +41,7 @@
   <div class="container" style="padding: 0px 10px 0px 10px;">
     @include('templates.alertSuccessMessage')
   </div>
-    <h2 style="margin-top: 0px;@guest padding-left: 232px; @else @if(!$isUserVolunteerExist) padding-left: 232px; @endif @endguest">
+    <h2 style="margin-top: 0px;@guest padding-left: 232px; @else @if(!$isUserVolunteerExist) padding-left: 232px; @elseif(Auth::user()->TypeOfAccount =="User") padding-left: 232px; @endif @endguest">
       Our volunteers
           @guest
               <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
@@ -78,7 +78,7 @@
   <div class="col-lg-12" style="width: auto">
     <div class="item" style="border-radius: 10px;">
       <div class="col-lg-5 plr-0 cust-img-div">
-        <img src="{{ asset($volunteersData->ProfileImage) }}"
+        <img src="{{ asset($volunteersData->ProfileImage) }}" alt="Not Found" onerror=this.src="{{url('images/user-icon.png')}}"
         style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;width: 160px;height: 178px;">
       </div>
         <div class="text col-lg-7 plr-0" style="height: 178px;">

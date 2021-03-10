@@ -234,7 +234,7 @@
                     Forgot Your Password?
                 </a>
                 <a style="display: flex;justify-content: center" class="btn btn-link cust-a"
-                    href="{{ route('password.request') }}">
+                    href="javascript:void(0)">
                     Terms & Conditions
                 </a>
             </div>
