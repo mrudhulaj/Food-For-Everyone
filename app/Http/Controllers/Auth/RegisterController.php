@@ -88,15 +88,19 @@ class RegisterController extends Controller
        }
 
       //  To give all permissions to Admin for the first time only
-      $permission['Action']   = ["create","update","delete"];
-      $permission['Category'] = ["AvailableFoods","Causes","Volunteers","Events","ContactMessages"];
-      $role                   = Role::select('id')->where('name',"Admin")->first();
-      foreach($permission['Category'] as $permissionCategory){
-        foreach($permission['Action'] as $permissionAction){
-            $permissionItem = Permission::where('name',$permissionAction." ".$permissionCategory)->first();
-            $role->givePermissionTo($permissionItem);
+      $adminExist = User::where('id',1)->where('FirstName','Admin')->first();
+      if(!$adminExist){
+        $permission['Action']   = ["create","update","delete"];
+        $permission['Category'] = ["AvailableFoods","Causes","Volunteers","Events","ContactMessages"];
+        $role                   = Roles::select('id')->where('name',"Admin")->first();
+        foreach($permission['Category'] as $permissionCategory){
+          foreach($permission['Action'] as $permissionAction){
+              $permissionItem = Permissions::where('name',$permissionAction." ".$permissionCategory)->first();
+              $role->givePermissionTo($permissionItem);
+          }
         }
       }
+
 
       return Redirect::back()->with('status','User added successfully, please login to continue.');
     }

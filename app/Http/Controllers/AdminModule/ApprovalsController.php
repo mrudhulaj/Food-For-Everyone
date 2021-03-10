@@ -12,6 +12,7 @@ use App\Models\Events;
 use Request;
 use Redirect;
 use Crypt;
+use App\User;
 
 class ApprovalsController extends Controller
 {
@@ -74,12 +75,17 @@ class ApprovalsController extends Controller
         return Redirect::route('approvalsCausesView');
       }
       elseif($selection == "Volunteers"){ 
-        $activity               = Volunteers::where('ID',Crypt::decrypt(Request::get('ID')))->first();
-        $activity->IsApproved   = Request::get('Decision');
+        $activity                     = Volunteers::where('ID',Crypt::decrypt(Request::get('ID')))->first();
+        $activity->IsApproved         = Request::get('Decision');
         $activity->save();
 
         if(Request::get('Decision') == 2){
-          $rejectedActivities     = $this->rejectedActivitiesSave($activity);
+          $rejectedActivities         = $this->rejectedActivitiesSave($activity);
+        }
+        elseif(Request::get('Decision') == 1){
+          $userTable                  = User::where('id',$activity->UserID)->first();
+          $userTable->TypeOfAccount   = "Volunteer";
+          $userTable->save();
         }
 
         return Redirect::route('approvalsVolunteersView');

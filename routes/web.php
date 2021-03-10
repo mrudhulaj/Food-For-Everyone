@@ -105,7 +105,7 @@
     Route::get('/admin-permissions-save', ['as' => 'adminPermissionsSave','uses' => 'AdminModule\PermissionsController@adminPermissionsSave']);
 
   // Approvals
-    Route::post('/approvalsDecisions', ['as' => 'approvalsDecisions','uses' => 'AdminModule\ApprovalsController@approvalsDecisions']);
+    Route::any('/approvalsDecisions', ['as' => 'approvalsDecisions','uses' => 'AdminModule\ApprovalsController@approvalsDecisions']);
     // Approvals-Causes
       Route::get('/approvalsCauses', ['as' => 'approvalsCausesView','uses' => 'AdminModule\ApprovalsController@approvalsCausesView']);
     

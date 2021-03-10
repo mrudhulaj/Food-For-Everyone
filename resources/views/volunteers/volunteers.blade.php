@@ -48,18 +48,24 @@
                     <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Become A Volunteer</a>
               </button>
             @else
-              @if(Session::get('user')=="Admin" || Session::get('user')=="Volunteer")
+              @if(Auth::user()->TypeOfAccount == "Admin")
                 <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
                     <a class="a-none" href="{{ route('addVolunteerView') }}">
-                        Add Volunteer
+                      Add Volunteer
                     </a>
                 </button>
-              @elseif(!$isUserVolunteerExist && $role->hasPermissionTo('create Volunteers'))
+              @elseif( !$isUserVolunteerExist && $role->hasPermissionTo('create Volunteers') )
                 <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
                   <a class="a-none" href="{{ route('addVolunteerView') }}">
                     Add Volunteer
                   </a>
                 </button>
+                @elseif(Auth::user()->TypeOfAccount =="User")
+                  <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
+                    <a class="a-none" href="{{ route('addVolunteerView') }}">
+                      Become Volunteer
+                    </a>
+                  </button>
               @endif
           @endguest
     </h2>
