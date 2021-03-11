@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 05, 2021 at 07:48 PM
+-- Generation Time: Mar 11, 2021 at 07:33 PM
 -- Server version: 8.0.23-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -215,7 +215,7 @@ CREATE TABLE `rejectedActivities` (
   `ID` int NOT NULL,
   `Activity` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `ActivityID` int NOT NULL,
-  `Reason` text NOT NULL,
+  `Reason` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `ActivityCreatedBy` varchar(200) NOT NULL,
   `ActivityCreatedByID` int NOT NULL,
   `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
