@@ -83,14 +83,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($donations as $donationsData)
-                                <tr>
-                                    <td class="txt-left">{{ $donationsData->ActivityName }}</td>
-                                    <td class="txt-left">{{ number_format($donationsData->Goal) }}</td>
-                                    <td class="txt-left">{{ number_format($donationsData->Raised) }}</td>
-                                    <td class="txt-left">{{ $donationsData->Date }}</td>
-                                </tr>
-                            @endforeach
+                          @if(count($donations) == 0 )
+                            <tr>
+                              <td colspan="5">
+                                 <b>No donations data found.</b>
+                              </td>
+                            </tr>
+                          @endif
+                          @foreach($donations as $donationsData)
+                              <tr>
+                                  <td class="txt-left">{{ $donationsData->ActivityName }}</td>
+                                  <td class="txt-left">{{ number_format($donationsData->Goal) }}</td>
+                                  <td class="txt-left">{{ number_format($donationsData->Raised) }}</td>
+                                  <td class="txt-left">{{ $donationsData->Date }}</td>
+                              </tr>
+                          @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -108,6 +115,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                          @if(count($foodsAdded) == 0 )
+                            <tr>
+                              <td colspan="5">
+                                  <b>No foods added data found. </b>
+                              </td>
+                            </tr>
+                          @endif
                           @foreach ($foodsAdded as $foodsAddedData)
                             <tr>
                               <td class="txt-left">
@@ -154,6 +168,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                          @if(count($causes) == 0 )
+                            <tr>
+                              <td colspan="5">
+                                 <b> No causes data found. </b>
+                              </td>
+                            </tr>
+                          @endif
                           @foreach ($causes as $causesData)
                             <tr>
                               <td class="txt-left">
@@ -197,6 +218,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                          @if(count($volunteers) == 0 )
+                            <tr>
+                              <td colspan="5">
+                                 <b>  No volunteers data found. </b>
+                              </td>
+                            </tr>
+                          @endif
                           @foreach ($volunteers as $volunteersData)
                             <tr>
                               <td class="txt-left">
@@ -250,6 +278,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                          @if(count($events) == 0 )
+                            <tr>
+                              <td colspan="5">
+                                 <b> No event data found. </b>
+                              </td>
+                            </tr>
+                          @endif
                           @foreach ($events as $eventsData)
                             <tr>
                               <td class="txt-left">
@@ -291,6 +326,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                          @if(count($contactMessages) == 0 )
+                            <tr>
+                              <td colspan="5">
+                                 <b> No contact messages data found. </b>
+                              </td>
+                            </tr>
+                          @endif
                           @foreach ($contactMessages as $contactMessagesData)
                             <tr>
                               <td class="txt-left">

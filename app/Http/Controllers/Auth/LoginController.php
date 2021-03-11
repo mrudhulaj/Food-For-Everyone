@@ -28,7 +28,6 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/home';
 
     public function redirectTo(){
       Auth::check() ? Session::put('user', Auth::user()->FirstName) : Session::put('user',"");

@@ -111,4 +111,11 @@ class RegisterController extends Controller
 
       return Response::json($emailExists);
     }
+
+    public function checkAdminExist(){
+      $adminExist  = User::where('TypeOfAccount','Admin')->get();
+      $adminExists = count($adminExist)>0 ? true : false;
+
+      return Response::json($adminExists);
+    }
 }

@@ -85,6 +85,13 @@
             </tr>
         </thead>
         <tbody>
+          @if(count($causes) == 0 )
+            <tr>
+              <td colspan="12">
+                  <b>No causes data found.</b>
+              </td>
+            </tr>
+          @endif
             @foreach($causes as $causesData)
                 <tr class="tr-cust" data-id="{{$causesData->ID}}">
                     <td class="txt-left">{{ $causesData->CauseName }}</td>

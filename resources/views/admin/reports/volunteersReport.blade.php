@@ -83,6 +83,13 @@
             </tr>
         </thead>
         <tbody>
+          @if(count($volunteers) == 0 )
+            <tr>
+              <td colspan="12">
+                  <b>No volunteers data found.</b>
+              </td>
+            </tr>
+          @endif
             @foreach($volunteers as $volunteersData)
                 <tr class="tr-cust" data-id="{{$volunteersData->ID}}">
                     <td class="txt-left">{{ $volunteersData->FirstName." ".$volunteersData->LastName }}</td>

@@ -62,6 +62,7 @@
   // Authentication
     Auth::routes();
     Route::get('check-email-exist', ['as' => 'checkEmailExist','uses' => 'Auth\RegisterController@checkEmailExist']);
+    Route::get('check-admin-exist', ['as' => 'checkAdminExist','uses' => 'Auth\RegisterController@checkAdminExist']);
 
 // End: Normal Views
 

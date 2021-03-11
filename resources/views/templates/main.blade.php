@@ -141,7 +141,7 @@
                                             <a href="{{ route('contactUsView') }}">CONTACT</a>
                                         </li>
                                         <li style="width: 25px;" class="@if(Session::get('user')!="Admin") hide @endif">
-                                          <a href="javascript:void(0)" id="nonAdminMenuToggle">
+                                          <a href="javascript:void(0)" id="nonAdminMenuToggle" data-menuToggle="Admin">
                                             <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
                                           </a>
                                         </li>
@@ -164,7 +164,7 @@
                                           <a href="{{ route('adminContactMessagesView') }}">CONTACT MESSAGES</a>
                                       </li>
                                       <li style="width: 25px;">
-                                        <a href="javascript:void(0)" id="adminMenuToggle">
+                                        <a href="javascript:void(0)" id="adminMenuToggle" data-menuToggle="NonAdmin">
                                           <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
                                         </a>
                                       </li>

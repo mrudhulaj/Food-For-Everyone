@@ -295,19 +295,21 @@
                 <p>We understand everyone's struggles, but it's the thought that always counts. If you like , it's
                     always possible to contribute to help our volunteers and the people. Our activites and events are
                     always transparent and you are always welcome to attend any of our events.</p>
-                <h4 style="margin-top: 35px;">Next upcoming event at {{$latestEvent->Landmark.", ".$latestEvent->District}}</h4>
-                <h4 style="margin-top: 35px;">Latest cause we are supporting: {{$latestCause->CauseName." at ".$latestCause->District.", ".$latestCause->State}}</h4>
-                <div class="progress-text">
-                    <p class="progress-top"><b>{{ number_format($latestCause->raisedAmountPercentage) }}%</b></p>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                            aria-valuemax="100" style="width:{{ number_format($latestCause->raisedAmountPercentage) }}%"></div>
-                    </div>
-                    <p class="progress-left">Raised: {{ number_format($latestCause->RaisedAmount) }} ₹</p>
-                    <p class="progress-right">Goal: {{ number_format($latestCause->ExpectedAmount) }} ₹</p>
-                </div>
-                <h2><a href="#" data-toggle="modal" class="donateButton" data-causeID="{{$latestCause->ID}}" data-target="#donationModal">DONATE NOW FOR {{strtoupper($latestCause->CauseName)}}</a></h2>
-            </div>
+                @if( $latestEvent && $latestCause )
+                  <h4 style="margin-top: 35px;">Next upcoming event at {{$latestEvent->Landmark.", ".$latestEvent->District}}</h4>
+                  <h4 style="margin-top: 35px;">Latest cause we are supporting: {{$latestCause->CauseName." at ".$latestCause->District.", ".$latestCause->State}}</h4>
+                  <div class="progress-text">
+                      <p class="progress-top"><b>{{ number_format($latestCause->raisedAmountPercentage) }}%</b></p>
+                      <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
+                              aria-valuemax="100" style="width:{{ number_format($latestCause->raisedAmountPercentage) }}%"></div>
+                      </div>
+                      <p class="progress-left">Raised: {{ number_format($latestCause->RaisedAmount) }} ₹</p>
+                      <p class="progress-right">Goal: {{ number_format($latestCause->ExpectedAmount) }} ₹</p>
+                  </div>
+                  <h2><a href="#" data-toggle="modal" class="donateButton" data-causeID="{{$latestCause->ID}}" data-target="#donationModal">DONATE NOW FOR {{strtoupper($latestCause->CauseName)}}</a></h2>
+                @endif
+              </div>
         </div>
     </div>
 </section>
@@ -319,9 +321,13 @@
     </h2>
     <p>Missed our previous events? Don't worry, we have plenty of them coming up!</p>
     <p>
-      <a href="{{route('eventsView',)}}" style="color: #00A348;text-decoration: none"> 
-      See all 
-      </a>
+      @if(count($events) > 0)
+        <a href="{{route('eventsView',)}}" style="color: #00A348;text-decoration: none"> 
+        See all 
+        </a>
+      @else
+        <span class="ffe-font"><b>No events added.</b></span>
+      @endif
     </p>
     <div class="container">
         <div class="row">
@@ -406,9 +412,13 @@
     <p>We also believe in investing for a better future for our kids and also to take care of our old pals by building
         them a place which they deserve.</p>
     <p>
-      <a href="{{route('causesView',)}}" style="color: #00A348;text-decoration: none"> 
-      See all 
-      </a>
+      @if(count($causes) > 0)
+        <a href="{{route('causesView',)}}" style="color: #00A348;text-decoration: none"> 
+        See all 
+        </a>
+      @else
+        <span class="ffe-font"><b>No causes added.</b></span>
+      @endif
     </p>
     <div class="container">
         <div class="row">
@@ -496,9 +506,13 @@
     </h2>
     <p>Meet our superhero's.The people who bring joy to our kids and elders.The silent warriors.</p>
     <p>
-      <a href="{{route('volunteersView',)}}" style="color: #00A348;text-decoration: none"> 
-      See all 
-      </a>
+      @if(count($volunteers) > 0)
+        <a href="{{route('volunteersView',)}}" style="color: #00A348;text-decoration: none"> 
+        See all 
+        </a>    
+      @else
+        <span class="ffe-font"><b>No volunteers added.</b></span>
+      @endif
     </p>
     <div class="container">
         <div class="row">

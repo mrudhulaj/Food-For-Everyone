@@ -32,8 +32,10 @@ class HomeController extends Controller
           $causeData->raisedAmountPercentage = round((($causeData->RaisedAmount/$causeData->ExpectedAmount)*100),2);
         }
       }
-      if($latestCause->ExpectedAmount != 0){
-        $latestCause->raisedAmountPercentage = round((($latestCause->RaisedAmount/$latestCause->ExpectedAmount)*100),2);
+      if($latestCause){
+        if($latestCause->ExpectedAmount != 0){
+          $latestCause->raisedAmountPercentage = round((($latestCause->RaisedAmount/$latestCause->ExpectedAmount)*100),2);
+        }
       }
 
       // Volunteers

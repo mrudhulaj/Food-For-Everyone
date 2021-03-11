@@ -84,6 +84,13 @@
             </tr>
         </thead>
         <tbody>
+          @if(count($contactMessages) == 0 )
+            <tr>
+              <td colspan="12">
+                  <b>No contact messages data found.</b>
+              </td>
+            </tr>
+          @endif
             @foreach($contactMessages as $contactMessagesData)
                 <tr class="tr-cust" data-contactUsID="{{$contactMessagesData->ID}}" data-ticketStatus="{{$contactMessagesData->RaisedTicket}}">
                     <td class="txt-left">{{ $contactMessagesData->FirstName." ".$contactMessagesData->LastName }}</td>

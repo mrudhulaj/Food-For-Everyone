@@ -142,7 +142,7 @@ hr {
 <p>We are continously trying to expand our reach to different areas where people need support to help build a
     better future.
     <br>These are the causes which we support currently.</p>
-    @if(count($causes) == 0) <p style="text-align: center;margin-top: 100px"><b>No causes found.</b></p> @endif
+    @if(count($causes) == 0) <p style="text-align: center;margin-top: 100px"><b>No causes added.</b></p> @endif
 <div class="container" style="margin-top: 70px;margin-bottom: 70px;padding-left: 5px;margin-right: 0px;">
     @foreach($causes as $causesData)
         <div class="box mainbox">

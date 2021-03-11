@@ -73,6 +73,13 @@
             </tr>
         </thead>
         <tbody>
+          @if(count($donations) == 0 )
+            <tr>
+              <td colspan="6">
+                  <b>No donations data found.</b>
+              </td>
+            </tr>
+          @endif
             @foreach($donations as $donationsData)
                 <tr>
                     <td class="txt-left">{{ $donationsData->donationFirstName." ".$donationsData->donationLastName }}</td>

@@ -294,8 +294,6 @@
                         <div class="col-md-7">
                             <select class="form-control" name="typeOfAccount" id="typeOfAccount" style="height: 34px !important;">
                                 <option hidden selected="" value="">Select</option>
-                                {{-- <option value="Volunteer">Volunteer</option> --}}
-                                <option value="User">User</option>
                             </select>
                         </div>
                     </div>
@@ -356,6 +354,20 @@
 <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
 <script>
     $(document).ready(function () {
+
+      // Check if it's the first login, if then make user to create admin account first.
+      $.ajax({
+                  url:'{{ route("checkAdminExist") }}',
+                  type:'GET',
+                  success:function(data) {
+                    if(data == false){
+                      $("#typeOfAccount").append(new Option("Admin", "Admin"));
+                    }
+                    else{
+                      $("#typeOfAccount").append(new Option("User", "User"));
+                    }
+                  }
+              });
 
       // Check if email already exist, else submit the registration form.
       $('#registerbtn').on('click', function() {

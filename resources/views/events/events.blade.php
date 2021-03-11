@@ -65,6 +65,7 @@
     </h2>
     <p>Missed our previous events? Don't worry, we have plenty of them coming up!</p>
     <div class="container" style="margin-bottom: 50px">
+      @if(count($events) == 0) <p style="text-align: center;margin-top: 100px"><b>No events added.</b></p> @endif
         <div class="row">
             @foreach($events as $eventsData)
                 <div class="col-md-4 col-xs-12">

@@ -85,6 +85,13 @@
             </tr>
         </thead>
         <tbody>
+          @if(count($events) == 0 )
+            <tr>
+              <td colspan="12">
+                  <b>No events data found.</b>
+              </td>
+            </tr>
+          @endif
             @foreach($events as $eventsData)
                 <tr class="tr-cust" data-id="{{$eventsData->ID}}">
                     <td class="txt-left">{{ $eventsData->EventName }}</td>

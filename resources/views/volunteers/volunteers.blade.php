@@ -70,7 +70,7 @@
           @endguest
     </h2>
     <p>Meet our superhero's.The people who bring joy to our kids and elders.The silent warriors.</p>
-    @if(count($volunteers) == 0) <p style="text-align: center;margin-top: 100px"><b>No volunteers found.</b></p> @endif
+    @if(count($volunteers) == 0) <p style="text-align: center;margin-top: 100px"><b>No volunteers added.</b></p> @endif
 </section>
 <div class="container" style="padding-bottom: 100px;padding-top: 50px;">
   @php $i = 0; @endphp {{-- To dynamically set Occup,Links etc to same height if name height differ --}}

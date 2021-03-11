@@ -78,6 +78,13 @@
             </tr>
         </thead>
         <tbody>
+          @if(count($foodsAdded) == 0 )
+            <tr>
+              <td colspan="12">
+                  <b>No foods added data found.</b>
+              </td>
+            </tr>
+          @endif
             @foreach($foodsAdded as $foodsAddedData)
                 <tr>
                     <td class="txt-left">{{ $foodsAddedData->FirstName." ".$foodsAddedData->LastName }}</td>
