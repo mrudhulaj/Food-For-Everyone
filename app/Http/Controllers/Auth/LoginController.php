@@ -36,6 +36,7 @@ class LoginController extends Controller
       $type = Auth::user()->TypeOfAccount; 
 
       if($type == "Admin"){ 
+        Session::put('activeMenu', 'Admin');
         return '/admin-dashboard';
       }
       else{

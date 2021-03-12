@@ -12,6 +12,8 @@ use App\Models\Volunteers;
 use App\Models\Donations;
 use App\Models\AvailableFoods;
 use App\Models\ContactUs;
+use Request;
+use Response;
 
 class DashboardController extends Controller
 {
@@ -35,5 +37,12 @@ class DashboardController extends Controller
                                                     ->count();
 
       return view('admin/dashboard/adminDashboard',compact('dashboardCount'));
+    }
+
+    public function adminMenuToggle(){
+      $currentMenu = Request::get('currentMenu');
+      Session::put('activeMenu', $currentMenu);
+
+      return Response::json($currentMenu);
     }
 }

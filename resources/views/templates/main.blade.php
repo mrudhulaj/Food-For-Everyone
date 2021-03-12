@@ -117,7 +117,7 @@
                             <div class="col-md-9 col-sm-12 col-xs-12">
                                 <div class="menu">
                                     {{--  Admin & Non admin users items  --}}
-                                    <ul id="nonAdminMenu" class="nav navbar-nav @if(Session::get('user')=="Admin") hide @endif">
+                                    <ul id="nonAdminMenu" class="nav navbar-nav @if(Session::get('activeMenu')=="Admin") hide @endif">
                                         <li class=" @if($activeTab == 'HOME') active-nav @endif ">
                                             <a href="{{ route('home') }}">HOME</a>
                                         </li>
@@ -147,7 +147,7 @@
                                         </li>
                                     </ul>
                                     {{--  Admin exclusive items  --}}
-                                    <ul class="nav navbar-nav @if(Session::get('user')!="Admin") hide @endif" id="adminMenu">
+                                    <ul class="nav navbar-nav @if(Session::get('activeMenu') == "NonAdmin") hide @endif" id="adminMenu">
                                       <li class=" @if($activeTab == 'DASHBOARD') active-nav @endif ">
                                           <a href="{{ route('adminDashboardView') }}">DASHBOARD</a>
                                       </li>
@@ -293,9 +293,25 @@
 
         // To toggle Admin and Non Admin menu items
         $("#adminMenuToggle,#nonAdminMenuToggle").click(function () {
-          $('#adminMenu').toggleClass("hide");
-          $('#nonAdminMenu').toggleClass("hide");
-        })
+          var currentMenu = $(this).attr("data-menuToggle");
+          if(currentMenu == "Admin"){
+            $('#nonAdminMenu').addClass("hide");
+            $('#adminMenu').removeClass("hide");
+          }
+          else if(currentMenu == "NonAdmin"){
+            $('#nonAdminMenu').removeClass("hide");
+            $('#adminMenu').addClass("hide");
+          }
+
+          $.ajax({
+                  url:'{{ route("adminMenuToggle") }}',
+                  type:'GET',
+                  data:{
+                    currentMenu   : currentMenu
+                  }
+              });
+
+        });
 
         // Make navbar sticky
           // window.onscroll = function() {myFunction()};
