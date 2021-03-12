@@ -44,7 +44,7 @@
       @include('templates.alertSuccessMessage')
     </div>
     <h2 style="margin-top: 0px;">
-     Edit Profile
+    <span class="custom-underline"> Edit Profile </span>
     </h2>
     <p>Please make sure the details provided including the mobile number and email are correct
       @if(!$profile->isVolunteer)

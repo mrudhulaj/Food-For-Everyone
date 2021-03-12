@@ -50,7 +50,7 @@
 @section('content')
 <div class="">
     <section>
-        <h2 style="margin-top: 0px;">We'd love to hear from you !</h2>
+        <h2 style="margin-top: 0px;"> <span class="custom-underline">We'd love to hear from you !</span></h2>
     </section>
     <div class="container mainbox plr-0" style="margin-bottom: 50px;">
         <div class="col-lg-6 plr-0" style="">

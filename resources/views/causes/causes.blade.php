@@ -124,7 +124,9 @@ hr {
   </div>
 <section>
 <h2 style="margin-top: 0px; @if( Auth::check()) padding-left: 270px; @endif">
+  <span class="custom-underline">
     We are expanding our reach!
+  </span>
     @if( Auth::check())
         <a class="a-none" @if($role->hasPermissionTo('create Causes'))
             href="{{ route('addCauseView') }}" @else href="javascript:void(0)"

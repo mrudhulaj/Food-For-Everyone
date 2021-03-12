@@ -45,7 +45,7 @@
 </div>
 <section class="events_section_area">
     <h2 id="cust-h2" @guest style="padding-left: 175px;" @else style="padding-left: 280px;" @endguest>
-        UPCOMING EVENTS
+         <span class="custom-underline">UPCOMING EVENTS</span>
         @guest
           <button class="btn button-bg-green"
               style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">

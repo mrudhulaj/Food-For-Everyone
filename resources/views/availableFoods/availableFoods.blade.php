@@ -62,7 +62,7 @@
     @include('templates.alertSuccessMessage')
     <section>
         <h2 style="margin-top: 0px;@guest padding-left: 115px; @else padding-left: 250px; @endguest">
-            Waiting for you to pick up!
+            <span class="custom-underline">Waiting for you to pick up!</span>
             <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right">
               @guest
                 <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Donate Food</a>

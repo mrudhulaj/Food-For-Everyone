@@ -72,7 +72,7 @@
     @include('templates.alertSuccessMessage')
     <section style="margin-bottom: 50px">
         <h2 style="margin-top: 0px;padding-left: 130px;">
-            Edit your contributions
+             <span class="custom-underline">Edit your contributions</span>
             <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right">
               <a class="a-none" href="{{route('availableFoodsView')}}">Back</a>
             </button>

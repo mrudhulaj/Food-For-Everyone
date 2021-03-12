@@ -39,11 +39,13 @@
 @section('content')
 <section>
     <h2 style="margin-top: 0px;">
+      <span class="custom-underline">
       @if(Session::get('user')=="Admin" || Session::get('user')=="Volunteer" || $profile->isVolunteer)
       Add a Volunteer
       @else
         Become A Volunteer
       @endif
+      </span>
     </h2>
     <p>Please make sure the details provided including the mobile number and email are correct, so that we can inform
         the volunteer when they are needed with us.</p>

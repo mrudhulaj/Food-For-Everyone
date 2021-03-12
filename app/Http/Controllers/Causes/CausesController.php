@@ -35,6 +35,7 @@ class CausesController extends Controller
     }
 
     public function causesDetailsView(){
+      Session::put('activeTab', 'CAUSES');
       $causeID    = Crypt::decrypt(Request::get('causeID'));
       $causeData  = Causes::where('ID',$causeID)->first();
       if($causeData->ExpectedAmount != 0){

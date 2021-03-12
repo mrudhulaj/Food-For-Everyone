@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
     public function HomeView(){
       Session::put('activeTab', 'HOME');
-
+      Session::put('activeMenu', 'NonAdmin');
       // Events
       $events                     = Events::where('IsApproved',1)->orderBy('CreatedDate','desc')->get();
       foreach($events as $eventsData){

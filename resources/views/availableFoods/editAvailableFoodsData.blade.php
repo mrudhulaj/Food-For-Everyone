@@ -38,7 +38,7 @@
 </style>
 @section('content')
 <section>
-    <h2 style="margin-top: 0px;">Edit Contribution</h2>
+    <h2 style="margin-top: 0px;"> <span class="custom-underline">Edit Contribution</span></h2>
     <p>Please make sure the food you provide is edible and passes the basic quality test,
         <br> that is, you will be having no problem giving this food to your own children and family.</p>
 </section>

@@ -147,7 +147,7 @@
                                         </li>
                                     </ul>
                                     {{--  Admin exclusive items  --}}
-                                    <ul class="nav navbar-nav @if(Session::get('activeMenu') == "NonAdmin") hide @endif" id="adminMenu">
+                                    <ul class="nav navbar-nav @if(Session::get('activeMenu') == "NonAdmin" || Session::get('activeMenu') == "") hide @endif" id="adminMenu">
                                       <li class=" @if($activeTab == 'DASHBOARD') active-nav @endif ">
                                           <a href="{{ route('adminDashboardView') }}">DASHBOARD</a>
                                       </li>

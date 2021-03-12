@@ -30,7 +30,7 @@
 @section('content')
 <div class="">
 	<section>
-		<h2 style="margin-top: 0px;">Our Story and Our Vision</h2>
+		<h2 style="margin-top: 0px;"><span class="custom-underline">Our Story and Our Vision</span></h2>
 	</section>
 	<div>
 		<img src="{{url('../images/about-us-1.png')}}" alt="" style="width: 100%;">

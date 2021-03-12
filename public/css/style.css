@@ -1557,3 +1557,11 @@
   }
 
   /* End Admin Approval */
+
+  .custom-underline{
+    border-bottom: 2px solid #01d262 !important;
+  }
+
+  .wrapper section>h2::before{
+    background: none !important;
+  }

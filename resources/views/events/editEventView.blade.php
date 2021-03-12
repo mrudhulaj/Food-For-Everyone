@@ -76,7 +76,7 @@
 </div>
 <section class="events_section_area">
     <h2 id="cust-h2" style="padding-left: 175px;">
-        EDIT EVENTS
+         <span class="custom-underline">EDIT EVENTS</span>
           <button class="btn button-bg-green"
               style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">
               <a class="a-none" href="{{route('eventsView')}}">

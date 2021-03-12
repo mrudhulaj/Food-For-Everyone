@@ -42,7 +42,7 @@
     @include('templates.alertSuccessMessage')
   </div>
     <h2 style="margin-top: 0px;@guest padding-left: 232px; @else @if(!$isUserVolunteerExist) padding-left: 232px; @elseif(Auth::user()->TypeOfAccount =="User") padding-left: 232px; @endif @endguest">
-      Our volunteers
+       <span class="custom-underline">Our volunteers</span>
           @guest
               <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
                     <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Become A Volunteer</a>

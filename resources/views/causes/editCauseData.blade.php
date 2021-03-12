@@ -73,7 +73,7 @@
   </div>
 </div>
 <section>
-  <h2 style="margin-top: 0px;">Edit cause</h2>
+  <h2 style="margin-top: 0px;"> <span class="custom-underline">Edit cause</span></h2>
   <p>Please make sure the details you provide are as accurate as possible.</p>
 </section>
 <div class="page-wrapper p-b-100 font-poppins" style="padding-top: 50px">

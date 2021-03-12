@@ -155,7 +155,7 @@ hr {
   </div>
 <section>
 <h2 style="margin-top: 0px; @if( Auth::check()) padding-left: 100px; @endif">
-    Edit Your Causes
+     <span class="custom-underline">Edit Your Causes</span>
     <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right">
       <a class="a-none" href="{{route('causesView')}}">Back</a>
     </button>

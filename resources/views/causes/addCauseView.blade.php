@@ -37,7 +37,7 @@
 </style>
 @section('content')
 <section>
-  <h2 style="margin-top: 0px;">Add cause</h2>
+  <h2 style="margin-top: 0px;"> <span class="custom-underline">Add cause</span></h2>
   <p>Please make sure the details you provide are as accurate as possible.</p>
 </section>
 <div class="col-lg-12" style="text-align: right;margin-top: -130px;padding-right: 62px;">

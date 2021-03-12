@@ -76,7 +76,7 @@
 @include('templates.alertSuccessMessage')
 <section>
     <h2 style="margin-top: 0px;">
-      <span style="margin-left: 170px;">Add an Event</span>
+      <span style="margin-left: 170px;"  class="custom-underline">Edit Event</span>
       <button class="btn button-bg-green"
       style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">
         <a class="a-none" href="{{route('editEventView')}}">
