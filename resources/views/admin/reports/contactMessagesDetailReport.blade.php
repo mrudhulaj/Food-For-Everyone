@@ -79,7 +79,7 @@
 @section('content')
 <div class="">
     <section>
-        <h2 style="margin-top: 0px;">CONTACT MESSAGE DETAILS</h2>
+        <h2 style="margin-top: 0px;"><span  class="custom-underline">CONTACT MESSAGE DETAILS </span></h2>
     </section>
     <div class="col-lg-12" style="text-align: right;margin-top: -90px;padding-right: 62px;">
       <button class="back-button"><a style="text-decoration: none;color: inherit !important;" href="{{ URL::previous() }}">Back</a></button>

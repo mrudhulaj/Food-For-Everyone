@@ -68,7 +68,9 @@
         @include('templates.alertSuccessMessage')
     </div>
     <h2 style="margin-top: 0px;">
+      <span class="custom-underline">
         Profile
+      </span>
     </h2>
 </section>
 <div class="col-lg-12" style="text-align: right;margin-top: -90px;padding-right: 62px;">

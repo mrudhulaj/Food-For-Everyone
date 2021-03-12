@@ -61,7 +61,9 @@
     @include('templates.alertSuccessMessage')
     <section class="events_section_area">
         <h2 id="cust-h2">
+          <span  class="custom-underline">
             Reports
+          </span>
         </h2>
     </section>
 </div>
@@ -187,9 +189,10 @@
                                 @if($causesData->IsApproved == '1')
                                   <i class="fa fa-check" aria-hidden="true" style="color: #00A348"></i>
 
-                                @else
+                                @elseif($causesData->IsApproved == '2')
                                   <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
-
+                                @else
+                                  <i class="fa fa-minus" aria-hidden="true" style="color: orange"></i>
                                 @endif
                               </td>
                               <td class="txt-left">
@@ -236,8 +239,10 @@
                               <td >
                                 @if($volunteersData->IsApproved == '1')
                                 <i class="fa fa-check" aria-hidden="true" style="color: #00A348"></i>
-                                @else
+                                @elseif($volunteersData->IsApproved == '2')
                                   <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
+                                @else
+                                  <i class="fa fa-minus" aria-hidden="true" style="color: orange"></i>
                                 @endif
                               </td>
                               <td class="txt-left">
@@ -296,8 +301,10 @@
                               <td>
                                 @if($eventsData->IsApproved == '1')
                                 <i class="fa fa-check" aria-hidden="true" style="color: #00A348"></i>
-                                @else
+                                @elseif($eventsData->IsApproved == '2')
                                   <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
+                                @else
+                                  <i class="fa fa-minus" aria-hidden="true" style="color: orange"></i>
                                 @endif
                               </td>
                               <td class="txt-left">

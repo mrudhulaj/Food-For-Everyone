@@ -28,7 +28,9 @@
 @section('content')
 <section class="events_section_area">
     <h2 id="cust-h2">
+      <span class="custom-underline">
         Contact Messages
+      </span>
     </h2>
 </section>
 <div class="container plr-0">

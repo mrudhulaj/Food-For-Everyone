@@ -62,7 +62,10 @@
     @include('templates.alertSuccessMessage')
     <section class="events_section_area">
         <h2 id="cust-h2">
+          <span class="custom-underline">
             Causes Report
+
+          </span>
         </h2>
     </section>
 </div>
