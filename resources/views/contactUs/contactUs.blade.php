@@ -263,7 +263,8 @@
     });
 
     $("#contactUs").on("submit", function(){            
-
+      var isFormValid = $("form[name='contactUs']").valid();
+      if(isFormValid){
         $.ajax({
             url:'{{ route("saveContactUs") }}',
             type:'POST',
@@ -285,6 +286,7 @@
               $('#successfullModal').modal('show');
             }
         });
+      }
     });
 
     $("#raiseTicket").change(function() {
