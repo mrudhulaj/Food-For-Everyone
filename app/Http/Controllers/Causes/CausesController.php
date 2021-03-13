@@ -88,7 +88,14 @@ class CausesController extends Controller
                             ->where('IsApproved',0)
                             ->orderBy('CreatedDate','desc')
                             ->get();
-    return view('causes/editCauseView',compact('causes'));
+
+    if(Auth::check()){
+      $role   = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
+    }else{
+      $role = "";
+    }
+
+    return view('causes/editCauseView',compact('causes','role'));
   }
 
   public function editCauseData(){

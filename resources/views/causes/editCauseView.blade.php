@@ -1,5 +1,6 @@
 @extends('templates.main')
 <title>Edit Causes</title>
+<link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
 <style>
 .wrapper section>h2::before {
   width: 190px !important;
@@ -171,9 +172,15 @@ hr {
     @foreach($causes as $causesData)
         <div class="box mainbox">
             <div class="img-div container-cust">
-                <img src="{{ asset($causesData->Image) }}"
-                    style="border-top-left-radius: inherit;border-top-right-radius: inherit;width: 420px;height: 220px;">
-                    <button data-toggle="modal" data-target="#deleteModal" class="btn" id="causeDeleteBtn" type="button" data-value="{{$causesData->ID}}">&times;</button>
+              @if($causesData->Image != "")
+              <img src="{{ asset($causesData->Image) }}"
+              style="border-top-left-radius: inherit;border-top-right-radius: inherit;width: 420px;height: 220px;">              
+              @else
+                <i class="fas fa-seedling iDashboard" style="padding: 50px 20px 20px 30px;"></i>
+              @endif
+              <button class="btn" type="button" @if($role->hasPermissionTo('delete Causes'))
+                data-toggle="modal" data-target="#deleteModal" id="causeDeleteBtn" data-value="{{$causesData->ID}}" @else href="javascript:void(0)"
+                data-toggle="modal" data-target="#permissionDeniedModal" @endif>&times;</button>
             </div>
             <div class="box-content" style="padding: 0 30px;">
                 <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}"

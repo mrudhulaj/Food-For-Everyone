@@ -137,7 +137,9 @@ hr {
                 Add Cause
             </button>
             <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right;margin-right: 10px">
-              <a class="a-none" href="{{ route('editCauseView') }}">Edit</a>
+              <a class="a-none" @if($role->hasPermissionTo('update Causes'))
+                href="{{ route('editCauseView') }}" @else href="javascript:void(0)"
+                data-toggle="modal" data-target="#permissionDeniedModal" @endif>Edit</a>
             </button>
         </a>
     @endif

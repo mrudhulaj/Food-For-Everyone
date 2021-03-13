@@ -98,7 +98,7 @@
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" @if($role->hasPermissionTo('create Volunteers')) checked @endif class="createCheckbox" name="createVolunteers" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('create Volunteers')) checked @endif class="createCheckbox" name="createVolunteers" id="" value="1" @if($user == 'User') disabled @endif>
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
@@ -134,7 +134,7 @@
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" @if($role->hasPermissionTo('update Volunteers')) checked @endif class="updateCheckbox" name="updateVolunteers" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('update Volunteers')) checked @endif class="updateCheckbox" name="updateVolunteers" id="" value="1" disabled>
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>
@@ -170,7 +170,7 @@
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" @if($role->hasPermissionTo('delete Volunteers')) checked @endif class="deleteCheckbox" name="deleteVolunteers" id="" value="1">
+                                    <input type="checkbox" @if($role->hasPermissionTo('delete Volunteers')) checked @endif class="deleteCheckbox" name="deleteVolunteers" id="" value="1" disabled>
                                     <span class="checkmark-cust"></span>
                                 </label>
                             </td>

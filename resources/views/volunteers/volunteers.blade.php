@@ -55,9 +55,11 @@
                       Add Volunteer
                     </a>
                 </button>
-              @elseif($role->hasPermissionTo('create Volunteers') )
+              @elseif(Auth::user()->TypeOfAccount == "Volunteer" )
                 <button class="btn button-bg-green" style="padding: 0px;width: 170px;height: 40px;float: right;margin-right: 60px;">
-                  <a class="a-none" href="{{ route('addVolunteerView') }}">
+                  <a class="a-none" @if($role->hasPermissionTo('create Volunteers'))
+                    href="{{ route('addVolunteerView') }}" @else href="javascript:void(0)"
+                    data-toggle="modal" data-target="#permissionDeniedModal" @endif>
                     Add Volunteer
                   </a>
                 </button>
