@@ -61,18 +61,22 @@
 <div class="container">
     @include('templates.alertSuccessMessage')
     <section>
-        <h2 style="margin-top: 0px;@guest padding-left: 115px; @else padding-left: 250px; @endguest">
+        <h2 style="margin-top: 0px;">
             <span class="custom-underline">Waiting for you to pick up!</span>
-            <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right">
-              @guest
-                <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Donate Food</a>
-              @else
-                <a class="a-none" href="{{ route('addAvailableFoodsView') }}">Donate</a>
-                <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right;margin-right: 10px">
-                  <a class="a-none" href="{{ route('editAvailableFoodsView') }}">Edit</a>
-                </button>
-              @endguest
-            </button>
+            <div style="margin-top: -35px;">
+              <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right">
+                @guest
+                  <a class="a-none" href="javascript:void(0)" data-toggle="modal" data-target="#defaultModal">Donate Food</a>
+                @else
+                    <a class="a-none" @if($role->hasPermissionTo('create AvailableFoods')) href="{{ route('addAvailableFoodsView') }}" @else href="javascript:void(0)"
+                      data-toggle="modal" data-target="#permissionDeniedModal" @endif>Donate</a>
+                    <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right;margin-right: 10px">
+                      <a class="a-none" @if($role->hasPermissionTo('update AvailableFoods')) href="{{ route('editAvailableFoodsView') }}" @else href="javascript:void(0)"
+                        data-toggle="modal" data-target="#permissionDeniedModal" @endif>Edit</a>
+                    </button>
+                @endguest
+              </button>
+            </div>
         </h2>
         <p>Here we list out the food's contributed by our user's and partner's.We make sure that these items comply
             strictly with our standard terms and policies.
@@ -210,6 +214,7 @@
         </table>
     </div>
 </div>
+@include('templates.permissionDeniedModal')
 @include('templates.defaultModal', ['title' => 'Login Required','message' => 'Please login or sign up to continue.'])
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script type="text/javascript" charset="utf8"

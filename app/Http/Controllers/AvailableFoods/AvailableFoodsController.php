@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AvailableFoods;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Models\AvailableFoods;
+use Spatie\Permission\Models\Role;
 use Request;
 use DB;
 use Response;
@@ -31,7 +32,15 @@ class AvailableFoodsController extends Controller
         "District" => AvailableFoods::select('District')->distinct()->get(),
       ];
 
-    return view('availableFoods/availableFoods',compact('availableFoods','filterValues'));
+    // Check if user/volunteer can add food
+      if(Auth::check()){
+        $role                   = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
+      }
+      else{
+        $role                 = false;
+      }
+
+    return view('availableFoods/availableFoods',compact('availableFoods','filterValues','role'));
   }
 
   public function addAvailableFoodsView(){
