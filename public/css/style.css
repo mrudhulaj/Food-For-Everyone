@@ -1565,3 +1565,8 @@
   .wrapper section>h2::before{
     background: none !important;
   }
+
+  .iDashboard {
+    font-size: 100px;
+    color: #00A348;
+}

@@ -72,7 +72,11 @@
                     <div class="events_single box-content" style="height: 570px;width: 351px;border-radius: 13px;
                     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);">
                         <div style="width: 351px;height: 207px;overflow: hidden;border-radius: 13px 13px 0px 0px;">
+                            @if($eventsData->EventImage)
                             <img style="width: 351px;height: 207px;" src="{{ asset($eventsData->EventImage) }}">
+                            @else
+                            <i class="fas fa-calendar-check iDashboard" style="padding: 50px 132px;"></i>
+                            @endif
                         </div>
                         <div style="padding: 10px;">
                             <div class="" style="margin-bottom: 5px">

@@ -210,8 +210,12 @@ hr {
   @foreach($causes as $causesData)
       <div class="box mainbox">
           <div class="img-div">
+              @if($causesData->Image != "")
               <img src="{{ asset($causesData->Image) }}"
                   style="border-top-left-radius: inherit;border-top-right-radius: inherit;width: 420px;height: 220px;">
+              @else
+              <i class="fas fa-seedling iDashboard" style="padding: 40px 20px 20px 30px;"></i>
+              @endif
           </div>
           <div class="box-content" style="padding: 0 30px;">
               <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}"

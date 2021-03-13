@@ -1,5 +1,6 @@
 @extends('templates.main')
 <title>Cause Details</title>
+<link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
 <style>
     .mainbox-cust {
         margin-bottom: 80px;
@@ -105,11 +106,16 @@
 <div class="container cust-center">
     <div class="col-lg-12 mainbox-cust plr-0 img-cust" style="">
         <div style="overflow: hidden !important;">
+            @if($causeData->Image != "")
             <img id="" src="{{ asset($causeData->Image) }}"
             alt="" style="width: 940px;height: 577px;margin-top: -15%;">
+            @else
+            <div style="width: 940px;height: 577px;text-align: center;padding-top: 30px">
+              <i class="fas fa-seedling iDashboard" style="padding: 40px 20px 20px 30px;font-size: 400px"></i>
+            </div>
+            @endif
         </div>
         <div class="ffe-font" style="padding-left: 30px;padding-right: 30px;padding-top: 30px;">
-
             <div>
                 <p style="font-weight: bold">
                   {{$causeData->CauseShortDescription}}
