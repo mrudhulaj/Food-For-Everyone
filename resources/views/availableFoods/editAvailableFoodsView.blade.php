@@ -118,8 +118,10 @@
                         <a class="a-none" href="{{route('editAvailableFoodsData',["foodID" => Crypt::encrypt($editAvailableFoodsData->ID)])}}">Edit</a>
                       </button>    
                       
-                      <button class="btn button-bg-green cust-btn" id="deleteFoodBtn" style="background-color: #c13131 !important;width: 55px !important;" data-value="{{$editAvailableFoodsData->ID}}" data-toggle="modal"
-                        data-target="#deleteModal">
+                      <button class="btn button-bg-green cust-btn" id="deleteFoodBtn" style="background-color: #c13131 !important;width: 55px !important;"@if($role->hasPermissionTo('delete AvailableFoods'))
+                        data-value="{{$editAvailableFoodsData->ID}}" data-toggle="modal"
+                        data-target="#deleteModal" @else href="javascript:void(0)"
+                        data-toggle="modal" data-target="#permissionDeniedModal" @endif>
                         Delete
                       </button>  
                     </td>

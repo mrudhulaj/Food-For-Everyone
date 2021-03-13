@@ -257,7 +257,7 @@
             </div>
           </div>
         </footer>
-
+    @include('templates.permissionDeniedModal')
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('js/active.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}" defer></script>

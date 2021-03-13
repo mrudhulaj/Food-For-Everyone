@@ -191,7 +191,6 @@ hr {
         </div>
     @endforeach
 @include('templates.donationModal')
-@include('templates.permissionDeniedModal')
 @include('templates.defaultModal', ['title' => 'Cause submitted !','message' => 'Your cause is successfully submitted.The cause added will be subject to admin approval.Please make sure the cause is genuine and you are willing to provide more details on request of admin.'])
 </div>
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>

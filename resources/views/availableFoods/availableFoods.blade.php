@@ -214,7 +214,6 @@
         </table>
     </div>
 </div>
-@include('templates.permissionDeniedModal')
 @include('templates.defaultModal', ['title' => 'Login Required','message' => 'Please login or sign up to continue.'])
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script type="text/javascript" charset="utf8"

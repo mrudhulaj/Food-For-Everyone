@@ -154,7 +154,15 @@ class AvailableFoodsController extends Controller
 
     }
 
-    return view('availableFoods/editAvailableFoodsView',compact('editAvailableFoods'));
+    // Check if user/volunteer can delete food
+      if(Auth::check()){
+        $role                   = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
+      }
+      else{
+        $role                 = false;
+      }
+
+    return view('availableFoods/editAvailableFoodsView',compact('editAvailableFoods','role'));
   }
 
   public function editAvailableFoodsData(){
