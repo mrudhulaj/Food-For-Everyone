@@ -235,4 +235,14 @@ hr {
       </div>
   @endforeach
 </div>
+<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+<script>
+    $.ajax({
+            url:'{{ route("adminMenuToggle") }}',
+            type:'GET',
+            data:{
+              currentMenu   : "Admin"
+            }
+          });
+</script>
 @stop
