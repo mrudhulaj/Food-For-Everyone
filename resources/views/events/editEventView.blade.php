@@ -99,8 +99,13 @@
                     <div class="events_single" style="height: 600px;width: 351px;border-radius: 13px;
                     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);">
                         <div class="container-cust" style="width: 351px;height: 207px;overflow: hidden;border-radius: 13px 13px 0px 0px;">
+                            @if($eventsData->EventImage)
                             <img style="width: 351px;height: 207px;" src="{{ asset($eventsData->EventImage) }}">
-                            <button data-toggle="modal" data-target="#deleteModal" class="btn" id="eventDeleteBtn" type="button" data-value="{{$eventsData->ID}}">&times;</button>
+                            @else
+                            <i class="fas fa-calendar-check iDashboard" style="padding: 50px 132px;"></i>
+                            @endif
+                            <button class="btn" type="button" @if($role->hasPermissionTo('delete Events')) data-toggle="modal" data-target="#deleteModal"  id="eventDeleteBtn"  data-value="{{$eventsData->ID}}" @else href="javascript:void(0)"
+                              data-toggle="modal" data-target="#permissionDeniedModal"  @endif>&times;</button>
                         </div>
                         <div style="padding: 10px;">
                             <div class="event_left">

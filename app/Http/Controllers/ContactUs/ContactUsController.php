@@ -10,6 +10,8 @@ use App\Models\Events;
 use App\Models\Causes;
 use App\Models\Volunteers;
 use App\Models\RaisedTickets;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Request;
 use Response;
 use Auth;
@@ -19,7 +21,14 @@ class ContactUsController extends Controller
     public function contactUsView(){
         Session::put('activeTab', 'CONTACT');
 
-        return view('contactUs/contactUs');
+        if(Auth::check()){
+          $role   = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
+        }else{
+          // Normal user rule defined for guest users also for creating contact messages.
+          $role = Role::select('id')->where('name',"User")->first(); 
+        }
+
+        return view('contactUs/contactUs',compact('role'));
     }
 
     public function saveContactUs(){

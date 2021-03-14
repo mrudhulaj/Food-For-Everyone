@@ -99,7 +99,7 @@
                             <td>
                                 <label class="checkbox-container">
                                     <input type="checkbox" @if($role->hasPermissionTo('create Volunteers')) checked @endif class="createCheckbox" name="createVolunteers" id="" value="1" @if($user == 'User') disabled @endif>
-                                    <span class="checkmark-cust"></span>
+                                    <span class="checkmark-cust" @if($user == 'User') style="background-color: #b3b0b0 !important;" @endif></span>
                                 </label>
                             </td>
                             <td>
@@ -135,7 +135,7 @@
                             <td>
                                 <label class="checkbox-container">
                                     <input type="checkbox" @if($role->hasPermissionTo('update Volunteers')) checked @endif class="updateCheckbox" name="updateVolunteers" id="" value="1" disabled>
-                                    <span class="checkmark-cust"></span>
+                                    <span class="checkmark-cust"  style="background-color: #b3b0b0 !important;"></span>
                                 </label>
                             </td>
                             <td>
@@ -146,8 +146,8 @@
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" class="updateCheckbox" name="updateContactMessages" id="" value="1" @if($role->hasPermissionTo('update ContactMessages')) checked @endif>
-                                    <span class="checkmark-cust"></span>
+                                    <input type="checkbox" class="updateCheckbox" name="updateContactMessages" id="" value="1" @if($role->hasPermissionTo('update ContactMessages')) checked @endif disabled>
+                                    <span class="checkmark-cust"   style="background-color: #b3b0b0 !important;"></span>
                                 </label>
                             </td>
                         </tr>
@@ -171,7 +171,7 @@
                             <td>
                                 <label class="checkbox-container">
                                     <input type="checkbox" @if($role->hasPermissionTo('delete Volunteers')) checked @endif class="deleteCheckbox" name="deleteVolunteers" id="" value="1" disabled>
-                                    <span class="checkmark-cust"></span>
+                                    <span class="checkmark-cust" style="background-color: #b3b0b0 !important;"></span>
                                 </label>
                             </td>
                             <td>
@@ -182,8 +182,8 @@
                             </td>
                             <td>
                                 <label class="checkbox-container">
-                                    <input type="checkbox" @if($role->hasPermissionTo('delete ContactMessages')) checked @endif class="deleteCheckbox" name="deleteContactMessages" id="" value="1">
-                                    <span class="checkmark-cust"></span>
+                                    <input type="checkbox" @if($role->hasPermissionTo('delete ContactMessages')) checked @endif class="deleteCheckbox" name="deleteContactMessages" id="" value="1" disabled>
+                                    <span class="checkmark-cust" style="background-color: #b3b0b0 !important;"></span>
                                 </label>
                             </td>
                         </tr>

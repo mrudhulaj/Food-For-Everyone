@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Events;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Models\Events;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Request;
 use Illuminate\Support\Facades\Crypt;
 use CommonFunctions;
@@ -23,7 +25,13 @@ class EventsController extends Controller
         $eventsData->EndTime = date('h:i A', strtotime($eventsData->EndTime));
       }
 
-      return view('events/events',compact('events','saved'));
+      if(Auth::check()){
+        $role   = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
+      }else{
+        $role = "";
+      }
+
+      return view('events/events',compact('events','saved','role'));
     }
 
     public function eventDetailsView(){
@@ -93,7 +101,14 @@ class EventsController extends Controller
         $eventsData->BeginTime   = date('h:i A', strtotime($eventsData->BeginTime));
         $eventsData->EndTime     = date('h:i A', strtotime($eventsData->EndTime));  
       }
-      return view('events/editEventView',compact('events'));
+
+      if(Auth::check()){
+        $role   = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
+      }else{
+        $role = "";
+      }
+
+      return view('events/editEventView',compact('events','role'));
     }
   
     public function editEventData(){

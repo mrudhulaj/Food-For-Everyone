@@ -56,10 +56,14 @@
         @else
           <button class="btn button-bg-green"
               style="padding: 0px;width: 120px;height: 40px;float: right;margin-right: 60px;">
-              <a class="a-none" href="{{ route('addEventView') }}">Add Event</a>
+              <a class="a-none" @if($role->hasPermissionTo('create Events'))
+                href="{{ route('addEventView') }}" @else href="javascript:void(0)"
+                data-toggle="modal" data-target="#permissionDeniedModal" @endif>Add Event</a>
           </button>
           <button class="btn button-bg-green" style="padding: 0px;width: 110px;height: 40px;float: right;margin-right: 10px">
-            <a class="a-none" href="{{ route('editEventView') }}">Edit</a>
+            <a class="a-none" @if($role->hasPermissionTo('update Events'))
+              href="{{ route('editEventView') }}" @else href="javascript:void(0)"
+              data-toggle="modal" data-target="#permissionDeniedModal" @endif>Edit</a>
           </button>
         @endguest
     </h2>

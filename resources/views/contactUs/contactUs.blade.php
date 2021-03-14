@@ -46,6 +46,11 @@
       margin-top: -20px;
     }
 
+    .disabledbutton {
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
 </style>
 @section('content')
 <div class="">
@@ -59,7 +64,7 @@
                     style="width: 100%;border-top-left-radius: 4px;border-bottom-left-radius: 5px;height: 962px;">
             </div>
         </div>
-        <div class="col-lg-6 plr-0" style="">
+        <div class="col-lg-6 plr-0" style="" id="contactUsDiv">
             <div class="row">
                 <div class="col-lg-12 cust-ffe-font">
                     <h2 style="text-align: center;padding-top: 25px;padding-bottom: 25px;font-weight: 400;">Send Us A
@@ -67,7 +72,7 @@
                 </div>
             </div>
             <div class="row mrl-0">
-                <div class="col-lg-12 cust-form-style">
+                <div class="col-lg-12 cust-form-style" id="contactUsDivForm">
                     <form action="javascript:void(0)" method="POST" enctype="multipart/form-data" name="contactUs" id="contactUs">
                         @csrf
                         <div class="row row-space">
@@ -168,7 +173,7 @@
                         </div>
 
                         <div class="" style="text-align: center;@if(Auth::check()) margin-top: 23px; @else margin-top: 80px; @endif">
-                            <button id="confirmForm" class="btn button-bg-green"
+                            <button @if($role->hasPermissionTo('create ContactMessages')) id="confirmForm" @else type="button" disabled @endif class="btn button-bg-green"
                                 style="padding: 0px;width: 120px;height: 60px;">
                                 Submit
                             </button>
@@ -203,12 +208,54 @@
     </div>
 </div>
 {{-- End : Message sent successfully Modal --}}
+@if(!$role->hasPermissionTo('create ContactMessages'))
+<div class="modal fade" id="contactUsDeniedModal" tabindex="-1" role="dialog" aria-labelledby="contactUsDeniedModalLabel"
+aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content" style="border-radius: 13px;border: none">
+          <div class="modal-header ffe-font">
+              <h5 class="modal-title" id="contactUsDeniedModalLabel">
+                @guest Disabled! @else Permission Denied ! @endguest
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </h5>
+          </div>
+          <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
+              @guest
+                <p class="ffe-font">This page is temporarily disabled.</p>
+              @else
+              <p class="ffe-font">You temporarily do not have the permission to do this action , please contact admin for more details.</p>
+              @endguest
+          </div>
+          <div class="modal-footer">
+              <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">
+                  Close
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
+@endif
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
 <script src="{{ asset('vendor/moment/moment.js') }}"></script>
 
 <script>
     $(document).ready(function () {
+
+        // If user does'nt have permission to submit contact messages.
+        var isPermitted = "{{$role->hasPermissionTo('create ContactMessages')}}";
+        if(!isPermitted){
+          $("#contactUsDiv").addClass("disabledbutton");
+          $("#contactUsDivForm").find('input').each(function () {
+              $(this).attr('disabled', 'disabled');
+              $(this).val('');
+          });
+
+          jQuery.noConflict();
+          $('#contactUsDeniedModal').modal('show');
+        }
 
         // Add Contact form validation
         $("form[name='contactUs']").validate({
