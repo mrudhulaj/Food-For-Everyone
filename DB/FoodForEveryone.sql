@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 14, 2021 at 10:48 PM
+-- Generation Time: Mar 15, 2021 at 12:09 AM
 -- Server version: 8.0.23-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -262,8 +262,8 @@ CREATE TABLE `users` (
   `Occupation` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `District` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `State` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FacebookLink` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `TwitterLink` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `FacebookLink` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `TwitterLink` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ProfileImage` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
