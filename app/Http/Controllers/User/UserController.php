@@ -20,7 +20,7 @@ class UserController extends Controller
     $profile->isVolunteer    = false;
 
     if($profile->TypeOfAccount == 'Volunteer'){
-      $profile                 = Volunteers::where('ID',Auth::user()->id)->first();
+      $profile                 = Volunteers::where('UserID',Auth::user()->id)->first();
       $profile->isVolunteer    = true;
     }
   
@@ -37,11 +37,8 @@ class UserController extends Controller
     $user->Occupation       = Request::get('occupation');
     $user->District         = Request::get('district');
     $user->State            = Request::get('state');
-
-    if($user->TypeOfAccount == 'Volunteer'){
-      $user->FacebookLink     = Request::get('facebook');
-      $user->TwitterLink      = Request::get('twitter');
-    }
+    $user->FacebookLink     = Request::get('facebook');
+    $user->TwitterLink      = Request::get('twitter');
 
     if (Request::hasFile('profileImage')) {
       $file                       = Request::file('profileImage');
