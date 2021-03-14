@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Models\Roles;
-use App\Models\Permissions;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Request;
 use Redirect;
 use Response;
@@ -48,6 +48,9 @@ class RegisterController extends Controller
 
     public function register()
     {
+      // Check if an admin exist for creating initial permissions later.
+      $adminExist             = User::where('TypeOfAccount','Admin')->exists();
+
       $user                   = new User();
       $user->FirstName        = Request::get('firstName');
       $user->LastName         = Request::get('lastName');
@@ -60,7 +63,7 @@ class RegisterController extends Controller
       // To create new user roles for the first time only.
       $roles = ["Admin","Volunteer","User"];
       foreach($roles as $rolesData){
-        Roles::firstOrCreate(['name' => $rolesData]);
+        Role::firstOrCreate(['name' => $rolesData]);
       }
 
        // To create new permissions for the first time only.
@@ -84,23 +87,47 @@ class RegisterController extends Controller
       ];
 
        foreach($permissions as $permissionsData){
-         Permissions::firstOrCreate(['name' => $permissionsData]);
+         Permission::firstOrCreate(['name' => $permissionsData]);
        }
 
-      //  To give all permissions to Admin for the first time only
-      $adminExist = User::where('id',1)->where('FirstName','Admin')->first();
+      // Give initial permissions for diff types of account; first time only
       if(!$adminExist){
+        //  To give all permissions to Admin for the first time only
         $permission['Action']   = ["create","update","delete"];
-        $permission['Category'] = ["AvailableFoods","Causes","Volunteers","Events","ContactMessages"];
-        $role                   = Roles::select('id')->where('name',"Admin")->first();
+        $permission['Category'] = ["AvailableFoods","Causes","Events","Volunteers","ContactMessages"];
+        $role                   = Role::select('id')->where('name',"Admin")->first();
         foreach($permission['Category'] as $permissionCategory){
           foreach($permission['Action'] as $permissionAction){
-              $permissionItem = Permissions::where('name',$permissionAction." ".$permissionCategory)->first();
+              $permissionItem = Permission::where('name',$permissionAction." ".$permissionCategory)->first();
               $role->givePermissionTo($permissionItem);
           }
         }
-      }
 
+        //To give default permissions to User & Volunteer for the first time only
+        $permission['Category'] = ["AvailableFoods","Causes","Events","ContactMessages"];
+        
+        for($i=1; $i<=2; $i++){ // Do it once each for Volunteer and User
+          $name   = $i==1 ? "Volunteer" : "User";
+          $role   = Role::select('id')->where('name',$name)->first();
+          foreach($permission['Category'] as $permissionCategory){
+
+            // Remove update and delete from $permission['Action'] for Contact Messages
+            if($i==1 && $permissionCategory == "ContactMessages"){ // Volunteer->Contact Message only create
+              $permission['Action']   = ["create"];
+            }
+            elseif($i==2 && $permissionCategory == "ContactMessages"){ // User->Contact Message only create
+              $permission['Action']   = ["create"];
+            }
+
+            foreach($permission['Action'] as $permissionAction){
+                $permissionItem = Permission::where('name',$permissionAction." ".$permissionCategory)->first();
+                $role->givePermissionTo($permissionItem);
+            }
+          }
+          //Reset $permission['Action'] to og after clearing update and delete for Volunteer->Contact Message
+          $permission['Action']   = ["create","update","delete"]; 
+        }
+      }
 
       return Redirect::back()->with('status','User added successfully, please login to continue.');
     }
