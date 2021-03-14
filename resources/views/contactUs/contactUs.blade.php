@@ -173,7 +173,7 @@
                         </div>
 
                         <div class="" style="text-align: center;@if(Auth::check()) margin-top: 23px; @else margin-top: 80px; @endif">
-                            <button @if($role->hasPermissionTo('create ContactMessages')) id="confirmForm" @else type="button" disabled @endif class="btn button-bg-green"
+                            <button @if($adminExist) @if($role->hasPermissionTo('create ContactMessages')) id="confirmForm" @else type="button" disabled @endif @endif class="btn button-bg-green"
                                 style="padding: 0px;width: 120px;height: 60px;">
                                 Submit
                             </button>
@@ -208,6 +208,8 @@
     </div>
 </div>
 {{-- End : Message sent successfully Modal --}}
+@if($adminExist)
+<input type="hidden" name="rolePermission" id="rolePermission" value="{{$role->hasPermissionTo('create ContactMessages')}}">
 @if(!$role->hasPermissionTo('create ContactMessages'))
 <div class="modal fade" id="contactUsDeniedModal" tabindex="-1" role="dialog" aria-labelledby="contactUsDeniedModalLabel"
 aria-hidden="true">
@@ -237,6 +239,7 @@ aria-hidden="true">
   </div>
 </div>
 @endif
+@endif
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
 <script src="{{ asset('vendor/moment/moment.js') }}"></script>
@@ -245,16 +248,19 @@ aria-hidden="true">
     $(document).ready(function () {
 
         // If user does'nt have permission to submit contact messages.
-        var isPermitted = "{{$role->hasPermissionTo('create ContactMessages')}}";
-        if(!isPermitted){
-          $("#contactUsDiv").addClass("disabledbutton");
-          $("#contactUsDivForm").find('input').each(function () {
-              $(this).attr('disabled', 'disabled');
-              $(this).val('');
-          });
+        var adminExist = "{{$adminExist}}";
+        if(adminExist){
+          var isPermitted = $("#rolePermission").val();
+          if(!isPermitted){
+            $("#contactUsDiv").addClass("disabledbutton");
+            $("#contactUsDivForm").find('input').each(function () {
+                $(this).attr('disabled', 'disabled');
+                $(this).val('');
+            });
 
-          jQuery.noConflict();
-          $('#contactUsDeniedModal').modal('show');
+            jQuery.noConflict();
+            $('#contactUsDeniedModal').modal('show');
+          }
         }
 
         // Add Contact form validation

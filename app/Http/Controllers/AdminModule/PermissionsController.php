@@ -13,10 +13,10 @@ use Spatie\Permission\Models\Permission;
 class PermissionsController extends Controller
 {
     public function adminPermissionsView(){
+      Session::put('activeTab', 'PERMISSIONS');
       $user   = Request::has("role") ? Request::get('role') : "Volunteer";
       $role   = Role::select('id')->where('name',$user)->first();
 
-      Session::put('activeTab', 'PERMISSIONS');
       return view('admin/permissions/permissions',compact('role','user'));
     }
 

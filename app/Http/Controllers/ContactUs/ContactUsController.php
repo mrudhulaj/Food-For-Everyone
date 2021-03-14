@@ -10,6 +10,7 @@ use App\Models\Events;
 use App\Models\Causes;
 use App\Models\Volunteers;
 use App\Models\RaisedTickets;
+use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Request;
@@ -25,10 +26,16 @@ class ContactUsController extends Controller
           $role   = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
         }else{
           // Normal user rule defined for guest users also for creating contact messages.
-          $role = Role::select('id')->where('name',"User")->first(); 
+          $adminExist = User::where('id',1)->where('FirstName','Admin')->first();
+          if($adminExist){
+            $role = Role::select('id')->where('name',"User")->first(); 
+          }
+          else{
+            $role = "";
+          }
         }
 
-        return view('contactUs/contactUs',compact('role'));
+        return view('contactUs/contactUs',compact('role','adminExist'));
     }
 
     public function saveContactUs(){
