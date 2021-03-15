@@ -226,12 +226,6 @@
                   }
 
                 },
-                fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    responsiveHelper.createExpandIcon(nRow);
-                    $(nRow).click(function() {
-                        document.location.href = 'www.google.com';
-                    });
-                },
             });
 
         }
