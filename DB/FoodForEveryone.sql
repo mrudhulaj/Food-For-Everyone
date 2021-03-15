@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 15, 2021 at 12:09 AM
+-- Generation Time: Mar 15, 2021 at 09:09 PM
 -- Server version: 8.0.23-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -149,6 +149,25 @@ CREATE TABLE `events` (
   `EditedUser` text,
   `CreatedUserID` int DEFAULT NULL,
   `EditedUserID` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locations`
+--
+
+CREATE TABLE `locations` (
+  `ID` int NOT NULL,
+  `District` varchar(500) NOT NULL,
+  `State` varchar(500) NOT NULL,
+  `Country` varchar(500) NOT NULL,
+  `CreatedDate` timestamp NOT NULL,
+  `CreatedUser` varchar(200) NOT NULL,
+  `EditedDate` timestamp NOT NULL,
+  `EditedUser` varchar(200) NOT NULL,
+  `CreatedUserID` int NOT NULL,
+  `EditedUserID` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -355,6 +374,12 @@ ALTER TABLE `events`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `locations`
+--
+ALTER TABLE `locations`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -458,6 +483,12 @@ ALTER TABLE `donations`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `locations`
+--
+ALTER TABLE `locations`
   MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 
 --
