@@ -140,6 +140,10 @@
     }
 
     /* End: Custom checkbok */
+    .invalid-feedback{
+      margin-left: 30px !important;
+      color: #114c13 !important;
+    }
 
 </style>
 @section('content')
