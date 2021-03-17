@@ -10,7 +10,7 @@
                 </h5>
             </div>
             <div class="modal-body col-lg-12 ffe-font" style="padding: 20px;">
-                <p class="ffe-font">{{$message}}</p>
+                <p class="ffe-font" id="cust-modal-message">{{$message}}</p>
             </div>
             <div class="modal-footer">
                 <button id="" data-dismiss="modal" type="button" class="btn btn-secondary mdl-btn-cancel">

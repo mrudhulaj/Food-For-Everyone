@@ -160,6 +160,9 @@
                                       <li class=" @if($activeTab == 'APPROVALS') active-nav @endif ">
                                           <a href="{{ route('approvalsCausesView') }}">APPROVALS</a>
                                       </li>
+                                      <li class=" @if($activeTab == 'LOCATIONS') active-nav @endif ">
+                                        <a href="{{ route('adminLocationsView') }}">LOCATIONS</a>
+                                      </li>
                                       <li class=" @if($activeTab == 'CONTACTMESSAGES') active-nav @endif ">
                                           <a href="{{ route('adminContactMessagesView') }}">CONTACT MESSAGES</a>
                                       </li>
@@ -328,6 +331,7 @@
           // }
 
     </script>
+    @yield('custom-script')
 </body>
 
 </html>

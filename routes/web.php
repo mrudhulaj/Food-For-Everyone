@@ -106,6 +106,11 @@
     Route::get('/admin-permissions', ['as' => 'adminPermissionsView','uses' => 'AdminModule\PermissionsController@adminPermissionsView']);
     Route::get('/admin-permissions-save', ['as' => 'adminPermissionsSave','uses' => 'AdminModule\PermissionsController@adminPermissionsSave']);
 
+  // Locations
+    Route::get('/admin-locations', ['as' => 'adminLocationsView','uses' => 'AdminModule\LocationsController@adminLocationsView']);
+    Route::get('admin-locations-filter', ['as' => 'adminLocationsFilter','uses' => 'AdminModule\LocationsController@adminLocationsFilter']);
+    Route::get('/admin-locations-add-view', ['as' => 'adminLocationsAddView','uses' => 'AdminModule\LocationsController@adminLocationsAddView']);
+    Route::post('/admin-locations-add-save', ['as' => 'adminLocationsAddSave','uses' => 'AdminModule\LocationsController@adminLocationsAddSave']);
   // Approvals
     Route::any('/approvalsDecisions', ['as' => 'approvalsDecisions','uses' => 'AdminModule\ApprovalsController@approvalsDecisions']);
     // Approvals-Causes
