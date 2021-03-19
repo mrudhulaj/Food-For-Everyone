@@ -69,7 +69,7 @@
 </style>
 @section('content')
 <div class="container">
-    @include('templates.alertSuccessMessage')
+    @include('templates.alertSuccessOrErrorMessage')
     <section style="margin-bottom: 50px">
         <h2 style="margin-top: 0px;padding-left: 130px;">
              <span class="custom-underline">Edit your contributions</span>

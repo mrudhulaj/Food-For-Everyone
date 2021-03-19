@@ -72,7 +72,7 @@
 </style>
 @section('content')
 <div class="container" style="padding: 0px 10px 0px 30px;">
-    @include('templates.alertSuccessMessage')
+    @include('templates.alertSuccessOrErrorMessage')
 </div>
 <section class="events_section_area">
     <h2 id="cust-h2" style="padding-left: 175px;">

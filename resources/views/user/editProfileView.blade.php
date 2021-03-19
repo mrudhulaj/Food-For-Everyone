@@ -41,7 +41,7 @@
 
 <section>
     <div style="margin: 0px 50px 0px 50px;">
-      @include('templates.alertSuccessMessage')
+      @include('templates.alertSuccessOrErrorMessage')
     </div>
     <h2 style="margin-top: 0px;">
     <span class="custom-underline"> Edit Profile </span>

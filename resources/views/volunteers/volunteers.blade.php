@@ -39,7 +39,7 @@
 @section('content')
 <section>
   <div class="container" style="padding: 0px 10px 0px 10px;">
-    @include('templates.alertSuccessMessage')
+    @include('templates.alertSuccessOrErrorMessage')
   </div>
     <h2 style="margin-top: 0px;">
        <span class="custom-underline">Our volunteers</span>

@@ -121,7 +121,7 @@ hr {
 @section('content')
 <div class="">
   <div class="container" style="padding: 0px 10px 0px 50px;">
-    @include('templates.alertSuccessMessage')
+    @include('templates.alertSuccessOrErrorMessage')
   </div>
 <section>
 <h2 style="margin-top: 0px; @if( Auth::check()) padding-left: 270px; @endif">

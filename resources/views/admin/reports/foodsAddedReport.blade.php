@@ -50,7 +50,7 @@
 </style>
 @section('content')
 <div class="container plr-0">
-    @include('templates.alertSuccessMessage')
+    @include('templates.alertSuccessOrErrorMessage')
     <section class="events_section_area">
         <h2 id="cust-h2">
           <span class="custom-underline">

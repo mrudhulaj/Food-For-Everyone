@@ -148,7 +148,7 @@
 </style>
 @section('content')
 <div class="container">
-  @include('templates.alertSuccessMessage')
+  @include('templates.alertSuccessOrErrorMessage')
     <div class="row justify-content-center">
         <div class="col-md-4" style="margin-bottom: 50px;">
             <div style="text-align: center;">

@@ -73,7 +73,7 @@
 
 </style>
 @section('content')
-@include('templates.alertSuccessMessage')
+@include('templates.alertSuccessOrErrorMessage')
 <section>
     <h2 style="margin-top: 0px;">
       <span style="margin-left: 170px;"  class="custom-underline">Edit Event</span>

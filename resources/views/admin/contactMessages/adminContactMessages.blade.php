@@ -34,7 +34,7 @@
     </h2>
 </section>
 <div class="container plr-0">
-@include('templates.alertSuccessMessage')
+@include('templates.alertSuccessOrErrorMessage')
     {{-- Begin:Filter Area --}}
     <div class="col-lg-12 plr-0 filter" style="margin-top: 30px;">
         <form class="form-inline" name="filterForm" id="filterForm">

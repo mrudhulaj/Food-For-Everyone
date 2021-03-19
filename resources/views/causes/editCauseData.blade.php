@@ -69,7 +69,7 @@
 @section('content')
 <div class="page-wrapper" style="min-height: auto !important;">
   <div class="wrapper wrapper--w680">
-    @include('templates.alertSuccessMessage')
+    @include('templates.alertSuccessOrErrorMessage')
   </div>
 </div>
 <section>

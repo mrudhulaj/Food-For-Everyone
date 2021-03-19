@@ -59,7 +59,7 @@
 </style>
 @section('content')
 <div class="container">
-    @include('templates.alertSuccessMessage')
+    @include('templates.alertSuccessOrErrorMessage')
     <section>
         <h2 style="margin-top: 0px;">
             <span class="custom-underline">Waiting for you to pick up!</span>
