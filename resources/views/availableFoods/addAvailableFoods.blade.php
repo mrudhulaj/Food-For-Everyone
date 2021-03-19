@@ -135,20 +135,28 @@
                         <label class="label ffe-font">Phone</label>
                         <input class="input--style-4" type="text" name="phone" value="{{Auth::user()->Phone}}" readonly>
                     </div>
+                    <div class="input-group col-lg-12">
+                      <label class="label ffe-font">Country</label>
+                      <select class="form-control input--style-4" style="" id="country" name="country">
+                        <option hidden selected="" value="">Country</option>
+                        @foreach ($locationsCountry as $locationsCountryData)
+                          <option value="{{$locationsCountryData->Country}}">{{$locationsCountryData->Country}}</option>
+                        @endforeach
+                      </select>                    
+                    </div>
                     <div class="row row-space" style="padding-right: 0px">
                       <div class="col-lg-4">
                           <div class="input-group col-lg-12 selectbox-div">
                               <label class="label ffe-font">State</label>
-                              <select class="form-control input--style-4" style="" id="state" name="state">
+                              <select class="form-control input--style-4" style="" id="state" name="state" disabled>
                                   <option hidden selected="" value="">State</option>
-                                  <option value="Kerala">Kerala</option>
                               </select>
                           </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">District</label>
-                                <select class="form-control input--style-4" style="" id="district" name="district">
+                                <select class="form-control input--style-4" style="" id="district" name="district" disabled>
                                     <option hidden selected="" value="">District</option>
                                     <option value="Calicut">Calicut</option>
                                 </select>
@@ -295,6 +303,29 @@
         });
 
     });
+
+    $('#country').change(function(){
+        if($(this).val() != ""){
+          $('#state')
+              .empty()
+              .append('<option hidden value="">State</option>')
+              ;
+          locationsSpecificData("Country",$(this).val(),"UserMenu");
+          $("#state").removeAttr('disabled');
+        }
+      });
+
+      $('#state').change(function(){
+        if($(this).val() != ""){
+          $('#district')
+              .empty()
+              .append('<option hidden value="">District</option>')
+              ;
+          locationsSpecificData("State",$(this).val(),"UserMenu");
+          $("#district").removeAttr('disabled');
+        }
+      });
+      
 
 </script>
 @stop

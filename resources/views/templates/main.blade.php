@@ -316,6 +316,37 @@
 
         });
 
+        // Ajax function to get state or district according to selected country or state.
+        var selected,selectedID,from,optionValue;
+        function locationsSpecificData(selected,selectedID,from = ""){
+          console.log("selected = "+selected+", selectedID = "+selectedID);
+          $.ajax({
+                  url:'{{ route("adminLocationsSpecificData") }}',
+                  type:'GET',
+                  data:{
+                      selected   : selected,
+                      selectedID : selectedID,
+                      from       : from,
+                  },
+                  success:function(data) {
+                    $.each(data, function (i) {
+                        $.each(data[i], function (key, val) {
+
+                          if(selected == "Country"){
+                            optionValue = from == "UserMenu" ? data[i]['State'] : data[i]['ID'];
+                            $('#state').append($("<option></option>").attr("value", optionValue).text(data[i]['State'])); 
+                          }
+                          else if(selected == "State"){
+                            optionValue = from == "UserMenu" ? data[i]['District'] : data[i]['ID'];
+                            $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
+                          }
+                          return false;
+                        });
+                    });
+                  }
+              });
+        }
+
         // Make navbar sticky
           // window.onscroll = function() {myFunction()};
 

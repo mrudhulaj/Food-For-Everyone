@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AvailableFoods;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Models\AvailableFoods;
+use App\Models\LocationsCountry;
 use Spatie\Permission\Models\Role;
 use Request;
 use DB;
@@ -28,6 +29,7 @@ class AvailableFoodsController extends Controller
     // To get filter dropdown values from AvailableFoods table.
       $filterValues = [
         "City"     => AvailableFoods::select('City')->distinct()->get(),
+        "Country"  => LocationsCountry::select('Country')->distinct()->get(),
         "State"    => AvailableFoods::select('State')->distinct()->get(),
         "District" => AvailableFoods::select('District')->distinct()->get(),
       ];
@@ -44,8 +46,8 @@ class AvailableFoodsController extends Controller
   }
 
   public function addAvailableFoodsView(){
-
-    return view('availableFoods/addAvailableFoods');
+    $locationsCountry = LocationsCountry::all();
+    return view('availableFoods/addAvailableFoods',compact('locationsCountry'));
 
   }
 
@@ -63,6 +65,7 @@ class AvailableFoodsController extends Controller
     $availableFoods->Phone            = Request::get('phone');
     $availableFoods->District         = Request::get('district');
     $availableFoods->State            = Request::get('state');
+    $availableFoods->Country          = Request::get('country');
     $availableFoods->City             = Request::get('city');
     $availableFoods->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
     $availableFoods->CreatedUserID    = Auth::user()->id;
@@ -77,8 +80,8 @@ class AvailableFoodsController extends Controller
     $data = DB::table('availableFoods')
                 ->where(function($query)use($filterValues){ 
 
-                    if (isset($filterValues['filterCity']) && $filterValues['filterCity'] != null && $filterValues['filterCity'] != "") {  
-                      $query->where('City',$filterValues['filterCity']);
+                    if (isset($filterValues['filterCountry']) && $filterValues['filterCountry'] != null && $filterValues['filterCountry'] != "") {  
+                      $query->where('Country',$filterValues['filterCountry']);
                     }
                     
                     if(isset($filterValues['filterDistrict']) && $filterValues['filterDistrict'] != null && $filterValues['filterDistrict'] != "") {
@@ -116,6 +119,7 @@ class AvailableFoodsController extends Controller
                     'District',
                     'State',
                     'City',
+                    'Country',
                     'ExpiryTime',
                     'FoodCount',
                     'EditedDate'
@@ -124,7 +128,7 @@ class AvailableFoodsController extends Controller
 
     foreach($data as $dataEach){
 
-      $dataEach->Location   = $dataEach->City.", ".$dataEach->District.", ".$dataEach->State;
+      $dataEach->Location   = $dataEach->City.", ".$dataEach->District.", ".$dataEach->State.", ".$dataEach->Country;
       $dataEach->AddedDate  = date('d-M-Y', strtotime($dataEach->EditedDate));
       $dataEach->ExpiryTime = date('h:i A', strtotime($dataEach->ExpiryTime));
 

@@ -91,10 +91,10 @@
                 <div class="col-lg-3 pright-0">
                     <div class="input-group" style="width: 100%;">
                         <label class="label ffe-font">Location</label>
-                        <select class="form-control input--style-4" style="" id="filterCity" name="filterCity">
-                            <option value="" selected hidden>Select City</option>
-                            @foreach ($filterValues['City'] as $values)
-                             <option value="{{$values['City']}}">{{$values['City']}}</option>
+                        <select class="form-control input--style-4" style="" id="filterCountry" name="filterCountry">
+                            <option value="" selected hidden>Select Country</option>
+                            @foreach ($filterValues['Country'] as $values)
+                             <option value="{{$values['Country']}}">{{$values['Country']}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -284,7 +284,7 @@
 
         $('#filterbtn').click(function () {
             var filterValues = {
-            filterCity        : $('#filterCity').val(),
+            filterCountry        : $('#filterCountry').val(),
             filterDistrict    : $('#filterDistrict').val(),
             filterState       : $('#filterState').val(),
             filterExpTime     : $('#filterExpTime').val(),
@@ -298,7 +298,7 @@
         });
 
         $('#resetFilter').click(function () {
-            $('#filterCity').val('');
+            $('#filterCountry').val('');
             $('#filterDistrict').val('');
             $('#filterState').val('');
             $('#filterExpTime').val('');
@@ -312,10 +312,10 @@
       if(
         $('#filterDistrict option').length  == 1 &&
         $('#filterState option').length     == 1 &&
-        $('#filterCity option').length      == 1 
+        $('#filterCountry option').length      == 1 
       ){
 
-        $('#filterDistrict,#filterState,#filterCity').append($("<option disabled>None</option>"));
+        $('#filterDistrict,#filterState,#filterCountry').append($("<option disabled>None</option>"));
       }
 
 
