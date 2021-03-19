@@ -10,6 +10,7 @@ use Response;
 use App\Models\LocationsCountry;
 use App\Models\LocationsDistrict;
 use App\Models\LocationsState;
+use App\Models\LocationsMain;
 use DB;
 use DataTables;
 
@@ -17,7 +18,7 @@ class LocationsController extends Controller
 {
     public function adminLocationsView(){
       Session::put('activeTab', 'LOCATIONS');
-      $locations   = Locations::all();
+      $locations   = LocationsMain::all();
 
       return view('admin/locations/adminViewLocations',compact('locations'));
     }
@@ -32,7 +33,7 @@ class LocationsController extends Controller
 
     public function adminLocationsFilter() {
       $filterValues   = Request::get('filterValues');
-      $data           = DB::table('locations')
+      $data           = DB::table('locationsMain')
                         ->where(function($query)use($filterValues){ 
                             if (isset($filterValues['filterState']) && $filterValues['filterState'] != null && $filterValues['filterState'] != "") {  
                               $query->where('State',$filterValues['filterState']);
@@ -43,15 +44,19 @@ class LocationsController extends Controller
                           ->select('District',
                             'State',
                             'Country',
-                            'ID',
+                            'CreatedDate',
                             )
                           ->get();
+
+    foreach($data as $dataEach){
+      $dataEach->CreatedDate  = date('d-M-Y', strtotime($dataEach->CreatedDate));
+    }
   
       return DataTables::of($data)->make(true);
   
     }
 
-    public function adminLocationsAddSave(){
+    public function adminLocationsSpecificSave(){
       $selected   = Request::get('selected');
       $value      = Request::get('value');
       $countryID  = Request::get('countryID');
@@ -70,6 +75,7 @@ class LocationsController extends Controller
         $newLocation              = new LocationsDistrict();
         $newLocation->District    = ucfirst(strtolower($value));
         $newLocation->StateID     = $stateID;
+        $newLocation->CountryID   = $countryID;
       } 
 
       $newLocation->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
@@ -86,5 +92,43 @@ class LocationsController extends Controller
       $data['valueID']    = $newLocation->ID;
 
       return Response::json($data);
+    }
+
+    public function adminLocationsSpecificData(){
+
+      switch (Request::get('selected')) {
+        case "Country":
+          $locationData                 = LocationsState::where('CountryID',Request::get('selectedID'))
+                                                        ->orderBy('CreatedDate','name')
+                                                        ->get();
+          break;
+        case "State":
+          $locationData                 = LocationsDistrict::where('StateID',Request::get('selectedID'))
+                                                          ->orderBy('CreatedDate','name')
+                                                          ->get();
+          break;
+      }
+      return Response::json($locationData);
+    }
+
+    public function adminLocationsAddSave(){
+      $locationsMain                = new LocationsMain();
+      $locationsMain->DistrictID    = Request::get('district');
+      $locationsMain->StateID       = Request::get('state');
+      $locationsMain->CountryID     = Request::get('country');
+
+      $locationsMain->District      = LocationsDistrict::where('ID',Request::get('district'))->value('District');
+      $locationsMain->State         = LocationsState::where('ID',Request::get('state'))->value('State');
+      $locationsMain->Country       = LocationsCountry::where('ID',Request::get('country'))->value('Country');
+
+      $locationsMain->CreatedUser   = Auth::user()->FirstName." ".Auth::user()->LastName;
+      $locationsMain->CreatedUserID = Auth::user()->id;
+      $locationsMain->CreatedDate   = date('Y-m-d H:i:s');
+      $locationsMain->EditedUser    = Auth::user()->FirstName." ".Auth::user()->LastName;
+      $locationsMain->EditedUserID  = Auth::user()->id;
+      $locationsMain->EditedDate    = date('Y-m-d H:i:s');
+      $locationsMain->save();
+
+      return redirect()->route('adminLocationsView')->with('status', 'Added Successfully!');
     }
 }
