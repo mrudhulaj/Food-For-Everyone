@@ -4,7 +4,7 @@
     rel="stylesheet">
 <link href="{{ url('css/form.css') }}" rel="stylesheet" media="all">
 <link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
-
+<title>Add Locations</title>
 <style>
     .wrapper section>h2::before {
         width: 200px !important;

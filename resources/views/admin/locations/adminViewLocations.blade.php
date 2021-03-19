@@ -21,7 +21,6 @@
 
     .odd:hover , .even:hover {
       background-color:#9cf19c;
-      cursor: pointer;
     }
 
 </style>
@@ -39,28 +38,27 @@
     <div class="col-lg-12 plr-0 filter" style="margin-top: 30px;">
         <form class="form-inline" name="filterForm" id="filterForm">
             <div class="col-lg-12 pright-0" style="margin-bottom: 30px">
-                <div class="col-lg-3 pright-0">
-                  <div class="input-group" style="width: 100%;">
-                    <label class="label ffe-font">State</label>
-                    <select class="form-control input--style-4" style="" id="filterState" name="filterState">
-                        <option value="" selected hidden>Select State</option>
-                        {{-- @foreach ($filterValues['City'] as $values)
-                         <option value="{{$values['City']}}">{{$values['City']}}</option>
-                        @endforeach --}}
-                    </select>
-                  </div>
+              
+              <div class="col-lg-3 pright-0">
+                <div class="input-group" style="width: 100%;">
+                  <label class="label ffe-font">Country</label>
+                  <select class="form-control input--style-4" style="" id="filterCountry" name="filterCountry">
+                    <option value="" selected hidden>Select Country</option>
+                    @foreach ($locationsCountry as $locationsCountryData)
+                    <option value="{{$locationsCountryData->ID}}">{{$locationsCountryData->Country}}</option>
+                    @endforeach
+                  </select>
                 </div>
-                <div class="col-lg-3 pright-0">
-                  <div class="input-group" style="width: 100%;">
-                    <label class="label ffe-font">Country</label>
-                    <select class="form-control input--style-4" style="" id="filterCountry" name="filterCountry">
-                        <option value="" selected hidden>Select Country</option>
-                        {{-- @foreach ($filterValues['City'] as $values)
-                         <option value="{{$values['City']}}">{{$values['City']}}</option>
-                        @endforeach --}}
-                    </select>
-                  </div>
+              </div>
+              
+              <div class="col-lg-3 pright-0">
+                <div class="input-group" style="width: 100%;">
+                  <label class="label ffe-font">State</label>
+                  <select class="form-control input--style-4" style="" id="filterState" name="filterState" disabled>
+                      <option value="" selected hidden>Select State</option>
+                  </select>
                 </div>
+              </div>
                 <div class="col-lg-6 pright-0" style="padding-top: 28px;">
                     <div class="input-group col-lg-12">
                       <div class="col-lg-3 plr-0" style="float: right;text-align: right;">
@@ -91,9 +89,10 @@
         <table class="table" style="" id="locationTable">
             <thead class="table-striped">
                 <tr>
-                  <th scope="col">District</th>
-                  <th scope="col">State</th>
                   <th scope="col">Country</th>
+                  <th scope="col">State</th>
+                  <th scope="col">District</th>
+                  <th scope="col">Created Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -132,16 +131,20 @@
                     }
                 },
                 columns: [{
-                        data: 'District',
-                        name: 'District'
+                        data: 'Country',
+                        name: 'Country'
                     },
                     {
                         data: 'State',
                         name: 'State'
                     },
                     {
-                        data: 'Country',
-                        name: 'Country'
+                        data: 'District',
+                        name: 'District'
+                    },
+                    {
+                        data: 'CreatedDate',
+                        name: 'CreatedDate'
                     }
                 ],
             });
@@ -151,8 +154,8 @@
 
         $('#filterbtn').click(function () {
             var filterValues = {
-            filterTicketStatus        : $('input[name="ticketStatus"]:checked').val(),
-            filterTicketSeverity      : $('input[name="ticketSeverity"]:checked').val()
+              filterCountry        : $('#filterCountry').val(),
+              filterState          : $('#filterState').val()
             };
 
             $('#locationTable').DataTable().destroy();
@@ -163,32 +166,53 @@
         });
 
         $('#resetFilter').click(function () {
-            $("#ticketStatusRaised").prop("checked", true);
-            $(".ticketSeverityDiv").removeClass('hide');
+          $('#filterState')
+                .empty()
+                .append('<option hidden value="">Select State</option>')
+                ;
+            
+          $("#filterState").attr("disabled", true);
+          $("#filterCountry").val($("#filterCountry option:first").val());
 
-            $('#locationTable').DataTable().destroy();
-            fillDatatable(filterValues);
+
+          $('#locationTable').DataTable().destroy();
+          fillDatatable(filterValues);
         });
 
-        // table = $('#locationTable').DataTable();
+        $('#filterCountry').change(function(){
+          if($(this).val() != ""){
+            $('#filterState')
+                .empty()
+                .append('<option hidden value="">Select State</option>')
+                ;
+            locationsSpecificData("Country",$(this).val());
+            $("#filterState").removeAttr('disabled');
+          }
+        });
 
-        // $('#locationTable tbody').on('click', 'tr', function () {
-        //   var data                  = table.row( this ).data();
-        //   var route                 = "{!! route('adminContactMessagesDetails',['ticketStatus' => 'ticketStatusData','ContactUsID' => 'ContactUsIDData','RaisedTicketsID' => 'RaisedTicketsIDData']) !!}";
+        // Ajax function to get state according to selected country.
+        var selected,selectedID;
+        function locationsSpecificData(selected,selectedID){
+          $.ajax({
+                  url:'{{ route("adminLocationsSpecificData") }}',
+                  type:'GET',
+                  data:{
+                      selected   : selected,
+                      selectedID : selectedID,
+                  },
+                  success:function(data) {
+                    $.each(data, function (i) {
+                        $.each(data[i], function (key, val) {
 
-        //   var mapObj = {
-        //                 ticketStatusData    : data['TicketStatus'],
-        //                 ContactUsIDData     : data['ContactUsID'],
-        //                 RaisedTicketsIDData : data['RaisedTicketsID']
-        //               };
-
-        //   route = route.replace(/ticketStatusData|ContactUsIDData|RaisedTicketsIDData/gi, function(matched){
-        //     return mapObj[matched];
-        //   });
-
-        //   window.location.href = route;
-
-        // } );
+                          if(selected == "Country"){
+                            $('#filterState').append($("<option></option>").attr("value", data[i]['ID']).text(data[i]['State'])); 
+                          }
+                          return false;
+                        });
+                    });
+                  }
+              });
+        }
 
     });
 

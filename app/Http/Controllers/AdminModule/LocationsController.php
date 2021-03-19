@@ -18,9 +18,13 @@ class LocationsController extends Controller
 {
     public function adminLocationsView(){
       Session::put('activeTab', 'LOCATIONS');
-      $locations   = LocationsMain::all();
+      $locations          = LocationsMain::all();
 
-      return view('admin/locations/adminViewLocations',compact('locations'));
+      // Filter Options
+      $locationsCountry   = LocationsCountry::all();
+      $locationsState     = LocationsState::all();
+
+      return view('admin/locations/adminViewLocations',compact('locations','locationsCountry','locationsState'));
     }
 
     public function adminLocationsAddView(){
@@ -35,8 +39,12 @@ class LocationsController extends Controller
       $filterValues   = Request::get('filterValues');
       $data           = DB::table('locationsMain')
                         ->where(function($query)use($filterValues){ 
+                            if (isset($filterValues['filterCountry']) && $filterValues['filterCountry'] != null && $filterValues['filterCountry'] != "") {  
+                              $query->where('CountryID',$filterValues['filterCountry']);
+                            }
+
                             if (isset($filterValues['filterState']) && $filterValues['filterState'] != null && $filterValues['filterState'] != "") {  
-                              $query->where('State',$filterValues['filterState']);
+                              $query->where('StateID',$filterValues['filterState']);
                             }
         
                           })
@@ -48,9 +56,9 @@ class LocationsController extends Controller
                             )
                           ->get();
 
-    foreach($data as $dataEach){
-      $dataEach->CreatedDate  = date('d-M-Y', strtotime($dataEach->CreatedDate));
-    }
+      foreach($data as $dataEach){
+        $dataEach->CreatedDate  = date('d-M-Y', strtotime($dataEach->CreatedDate));
+      }
   
       return DataTables::of($data)->make(true);
   
@@ -112,23 +120,35 @@ class LocationsController extends Controller
     }
 
     public function adminLocationsAddSave(){
-      $locationsMain                = new LocationsMain();
-      $locationsMain->DistrictID    = Request::get('district');
-      $locationsMain->StateID       = Request::get('state');
-      $locationsMain->CountryID     = Request::get('country');
+      // Check if location already exist or not
+      $locationsMain = LocationsMain::where([
+                                            ['CountryID', '=', Request::get('country')],
+                                            ['StateID', '=', Request::get('state')],
+                                            ['DistrictID', '=', Request::get('district')]
+                                          ])->first();
+      if(!empty($locationsMain)){
+        return redirect()->route('adminLocationsView')->with('error-status', 'Location Already Exist!');
+      }
+      else{      
+        $locationsMain                = new LocationsMain();
+        $locationsMain->DistrictID    = Request::get('district');
+        $locationsMain->StateID       = Request::get('state');
+        $locationsMain->CountryID     = Request::get('country');
 
-      $locationsMain->District      = LocationsDistrict::where('ID',Request::get('district'))->value('District');
-      $locationsMain->State         = LocationsState::where('ID',Request::get('state'))->value('State');
-      $locationsMain->Country       = LocationsCountry::where('ID',Request::get('country'))->value('Country');
+        $locationsMain->District      = LocationsDistrict::where('ID',Request::get('district'))->value('District');
+        $locationsMain->State         = LocationsState::where('ID',Request::get('state'))->value('State');
+        $locationsMain->Country       = LocationsCountry::where('ID',Request::get('country'))->value('Country');
 
-      $locationsMain->CreatedUser   = Auth::user()->FirstName." ".Auth::user()->LastName;
-      $locationsMain->CreatedUserID = Auth::user()->id;
-      $locationsMain->CreatedDate   = date('Y-m-d H:i:s');
-      $locationsMain->EditedUser    = Auth::user()->FirstName." ".Auth::user()->LastName;
-      $locationsMain->EditedUserID  = Auth::user()->id;
-      $locationsMain->EditedDate    = date('Y-m-d H:i:s');
-      $locationsMain->save();
+        $locationsMain->CreatedUser   = Auth::user()->FirstName." ".Auth::user()->LastName;
+        $locationsMain->CreatedUserID = Auth::user()->id;
+        $locationsMain->CreatedDate   = date('Y-m-d H:i:s');
+        $locationsMain->EditedUser    = Auth::user()->FirstName." ".Auth::user()->LastName;
+        $locationsMain->EditedUserID  = Auth::user()->id;
+        $locationsMain->EditedDate    = date('Y-m-d H:i:s');
+        $locationsMain->save();
 
-      return redirect()->route('adminLocationsView')->with('status', 'Added Successfully!');
+        return redirect()->route('adminLocationsView')->with('status', 'Location Added Successfully!');
+      }
+
     }
 }
