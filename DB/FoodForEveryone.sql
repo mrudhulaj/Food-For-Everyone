@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 15, 2021 at 09:09 PM
+-- Generation Time: Mar 19, 2021 at 06:51 PM
 -- Server version: 8.0.23-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -154,14 +154,71 @@ CREATE TABLE `events` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `locations`
+-- Table structure for table `locationsCountry`
 --
 
-CREATE TABLE `locations` (
+CREATE TABLE `locationsCountry` (
   `ID` int NOT NULL,
-  `District` varchar(500) NOT NULL,
-  `State` varchar(500) NOT NULL,
   `Country` varchar(500) NOT NULL,
+  `CreatedDate` timestamp NOT NULL,
+  `CreatedUser` varchar(200) NOT NULL,
+  `EditedDate` timestamp NOT NULL,
+  `EditedUser` varchar(200) NOT NULL,
+  `CreatedUserID` int NOT NULL,
+  `EditedUserID` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locationsDistrict`
+--
+
+CREATE TABLE `locationsDistrict` (
+  `ID` int NOT NULL,
+  `District` varchar(500) DEFAULT NULL,
+  `StateID` int NOT NULL,
+  `CountryID` int NOT NULL,
+  `CreatedDate` timestamp NOT NULL,
+  `CreatedUser` varchar(200) NOT NULL,
+  `EditedDate` timestamp NOT NULL,
+  `EditedUser` varchar(200) NOT NULL,
+  `CreatedUserID` int NOT NULL,
+  `EditedUserID` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locationsMain`
+--
+
+CREATE TABLE `locationsMain` (
+  `ID` int NOT NULL,
+  `District` varchar(200) NOT NULL,
+  `DistrictID` int NOT NULL,
+  `State` varchar(200) NOT NULL,
+  `StateID` int NOT NULL,
+  `Country` varchar(200) NOT NULL,
+  `CountryID` int NOT NULL,
+  `CreatedDate` timestamp NOT NULL,
+  `CreatedUser` varchar(200) NOT NULL,
+  `EditedDate` timestamp NOT NULL,
+  `EditedUser` varchar(200) NOT NULL,
+  `CreatedUserID` int NOT NULL,
+  `EditedUserID` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locationsState`
+--
+
+CREATE TABLE `locationsState` (
+  `ID` int NOT NULL,
+  `State` varchar(500) DEFAULT NULL,
+  `CountryID` int NOT NULL,
   `CreatedDate` timestamp NOT NULL,
   `CreatedUser` varchar(200) NOT NULL,
   `EditedDate` timestamp NOT NULL,
@@ -374,9 +431,27 @@ ALTER TABLE `events`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `locations`
+-- Indexes for table `locationsCountry`
 --
-ALTER TABLE `locations`
+ALTER TABLE `locationsCountry`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `locationsDistrict`
+--
+ALTER TABLE `locationsDistrict`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `locationsMain`
+--
+ALTER TABLE `locationsMain`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `locationsState`
+--
+ALTER TABLE `locationsState`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -486,9 +561,27 @@ ALTER TABLE `events`
   MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `locations`
+-- AUTO_INCREMENT for table `locationsCountry`
 --
-ALTER TABLE `locations`
+ALTER TABLE `locationsCountry`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `locationsDistrict`
+--
+ALTER TABLE `locationsDistrict`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `locationsMain`
+--
+ALTER TABLE `locationsMain`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `locationsState`
+--
+ALTER TABLE `locationsState`
   MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 
 --
