@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Models\Volunteers;
+use App\Models\LocationsState;
 use Request;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
@@ -23,8 +24,8 @@ class UserController extends Controller
       $profile                 = Volunteers::where('UserID',Auth::user()->id)->first();
       $profile->isVolunteer    = true;
     }
-  
-    return view('user/editProfileView',compact('profile'));
+    $locationsState   = LocationsState::where('CountryID',Auth::user()->CountryID)->get();
+    return view('user/editProfileView',compact('profile','locationsState'));
   }
 
   public function editProfileSave(){
@@ -51,6 +52,23 @@ class UserController extends Controller
     }
 
     $user->save();
+
+    // Save these changes to Volunteer table as well.
+    $volunteers               = Volunteers::where('UserID',Auth::user()->id)->first();
+    if(!empty($volunteers)){
+      $volunteers->FirstName    = $user->FirstName;
+      $volunteers->LastName     = $user->LastName;
+      $volunteers->Email        = $user->Email;
+      $volunteers->Phone        = $user->Phone;
+      $volunteers->Occupation   = $user->Occupation;
+      $volunteers->Phone        = $user->Phone;
+      $volunteers->District     = $user->District;
+      $volunteers->State        = $user->State;
+      $volunteers->FacebookLink = $user->FacebookLink;
+      $volunteers->TwitterLink  = $user->TwitterLink;
+      $volunteers->save();
+    }
+
 
     return redirect()->route('editProfileView')->with('status', "Updated Successfully!");
   }

@@ -87,15 +87,26 @@ class VolunteersController extends Controller
         $volunteers->ProfileImage   = $user->ProfileImage ;
       }
     }
-
+    
     $volunteers->save();
+
+    // Save these changes to User table as well.
+    $user               = User::where('ID',Auth::user()->id)->first();
+    $user->Occupation   = $volunteers->Occupation;
+    $user->Phone        = $volunteers->Phone;
+    $user->District     = $volunteers->District;
+    $user->State        = $volunteers->State;
+    $user->FacebookLink = $volunteers->FacebookLink;
+    $user->TwitterLink  = $volunteers->TwitterLink;
+    $user->save();
+
+
 
     return redirect()->route('volunteersView',["saved" => "1"]);
   }
 
   public function editVolunteerView(){
-    return $volunteer        = Volunteers::where('CreatedUserID',Auth::user()->id)->orderBy('CreatedDate','desc')->get();
-  
+    $volunteer        = Volunteers::where('CreatedUserID',Auth::user()->id)->orderBy('CreatedDate','desc')->get();
     return view('volunteers/editVolunteerView',compact('volunteer'));
   }
 
@@ -111,7 +122,6 @@ class VolunteersController extends Controller
     $volunteers->State            = Request::get('state');
     $volunteers->FacebookLink     = Request::get('facebook');
     $volunteers->TwitterLink      = Request::get('twitter');
-    // $volunteers->IsApproved       = 0;
     $volunteers->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
     $volunteers->CreatedUserID    = Auth::user()->id;
     $volunteers->CreatedDate      = date('Y-m-d H:i:s');

@@ -92,13 +92,13 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstName" @if(!$profile->isVolunteer) value="{{$profile->FirstName}}" @else value="" @endif>
+                                <input class="input--style-4" type="text" name="firstName" @if(!$profile->isVolunteer) value="{{$profile->FirstName}}" readonly @else value="" @endif>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastName" @if(!$profile->isVolunteer) value="{{$profile->LastName}}" @else value="" @endif>
+                                <input class="input--style-4" type="text" name="lastName" @if(!$profile->isVolunteer) value="{{$profile->LastName}}" readonly @else value="" @endif>
                             </div>
                         </div>
                     </div>
@@ -110,35 +110,40 @@
 
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Email</label>
-                        <input class="input--style-4" type="text" name="email" @if(!$profile->isVolunteer) value="{{$profile->Email}}" @else value="" @endif>
+                        <input class="input--style-4" type="text" name="email" @if(!$profile->isVolunteer) value="{{$profile->Email}}" readonly @else value="" @endif>
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Phone</label>
-                        <input class="input--style-4" type="text" name="phone" @if(!$profile->isVolunteer) value="{{$profile->Phone}}" @else value="" @endif>
+                        <input class="input--style-4" type="text" name="phone" @if(!$profile->isVolunteer) value="{{$profile->Phone}}" readonly @else value="" @endif>
+                    </div>
+                    <div class="input-group col-lg-12">
+                      <label class="label ffe-font">Country</label>
+                      <select class="form-control input--style-4" style="" id="country" name="country">
+                        <option hidden selected="" value="">Country</option>
+                        <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                      </select>                    
                     </div>
 
                     <div class="row row-space" style="padding-right: 0px">
+                      <div class="col-lg-6">
+                          <div class="input-group col-lg-12 selectbox-div">
+                              <label class="label ffe-font">State
+                                  <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                      title="The state where you'll be available."></i>
+                              </label>
+                              <select class="form-control input--style-4" style="" id="state" name="state">
+                                  <option hidden selected="" value="">State</option>
+                              </select>
+                          </div>
+                      </div>
                         <div class="col-lg-6">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">District
                                     <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                                         title="The district where you'll be available."></i>
                                 </label>
-                                <select class="form-control input--style-4" style="" id="district" name="district">
+                                <select class="form-control input--style-4" style="" id="district" name="district" disabled>
                                     <option hidden selected="" value="">District</option>
-                                    <option @if( !$profile->isVolunteer && $profile->District) selected @endif value="Kerala">Kerala</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="input-group col-lg-12 selectbox-div">
-                                <label class="label ffe-font">State
-                                    <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="The state where you'll be available."></i>
-                                </label>
-                                <select class="form-control input--style-4" style="" id="state" name="state">
-                                    <option hidden selected="" value="">State</option>
-                                    <option value="Calicut" @if(!$profile->isVolunteer && $profile->State) selected @endif>Calicut</option>
                                 </select>
                             </div>
                         </div>
@@ -198,7 +203,9 @@
     </div>
 </div>
 {{-- End :Confirmation Box --}}
-<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+@stop
+@section('custom-script')
+<script src="{{ asset('vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
 <script>
     $("input[name='typeofdonation']").change(function () {
         var type = $('input[name="typeofdonation"]:checked').val();
@@ -300,6 +307,17 @@
     });
 
 
+    locationsSpecificData("Country",$('#country').val(),"UserMenu");
+      $('#state').change(function(){
+        if($(this).val() != ""){
+          $('#district')
+              .empty()
+              .append('<option hidden value="">District</option>')
+              ;
+          locationsSpecificData("State",$(this).val(),"UserMenu");
+          $("#district").removeAttr('disabled');
+        }
+      });
 
 </script>
-@stop
+@endsection
