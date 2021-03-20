@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 19, 2021 at 06:51 PM
+-- Generation Time: Mar 20, 2021 at 07:23 PM
 -- Server version: 8.0.23-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -37,6 +37,7 @@ CREATE TABLE `availableFoods` (
   `RestaurantName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `Email` varchar(100) NOT NULL,
   `Phone` varchar(100) NOT NULL,
+  `Country` varchar(200) NOT NULL,
   `District` varchar(50) NOT NULL,
   `State` varchar(50) NOT NULL,
   `City` varchar(100) NOT NULL,
@@ -338,6 +339,8 @@ CREATE TABLE `users` (
   `Occupation` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `District` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `State` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Country` text COLLATE utf8mb4_unicode_ci,
+  `CountryID` int DEFAULT NULL,
   `FacebookLink` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `TwitterLink` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ProfileImage` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
