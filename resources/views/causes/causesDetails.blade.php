@@ -133,7 +133,7 @@
               <p>
                 <b>Phone:</b> +91 {{$causeData->Phone}}
               <br>
-                <b>Place:</b> {{ $causeData->State.", ".$causeData->District.", ".$causeData->City}}.
+                <b>Place:</b> {{ $causeData->City.", ".$causeData->State.", ".$causeData->District.", ".Auth::user()->Country}}.
               <br>
                 <b>Email:</b> {{$causeData->Email}}
               </p>

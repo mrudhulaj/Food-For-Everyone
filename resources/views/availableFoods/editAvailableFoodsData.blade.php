@@ -157,6 +157,7 @@
                         <div class="col-lg-4">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">District</label>
+                                <input type="hidden" value="{{$editAvailableFoods->District}}" id="savedDistrict">
                                 <select class="form-control input--style-4" style="" id="district" name="district">
                                     <option hidden value="">District</option>
                                 </select>
@@ -334,8 +335,11 @@
                           if(onLoad == ""){
                             $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
                           }
-                          else{
+                          else if( data[i]['District'] == $("#savedDistrict").val() ){
                             $('#district').append($("<option></option>").attr("value", optionValue).attr('selected','selected').text(data[i]['District'])); 
+                          }
+                          else{
+                            $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
                           }
                         }
                       return false;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Causes;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Models\Causes;
+use App\Models\LocationsState;
 use Request;
 use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Role;
@@ -100,7 +101,8 @@ class CausesController extends Controller
 
   public function editCauseData(){
     $editCause        = Causes::where('ID',Crypt::decrypt(Request::get('foodID')))->first();
-    return view('causes/editCauseData',compact('editCause'));
+    $locationsState   = LocationsState::where('CountryID',Auth::user()->CountryID)->get();
+    return view('causes/editCauseData',compact('editCause','locationsState'));
   }
 
   public function editCauseDataSave(){

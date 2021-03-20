@@ -123,25 +123,34 @@
                     <label class="label ffe-font">Landmark</label>
                     <input class="input--style-4" type="text" name="landmark" value="{{$editCause->Landmark}}">
                   </div>
+                  <div class="input-group col-lg-12">
+                    <label class="label ffe-font">Country</label>
+                    <select class="form-control input--style-4" style="" id="country" name="country">
+                      <option hidden selected="" value="">Country</option>
+                      <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                    </select>                    
+                  </div>
                   <div class="row row-space" style="padding-right: 0px">
-                      <div class="col-lg-4">
-                          <div class="input-group col-lg-12 selectbox-div">
-                              <label class="label ffe-font">District</label>
-                              <select class="form-control input--style-4" style="" id="district" name="district">
-                                  <option hidden value="">District</option>
-                                  <option value="Kerala" @if($editCause->District) selected @endif>Kerala</option>
-                              </select>
-                          </div>
+                    <div class="col-lg-4">
+                      <div class="input-group col-lg-12 selectbox-div">
+                          <label class="label ffe-font">State</label>
+                          <select class="form-control input--style-4" style="" id="state" name="state">
+                              <option hidden value="">State</option>
+                              @foreach ($locationsState as $locationsStateData)
+                                <option @if($editCause->State == $locationsStateData->State) selected @endif value="{{$locationsStateData->State}}">{{$locationsStateData->State}}</option>
+                              @endforeach
+                          </select>
                       </div>
-                      <div class="col-lg-4">
-                          <div class="input-group col-lg-12 selectbox-div">
-                              <label class="label ffe-font">State</label>
-                              <select class="form-control input--style-4" style="" id="state" name="state">
-                                  <option hidden value="">State</option>
-                                  <option value="Calicut" @if($editCause->State) selected @endif>Calicut</option>
-                              </select>
-                          </div>
-                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="input-group col-lg-12 selectbox-div">
+                            <label class="label ffe-font">District</label>
+                            <input type="hidden" value="{{$editCause->District}}" id="savedDistrict">
+                            <select class="form-control input--style-4" style="" id="district" name="district">
+                                <option hidden value="">District</option>
+                            </select>
+                        </div>
+                    </div>
                       <div class="col-lg-4">
                         <div class="input-group col-lg-12 selectbox-div">
                             <label class="label ffe-font">City</label>
@@ -330,6 +339,50 @@
             }
       });
     });
+
+    locationsSpecificDataCustom("State",$('#state').val(),"UserMenu","onLoad");
+    $('#state').change(function(){
+        if($(this).val() != ""){
+          $('#district')
+              .empty()
+              .append('<option hidden value="">District</option>')
+              ;
+          locationsSpecificDataCustom("State",$(this).val(),"UserMenu");
+        }
+    });
+
+    // Ajax function to get district according to selected state.
+    var selected,selectedID,from,optionValue,onLoad;
+    function locationsSpecificDataCustom(selected,selectedID,from = "",onLoad = ""){
+      $.ajax({
+              url:'{{ route("adminLocationsSpecificData") }}',
+              type:'GET',
+              data:{
+                  selected   : selected,
+                  selectedID : selectedID,
+                  from       : from,
+              },
+              success:function(data) {
+                $.each(data, function (i) {
+                    $.each(data[i], function (key, val) {
+                      if(selected == "State"){
+                          optionValue = from == "UserMenu" ? data[i]['District'] : data[i]['ID'];
+                          if(onLoad == ""){
+                            $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
+                          }
+                          else if( data[i]['District'] == $("#savedDistrict").val() ){
+                            $('#district').append($("<option></option>").attr("value", optionValue).attr('selected','selected').text(data[i]['District'])); 
+                          }
+                          else{
+                            $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
+                          }
+                        }
+                      return false;
+                    });
+                });
+              }
+          });
+    }
 
 </script>
 @stop
