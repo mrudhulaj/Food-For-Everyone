@@ -135,13 +135,22 @@
                         <label class="label ffe-font">Phone</label>
                         <input class="input--style-4" type="text" name="phone" value="{{$editAvailableFoods->Phone}}">
                     </div>
+                    <div class="input-group col-lg-12">
+                      <label class="label ffe-font">Country</label>
+                      <select class="form-control input--style-4" style="" id="country" name="country">
+                        <option hidden selected="" value="">Country</option>
+                        <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                      </select>                    
+                    </div>
                     <div class="row row-space" style="padding-right: 0px">
                       <div class="col-lg-4">
                           <div class="input-group col-lg-12 selectbox-div">
                               <label class="label ffe-font">State</label>
                               <select class="form-control input--style-4" style="" id="state" name="state">
                                   <option hidden value="">State</option>
-                                  <option @if($editAvailableFoods->State == "Kerala") selected @endif value="Kerala">Kerala</option>
+                                  @foreach ($locationsState as $locationsStateData)
+                                    <option @if($editAvailableFoods->State == $locationsStateData->State) selected @endif value="{{$locationsStateData->State}}">{{$locationsStateData->State}}</option>
+                                  @endforeach
                               </select>
                           </div>
                         </div>
@@ -150,7 +159,6 @@
                                 <label class="label ffe-font">District</label>
                                 <select class="form-control input--style-4" style="" id="district" name="district">
                                     <option hidden value="">District</option>
-                                    <option @if($editAvailableFoods->District == "Calicut") selected @endif value="Calicut">Calicut</option>
                                 </select>
                             </div>
                         </div>
@@ -202,7 +210,8 @@
     </div>
 </div>
 {{-- End :Confirmation Box --}}
-<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+@stop
+@section('custom-script')
 <script src="{{ asset('vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
 <script>
     $("input[name='typeofdonation']").change(function () {
@@ -295,6 +304,47 @@
         });
 
     });
+    locationsSpecificDataCustom("State",$('#state').val(),"UserMenu","onLoad");
+    $('#state').change(function(){
+        if($(this).val() != ""){
+          $('#district')
+              .empty()
+              .append('<option hidden value="">District</option>')
+              ;
+          locationsSpecificDataCustom("State",$(this).val(),"UserMenu");
+        }
+    });
+
+    // Ajax function to get district according to selected state.
+    var selected,selectedID,from,optionValue,onLoad;
+    function locationsSpecificDataCustom(selected,selectedID,from = "",onLoad = ""){
+      $.ajax({
+              url:'{{ route("adminLocationsSpecificData") }}',
+              type:'GET',
+              data:{
+                  selected   : selected,
+                  selectedID : selectedID,
+                  from       : from,
+              },
+              success:function(data) {
+                $.each(data, function (i) {
+                    $.each(data[i], function (key, val) {
+                      if(selected == "State"){
+                          optionValue = from == "UserMenu" ? data[i]['District'] : data[i]['ID'];
+                          if(onLoad == ""){
+                            $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
+                          }
+                          else{
+                            $('#district').append($("<option></option>").attr("value", optionValue).attr('selected','selected').text(data[i]['District'])); 
+                          }
+                        }
+                      return false;
+                    });
+                });
+              }
+          });
+    }
 
 </script>
-@stop
+@endsection
+

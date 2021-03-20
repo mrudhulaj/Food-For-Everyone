@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Session;
 use App\Models\AvailableFoods;
 use App\Models\LocationsCountry;
+use App\Models\LocationsState;
 use Spatie\Permission\Models\Role;
 use Request;
 use DB;
@@ -177,9 +178,9 @@ class AvailableFoodsController extends Controller
     $secs               = $expiryDateTime - $createdDateTime; // return sec in difference
     $expiryTime         = round($secs / 3600); // convert sec to hours
 
+    $locationsState = LocationsState::where('CountryID',Auth::user()->CountryID)->get();
 
-
-    return view('availableFoods/editAvailableFoodsData',compact('editAvailableFoods','expiryTime'));
+    return view('availableFoods/editAvailableFoodsData',compact('editAvailableFoods','expiryTime','locationsState'));
   }
 
   public function editAvailableFoodsDataSave(){

@@ -319,7 +319,6 @@
         // Ajax function to get state or district according to selected country or state.
         var selected,selectedID,from,optionValue;
         function locationsSpecificData(selected,selectedID,from = ""){
-          console.log("selected = "+selected+", selectedID = "+selectedID);
           $.ajax({
                   url:'{{ route("adminLocationsSpecificData") }}',
                   type:'GET',
@@ -346,6 +345,39 @@
                   }
               });
         }
+
+        // Default country/state/district select options insert none , if no option exist
+        if ($('#country').length ||  $('#state').length || $('#district').length){
+          if($('#country option').length == 1){
+            $('#country,#filterCountry').append($("<option disabled>None</option>"));
+          }
+
+          if($('#state option').length == 1){
+            $('#state,#filterState').append($("<option disabled>None</option>"));
+          }
+
+          if($('#district option').length  == 1){
+            $('#district,#filterDistrict').append($("<option disabled>None</option>"));
+          }
+        }
+
+
+        // Default filter country/state/district select options insert none , if no option exist
+        if ($('#filterCountry').length ||  $('#filterState').length || $('#filterDistrict').length){
+          if($('#filterCountry option').length == 1){
+            $('#country,#filterCountry').append($("<option disabled>None</option>"));
+          }
+
+          if($('#filterState option').length == 1){
+            $('#state,#filterState').append($("<option disabled>None</option>"));
+          }
+
+          if($('#filterDistrict option').length == 1){
+            $('#district,#filterDistrict').append($("<option disabled>None</option>"));
+          }
+        }
+
+      
 
         // Make navbar sticky
           // window.onscroll = function() {myFunction()};

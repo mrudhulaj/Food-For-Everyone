@@ -139,16 +139,14 @@
                       <label class="label ffe-font">Country</label>
                       <select class="form-control input--style-4" style="" id="country" name="country">
                         <option hidden selected="" value="">Country</option>
-                        @foreach ($locationsCountry as $locationsCountryData)
-                          <option value="{{$locationsCountryData->Country}}">{{$locationsCountryData->Country}}</option>
-                        @endforeach
+                        <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
                       </select>                    
                     </div>
                     <div class="row row-space" style="padding-right: 0px">
                       <div class="col-lg-4">
                           <div class="input-group col-lg-12 selectbox-div">
                               <label class="label ffe-font">State</label>
-                              <select class="form-control input--style-4" style="" id="state" name="state" disabled>
+                              <select class="form-control input--style-4" style="" id="state" name="state">
                                   <option hidden selected="" value="">State</option>
                               </select>
                           </div>
@@ -210,7 +208,8 @@
     </div>
 </div>
 {{-- End :Confirmation Box --}}
-<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+@stop
+@section('custom-script')
 <script src="{{ asset('vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
 <script>
     $("input[name='typeofdonation']").change(function () {
@@ -304,17 +303,7 @@
 
     });
 
-    $('#country').change(function(){
-        if($(this).val() != ""){
-          $('#state')
-              .empty()
-              .append('<option hidden value="">State</option>')
-              ;
-          locationsSpecificData("Country",$(this).val(),"UserMenu");
-          $("#state").removeAttr('disabled');
-        }
-      });
-
+      locationsSpecificData("Country",$('#country').val(),"UserMenu");
       $('#state').change(function(){
         if($(this).val() != ""){
           $('#district')
@@ -328,4 +317,4 @@
       
 
 </script>
-@stop
+@endsection

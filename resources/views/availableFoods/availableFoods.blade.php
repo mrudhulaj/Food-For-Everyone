@@ -93,9 +93,13 @@
                         <label class="label ffe-font">Location</label>
                         <select class="form-control input--style-4" style="" id="filterCountry" name="filterCountry">
                             <option value="" selected hidden>Select Country</option>
-                            @foreach ($filterValues['Country'] as $values)
-                             <option value="{{$values['Country']}}">{{$values['Country']}}</option>
-                            @endforeach
+                            @guest
+                              @foreach ($filterValues['Country'] as $values)
+                              <option value="{{$values['Country']}}">{{$values['Country']}}</option>
+                              @endforeach
+                            @else
+                              <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                            @endguest
                         </select>
                     </div>
                 </div>
