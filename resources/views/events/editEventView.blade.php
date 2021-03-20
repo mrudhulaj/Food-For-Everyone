@@ -114,7 +114,7 @@
                             </div>
                             <div class="event_right">
                               <i class="fas fa-map-marker-alt"></i>
-                              {{$eventsData->Landmark.", ".$eventsData->City.", ".$eventsData->District.", ".$eventsData->State}}
+                              {{$eventsData->Landmark.", ".$eventsData->City.", ".$eventsData->District.", ".$eventsData->State.", ".Auth::user()->Country}}
                             </div>
                           <div class="clear"></div>
                           <h3 style="text-decoration: none;">{{$eventsData->EventName}}</h3>

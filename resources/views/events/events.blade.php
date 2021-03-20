@@ -89,7 +89,7 @@
                             </div>
                             <div class="">
                               <i class="fas fa-map-marker-alt"></i>
-                              {{$eventsData->Landmark.", ".$eventsData->City.", ".$eventsData->District.", ".$eventsData->State}}
+                              {{$eventsData->Landmark.", ".$eventsData->City.", ".$eventsData->District.", ".$eventsData->State.", ".Auth::user()->Country}}
                             </div>
                           <div class="clear"></div>
                           <h3 style="text-decoration: none;"> <a href="{{route('eventDetailsView',['eventID' => Crypt::encrypt($eventsData->ID)])}}" class="a-none">{{$eventsData->EventName}}</a> </h3>

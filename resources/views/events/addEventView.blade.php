@@ -104,25 +104,30 @@
                       <label class="label ffe-font">Landmark</label>
                       <input class="input--style-4" type="text" name="landmark">
                     </div>
+                    <div class="input-group col-lg-12">
+                      <label class="label ffe-font">Country</label>
+                      <select class="form-control input--style-4" style="" id="country" name="country">
+                        <option hidden selected="" value="">Country</option>
+                        <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                      </select>                    
+                    </div>
 
                     <div class="row row-space" style="padding-right: 0px">
+                      <div class="col-lg-4">
+                          <div class="input-group col-lg-12 selectbox-div">
+                              <label class="label ffe-font">State
+                              </label>
+                              <select class="form-control input--style-4" style="" id="state" name="state">
+                                  <option hidden selected="" value="">State</option>
+                              </select>
+                          </div>
+                      </div>
                         <div class="col-lg-4">
                             <div class="input-group col-lg-12 selectbox-div">
                                 <label class="label ffe-font">District
                                 </label>
-                                <select class="form-control input--style-4" style="" id="district" name="district">
+                                <select class="form-control input--style-4" style="" id="district" name="district" disabled>
                                     <option hidden selected="" value="">District</option>
-                                    <option value="Calicut">Calicut</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="input-group col-lg-12 selectbox-div">
-                                <label class="label ffe-font">State
-                                </label>
-                                <select class="form-control input--style-4" style="" id="state" name="state">
-                                    <option hidden selected="" value="">State</option>
-                                    <option value="Kerala">Kerala</option>
                                 </select>
                             </div>
                         </div>
@@ -191,9 +196,9 @@
     </div>
 </div>
 {{-- End :Confirmation Box --}}
-<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+@stop
+@section('custom-script')
 <script src="{{ asset('vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
-
 <script>
     $("input[name='typeofdonation']").change(function () {
         var type = $('input[name="typeofdonation"]:checked').val();
@@ -322,5 +327,18 @@
           $('#addVolunteer').submit();
     });
 
+
+    locationsSpecificData("Country",$('#country').val(),"UserMenu");
+      $('#state').change(function(){
+        if($(this).val() != ""){
+          $('#district')
+              .empty()
+              .append('<option hidden value="">District</option>')
+              ;
+          locationsSpecificData("State",$(this).val(),"UserMenu");
+          $("#district").removeAttr('disabled');
+        }
+      });
+
 </script>
-@stop
+@endsection

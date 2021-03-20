@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Events;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Models\Events;
+use App\Models\LocationsState;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Request;
@@ -113,7 +114,8 @@ class EventsController extends Controller
   
     public function editEventData(){
       $editEvent        = Events::where('ID',Crypt::decrypt(Request::get('eventID')))->first();
-      return view('events/editEventData',compact('editEvent'));
+      $locationsState   = LocationsState::where('CountryID',Auth::user()->CountryID)->get();
+      return view('events/editEventData',compact('editEvent','locationsState'));
     }
   
     public function editEventDataSave(){
