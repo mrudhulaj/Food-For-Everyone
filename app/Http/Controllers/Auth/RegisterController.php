@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\LocationsCountry;
 use Request;
 use Redirect;
 use Response;
@@ -49,15 +50,18 @@ class RegisterController extends Controller
     public function register()
     {
       // Check if an admin exist for creating initial permissions later.
-      $adminExist             = User::where('TypeOfAccount','Admin')->exists();
+      $adminExist          = User::where('TypeOfAccount','Admin')->exists();
+      // return $test     = $adminExist? "true" : "false";
 
-      $user                   = new User();
-      $user->FirstName        = Request::get('firstName');
-      $user->LastName         = Request::get('lastName');
-      $user->Phone            = Request::get('phone');
-      $user->TypeOfAccount    = Request::get('typeOfAccount');
-      $user->Email            = Request::get('newEmail');
-      $user->Password         = Hash::make(Request::get('newPassword'));
+      $user                = new User();
+      $user->FirstName     = Request::get('firstName');
+      $user->LastName      = Request::get('lastName');
+      $user->Phone         = Request::get('phone');
+      $user->TypeOfAccount = Request::get('typeOfAccount');
+      $user->Email         = Request::get('newEmail');
+      $user->CountryID     = $adminExist? Request::get('country') : null;
+      $user->Country       = $adminExist? LocationsCountry::where('ID',Request::get('country'))->value('Country') : null;
+      $user->Password      = Hash::make(Request::get('newPassword'));
       $user->save();
 
       // To create new user roles for the first time only.
@@ -144,5 +148,11 @@ class RegisterController extends Controller
       $adminExists = count($adminExist)>0 ? true : false;
 
       return Response::json($adminExists);
+    }
+
+    public function getCountryList(){
+      $locationsCountry = LocationsCountry::select('Country','ID')->get(); 
+
+      return Response::json($locationsCountry);
     }
 }

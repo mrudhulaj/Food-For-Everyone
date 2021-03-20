@@ -302,6 +302,16 @@
                         </div>
                     </div>
 
+                    <div class="form-group row countryDiv">
+                      <label for="" class="col-md-5 col-form-label text-md-right">Country</label>
+
+                      <div class="col-md-7">
+                          <select class="form-control" name="country" id="country" style="height: 34px !important;">
+                              <option hidden value="">Select Country</option>
+                          </select>
+                      </div>
+                    </div>
+
                     <div class="form-group row">
                         <label for="newEmail" class="col-md-5 col-form-label text-md-right">E-Mail Address</label>
 
@@ -358,25 +368,47 @@
 <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
 <script>
     $(document).ready(function () {
-
+      var adminExist;
       // Check if it's the first login, if then make user to create admin account first.
       $.ajax({
                   url:'{{ route("checkAdminExist") }}',
                   type:'GET',
+                  async: false,
                   success:function(data) {
                     if(data == false){
                       $("#typeOfAccount").append(new Option("Admin", "Admin"));
+                      adminExist = false;
                     }
                     else{
                       $("#typeOfAccount").append(new Option("User", "User"));
+                      adminExist = true;
                     }
                   }
               });
 
+      // Get all countries list added by admin
+      if(adminExist == true){
+              $.ajax({
+                url:'{{ route("getCountryList") }}',
+                type:'GET',
+                success:function(data) {
+                  $.each(data, function (i) {
+                    $.each(data[i], function (key, val) {
+                      $('#country').append($("<option></option>").attr("value", data[i]['ID']).text(data[i]['Country'])); 
+                      return false;
+                    });
+                });
+                }
+            });
+      }
+      else{
+        $(".countryDiv").addClass("hide");
+      }
+
+
       // Check if email already exist, else submit the registration form.
       $('#registerbtn').on('click', function() {
           var isFormValid = $("#register").valid();
-          console.log("is valid = "+isFormValid);
             if(isFormValid == true){
               $.ajax({
                   url:'{{ route("checkEmailExist") }}',
@@ -387,7 +419,6 @@
                   success:function(data) {
                     if(data == true){
                       $('#newEmailExist-error').html("Email already exist. Click 'Forgot Password'");
-                      console.log("Email exist error");
                     }
                     else{
                       $('#register').submit();
@@ -426,6 +457,7 @@
             rules: {
                 firstName: "required",
                 lastName: "required",
+                country: "required",
                 email: {
                     required: true,
                     email: true
@@ -451,6 +483,7 @@
             messages: {
                 firstName: "Please enter your first name",
                 lastName: "Please enter your last name",
+                country: "Please select a country",
                 typeOfAccount: {
                     required: "Please select an account type",
                 },
