@@ -1,5 +1,6 @@
 @extends('templates.main')
 <title>Home</title>
+<link href="{{ url('font-awesome/css/all.css') }}" rel="stylesheet" media="all">
 <style>
     ::placeholder {
         color: white;
@@ -336,7 +337,11 @@
               <div class="events_single" style="height: 570px;width: 351px;border-radius: 13px;
               box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);">
                   <div style="width: 351px;height: 207px;overflow: hidden;border-radius: 13px 13px 0px 0px;">
-                      <img style="width: 351px;height: 207px;" src="{{ asset($eventsData->EventImage) }}">
+                      @if($eventsData->EventImage)
+                        <img style="width: 351px;height: 207px;" src="{{ asset($eventsData->EventImage) }}">
+                      @else
+                        <i class="fas fa-calendar-check iDashboard" style="padding: 50px 132px;"></i>
+                      @endif
                   </div>
                   <div style="padding: 10px;">
                     <p><span class="event_left"><i
@@ -428,8 +433,12 @@
                     @foreach($causes as $causesData)
                         <div class="box mainbox">
                             <div class="img-div">
+                              @if($causesData->Image != "")
                                 <img src="{{ asset($causesData->Image) }}"
-                                    style="border-top-left-radius: inherit;border-top-right-radius: inherit;width: 420px;height: 220px;">
+                                  style="border-top-left-radius: inherit;border-top-right-radius: inherit;width: 420px;height: 220px;">
+                              @else
+                                <i class="fas fa-seedling iDashboard" style="padding: 40px 20px 20px 30px;"></i>
+                              @endif
                             </div>
                             <div class="box-content" style="padding: 0 30px;">
                                 <a href="{{ route('causesDetails',['causeID' => Crypt::encrypt($causesData->ID)]) }}"
@@ -523,7 +532,7 @@
                 <div class="col-lg-12" style="width: auto">
                   <div class="item-vol" style="border-radius: 10px;">
                     <div class="col-lg-5 plr-0 cust-img-div-vol">
-                      <img src="{{ asset($volunteersData->ProfileImage) }}"
+                      <img src="{{ asset($volunteersData->ProfileImage) }}" alt="Not Found" onerror=this.src="{{url('images/user-icon.png')}}"
                       style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;width: 160px;height: 178px;">
                     </div>
                       <div class="text col-lg-7 plr-0" style="height: 178px;">
