@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Session;
 use App\Models\AvailableFoods;
 use App\Models\LocationsCountry;
+use App\Models\LocationsMain;
 use App\Models\LocationsState;
 use Spatie\Permission\Models\Role;
 use Request;
@@ -47,7 +48,7 @@ class AvailableFoodsController extends Controller
   }
 
   public function addAvailableFoodsView(){
-    $locationsCountry = LocationsCountry::all();
+    $locationsCountry = LocationsMain::select('Country')->distinct()->get();
     return view('availableFoods/addAvailableFoods',compact('locationsCountry'));
 
   }
@@ -178,9 +179,17 @@ class AvailableFoodsController extends Controller
     $secs               = $expiryDateTime - $createdDateTime; // return sec in difference
     $expiryTime         = round($secs / 3600); // convert sec to hours
 
-    $locationsState = LocationsState::where('CountryID',Auth::user()->CountryID)->get();
+    if(Auth::user()->TypeOfAccount != "Admin"){
+      $locationsState   = LocationsState::where('CountryID',Auth::user()->CountryID)->get();
+    }
+    else{
+      $countryID        = LocationsCountry::where('Country',$editAvailableFoods->Country)->value('ID');
+      $locationsState   = LocationsState::where('CountryID',$countryID)->get();
+    }
 
-    return view('availableFoods/editAvailableFoodsData',compact('editAvailableFoods','expiryTime','locationsState'));
+    $locationsCountry = LocationsMain::select('Country')->distinct()->get();
+
+    return view('availableFoods/editAvailableFoodsData',compact('editAvailableFoods','expiryTime','locationsState','locationsCountry'));
   }
 
   public function editAvailableFoodsDataSave(){

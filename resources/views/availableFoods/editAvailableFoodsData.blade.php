@@ -139,7 +139,13 @@
                       <label class="label ffe-font">Country</label>
                       <select class="form-control input--style-4" style="" id="country" name="country">
                         <option hidden selected="" value="">Country</option>
-                        <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                        @if (Auth::user()->TypeOfAccount == "Admin")
+                            @foreach ($locationsCountry as $locationsCountryData)
+                            <option value="{{$locationsCountryData->Country}}" @if($editAvailableFoods->Country == $locationsCountryData->Country) selected @endif>{{$locationsCountryData->Country}}</option>
+                            @endforeach
+                        @else
+                          <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                        @endif
                       </select>                    
                     </div>
                     <div class="row row-space" style="padding-right: 0px">
@@ -305,6 +311,25 @@
         });
 
     });
+
+    var isAdminLoggedIn = "{{Auth::user()->TypeOfAccount}}";
+      if(isAdminLoggedIn == "Admin"){
+        $('#country').change(function(){
+          if($(this).val() != ""){
+            $('#state')
+                .empty()
+                .append('<option hidden value="">State</option>')
+                ;
+            $('#district')
+            .empty()
+            .append('<option hidden value="">District</option>')
+            ;
+            locationsSpecificData("Country",$(this).val(),"UserMenu");
+            $("#state").removeAttr('disabled');
+          }
+        });
+      }
+
     locationsSpecificDataCustom("State",$('#state').val(),"UserMenu","onLoad");
     $('#state').change(function(){
         if($(this).val() != ""){
