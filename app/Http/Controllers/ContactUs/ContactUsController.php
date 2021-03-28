@@ -22,11 +22,11 @@ class ContactUsController extends Controller
     public function contactUsView(){
         Session::put('activeTab', 'CONTACT');
 
+        $adminExist = User::where('id',1)->where('FirstName','Admin')->first();
         if(Auth::check()){
           $role   = Role::select('id')->where('name',Auth::user()->TypeOfAccount)->first();
         }else{
           // Normal user rule defined for guest users also for creating contact messages.
-          $adminExist = User::where('id',1)->where('FirstName','Admin')->first();
           if($adminExist){
             $role = Role::select('id')->where('name',"User")->first(); 
           }
