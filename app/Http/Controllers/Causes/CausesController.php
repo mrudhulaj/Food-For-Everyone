@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Auth;
+use CommonFunctions;
 use Response;
 
 class CausesController extends Controller
@@ -42,8 +43,8 @@ class CausesController extends Controller
       if($causeData->ExpectedAmount != 0){
         $causeData->raisedAmountPercentage = round((($causeData->RaisedAmount/$causeData->ExpectedAmount)*100),2);
       }
-
-      return view('causes/causesDetails',compact('causeData'));
+      $countryName = CommonFunctions::countryName($causeData->CreatedUserID);
+      return view('causes/causesDetails',compact('causeData','countryName'));
     }
 
     public function addCauseView(){

@@ -24,6 +24,7 @@ class EventsController extends Controller
       foreach($events as $eventsData){
         $eventsData->BeginTime = date('h:i A', strtotime($eventsData->BeginTime));
         $eventsData->EndTime = date('h:i A', strtotime($eventsData->EndTime));
+        $eventsData->countryName = CommonFunctions::countryName($eventsData->CreatedUserID);
       }
 
       if(Auth::check()){
@@ -31,7 +32,6 @@ class EventsController extends Controller
       }else{
         $role = "";
       }
-
       return view('events/events',compact('events','saved','role'));
     }
 
@@ -40,6 +40,7 @@ class EventsController extends Controller
       $eventData              = Events::where('ID',$eventID)->first();
       $eventData->BeginTime   = date('h:i A', strtotime($eventData->BeginTime));
       $eventData->EndTime     = date('h:i A', strtotime($eventData->EndTime));
+      $eventData->countryName = CommonFunctions::countryName($eventData->CreatedUserID);
 
       return view('events/eventDetails',compact('eventData'));
     }

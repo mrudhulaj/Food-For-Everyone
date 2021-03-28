@@ -1,8 +1,10 @@
 <?php 
 
 namespace App\CommonFunctions;
+use App\Http\Controllers\Controller;
+use DB;
 
-class CommonFunctions
+class CommonFunctions extends Controller
 {
     public static function lastOccurReplace($search, $replace, $subject)
     {
@@ -15,4 +17,11 @@ class CommonFunctions
     
     return $subject;
     }
+
+    public static function countryName($createdUserID)
+    {
+      $users = DB::table('users')->where('id',$createdUserID)->first();
+      return $users->Country;
+    }
+
 }

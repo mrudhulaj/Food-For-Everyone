@@ -128,7 +128,7 @@
           </div>
           <div class="col-lg-6" style="text-align: right">
               <i class="fas fa-map-marker-alt"></i>
-              {{$eventData->Landmark.", ".$eventData->City.", ".$eventData->District.", ".$eventData->State.", ".Auth::user()->Country}}
+              {{$eventData->Landmark.", ".$eventData->City.", ".$eventData->District.", ".$eventData->State.", ".$eventData->countryName}}
           </div>
         </div>
         <div class="ffe-font" style="padding-left: 30px;padding-right: 30px;padding-top: 30px;">
@@ -150,7 +150,7 @@
               <p style="padding-bottom: 15px;">
                   Phone: +91 {{$eventData->Phone}}
                 <br>
-                  Place: {{$eventData->Landmark.", ".$eventData->City.", ".$eventData->District.", ".$eventData->State.", ".Auth::user()->Country}}
+                  Place: {{$eventData->Landmark.", ".$eventData->City.", ".$eventData->District.", ".$eventData->State.", ".$eventData->countryName}}
                 <br>
                   Email: {{$eventData->Email}}
               </p>
