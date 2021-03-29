@@ -141,7 +141,7 @@
                         <option hidden selected="" value="">Country</option>
                         @if (Auth::user()->TypeOfAccount == "Admin")
                             @foreach ($locationsCountry as $locationsCountryData)
-                            <option value="{{$locationsCountryData->Country}}" @if($editAvailableFoods->Country == $locationsCountryData->Country) selected @endif>{{$locationsCountryData->Country}}</option>
+                            <option value="{{$locationsCountryData->CountryID}}" @if($editAvailableFoods->Country == $locationsCountryData->Country) selected @endif>{{$locationsCountryData->Country}}</option>
                             @endforeach
                         @else
                           <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
@@ -155,7 +155,7 @@
                               <select class="form-control input--style-4" style="" id="state" name="state">
                                   <option hidden value="">State</option>
                                   @foreach ($locationsState as $locationsStateData)
-                                    <option @if($editAvailableFoods->State == $locationsStateData->State) selected @endif value="{{$locationsStateData->State}}">{{$locationsStateData->State}}</option>
+                                    <option @if($editAvailableFoods->State == $locationsStateData->State) selected @endif value="{{$locationsStateData->ID}}">{{$locationsStateData->State}}</option>
                                   @endforeach
                               </select>
                           </div>
@@ -166,6 +166,9 @@
                                 <input type="hidden" value="{{$editAvailableFoods->District}}" id="savedDistrict">
                                 <select class="form-control input--style-4" style="" id="district" name="district">
                                     <option hidden value="">District</option>
+                                    @foreach ($locationsDistrict as $locationsDistrictData)
+                                      <option @if($editAvailableFoods->District == $locationsDistrictData->District) selected @endif value="{{$locationsDistrictData->ID}}">{{$locationsDistrictData->District}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -350,13 +353,12 @@
               data:{
                   selected   : selected,
                   selectedID : selectedID,
-                  from       : from,
               },
               success:function(data) {
                 $.each(data, function (i) {
                     $.each(data[i], function (key, val) {
                       if(selected == "State"){
-                          optionValue = from == "UserMenu" ? data[i]['District'] : data[i]['ID'];
+                          optionValue = data[i]['ID'];
                           if(onLoad == ""){
                             $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
                           }

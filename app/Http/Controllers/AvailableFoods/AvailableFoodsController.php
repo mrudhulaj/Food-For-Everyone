@@ -8,6 +8,7 @@ use App\Models\AvailableFoods;
 use App\Models\LocationsCountry;
 use App\Models\LocationsMain;
 use App\Models\LocationsState;
+use App\Models\LocationsDistrict;
 use Spatie\Permission\Models\Role;
 use Request;
 use DB;
@@ -31,7 +32,7 @@ class AvailableFoodsController extends Controller
     // To get filter dropdown values from AvailableFoods table.
       $filterValues = [
         "City"     => AvailableFoods::select('City')->distinct()->get(),
-        "Country"  => LocationsCountry::select('Country')->distinct()->get(),
+        "Country"  => AvailableFoods::select('Country')->distinct()->get(),
         "State"    => AvailableFoods::select('State')->distinct()->get(),
         "District" => AvailableFoods::select('District')->distinct()->get(),
       ];
@@ -48,7 +49,7 @@ class AvailableFoodsController extends Controller
   }
 
   public function addAvailableFoodsView(){
-    $locationsCountry = LocationsMain::select('Country')->distinct()->get();
+    $locationsCountry = LocationsMain::select('Country','CountryID')->distinct()->get();
     return view('availableFoods/addAvailableFoods',compact('locationsCountry'));
 
   }
@@ -65,9 +66,12 @@ class AvailableFoodsController extends Controller
     $availableFoods->RestaurantName   = Request::get('restaurantName');
     $availableFoods->Email            = Request::get('email');
     $availableFoods->Phone            = Request::get('phone');
-    $availableFoods->District         = Request::get('district');
-    $availableFoods->State            = Request::get('state');
-    $availableFoods->Country          = Request::get('country');
+    $availableFoods->CountryID        = Request::get('country');
+    $availableFoods->StateID          = Request::get('state');
+    $availableFoods->DistrictID       = Request::get('district');
+    $availableFoods->Country          = LocationsCountry::where('ID',Request::get('country'))->value('Country');
+    $availableFoods->State            = LocationsState::where('ID',Request::get('state'))->value('State');
+    $availableFoods->District         = LocationsDistrict::where('ID',Request::get('district'))->value('District');
     $availableFoods->City             = Request::get('city');
     $availableFoods->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
     $availableFoods->CreatedUserID    = Auth::user()->id;
@@ -150,7 +154,7 @@ class AvailableFoodsController extends Controller
 
     foreach($editAvailableFoods as $editAvailableFoodsData){
 
-      $editAvailableFoodsData->Location   = $editAvailableFoodsData->City.", ".$editAvailableFoodsData->District.", ".$editAvailableFoodsData->State;
+      $editAvailableFoodsData->Location   = $editAvailableFoodsData->City.", ".$editAvailableFoodsData->District.", ".$editAvailableFoodsData->State.", ".$editAvailableFoodsData->Country;
       $editAvailableFoodsData->AddedDate  = date('d-M-Y', strtotime($editAvailableFoodsData->EditedDate));
       $editAvailableFoodsData->ExpiryTime = date('h:i A', strtotime($editAvailableFoodsData->ExpiryTime));
 
@@ -187,9 +191,11 @@ class AvailableFoodsController extends Controller
       $locationsState   = LocationsState::where('CountryID',$countryID)->get();
     }
 
-    $locationsCountry = LocationsMain::select('Country')->distinct()->get();
+    $locationsCountry = LocationsMain::select('Country','CountryID')->distinct()->get();
+    $locationsDistrict= LocationsDistrict::where('StateID',$editAvailableFoods->StateID)->get();
 
-    return view('availableFoods/editAvailableFoodsData',compact('editAvailableFoods','expiryTime','locationsState','locationsCountry'));
+
+    return view('availableFoods/editAvailableFoodsData',compact('editAvailableFoods','expiryTime','locationsState','locationsCountry','locationsDistrict'));
   }
 
   public function editAvailableFoodsDataSave(){
@@ -204,8 +210,12 @@ class AvailableFoodsController extends Controller
     $editAvailableFoods->RestaurantName   = Request::get('restaurantName');
     $editAvailableFoods->Email            = Request::get('email');
     $editAvailableFoods->Phone            = Request::get('phone');
-    $editAvailableFoods->District         = Request::get('district');
-    $editAvailableFoods->State            = Request::get('state');
+    $editAvailableFoods->CountryID        = Request::get('country');
+    $editAvailableFoods->StateID          = Request::get('state');
+    $editAvailableFoods->DistrictID       = Request::get('district');
+    $editAvailableFoods->Country          = LocationsCountry::where('ID',Request::get('country'))->value('Country');
+    $editAvailableFoods->State            = LocationsState::where('ID',Request::get('state'))->value('State');
+    $editAvailableFoods->District         = LocationsDistrict::where('ID',Request::get('district'))->value('District');
     $editAvailableFoods->City             = Request::get('city');
     $editAvailableFoods->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
     $editAvailableFoods->CreatedUserID    = Auth::user()->id;

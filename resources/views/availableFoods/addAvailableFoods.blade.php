@@ -141,7 +141,7 @@
                         <option hidden selected="" value="">Country</option>
                         @if (Auth::user()->TypeOfAccount == "Admin")
                             @foreach ($locationsCountry as $locationsCountryData)
-                              <option value="{{$locationsCountryData->Country}}">{{$locationsCountryData->Country}}</option>
+                              <option value="{{$locationsCountryData->CountryID}}">{{$locationsCountryData->Country}}</option>
                             @endforeach
                         @else
                           <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>

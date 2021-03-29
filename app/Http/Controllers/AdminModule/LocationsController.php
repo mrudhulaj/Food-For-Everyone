@@ -105,18 +105,7 @@ class LocationsController extends Controller
     // Common function accessed from all parts of the application wherever country/state/district is to be loaded.
     public function adminLocationsSpecificData(){
 
-      // If function called from user menu items,<select> <options> value is same as the text, so find relative ID first to pass to below switch case
-      if(Request::get('from') == "UserMenu"){
-        if(Request::get('selected') == "Country"){
-          $selectedID = LocationsCountry::where('Country',Request::get('selectedID'))->value('ID');
-        }
-        else if(Request::get('selected') == "State"){
-          $selectedID = LocationsState::where('State',Request::get('selectedID'))->value('ID');
-        }
-      }
-      else{ // If function called from Admin:Locations 
-        $selectedID = Request::get('selectedID');
-      }
+      $selectedID = Request::get('selectedID');
 
       switch (Request::get('selected')) {
         case "Country":

@@ -325,18 +325,17 @@
                   data:{
                       selected   : selected,
                       selectedID : selectedID,
-                      from       : from,
                   },
                   success:function(data) {
                     $.each(data, function (i) {
                         $.each(data[i], function (key, val) {
 
                           if(selected == "Country"){
-                            optionValue = from == "UserMenu" ? data[i]['State'] : data[i]['ID'];
+                            optionValue = data[i]['ID'];
                             $('#state').append($("<option></option>").attr("value", optionValue).text(data[i]['State'])); 
                           }
                           else if(selected == "State"){
-                            optionValue = from == "UserMenu" ? data[i]['District'] : data[i]['ID'];
+                            optionValue = data[i]['ID'];
                             $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
                           }
                           return false;
