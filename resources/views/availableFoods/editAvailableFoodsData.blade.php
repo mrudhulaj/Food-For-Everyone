@@ -333,7 +333,6 @@
         });
       }
 
-    locationsSpecificDataCustom("State",$('#state').val(),"UserMenu","onLoad");
     $('#state').change(function(){
         if($(this).val() != ""){
           $('#district')
