@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Session;
 use App\Models\Causes;
 use App\Models\LocationsState;
+use App\Models\LocationsCountry;
+use App\Models\LocationsMain;
+use App\Models\LocationsDistrict;
 use Request;
 use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Role;
@@ -48,7 +51,8 @@ class CausesController extends Controller
     }
 
     public function addCauseView(){
-      return view('causes/addCauseView');
+      $locationsCountry = LocationsMain::select('Country','CountryID')->distinct()->get();
+      return view('causes/addCauseView',compact('locationsCountry'));
     }
 
     public function addCauseSave(){
@@ -60,8 +64,12 @@ class CausesController extends Controller
       $causes->Email                  = Request::get('email');
       $causes->Phone                  = Request::get('phone');
       $causes->Landmark               = Request::get('landmark');
-      $causes->District               = Request::get('district');
-      $causes->State                  = Request::get('state');
+      $causes->CountryID              = Request::get('country');
+      $causes->StateID                = Request::get('state');
+      $causes->DistrictID             = Request::get('district');
+      $causes->Country                = LocationsCountry::where('ID',Request::get('country'))->value('Country');
+      $causes->State                  = LocationsState::where('ID',Request::get('state'))->value('State');
+      $causes->District               = LocationsDistrict::where('ID',Request::get('district'))->value('District');
       $causes->City                   = Request::get('city');
       $causes->IsApproved             = 0;
       $causes->CreatedUser            = Auth::user()->FirstName." ".Auth::user()->LastName;
@@ -102,8 +110,11 @@ class CausesController extends Controller
 
   public function editCauseData(){
     $editCause        = Causes::where('ID',Crypt::decrypt(Request::get('foodID')))->first();
-    $locationsState   = LocationsState::where('CountryID',Auth::user()->CountryID)->get();
-    return view('causes/editCauseData',compact('editCause','locationsState'));
+    $countryID        = LocationsCountry::where('Country',$editCause->Country)->value('ID');
+    $locationsState   = LocationsState::where('CountryID',$countryID)->get();
+    $locationsCountry = LocationsMain::select('Country','CountryID')->distinct()->get();
+    $locationsDistrict= LocationsDistrict::where('StateID',$editCause->StateID)->get();
+    return view('causes/editCauseData',compact('editCause','locationsState','locationsCountry','locationsDistrict'));
   }
 
   public function editCauseDataSave(){
@@ -115,9 +126,13 @@ class CausesController extends Controller
     $causes->ExpectedAmount         = Request::get('expectedAmount');
     $causes->Email                  = Request::get('email');
     $causes->Phone                  = Request::get('phone');
-    $causes->District               = Request::get('district');
     $causes->Landmark               = Request::get('landmark');
-    $causes->State                  = Request::get('state');
+    $causes->CountryID              = Request::get('country');
+    $causes->StateID                = Request::get('state');
+    $causes->DistrictID             = Request::get('district');
+    $causes->Country                = LocationsCountry::where('ID',Request::get('country'))->value('Country');
+    $causes->State                  = LocationsState::where('ID',Request::get('state'))->value('State');
+    $causes->District               = LocationsDistrict::where('ID',Request::get('district'))->value('District');
     $causes->City                   = Request::get('city');
     $causes->IsApproved             = 0;
     $causes->CreatedUser            = Auth::user()->FirstName." ".Auth::user()->LastName;
