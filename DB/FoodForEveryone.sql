@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 20, 2021 at 07:23 PM
+-- Generation Time: Mar 31, 2021 at 05:25 PM
 -- Server version: 8.0.23-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -37,9 +37,12 @@ CREATE TABLE `availableFoods` (
   `RestaurantName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `Email` varchar(100) NOT NULL,
   `Phone` varchar(100) NOT NULL,
-  `Country` varchar(200) NOT NULL,
-  `District` varchar(50) NOT NULL,
-  `State` varchar(50) NOT NULL,
+  `Country` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `CountryID` int NOT NULL,
+  `District` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `DistrictID` int NOT NULL,
+  `State` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `StateID` int NOT NULL,
   `City` varchar(100) NOT NULL,
   `FoodCount` int NOT NULL,
   `ExpiryTime` datetime NOT NULL,
@@ -67,8 +70,12 @@ CREATE TABLE `causes` (
   `Email` varchar(50) NOT NULL,
   `Phone` varchar(50) NOT NULL,
   `Landmark` varchar(200) NOT NULL,
+  `Country` varchar(200) NOT NULL,
+  `CountryID` int NOT NULL,
   `District` varchar(50) NOT NULL,
+  `DistrictID` int NOT NULL,
   `State` varchar(50) NOT NULL,
+  `StateID` int NOT NULL,
   `City` varchar(50) NOT NULL,
   `Image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `IsApproved` int NOT NULL DEFAULT '0' COMMENT '0 - Pending | 1 - Approved | 2- Rejected',
@@ -139,8 +146,12 @@ CREATE TABLE `events` (
   `Email` varchar(100) NOT NULL,
   `Phone` varchar(100) NOT NULL,
   `Landmark` varchar(200) NOT NULL,
+  `Country` varchar(200) NOT NULL,
+  `CountryID` int NOT NULL,
   `District` varchar(100) NOT NULL,
+  `DistrictID` int NOT NULL,
   `State` varchar(100) NOT NULL,
+  `StateID` int NOT NULL,
   `City` varchar(100) NOT NULL,
   `EventImage` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `IsApproved` int NOT NULL DEFAULT '0' COMMENT '0 - Pending | 1 - Approved | 2- Rejected',
@@ -338,7 +349,9 @@ CREATE TABLE `users` (
   `Phone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Occupation` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `District` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `DistrictID` int NOT NULL,
   `State` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `StateID` int NOT NULL,
   `Country` text COLLATE utf8mb4_unicode_ci,
   `CountryID` int DEFAULT NULL,
   `FacebookLink` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -385,8 +398,12 @@ CREATE TABLE `volunteers` (
   `Occupation` varchar(100) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `Phone` varchar(50) NOT NULL,
+  `Country` varchar(200) NOT NULL,
+  `CountryID` int NOT NULL,
   `District` varchar(100) NOT NULL,
+  `DistrictID` int NOT NULL,
   `State` varchar(100) NOT NULL,
+  `StateID` int NOT NULL,
   `FacebookLink` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `TwitterLink` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `ProfileImage` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
