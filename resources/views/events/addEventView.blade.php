@@ -108,7 +108,13 @@
                       <label class="label ffe-font">Country</label>
                       <select class="form-control input--style-4" style="" id="country" name="country">
                         <option hidden selected="" value="">Country</option>
-                        <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                        @if (Auth::user()->TypeOfAccount == "Admin")
+                            @foreach ($locationsCountry as $locationsCountryData)
+                              <option value="{{$locationsCountryData->CountryID}}">{{$locationsCountryData->Country}}</option>
+                            @endforeach
+                        @else
+                          <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                        @endif
                       </select>                    
                     </div>
 
@@ -117,7 +123,7 @@
                           <div class="input-group col-lg-12 selectbox-div">
                               <label class="label ffe-font">State
                               </label>
-                              <select class="form-control input--style-4" style="" id="state" name="state">
+                              <select class="form-control input--style-4" style="" id="state" name="state" @if(Auth::user()->TypeOfAccount == "Admin") disabled @endif>
                                   <option hidden selected="" value="">State</option>
                               </select>
                           </div>
@@ -327,8 +333,23 @@
           $('#addVolunteer').submit();
     });
 
+    var isAdminLoggedIn = "{{Auth::user()->TypeOfAccount}}";
+      if(isAdminLoggedIn != "Admin"){
+        locationsSpecificData("Country",$('#country').val(),"UserMenu");
+      }
+      else{
+        $('#country').change(function(){
+          if($(this).val() != ""){
+            $('#state')
+                .empty()
+                .append('<option hidden value="">State</option>')
+                ;
+            locationsSpecificData("Country",$(this).val(),"UserMenu");
+            $("#state").removeAttr('disabled');
+          }
+        });
+      }
 
-    locationsSpecificData("Country",$('#country').val(),"UserMenu");
       $('#state').change(function(){
         if($(this).val() != ""){
           $('#district')

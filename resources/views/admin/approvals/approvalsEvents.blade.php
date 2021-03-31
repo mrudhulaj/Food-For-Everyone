@@ -148,7 +148,7 @@
                         </div>
                         <div class="">
                             <i class="fas fa-map-marker-alt"></i>
-                            {{ $eventsData->Landmark.", ".$eventsData->City.", ".$eventsData->District.", ".$eventsData->State }}
+                            {{ $eventsData->Landmark.", ".$eventsData->City.", ".$eventsData->District.", ".$eventsData->State.", ".$eventsData->Country }}
                         </div>
                         <div class="clear"></div>
                         <h3 style="text-decoration: none;" class=""> <a

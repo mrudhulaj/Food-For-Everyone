@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Session;
 use App\Models\Events;
 use App\Models\LocationsState;
+use App\Models\LocationsDistrict;
+use App\Models\LocationsCountry;
+use App\Models\LocationsMain;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Request;
@@ -46,7 +49,8 @@ class EventsController extends Controller
     }
 
     public function addEventView(){
-      return view('events/addEventView');
+      $locationsCountry = LocationsMain::select('Country','CountryID')->distinct()->get();
+      return view('events/addEventView',compact('locationsCountry'));
     } 
 
     public function addEventSave(){
@@ -66,8 +70,12 @@ class EventsController extends Controller
       $events->Email            = Request::get('email');
       $events->Phone            = Request::get('phone');
       $events->Landmark         = Request::get('landmark');
-      $events->District         = Request::get('district');
-      $events->State            = Request::get('state');
+      $events->CountryID        = Request::get('country');
+      $events->StateID          = Request::get('state');
+      $events->DistrictID       = Request::get('district');
+      $events->Country          = LocationsCountry::where('ID',Request::get('country'))->value('Country');
+      $events->State            = LocationsState::where('ID',Request::get('state'))->value('State');
+      $events->District         = LocationsDistrict::where('ID',Request::get('district'))->value('District');
       $events->City             = Request::get('city');
       $events->IsApproved       = 0;
       $events->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
@@ -115,8 +123,11 @@ class EventsController extends Controller
   
     public function editEventData(){
       $editEvent        = Events::where('ID',Crypt::decrypt(Request::get('eventID')))->first();
-      $locationsState   = LocationsState::where('CountryID',Auth::user()->CountryID)->get();
-      return view('events/editEventData',compact('editEvent','locationsState'));
+      $countryID        = LocationsCountry::where('Country',$editEvent->Country)->value('ID');
+      $locationsState   = LocationsState::where('CountryID',$countryID)->get();
+      $locationsCountry = LocationsMain::select('Country','CountryID')->distinct()->get();
+      $locationsDistrict= LocationsDistrict::where('StateID',$editEvent->StateID)->get();
+      return view('events/editEventData',compact('editEvent','locationsState','locationsCountry','locationsDistrict'));
     }
   
     public function editEventDataSave(){
@@ -137,8 +148,12 @@ class EventsController extends Controller
       $events->Email            = Request::get('email');
       $events->Phone            = Request::get('phone');
       $events->Landmark         = Request::get('landmark');
-      $events->District         = Request::get('district');
-      $events->State            = Request::get('state');
+      $events->CountryID        = Request::get('country');
+      $events->StateID          = Request::get('state');
+      $events->DistrictID       = Request::get('district');
+      $events->Country          = LocationsCountry::where('ID',Request::get('country'))->value('Country');
+      $events->State            = LocationsState::where('ID',Request::get('state'))->value('State');
+      $events->District         = LocationsDistrict::where('ID',Request::get('district'))->value('District');
       $events->City             = Request::get('city');
       $events->IsApproved       = 0;
       $events->CreatedUser      = Auth::user()->FirstName." ".Auth::user()->LastName;
