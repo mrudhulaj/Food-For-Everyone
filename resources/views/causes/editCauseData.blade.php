@@ -398,6 +398,18 @@
                             $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
                           }
                         }
+                        else if (selected == "Country"){
+                          optionValue =  data[i]['ID'];
+                          if(onLoad == ""){
+                            $('#state').append($("<option></option>").attr("value", optionValue).text(data[i]['State'])); 
+                          }
+                          else if( data[i]['State'] == $("#savedDistrict").val() ){
+                            $('#state').append($("<option></option>").attr("value", optionValue).attr('selected','selected').text(data[i]['State'])); 
+                          }
+                          else{
+                            $('#state').append($("<option></option>").attr("value", optionValue).text(data[i]['State'])); 
+                          }
+                        }
                       return false;
                     });
                 });
