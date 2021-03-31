@@ -119,7 +119,9 @@
                       <label class="label ffe-font">Country</label>
                       <select class="form-control input--style-4" style="" id="country" name="country">
                         <option hidden selected="" value="">Country</option>
-                        <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                        @foreach ($locationsCountry as $locationsCountryData)
+                          <option value="{{$locationsCountryData->CountryID}}" @if($profile->Country == $locationsCountryData->Country) selected @endif>{{$locationsCountryData->Country}}</option>
+                        @endforeach
                       </select>                    
                     </div>
 
@@ -135,7 +137,7 @@
                               <select class="form-control input--style-4" style="" id="state" name="state">
                                   <option hidden value="">State</option>
                                   @foreach ($locationsState as $locationsStateData)
-                                    <option @if($profile->State == $locationsStateData->State) selected @endif value="{{$locationsStateData->State}}">{{$locationsStateData->State}}</option>
+                                    <option @if($profile->State == $locationsStateData->State) selected @endif value="{{$locationsStateData->ID}}">{{$locationsStateData->State}}</option>
                                   @endforeach
                               </select>
                           </div>
@@ -151,6 +153,9 @@
                                 <input type="hidden" value="{{$profile->District}}" id="savedDistrict">
                                 <select class="form-control input--style-4" style="" id="district" name="district">
                                     <option hidden value="">District</option>
+                                    @foreach ($locationsDistrict as $locationsDistrictData)
+                                      <option @if($profile->District == $locationsDistrictData->District) selected @endif value="{{$locationsDistrictData->ID}}">{{$locationsDistrictData->District}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -234,8 +239,26 @@
       });
     });
 
-    locationsSpecificDataCustom("State",$('#state').val(),"UserMenu","onLoad");
-    $('#state').change(function(){
+    var isAdminLoggedIn = "{{Auth::user()->TypeOfAccount}}";
+      if(isAdminLoggedIn == "Admin"){
+        $('#country').change(function(){
+          if($(this).val() != ""){
+            $('#state')
+                .empty()
+                .append('<option hidden value="">State</option>')
+                ;
+            $('#district')
+            .empty()
+            .append('<option hidden value="">District</option>')
+            ;
+
+            locationsSpecificDataCustom("Country",$(this).val(),"UserMenu");
+            $("#state").removeAttr('disabled');
+          }
+        });
+      }    
+      
+      $('#state').change(function(){
         if($(this).val() != ""){
           $('#district')
               .empty()
@@ -260,7 +283,7 @@
                 $.each(data, function (i) {
                     $.each(data[i], function (key, val) {
                       if(selected == "State"){
-                          optionValue = from == "UserMenu" ? data[i]['District'] : data[i]['ID'];
+                          optionValue =  data[i]['ID'];
                           if(onLoad == ""){
                             $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
                           }
@@ -269,6 +292,18 @@
                           }
                           else{
                             $('#district').append($("<option></option>").attr("value", optionValue).text(data[i]['District'])); 
+                          }
+                        }
+                        else if (selected == "Country"){
+                          optionValue =  data[i]['ID'];
+                          if(onLoad == ""){
+                            $('#state').append($("<option></option>").attr("value", optionValue).text(data[i]['State'])); 
+                          }
+                          else if( data[i]['State'] == $("#savedDistrict").val() ){
+                            $('#state').append($("<option></option>").attr("value", optionValue).attr('selected','selected').text(data[i]['State'])); 
+                          }
+                          else{
+                            $('#state').append($("<option></option>").attr("value", optionValue).text(data[i]['State'])); 
                           }
                         }
                       return false;

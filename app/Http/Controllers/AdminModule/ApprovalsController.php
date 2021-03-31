@@ -84,7 +84,9 @@ class ApprovalsController extends Controller
         }
         elseif(Request::get('Decision') == 1){
           $userTable                  = User::where('id',$activity->UserID)->first();
-          $userTable->TypeOfAccount   = "Volunteer";
+          if(Auth::user()->TypeOfAccount != "Admin"){
+            $userTable->TypeOfAccount   = "Volunteer";
+          }
           $userTable->save();
         }
 

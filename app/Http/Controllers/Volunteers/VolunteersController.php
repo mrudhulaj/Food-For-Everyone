@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Volunteers;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Models\Volunteers;
+use App\Models\LocationsMain;
+use App\Models\LocationsCountry;
+use App\Models\LocationsState;
+use App\Models\LocationsDistrict;
 use Request;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
@@ -44,12 +48,8 @@ class VolunteersController extends Controller
         $profile->isVolunteer    = true;
       }
     }
-
-      return view('volunteers/addVolunteerView',compact('profile'));
-  }
-
-  public function addCauseView(){
-    return view('causes/addCauseView');
+      $locationsCountry = LocationsMain::select('Country','CountryID')->distinct()->get();
+      return view('volunteers/addVolunteerView',compact('profile','locationsCountry'));
   }
 
   public function addVolunteerSave(){
@@ -60,8 +60,12 @@ class VolunteersController extends Controller
     $volunteers->Occupation       = Request::get('occupation');
     $volunteers->Email            = Request::get('email');
     $volunteers->Phone            = Request::get('phone');
-    $volunteers->District         = Request::get('district');
-    $volunteers->State            = Request::get('state');
+    $volunteers->CountryID        = Request::get('country');
+    $volunteers->StateID          = Request::get('state');
+    $volunteers->DistrictID       = Request::get('district');
+    $volunteers->Country          = LocationsCountry::where('ID',Request::get('country'))->value('Country');
+    $volunteers->State            = LocationsState::where('ID',Request::get('state'))->value('State');
+    $volunteers->District         = LocationsDistrict::where('ID',Request::get('district'))->value('District');
     $volunteers->FacebookLink     = Request::get('facebook');
     $volunteers->TwitterLink      = Request::get('twitter');
     $volunteers->IsApproved       = 0;

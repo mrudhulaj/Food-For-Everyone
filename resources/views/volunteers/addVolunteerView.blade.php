@@ -92,13 +92,13 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">First Name</label>
-                                <input class="input--style-4" type="text" name="firstName" @if(!$profile->isVolunteer) value="{{$profile->FirstName}}" readonly @else value="" @endif>
+                                <input class="input--style-4" type="text" name="firstName" @if(!$profile->isVolunteer) value="{{$profile->FirstName}}" @if(Auth::user()->TypeOfAccount != "Admin") readonly @endif @else value="" @endif>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label ffe-font">Last name</label>
-                                <input class="input--style-4" type="text" name="lastName" @if(!$profile->isVolunteer) value="{{$profile->LastName}}" readonly @else value="" @endif>
+                                <input class="input--style-4" type="text" name="lastName" @if(!$profile->isVolunteer) value="{{$profile->LastName}}" @if(Auth::user()->TypeOfAccount != "Admin") readonly @endif @else value="" @endif>
                             </div>
                         </div>
                     </div>
@@ -110,17 +110,23 @@
 
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Email</label>
-                        <input class="input--style-4" type="text" name="email" @if(!$profile->isVolunteer) value="{{$profile->Email}}" readonly @else value="" @endif>
+                        <input class="input--style-4" type="text" name="email" @if(!$profile->isVolunteer) value="{{$profile->Email}}" @if(Auth::user()->TypeOfAccount != "Admin") readonly @endif @else value="" @endif>
                     </div>
                     <div class="input-group col-lg-12">
                         <label class="label ffe-font">Phone</label>
-                        <input class="input--style-4" type="text" name="phone" @if(!$profile->isVolunteer) value="{{$profile->Phone}}" readonly @else value="" @endif>
+                        <input class="input--style-4" type="text" name="phone" @if(!$profile->isVolunteer) value="{{$profile->Phone}}" @if(Auth::user()->TypeOfAccount != "Admin") readonly @endif @else value="" @endif>
                     </div>
                     <div class="input-group col-lg-12">
                       <label class="label ffe-font">Country</label>
                       <select class="form-control input--style-4" style="" id="country" name="country">
                         <option hidden selected="" value="">Country</option>
-                        <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                        @if (Auth::user()->TypeOfAccount == "Admin")
+                            @foreach ($locationsCountry as $locationsCountryData)
+                              <option value="{{$locationsCountryData->CountryID}}">{{$locationsCountryData->Country}}</option>
+                            @endforeach
+                        @else
+                          <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                        @endif
                       </select>                    
                     </div>
 
@@ -131,7 +137,7 @@
                                   <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                                       title="The state where you'll be available."></i>
                               </label>
-                              <select class="form-control input--style-4" style="" id="state" name="state">
+                              <select class="form-control input--style-4" style="" id="state" name="state" @if(Auth::user()->TypeOfAccount == "Admin") disabled @endif>
                                   <option hidden selected="" value="">State</option>
                               </select>
                           </div>
@@ -306,8 +312,23 @@
       $('#addVolunteer').submit();
     });
 
+    var isAdminLoggedIn = "{{Auth::user()->TypeOfAccount}}";
+      if(isAdminLoggedIn != "Admin"){
+        locationsSpecificData("Country",$('#country').val(),"UserMenu");
+      }
+      else{
+        $('#country').change(function(){
+          if($(this).val() != ""){
+            $('#state')
+                .empty()
+                .append('<option hidden value="">State</option>')
+                ;
+            locationsSpecificData("Country",$(this).val(),"UserMenu");
+            $("#state").removeAttr('disabled');
+          }
+        });
+      }
 
-    locationsSpecificData("Country",$('#country').val(),"UserMenu");
       $('#state').change(function(){
         if($(this).val() != ""){
           $('#district')

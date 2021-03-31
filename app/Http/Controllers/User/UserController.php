@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Session;
 use App\Models\Volunteers;
 use App\Models\LocationsState;
+use App\Models\LocationsCountry;
+use App\Models\LocationsDistrict;
+use App\Models\LocationsMain;
 use Request;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
@@ -24,8 +27,11 @@ class UserController extends Controller
       $profile                 = Volunteers::where('UserID',Auth::user()->id)->first();
       $profile->isVolunteer    = true;
     }
-    $locationsState   = LocationsState::where('CountryID',Auth::user()->CountryID)->get();
-    return view('user/editProfileView',compact('profile','locationsState'));
+    $countryID        = LocationsCountry::where('Country',$profile->Country)->value('ID');
+    $locationsState   = LocationsState::where('CountryID',$countryID)->get();
+    $locationsCountry = LocationsMain::select('Country','CountryID')->distinct()->get();
+    $locationsDistrict= LocationsDistrict::where('StateID',$profile->StateID)->get();
+    return view('user/editProfileView',compact('profile','locationsState','locationsCountry','locationsDistrict'));
   }
 
   public function editProfileSave(){
@@ -36,8 +42,12 @@ class UserController extends Controller
     $user->Email            = Request::get('email');
     $user->Phone            = Request::get('phone');
     $user->Occupation       = Request::get('occupation');
-    $user->District         = Request::get('district');
-    $user->State            = Request::get('state');
+    $user->CountryID        = Request::get('country');
+    $user->StateID          = Request::get('state');
+    $user->DistrictID       = Request::get('district');
+    $user->Country          = LocationsCountry::where('ID',Request::get('country'))->value('Country');
+    $user->State            = LocationsState::where('ID',Request::get('state'))->value('State');
+    $user->District         = LocationsDistrict::where('ID',Request::get('district'))->value('District');
     $user->FacebookLink     = Request::get('facebook');
     $user->TwitterLink      = Request::get('twitter');
 

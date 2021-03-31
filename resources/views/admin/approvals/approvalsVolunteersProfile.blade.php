@@ -112,20 +112,15 @@
                     <label class="label ffe-font">Phone</label>
                     <input readonly class="input--style-4" type="text" name="phone" value="{{ $profile->Phone }}">
                 </div>
+                <div class="input-group col-lg-12">
+                  <label class="label ffe-font">Country</label>
+                  <select class="form-control input--style-4" style="" id="country" name="country" disabled>
+                    <option hidden selected="" value="">Country</option>
+                      <option value="{{$profile->Country}}" selected>{{$profile->Country}}</option>
+                  </select>                    
+                </div>
 
                 <div class="row row-space" style="padding-right: 0px">
-                    <div class="col-lg-6">
-                        <div class="input-group col-lg-12 selectbox-div">
-                            <label class="label ffe-font">District
-                                <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                    title="The district where you'll be available."></i>
-                            </label>
-                            <select class="form-control input--style-4" disabled style="" id="district" name="district">
-                                <option hidden value="">District</option>
-                                <option @if($profile->District) selected @endif value="Kerala">Kerala</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-lg-6">
                         <div class="input-group col-lg-12 selectbox-div">
                             <label class="label ffe-font">State
@@ -134,9 +129,21 @@
                             </label>
                             <select disabled class="form-control input--style-4" style="" id="state" name="state">
                                 <option hidden value="">State</option>
-                                <option value="Calicut" @if($profile->State) selected @endif>Calicut</option>
-                            </select>
+                                <option value="{{$profile->State}}" selected>{{$profile->State}}</option>
+                              </select>
                         </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-group col-lg-12 selectbox-div">
+                          <label class="label ffe-font">District
+                              <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                                  title="The district where you'll be available."></i>
+                          </label>
+                          <select class="form-control input--style-4" disabled style="" id="district" name="district">
+                              <option hidden value="">District</option>
+                              <option value="{{$profile->District}}" selected>{{$profile->District}}</option>
+                            </select>
+                      </div>
                     </div>
                 </div>
 
