@@ -45,4 +45,8 @@ class DashboardController extends Controller
 
       return Response::json($currentMenu);
     }
+
+    public function adminAccessError(){
+      return view('templates/adminAccessErrorPage');
+    }
 }
