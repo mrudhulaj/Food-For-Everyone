@@ -60,6 +60,24 @@
       color:#0d6d38 !important;
     }
 
+    .button-bg-green{
+      padding: 6px 12px !important;
+      background-color: #00B346 !important;
+      border: 1px solid #00B346 !important;
+    }
+
+    .dropdown-menu.show{
+      background: #00B346 none repeat scroll 0 0 !important;
+      border: none !important;
+      top: -2px !important;
+      border-radius: 0px;
+      border-top: #00E660;
+    }
+
+    .dropdown-menu > li > a{
+      color: white !important;
+    }
+
 </style>
 @section('content')
 <section class="events_section_area">
@@ -77,7 +95,18 @@
                       <i class="fas fa-hand-holding-heart iDashboard" style="padding: 35px 20px 20px 23px;"></i>
                     </div>
                     <div class="text col-lg-7 plr-0" style="height: 178px;">
-                        <h3 class="vNames">Donations</h3>
+                        <h3 class="vNames">Donations
+                          <div class="dropdown">
+                            <button class="button-bg-green btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            <span class="caret" style="color: white"></span></button>
+                            <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;">
+                              <li><a href="#" class="ffe-font">Last 24h</a></li>
+                              <li><a href="#" class="ffe-font">Last Month</a></li>
+                              <li><a href="#" class="ffe-font">Last Year</a></li>
+                              <li><a href="#" class="ffe-font">All time</a></li>
+                            </ul>
+                          </div>
+                        </h3>
                         <p>In last 24h:</p>
                         <div style="padding: 15px 0px;">
                           <span class="ffe-font dashboard-font">
@@ -96,7 +125,18 @@
                       <i class="fas fa-utensils iDashboard" style="padding: 40px 20px 20px 36px;"></i>
                     </div>
                     <div class="text col-lg-7 plr-0" style="height: 178px;">
-                        <h3 class="vNames">Foods Added</h3>
+                        <h3 class="vNames">Foods Added
+                          <div class="dropdown">
+                            <button class="button-bg-green btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            <span class="caret" style="color: white"></span></button>
+                            <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;">
+                              <li><a href="#" class="ffe-font">Last 24h</a></li>
+                              <li><a href="#" class="ffe-font">Last Month</a></li>
+                              <li><a href="#" class="ffe-font">Last Year</a></li>
+                              <li><a href="#" class="ffe-font">All time</a></li>
+                            </ul>
+                          </div>
+                        </h3>
                         <p>In last 24h:</p>
                         <div style="padding: 15px 0px;">
                           <span class="ffe-font dashboard-font">
@@ -115,7 +155,17 @@
                       <i class="fas fa-seedling iDashboard" style="padding: 40px 20px 20px 30px;"></i>
                     </div>
                     <div class="text col-lg-7 plr-0" style="height: 178px;">
-                        <h3 class="vNames">Causes</h3>
+                        <h3 class="vNames">Causes
+                          <div class="dropdown">
+                            <button class="button-bg-green btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            <span class="caret" style="color: white"></span></button>
+                            <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;">
+                              <li><a href="#" class="ffe-font">Total Pending</a></li>
+                              <li><a href="#" class="ffe-font">Total Approved</a></li>
+                              <li><a href="#" class="ffe-font">Total Cancelled</a></li>
+                            </ul>
+                          </div>
+                        </h3>
                         <p>Total pending approval:</p>
                         <div style="padding: 15px 0px;">
                           <span class="ffe-font dashboard-font">
@@ -137,7 +187,17 @@
                     <i class="fas fa-people-carry iDashboard" style="padding: 45px 20px 20px 20px;"></i>
                   </div>
                   <div class="text col-lg-7 plr-0" style="height: 178px;">
-                      <h3 class="vNames">Volunteers</h3>
+                      <h3 class="vNames">Volunteers
+                        <div class="dropdown">
+                          <button class="button-bg-green btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                          <span class="caret" style="color: white"></span></button>
+                          <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;">
+                            <li><a href="#" class="ffe-font">Total Pending</a></li>
+                            <li><a href="#" class="ffe-font">Total Approved</a></li>
+                            <li><a href="#" class="ffe-font">Total Cancelled</a></li>
+                          </ul>
+                        </div>
+                      </h3>
                       <p>Total pending approval:</p>
                       <div style="padding: 15px 0px;">
                         <span class="ffe-font dashboard-font">
@@ -156,7 +216,17 @@
                     <i class="fas fa-calendar-check iDashboard" style="padding: 45px 20px 20px 35px;"></i>
                   </div>
                   <div class="text col-lg-7 plr-0" style="height: 178px;">
-                      <h3 class="vNames">Events</h3>
+                      <h3 class="vNames">Events
+                        <div class="dropdown">
+                          <button class="button-bg-green btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                          <span class="caret" style="color: white"></span></button>
+                          <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;">
+                            <li><a href="#" class="ffe-font">Total Pending</a></li>
+                            <li><a href="#" class="ffe-font">Total Approved</a></li>
+                            <li><a href="#" class="ffe-font">Total Cancelled</a></li>
+                          </ul>
+                        </div>
+                      </h3>
                       <p>Total pending approval:</p>
                       <div style="padding: 15px 0px;">
                         <span class="ffe-font dashboard-font">
@@ -175,7 +245,18 @@
                     <i class="fas fa-address-card iDashboard" style="padding: 50px 20px 20px 23px;"></i>
                   </div>
                   <div class="text col-lg-7 plr-0" style="height: 178px;">
-                      <h3 class="vNames">Contact</h3>
+                      <h3 class="vNames">Contact
+                        <div class="dropdown">
+                          <button class="button-bg-green btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                          <span class="caret" style="color: white"></span></button>
+                          <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;">
+                            <li><a href="#" class="ffe-font">Total Raised Tickets (24h)</a></li>
+                            <li><a href="#" class="ffe-font">Total Non Raised Tickets (24h)</a></li>
+                            <li><a href="#" class="ffe-font">Total Raised Tickets</a></li>
+                            <li><a href="#" class="ffe-font">Total Non Raised Tickets</a></li>
+                          </ul>
+                        </div>
+                      </h3>
                       <span>Total Raised Tickets:</span>
                       <div style="padding: 5px 0px;">
                         <span class="ffe-font" style="font-size: 25px;color: #0d6d38 !important;">
