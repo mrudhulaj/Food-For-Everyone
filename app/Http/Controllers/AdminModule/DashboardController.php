@@ -12,6 +12,7 @@ use App\Models\Volunteers;
 use App\Models\Donations;
 use App\Models\AvailableFoods;
 use App\Models\ContactUs;
+use DB;
 use Request;
 use Response;
 
@@ -48,5 +49,47 @@ class DashboardController extends Controller
 
     public function adminAccessError(){
       return view('templates/adminAccessErrorPage');
+    }
+
+    public function adminDashboardFilter(){
+      $category   = Request::get('category');
+      $item       = Request::get('item');
+
+      switch ($category) {
+        case "donations":
+          $data = DB::table('donations')->where(function($query) use ($item) {
+                                          if ($item == "Last 24h") {
+                                            $query->where('CreatedDate', '>', Carbon::now()->subDays(1));
+                                          }
+                                          elseif ($item == "Last Month") {
+                                            $query->whereMonth('CreatedDate', Carbon::now()->format('m'));
+                                          }
+                                          elseif ($item == "Last Year") {
+                                            $query->whereYear('CreatedDate', Carbon::now()->format('Y'));
+                                          }
+                                          elseif($item == "All Time"){}
+                                        })->count();
+
+
+        break;
+
+        case "foodsAdded":
+          $data = DB::table('availableFoods')->where(function($query) use ($item) {
+                                        if ($item == "Last 24h") {
+                                          $query->where('CreatedDate', '>', Carbon::now()->subDays(1));
+                                        }
+                                        elseif ($item == "Last Month") {
+                                          $query->whereMonth('CreatedDate', Carbon::now()->format('m'));
+                                        }
+                                        elseif ($item == "Last Year") {
+                                          $query->whereYear('CreatedDate', Carbon::now()->format('Y'));
+                                        }
+                                        elseif($item == "All Time"){}
+                                      })->count();
+
+        break;
+      }
+
+      return Response::json($data);
     }
 }

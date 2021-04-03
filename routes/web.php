@@ -93,6 +93,7 @@
     // Dashboard
     Route::get('/admin-dashboard', ['as' => 'adminDashboardView','uses' => 'AdminModule\DashboardController@adminDashboardView']);
     Route::get('/admin-menu-toggle', ['as' => 'adminMenuToggle','uses' => 'AdminModule\DashboardController@adminMenuToggle']);
+    Route::get('admin-dashboard-filter', ['as' => 'adminDashboardFilter','uses' => 'AdminModule\DashboardController@adminDashboardFilter']);
 
     // Contact Messages
     Route::get('/admin-contact-messages', ['as' => 'adminContactMessagesView','uses' => 'AdminModule\ContactMessagesController@adminContactMessagesView']);
