@@ -85,8 +85,11 @@
 
 // Begin: Admin Views
 
-  // Adminn Access Error Page
+  // Admin Access Error Page
   Route::get('/adminAccessError', ['as' => 'adminAccessError','uses' => 'AdminModule\DashboardController@adminAccessError']);
+  
+  // General: Get state/district name list based on country selection 
+  Route::get('/admin-locations-specific-data', ['as' => 'adminLocationsSpecificData','uses' => 'AdminModule\LocationsController@adminLocationsSpecificData']);
 
   Route::group(['middleware' => ['isAdmin']], function() {
 
@@ -135,7 +138,6 @@
       Route::get('admin-locations-filter', ['as' => 'adminLocationsFilter','uses' => 'AdminModule\LocationsController@adminLocationsFilter']);
       Route::get('/admin-locations-add-view', ['as' => 'adminLocationsAddView','uses' => 'AdminModule\LocationsController@adminLocationsAddView']);
       Route::post('/admin-locations-specific-save', ['as' => 'adminLocationsSpecificSave','uses' => 'AdminModule\LocationsController@adminLocationsSpecificSave']);
-      Route::get('/admin-locations-specific-data', ['as' => 'adminLocationsSpecificData','uses' => 'AdminModule\LocationsController@adminLocationsSpecificData']);
       Route::post('/admin-locations-add-save', ['as' => 'adminLocationsAddSave','uses' => 'AdminModule\LocationsController@adminLocationsAddSave']);
     
     // Approvals
