@@ -30,7 +30,7 @@ class ContactMessagesController extends Controller
 
     public function adminContactMessagesFilter() {
       $filterValues =  Request::get('filterValues');
-      if( $filterValues['filterTicketStatus'] == "1"){
+      if( $filterValues['filterTicketStatus'] == "1"){ // Raised Tickets
         $data = DB::table('contactUs')
                     ->join('raisedTickets','raisedTickets.ContactUsID','=','contactUs.ID')
                     ->where(function($query)use($filterValues){ 
@@ -41,6 +41,10 @@ class ContactMessagesController extends Controller
                         
                         if(isset($filterValues['filterTicketSeverity']) && $filterValues['filterTicketSeverity'] != null && $filterValues['filterTicketSeverity'] != "") {
                           $query->where('raisedTickets.Severity', $filterValues['filterTicketSeverity']);
+                        }
+
+                        if(isset($filterValues['filterPendingOrReview']) && $filterValues['filterPendingOrReview'] != null && $filterValues['filterPendingOrReview'] != "") {
+                          $query->where('contactUs.TicketStatus', $filterValues['filterPendingOrReview']);
                         }
     
                       })
@@ -53,6 +57,7 @@ class ContactMessagesController extends Controller
                         'contactUs.Email',
                         'contactUs.Phone',
                         'contactUs.Subject',
+                        'contactUs.TicketStatus',
                         'raisedTickets.ID as RaisedTicketsID',
                         'raisedTickets.Severity',
                         'raisedTickets.Category',
@@ -60,8 +65,13 @@ class ContactMessagesController extends Controller
                         'contactUs.EditedDate'
                         )
                       ->get();
-
         foreach($data as $dataEach){
+
+          // Name
+          $dataEach->Name = $dataEach->FirstName." ".$dataEach->LastName;
+
+          // Ticket Status
+          $dataEach->Status = $dataEach->TicketStatus;
 
           // Type Of Account
           if($dataEach->CreatedUserID == null || $dataEach->CreatedUserID == ""  ){
@@ -109,7 +119,7 @@ class ContactMessagesController extends Controller
     
         }
       }
-      elseif($filterValues['filterTicketStatus'] == "0"){
+      elseif($filterValues['filterTicketStatus'] == "0"){ // Non-Raised Tickets
 
         $data = DB::table('contactUs')
                     ->where(function($query)use($filterValues){ 
@@ -125,6 +135,7 @@ class ContactMessagesController extends Controller
                         'LastName',
                         'CreatedUserID',
                         'Email',
+                        'TicketStatus',
                         'Phone',
                         'Subject',
                         'ID as ContactUsID',
@@ -133,6 +144,12 @@ class ContactMessagesController extends Controller
                       ->get();
 
         foreach($data as $dataEach){
+
+          // Name
+          $dataEach->Name = $dataEach->FirstName." ".$dataEach->LastName;
+
+          // Ticket Status
+          $dataEach->Status = $dataEach->TicketStatus;
 
           // Type Of Account
           if($dataEach->CreatedUserID == null || $dataEach->CreatedUserID == ""  ){

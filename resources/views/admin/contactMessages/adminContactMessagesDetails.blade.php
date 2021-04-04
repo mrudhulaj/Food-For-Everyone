@@ -149,6 +149,17 @@
                                 id="message" class="input--style-4" cols="74" rows="6" disabled>{{$contactUsdata->Message}}</textarea>
                         </div>
 
+                        <div class="input-group col-lg-12">
+                          <label class="label ffe-font">
+                            Current Status : 
+                              @if ($contactUsdata->TicketStatus == "1")
+                                <span style="color: darkorange">Review</span>
+                              @elseif($contactUsdata->TicketStatus == "0")
+                                <span style="color: red">Pending</span>
+                              @endif
+                          </label>
+                        </div>
+
                         <div class="" style="text-align: center;@if(Auth::check()) margin-top: 23px; @else margin-top: 80px; @endif">
                             <button type="submit" name="status" class="btn button-bg-green btn-review"
                                 style="padding: 0px;width: 120px;height: 60px;margin-right: 30px;background-color: orange;border: orange;" value="1">
