@@ -144,7 +144,7 @@
                             <option value="{{$locationsCountryData->CountryID}}" @if($editAvailableFoods->Country == $locationsCountryData->Country) selected @endif>{{$locationsCountryData->Country}}</option>
                             @endforeach
                         @else
-                          <option value="{{Auth::user()->Country}}" selected>{{Auth::user()->Country}}</option>
+                          <option value="{{Auth::user()->CountryID}}" selected>{{Auth::user()->Country}}</option>
                         @endif
                       </select>                    
                     </div>
