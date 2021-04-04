@@ -129,7 +129,7 @@
                           <div class="dropdown">
                             <button class="button-bg-green btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                             <span class="caret" style="color: white"></span></button>
-                            <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;" data-category="foodsAdded">
+                            <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;" data-category="availableFoods">
                               <li><a href="javascript:void(0)" class="ffe-font filter-item">Last 24h</a></li>
                               <li><a href="javascript:void(0)" class="ffe-font filter-item">Last Month</a></li>
                               <li><a href="javascript:void(0)" class="ffe-font filter-item">Last Year</a></li>
@@ -162,7 +162,7 @@
                             <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;" data-category="causes">
                               <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Pending</a></li>
                               <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Approved</a></li>
-                              <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Cancelled</a></li>
+                              <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Rejected</a></li>
                             </ul>
                           </div>
                         </h3>
@@ -194,7 +194,7 @@
                           <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;" data-category="volunteers">
                             <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Pending</a></li>
                             <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Approved</a></li>
-                            <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Cancelled</a></li>
+                            <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Rejected</a></li>
                           </ul>
                         </div>
                       </h3>
@@ -223,7 +223,7 @@
                           <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;" data-category="events">
                             <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Pending</a></li>
                             <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Approved</a></li>
-                            <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Cancelled</a></li>
+                            <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Rejected</a></li>
                           </ul>
                         </div>
                       </h3>
@@ -249,16 +249,22 @@
                         <div class="dropdown">
                           <button class="button-bg-green btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                           <span class="caret" style="color: white"></span></button>
-                          <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;" data-category="contactMessages">
+                          <ul class="dropdown-menu" style="margin-top: 5px !important;border-radius: 5px;" data-category="contactUs">
                             <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Raised Tickets (24h)</a></li>
                             <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Non Raised Tickets (24h)</a></li>
+                            <li class="divider"></li>
                             <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Raised Tickets</a></li>
                             <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Non Raised Tickets</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header" style="color: white">Raised Tickets</li>
+                            <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Pending Tickets</a></li>
+                            <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Reviewed Tickets</a></li>
+                            <li><a href="javascript:void(0)" class="ffe-font filter-item">Total Resolved Tickets</a></li>
                           </ul>
                         </div>
                       </h3>
-                      <p class="filter-text">Total Raised Tickets:</p>
-                      <div style="padding: 15px 0px;">
+                      <p class="filter-text">Total Raised Tickets (24h):</p>
+                      <div style="padding: 10px 0px;">
                         <span class="ffe-font dashboard-font filter-value">
                           {{$dashboardCount['contactRaisedTickets']}}
                         </span>
@@ -281,12 +287,25 @@
         var item        = $(this).text();
         var filterText  = $(this).closest('.categoryDiv').find('.filter-text');
         var filterValue = $(this).closest('.categoryDiv').find('.filter-value');
+
+        var filterType;
+        if(category == "donations" || category == "availableFoods"){
+          filterType = "time";
+        }
+        else if (category == "causes" || category == "volunteers" || category == "events"){
+          filterType = "approval";
+        }
+        else if(category == "contactUs"){
+          filterType = "tickets";
+        }
+
         $.ajax({
                 url:'{{ route("adminDashboardFilter") }}',
                 type:'GET',
                 data:{
                   category    : category,
                   item        : item,
+                  filterType  : filterType,
                 },
                 success:function(data) {
                   filterText.text(item+" :");
