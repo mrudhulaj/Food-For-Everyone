@@ -53,7 +53,7 @@ class ContactUsController extends Controller
       if(Auth::check()){
         if( Request::get('raiseTicket') ){
           $contactUs->RaisedTicket        = Request::get('raiseTicket');
-          $contactUs->TicketStatus        = 1;
+          $contactUs->TicketStatus        = 0;
         }
         $contactUs->CreatedUser     = Auth::user()->FirstName." ".Auth::user()->LastName;
         $contactUs->CreatedUserID   = Auth::user()->id;
