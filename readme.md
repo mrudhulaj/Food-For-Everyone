@@ -70,7 +70,7 @@ Administrator Pages :
 The administrator can see a glimpse of the overall actions from here. The categories can also be filtered by time or by related sub categories.
 
 - **Reports**
-![reports](https://user-images.githubusercontent.com/27756559/113590419-ac24cc00-9643-11eb-9131-6d3637c91cc3.png)
+![reports](https://user-images.githubusercontent.com/27756559/113594118-46870e80-9648-11eb-9464-9fa5b7a1844d.png)
 
 An overview of all the datas added can be viewed from here in the form of reports.
 
