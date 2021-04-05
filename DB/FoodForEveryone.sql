@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 31, 2021 at 05:25 PM
+-- Generation Time: Apr 05, 2021 at 10:21 PM
 -- Server version: 8.0.23-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -349,9 +349,9 @@ CREATE TABLE `users` (
   `Phone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Occupation` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `District` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `DistrictID` int NOT NULL,
+  `DistrictID` int DEFAULT NULL,
   `State` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `StateID` int NOT NULL,
+  `StateID` int DEFAULT NULL,
   `Country` text COLLATE utf8mb4_unicode_ci,
   `CountryID` int DEFAULT NULL,
   `FacebookLink` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
