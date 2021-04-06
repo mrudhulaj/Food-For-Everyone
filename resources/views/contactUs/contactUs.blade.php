@@ -2,7 +2,6 @@
 <title>Contact</title>
 <link rel="stylesheet" href="{{ url('css/contact-us-css/util.css') }}">
 <link rel="stylesheet" href="{{ url('css/contact-us-css/main.css') }}">
-
 <link href="{{ url('css/form.css') }}" rel="stylesheet" media="all">
 <style>
     ::placeholder {
@@ -61,7 +60,7 @@
         <div class="col-lg-6 plr-0" style="">
             <div>
                 <img src="{{ url('../images/children-eating-1.jpg') }}" alt=""
-                    style="width: 100%;border-top-left-radius: 4px;border-bottom-left-radius: 5px;height: 962px;">
+                    style="width: 100%;border-top-left-radius: 4px;border-bottom-left-radius: 5px;height: fit-content;">
             </div>
         </div>
         <div class="col-lg-6 plr-0" style="" id="contactUsDiv">
@@ -116,8 +115,6 @@
                             <div class="col-2">
                                 <div class="input-group custvalid">
                                   <label class="label ffe-font">Category</label>
-                                  <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                    title="Within what time should this food be consumed?"></i>
                                   <select class="form-control input--style-4" style="" id="ticketCategory" name="ticketCategory">
                                     <option hidden selected="" value="">Select Category</option>
                                     <option value="Available Foods">Available Foods</option>
@@ -169,7 +166,7 @@
                         <div class="input-group col-lg-12">
                             <label class="label ffe-font">Message</label>
                             <textarea style="border: none;line-height: 25px;padding: 12px 22px;" name="message"
-                                id="message" class="input--style-4" cols="67" rows="6"></textarea>
+                                id="message" class="input--style-4" cols="67" rows="5"></textarea>
                         </div>
 
                         <div class="" style="text-align: center;@if(Auth::check()) margin-top: 23px; @else margin-top: 80px; @endif">
