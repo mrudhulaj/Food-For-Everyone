@@ -121,8 +121,14 @@
 <div class="container cust-center">
     <div class="col-lg-12 mainbox-cust plr-0 img-cust" style="width: 940px !important;">
         <div style="overflow: hidden !important;">
-            <img id="" src="{{ asset($eventData->EventImage) }}"
-            alt="" style="width: 940px;height: 577px;margin-top: -15%;">
+            @if($eventData->Image != "")
+              <img id="" src="{{ asset($eventData->Image) }}"
+              alt="" style="width: 940px;height: 577px;margin-top: -15%;">
+            @else
+              <div style="width: 940px;height: 577px;text-align: center;padding-top: 30px">
+                <i class="fas fa-calendar-check iDashboard" style="padding: 40px 20px 20px 30px;font-size: 400px"></i>
+              </div>
+            @endif
         </div>
         <div class="col-lg-12 plr-0" style="margin-bottom: 20px;margin-top: 10px;">
           <div class="col-lg-6" style="">
