@@ -56,4 +56,8 @@ class HomeController extends Controller
       Session::put('activeTab', 'DASHBOARD');
       return view('admin/dashboard/adminDashboard');
     }
+
+    public function generalError(){
+      return view('templates/generalErrorPage');
+    }
 }
