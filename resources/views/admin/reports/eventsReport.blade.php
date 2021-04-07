@@ -84,6 +84,7 @@
                 <th class="txt-left">Is Approved?</th>
                 <th class="txt-left">Created By</th>
                 <th class="txt-left">Date</th>
+                <th class="txt-left">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -96,7 +97,7 @@
           @endif
             @foreach($events as $eventsData)
                 <tr class="tr-cust" data-id="{{$eventsData->ID}}">
-                    <td class="txt-left">{{ $eventsData->EventName }}</td>
+                    <td class="txt-left eventName">{{ $eventsData->EventName }}</td>
                     <td class="txt-left">{{ $eventsData->BeginTime }}</td>
                     <td class="txt-left">{{ $eventsData->EndTime }}</td>
                     <td class="txt-left">{{ $eventsData->Email }}</td>
@@ -112,6 +113,7 @@
                       @endif
                     </td>                    <td class="txt-left">{{ $eventsData->CreatedUser }}</td>
                     <td class="txt-left">{{ $eventsData->Date }}</td>
+                    <td data-exclude="true"><i class="fa fa-trash" aria-hidden="true" style="color: red" data-toggle="modal" data-target="#generalDeleteModal"></i></td>
                 </tr>
             @endforeach
         </tbody>
@@ -120,13 +122,36 @@
       {!! $events->render() !!}
     </div>
 </div>
+@include('templates.generalDeleteModal')
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
-  $('#eventsTable tbody').on('click', 'tr', function () {
-    var route               = "{!! route('reportsEventsDetailsView',['EventsID' => 'EventsIDData']) !!}";
-    var route               = route.replace('EventsIDData',$(this).attr("data-id") );
-    window.location.href    = route;
 
-  } );
+  $('td').click(function() {
+    var isExclude = $(this).attr("data-exclude");
+    if ( isExclude != "true" ) {
+      var route               = "{!! route('reportsEventsDetailsView',['EventsID' => 'EventsIDData']) !!}";
+      var route               = route.replace('EventsIDData',$(this).parent().attr("data-id") );
+      window.location.href    = route;
+    }
+    else{
+      $("#deleteID").val($(this).parent().attr("data-id"));
+      $("#itemName").text($(this).closest(".tr-cust").find(".eventName").text());
+    }
+  });
+  
+  $("#generalDeleteConfirm").click(function(){
+    $.ajax({
+            url:'{{ route("deleteCategoryItem") }}',
+            type:'POST',
+            data:{
+                "_token"          : "{{ csrf_token() }}",
+                category          : "events",
+                categoryItemID    : $("#deleteID").val(),
+            },
+            success:function(data) {
+              location.reload();
+            }
+        });
+  });
 </script>
 @stop

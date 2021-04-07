@@ -82,6 +82,7 @@
                 <th class="txt-left">Location</th>
                 <th class="txt-left">Is Approved?</th>
                 <th class="txt-left">Created Date</th>
+                <th class="txt-left">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -94,7 +95,7 @@
           @endif
             @foreach($volunteers as $volunteersData)
                 <tr class="tr-cust" data-id="{{$volunteersData->ID}}">
-                    <td class="txt-left">{{ $volunteersData->FirstName." ".$volunteersData->LastName }}</td>
+                    <td class="txt-left volunteerName">{{ $volunteersData->FirstName." ".$volunteersData->LastName }}</td>
                     <td class="txt-left">{{ $volunteersData->Occupation }}</td>
                     <td class="txt-left">{{ $volunteersData->Email }}</td>
                     <td class="txt-left">{{ $volunteersData->Phone }}</td>
@@ -109,6 +110,7 @@
                       @endif
                     </td>                    
                     <td class="txt-left">{{ $volunteersData->Date }}</td>
+                    <td data-exclude="true"><i class="fa fa-trash" aria-hidden="true" style="color: red" data-toggle="modal" data-target="#generalDeleteModal"></i></td>
                 </tr>
             @endforeach
         </tbody>
@@ -117,13 +119,35 @@
       {!! $volunteers->render() !!}
     </div>
 </div>
+@include('templates.generalDeleteModal')
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
-  $('#volunteerTable tbody').on('click', 'tr', function () {
-    var route               = "{!! route('reportsVolunteersDetailsView',['VolunteerID' => 'VolunteerIDData']) !!}";
-    var route               = route.replace('VolunteerIDData',$(this).attr("data-id") );
-    window.location.href    = route;
+  $('td').click(function() {
+    var isExclude = $(this).attr("data-exclude");
+    if ( isExclude != "true" ) {
+      var route               = "{!! route('reportsVolunteersDetailsView',['VolunteerID' => 'VolunteerIDData']) !!}";
+      var route               = route.replace('VolunteerIDData',$(this).parent().attr("data-id") );
+      window.location.href    = route;
+    }
+    else{
+      $("#deleteID").val($(this).parent().attr("data-id"));
+      $("#itemName").text("volunteer: "+$(this).closest(".tr-cust").find(".volunteerName").text());
+    }
+  });
 
-  } );
+  $("#generalDeleteConfirm").click(function(){
+    $.ajax({
+            url:'{{ route("deleteCategoryItem") }}',
+            type:'POST',
+            data:{
+                "_token"          : "{{ csrf_token() }}",
+                category          : "volunteers",
+                categoryItemID    : $("#deleteID").val(),
+            },
+            success:function(data) {
+              location.reload();
+            }
+        });
+  });
 </script>
 @stop

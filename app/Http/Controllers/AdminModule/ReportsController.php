@@ -16,6 +16,7 @@ use App\Models\RejectedActivities;
 use App\User;
 use DB;
 use Request;
+use Response;
 
 class ReportsController extends Controller
 {
@@ -230,6 +231,34 @@ class ReportsController extends Controller
       }
 
       return view('admin/reports/contactMessagesDetailReport',compact('contactUsdata','ticketStatus','categoryData','contactUsID'));
+    }
+
+    public function deleteCategoryItem(){
+      $category   = Request::get('category');
+      $categoryID = Request::get("categoryItemID");
+
+      if($category != "volunteers" && $category != "contactUs"){ 
+        $delete = DB::table($category)
+                      ->where('ID','=',$categoryID)
+                      ->delete();
+      }
+      elseif($category == "volunteers"){
+        $volunteers             = DB::table('volunteers')->where('ID','=',$categoryID)->first();
+        $users                  = DB::table('users')->where('ID',$volunteers->UserID)->first();
+        $users->TypeOfAccount   = "User";
+        $delete                 = DB::table('volunteers')->where('ID','=',$categoryID)->delete();
+      }
+      elseif($category == "contactUs"){
+        $contactUs              = DB::table('contactUs')->where('ID','=',$categoryID)->first();
+
+        if($contactUs->RaisedTicket == "1"){
+          $raisedTicket         = DB::table('raisedTickets')->where('ContactUsID','=',$contactUs->ID)->delete();
+        }
+        
+        $delete                 = DB::table('contactUs')->where('ID','=',$categoryID)->delete();
+      }
+
+      return Response::json($delete);
     }
 
 }

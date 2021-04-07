@@ -106,6 +106,9 @@
 
     // Reports
     Route::get('/admin-reports', ['as' => 'adminReportsView','uses' => 'AdminModule\ReportsController@adminReportsView']);
+      // Reports - Delete Category Item
+      Route::post('/delete-category', ['as' => 'deleteCategoryItem','uses' => 'AdminModule\ReportsController@deleteCategoryItem']);
+
       // Reports - Donations
       Route::get('/reports-donations', ['as' => 'reportsDonationView','uses' => 'AdminModule\ReportsController@reportsDonationView']);
     

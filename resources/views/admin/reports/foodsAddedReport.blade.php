@@ -77,6 +77,7 @@
                 <th class="txt-left">Location</th>
                 <th class="txt-left">Added Time</th>
                 <th class="txt-left">Expiry Time</th>
+                <th class="txt-left">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -88,7 +89,7 @@
             </tr>
           @endif
             @foreach($foodsAdded as $foodsAddedData)
-                <tr>
+                <tr data-id="{{$foodsAddedData->ID}}">
                     <td class="txt-left">{{ $foodsAddedData->FirstName." ".$foodsAddedData->LastName }}</td>
                     <td class="txt-left">{{ $foodsAddedData->TypeOfDonation }}</td>
                     <td class="txt-left">{{ $foodsAddedData->FoodCount }}</td>
@@ -106,6 +107,7 @@
                     <td class="txt-left">{{ $foodsAddedData->City.",".$foodsAddedData->District.",".$foodsAddedData->State }}</td>
                     <td class="txt-left">{{ $foodsAddedData->AddedDate }}</td>
                     <td class="txt-left">{{ $foodsAddedData->ExpiryTime }}</td>
+                    <td data-exclude="true"><i class="fa fa-trash" aria-hidden="true" style="color: red;cursor: pointer;" data-toggle="modal" data-target="#generalDeleteModal"></i></td>
                 </tr>
             @endforeach
         </tbody>
@@ -114,7 +116,26 @@
       {!! $foodsAdded->render() !!}
     </div>
 </div>
+@include('templates.generalDeleteModal')
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
+    $('.fa-trash').click(function() {
+      $("#deleteID").val($(this).parent().parent().attr("data-id"));
+    });
+
+    $("#generalDeleteConfirm").click(function(){
+    $.ajax({
+            url:'{{ route("deleteCategoryItem") }}',
+            type:'POST',
+            data:{
+                "_token"          : "{{ csrf_token() }}",
+                category          : "availableFoods",
+                categoryItemID    : $("#deleteID").val(),
+            },
+            success:function(data) {
+              location.reload();
+            }
+        });
+  });
 </script>
 @stop

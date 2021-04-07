@@ -85,6 +85,7 @@
                 <th class="txt-left">Is Approved?</th>
                 <th class="txt-left">Created By</th>
                 <th class="txt-left">Date</th>
+                <th class="txt-left">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -97,7 +98,7 @@
           @endif
             @foreach($causes as $causesData)
                 <tr class="tr-cust" data-id="{{$causesData->ID}}">
-                    <td class="txt-left">{{ $causesData->CauseName }}</td>
+                    <td class="txt-left causeName">{{ $causesData->CauseName }}</td>
                     <td class="txt-left">{{ number_format($causesData->ExpectedAmount) }}</td>
                     <td class="txt-left">{{ number_format($causesData->RaisedAmount) }}</td>
                     <td class="txt-left">{{ $causesData->Email }}</td>
@@ -111,8 +112,10 @@
                       @else
                         <i class="fa fa-minus" aria-hidden="true" style="color: orange"></i>
                       @endif
-                    </td>                    <td class="txt-left">{{ $causesData->CreatedUser }}</td>
+                    </td>                    
+                    <td class="txt-left">{{ $causesData->CreatedUser }}</td>
                     <td class="txt-left">{{ $causesData->Date }}</td>
+                    <td data-exclude="true"><i class="fa fa-trash" aria-hidden="true" style="color: red" data-toggle="modal" data-target="#generalDeleteModal"></i></td>
                 </tr>
             @endforeach
         </tbody>
@@ -121,13 +124,37 @@
       {!! $causes->render() !!}
     </div>
 </div>
+@include('templates.generalDeleteModal')
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
-  $('#causeTable tbody').on('click', 'tr', function () {
-    var route               = "{!! route('reportsCausesDetailsView',['CauseID' => 'CauseIDData']) !!}";
-    var route               = route.replace('CauseIDData',$(this).attr("data-id") );
-    window.location.href    = route;
 
-  } );
+  $('td').click(function() {
+    var isExclude = $(this).attr("data-exclude");
+    if ( isExclude != "true" ) {
+      var route               = "{!! route('reportsCausesDetailsView',['CauseID' => 'CauseIDData']) !!}";
+      var route               = route.replace('CauseIDData',$(this).parent().attr("data-id") );
+      window.location.href    = route;
+    }
+    else{
+      $("#deleteID").val($(this).parent().attr("data-id"));
+      $("#itemName").text($(this).closest(".tr-cust").find(".causeName").text());
+    }
+  });
+  
+  $("#generalDeleteConfirm").click(function(){
+    $.ajax({
+            url:'{{ route("deleteCategoryItem") }}',
+            type:'POST',
+            data:{
+                "_token"          : "{{ csrf_token() }}",
+                category          : "causes",
+                categoryItemID    : $("#deleteID").val(),
+            },
+            success:function(data) {
+              location.reload();
+            }
+        });
+  });
+
 </script>
 @stop

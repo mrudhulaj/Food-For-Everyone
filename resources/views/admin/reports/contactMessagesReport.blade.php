@@ -82,6 +82,7 @@
                 <th class="txt-left">Ticket Status</th>
                 <th class="txt-left">Created By</th>
                 <th class="txt-left">Date</th>
+                <th class="txt-left">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -97,7 +98,7 @@
                     <td class="txt-left">{{ $contactMessagesData->FirstName." ".$contactMessagesData->LastName }}</td>
                     <td class="txt-left">{{ $contactMessagesData->Email }}</td>
                     <td class="txt-left">{{ $contactMessagesData->Phone }}</td>
-                    <td class="txt-left">{{ $contactMessagesData->Subject }}</td>
+                    <td class="txt-left subjectName">{{ $contactMessagesData->Subject }}</td>
                     <td class="txt-left">
                       @if($contactMessagesData->RaisedTicket == '1')
                         <i class="fa fa-check" aria-hidden="true" style="color: #00A348"></i>
@@ -116,6 +117,7 @@
                     </td>                   
                     <td class="txt-left">{{ $contactMessagesData->CreatedUser }}</td>
                     <td class="txt-left">{{ $contactMessagesData->Date }}</td>
+                    <td data-exclude="true"><i class="fa fa-trash" aria-hidden="true" style="color: red" data-toggle="modal" data-target="#generalDeleteModal"></i></td>
                 </tr>
             @endforeach
         </tbody>
@@ -124,24 +126,49 @@
       {!! $contactMessages->render() !!}
     </div>
 </div>
+@include('templates.generalDeleteModal')
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script>
-  $('#contactMessagesTable tbody').on('click', 'tr', function () {
-    var route               = "{!! route('reportsContactMessagesDetailsView',['ticketStatus' => 'ticketStatusData','ContactUsID' => 'ContactUsIDData']) !!}";
 
-    var ticketStatus = $(this).attr("data-ticketStatus") == "1" ? "Raised" : "NotRaised";
+  $('td').click(function() {
+    var isExclude = $(this).attr("data-exclude");
+    if ( isExclude != "true" ) {
 
-    var mapObj = {
-                    ticketStatusData    : ticketStatus,
-                    ContactUsIDData     : $(this).attr("data-contactUsID")
-                  };
+      var route               = "{!! route('reportsContactMessagesDetailsView',['ticketStatus' => 'ticketStatusData','ContactUsID' => 'ContactUsIDData']) !!}";
 
-    route = route.replace(/ticketStatusData|ContactUsIDData/gi, function(matched){
-            return mapObj[matched];
-            });
+      var ticketStatus = $(this).attr("data-ticketStatus") == "1" ? "Raised" : "NotRaised";
 
-    window.location.href    = route;
+      var mapObj = {
+                      ticketStatusData    : ticketStatus,
+                      ContactUsIDData     : $(this).parent().attr("data-contactUsID")
+                    };
 
-  } );
+      route = route.replace(/ticketStatusData|ContactUsIDData/gi, function(matched){
+              return mapObj[matched];
+              });
+
+      window.location.href    = route;
+
+    }
+    else{
+      $("#deleteID").val($(this).parent().attr("data-contactUsID"));
+      $("#itemName").text($(this).closest(".tr-cust").find(".subjectName").text());
+    }
+  });
+  
+  $("#generalDeleteConfirm").click(function(){
+    $.ajax({
+            url:'{{ route("deleteCategoryItem") }}',
+            type:'POST',
+            data:{
+                "_token"          : "{{ csrf_token() }}",
+                category          : "contactUs",
+                categoryItemID    : $("#deleteID").val(),
+            },
+            success:function(data) {
+              location.reload();
+            }
+        });
+  });
 </script>
 @stop
