@@ -1,14 +1,13 @@
 {{-- Modal Donation Form --}}
 <style>
-    #amount-error{
-      margin-top: -22px;
-      margin-bottom: 22px;
+    #amount-error {
+        margin-top: -22px;
+        margin-bottom: 22px;
     }
 
 </style>
 
-<div class="modal fade" id="donationModal" role="dialog" aria-labelledby="donationModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="donationModal" role="dialog" aria-labelledby="donationModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="border-radius: 13px;border: none">
             <div class="modal-header ffe-font">
@@ -23,21 +22,24 @@
                     <div class="wrapper wrapper--w680">
                         <div style="padding: 30px 30px 0px 30px;">
                             <div class="card-body">
-                                <form action="javascript:void(0)" method="POST" enctype="multipart/form-data" name="donationForm" id="donationForm">
+                                <form action="javascript:void(0)" method="POST" enctype="multipart/form-data"
+                                    name="donationForm" id="donationForm">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="row row-space">
                                         <div class="col-2">
                                             <div class="input-group">
                                                 <label class="label ffe-font">First Name</label>
-                                                <input class="input--style-4" type="text" name="firstName" @if(Auth::check()) value="{{Auth::user()->FirstName}}" @else value="" @endif>
+                                                <input class="input--style-4" type="text" name="firstName"
+                                                    @if(Auth::check()) value="{{ Auth::user()->FirstName }}" @else
+                                                    value="" @endif>
                                             </div>
                                         </div>
                                         <div class="col-2">
                                             <div class="input-group">
                                                 <label class="label ffe-font">Last name</label>
-                                                <input class="input--style-4" type="text" name="lastName"
-                                                @if(Auth::check()) value="{{Auth::user()->LastName}}" @else value="" @endif>
+                                                <input class="input--style-4" type="text" name="lastName" <blade
+                                                    if|(Auth%3A%3Acheck())%20value%3D%26%2334%3B%7B%7BAuth%253A%253Auser()-%253ELastName%7D%7D%26%2334%3B%20%40else%20value%3D%26%2334%3B%26%2334%3B%20%40endif%3E>
                                             </div>
                                         </div>
                                     </div>
@@ -75,11 +77,13 @@
 
                                     <div class="input-group col-lg-12">
                                         <label class="label ffe-font">Phone</label>
-                                        <input class="input--style-4" type="text" name="phone" @if(Auth::check()) value="{{Auth::user()->Phone}}" @else value="" @endif>
+                                        <input class="input--style-4" type="text" name="phone" @if(Auth::check())
+                                            value="{{ Auth::user()->Phone }}" @else value="" @endif>
                                     </div>
                                     <div class="input-group col-lg-12">
                                         <label class="label ffe-font">Email</label>
-                                        <input class="input--style-4" type="text" name="email" @if(Auth::check()) value="{{Auth::user()->Email}}" @else value="" @endif>
+                                        <input class="input--style-4" type="text" name="email" @if(Auth::check())
+                                            value="{{ Auth::user()->Email }}" @else value="" @endif>
                                         <p style="text-align: center;margin-top: 5px;" class="ffe-font">A reciept will
                                             be send to your email after the donation is made.</p>
                                     </div>
@@ -102,9 +106,8 @@
     </div>
 </div>
 
-{{--  Begin: Donation sent successfully Modal  --}}
-<div class="modal fade" id="successfullModal" role="dialog" aria-labelledby="successfullModalLabel"
-    aria-hidden="true">
+{{-- Begin: Donation sent successfully Modal --}}
+<div class="modal fade" id="successfullModal" role="dialog" aria-labelledby="successfullModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="border-radius: 13px;border: none">
             <div class="modal-header ffe-font">
@@ -136,11 +139,11 @@
 
     $(document).ready(function () {
 
-      // Donation form validation
-        $("form[name='donationForm']").validate({            
-          errorPlacement: function(error, element) {
+        // Donation form validation
+        $("form[name='donationForm']").validate({
+            errorPlacement: function (error, element) {
                 if (element.parent().hasClass('amount-div')) {
-                  error.insertAfter(element.parent());
+                    error.insertAfter(element.parent());
                 } else {
                     error.insertAfter(element);
                 }
@@ -181,28 +184,28 @@
 
     });
 
-  $("#donationForm").on("submit", function(){    
-    jQuery.noConflict();
-    $('#donationModal').modal('hide');
-    
-    $.ajax({
-        url:'{{ route("addDonation") }}',
-        type:'POST',
-        data:{
-            "_token": "{{ csrf_token() }}",
-            firstName   : $("input[name=firstName]").val(),
-            lastName    : $("input[name=lastName]").val(),
-            amount      : $("input[name=amount]").val(),
-            email       : $("input[name=email]").val(),
-            phone       : $("input[name=phone]").val(),
-            causeId     : $("input[name=causeIdDonation]").val(),
-        },
-        success:function(data) {
-          jQuery.noConflict();
-          $('#successfullModal').modal('show');
-        }
+    $("#donationForm").on("submit", function () {
+        jQuery.noConflict();
+        $('#donationModal').modal('hide');
+
+        $.ajax({
+            url: '{{ route("addDonation") }}',
+            type: 'POST',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                firstName: $("input[name=firstName]").val(),
+                lastName: $("input[name=lastName]").val(),
+                amount: $("input[name=amount]").val(),
+                email: $("input[name=email]").val(),
+                phone: $("input[name=phone]").val(),
+                causeId: $("input[name=causeIdDonation]").val(),
+            },
+            success: function (data) {
+                jQuery.noConflict();
+                $('#successfullModal').modal('show');
+            }
+        });
     });
-  });
 
 </script>
 {{-- End: Modal Donation Form --}}
