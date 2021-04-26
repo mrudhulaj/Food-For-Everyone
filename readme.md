@@ -14,7 +14,7 @@
 
 ## Food For Everyone
 
-Food For Everyone is a website which helps to connect restaurent owners and event planners to distribute the leftover food to the needy people instead of letting them go to waste.The website also allows the functionality for users and volunteers to add causes, events and add/become volunteer.All of these functionalities are monitored and controlled by the administrator.The administrator has the power to enable or disable any of the above functionalities (via permissions) and also to approve or reject the causes, events or volunteer request before they are made live to the public.
+Food For Everyone is a website which helps to connect restaurant owners and event planners to distribute the leftover food to the needy people instead of letting them go to waste.The website also allows the functionality for users and volunteers to add causes, events and add/become volunteer.All of these functionalities are monitored and controlled by the administrator.The administrator has the power to enable or disable any of the above functionalities (via permissions) and also to approve or reject the causes, events or volunteer request before they are made live to the public.
 
 Click [here](https://user-images.githubusercontent.com/27756559/113592963-e2b01600-9646-11eb-8b37-6e3afa01536c.png) to see the home page.
 
