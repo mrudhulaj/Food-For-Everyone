@@ -121,7 +121,6 @@ The user can either become a volunteer or add other volunteers (if permission is
 The user can view/add/edit events from here.
 
 - **Contact**
-![contact us](https://user-images.githubusercontent.com/27756559/113592205-e7c09580-9645-11eb-9780-48362ea2247a.png)
 
 The user can send a message to admin from here.A normal message or a raised ticket can be send from here after selecting the appropriate categories and their item.
 
